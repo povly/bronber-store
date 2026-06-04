@@ -75,9 +75,11 @@
         font-size: 14px;
         color: var(--color-black);
         margin: 4px 0 0;
-    }
 
-    /* ── Mobile filter/sort buttons ─────────────────── */
+        &--mobile {
+            display: block;
+        }
+    }
 
     &__filter-btns {
         display: flex;
@@ -209,6 +211,24 @@
         display: none;
     }
 
+    &__desktop-bar-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__desktop-bar-filters {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__desktop-bar-sort {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
     &__desktop-bar-label {
         font-family: var(--font-manrope);
         font-weight: 500;
@@ -235,7 +255,7 @@
         border-radius: 5px;
         font-family: var(--font-manrope);
         font-weight: 500;
-        font-size: 14px;
+        font-size: 16px;
         color: var(--color-white);
         cursor: pointer;
         white-space: nowrap;
@@ -261,7 +281,6 @@
 
     &__sort {
         position: relative;
-        margin-left: auto;
     }
 
     &__sort-trigger {
@@ -298,6 +317,46 @@
 
         &.is-open {
             transform: rotate(180deg);
+        }
+    }
+
+    &__mobile-sort {
+        position: relative;
+    }
+
+    &__mobile-sort-dropdown {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        min-width: 200px;
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-placeholder);
+        border-radius: 5px;
+        box-shadow: var(--shadow-card);
+        z-index: 100;
+        padding: 4px 0;
+    }
+
+    &__mobile-sort-option {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 10px 14px;
+        background: none;
+        border: none;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-black);
+        cursor: pointer;
+
+        &:hover {
+            background: var(--color-off-white);
+        }
+
+        &.is-active {
+            color: var(--color-purple);
+            font-weight: 600;
         }
     }
 
@@ -355,7 +414,11 @@
 
         &__count {
             font-size: 16px;
-            margin-top: 6px;
+            margin: 0;
+
+            &--mobile {
+                display: none;
+            }
         }
 
         &__filter-btns {
@@ -369,8 +432,12 @@
         &__desktop-bar {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: space-between;
             margin-top: 16px;
+        }
+
+        &__chips-clear {
+            font-size: 16px;
         }
     }
 }

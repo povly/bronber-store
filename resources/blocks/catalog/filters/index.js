@@ -1,6 +1,7 @@
 document.addEventListener('alpine:init', () => {
-    Alpine.data('catalogFilters', () => ({
+    Alpine.data('catalogFilters', (data = {}) => ({
         mobileOpen: false,
+        _ready: false,
 
         openSections: {
             price: true,
@@ -14,29 +15,21 @@ document.addEventListener('alpine:init', () => {
         },
         activeCategory: 'brakes',
 
-        priceMin: 500,
-        priceMax: 5000,
-        rangeMin: 0,
-        rangeMax: 10000,
+        priceMin: data.priceMin ?? 0,
+        priceMax: data.priceMax ?? 10000,
+        rangeMin: data.rangeMin ?? 0,
+        rangeMax: data.rangeMax ?? 10000,
 
         brandSearch: '',
+        brandShowAll: false,
+        visibleCount: data.visibleCount ?? 4,
 
-        brands: [
-            { id: 1, name: 'Bosch', count: 24, checked: true },
-            { id: 2, name: 'DeatschWerks', count: 15, checked: false },
-            { id: 3, name: 'DeatschWerks', count: 21, checked: false },
-            { id: 4, name: 'Bosch', count: 6, checked: false },
-            { id: 5, name: 'Bosch', count: 6, checked: false },
-        ],
+        availability: data.availability || { in_stock: false, to_order: false },
 
-        compatibility: {
-            mark: 'BMW',
-            model: '5 серия',
-            generation: '',
-            engine: '',
-        },
+        brands: data.brands || [],
 
-        // Custom select open state
+        compatibility: data.compatibility || { mark: '', model: '', generation: '', engine: '' },
+
         selectOpen: {
             mark: false,
             model: false,
@@ -44,35 +37,137 @@ document.addEventListener('alpine:init', () => {
             engine: false,
         },
 
-        // Select options data
-        selectOptions: {
-            mark: [
-                { value: '', label: 'Выберите марку' },
-                { value: 'BMW', label: 'BMW' },
-                { value: 'Audi', label: 'Audi' },
-                { value: 'Mercedes', label: 'Mercedes' },
-                { value: 'Volkswagen', label: 'Volkswagen' },
-            ],
-            model: [
-                { value: '', label: 'Выберите модель' },
-                { value: '5 серия', label: '5 серия' },
-                { value: '3 серия', label: '3 серия' },
-                { value: '7 серия', label: '7 серия' },
-                { value: 'X5', label: 'X5' },
-            ],
-            generation: [
-                { value: '', label: 'Выберите поколение' },
-                { value: 'G30', label: 'G30' },
-                { value: 'F10', label: 'F10' },
-                { value: 'E60', label: 'E60' },
-            ],
-            engine: [
-                { value: '', label: 'Выберите двигатель' },
-                { value: '2.0d', label: '2.0d' },
-                { value: '3.0i', label: '3.0i' },
-                { value: '530d', label: '530d' },
-                { value: '540i', label: '540i' },
-            ],
+        selectFlip: {
+            mark: false,
+            model: false,
+            generation: false,
+            engine: false,
+        },
+
+        selectOptions: data.selectOptions || {},
+
+        init() {
+            this.applyUrlParams();
+            this.$nextTick(() => {
+                this._ready = true;
+                this.emitChips();
+            });
+
+            window.addEventListener('chip-remove', (e) => {
+                this.removeChipByData(e.detail);
+                this.emitChips();
+                this.$nextTick(() => this.submitForm());
+            });
+
+            window.addEventListener('chip-clear', () => {
+                this.clearAll();
+                this.emitChips();
+                this.$nextTick(() => this.submitForm());
+            });
+        },
+
+        applyUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+
+            if (params.has('price_min')) this.priceMin = Number(params.get('price_min'));
+            if (params.has('price_max')) this.priceMax = Number(params.get('price_max'));
+
+            if (params.has('brand')) {
+                const activeBrands = params.get('brand').split(',');
+                this.brands.forEach(b => {
+                    b.checked = activeBrands.includes(b.name);
+                });
+            }
+
+            if (params.has('availability')) {
+                const keys = params.get('availability').split(',');
+                this.availability.in_stock = keys.includes('in_stock');
+                this.availability.to_order = keys.includes('to_order');
+            }
+
+            ['mark', 'model', 'generation', 'engine'].forEach(field => {
+                if (params.has(field) && params.get(field) !== '') {
+                    this.compatibility[field] = params.get(field);
+                }
+            });
+
+            if (this.availability.in_stock || this.availability.to_order) {
+                this.openSections.availability = true;
+            }
+            if (Object.values(this.compatibility).some(v => v !== '')) {
+                this.openSections.compatibility = true;
+            }
+        },
+
+        buildChips() {
+            const chips = [];
+
+            this.brands.filter(b => b.checked).forEach(b => {
+                chips.push({ id: 'brand-' + b.name, label: b.name, type: 'brand', value: b.name });
+            });
+
+            if (this.priceMin > this.rangeMin || this.priceMax < this.rangeMax) {
+                chips.push({
+                    id: 'price-range',
+                    label: `От ${this.priceMin} до ${this.priceMax}₽`,
+                    type: 'price',
+                });
+            }
+
+            if (this.availability.in_stock) {
+                chips.push({ id: 'avail-in_stock', label: 'В наличии', type: 'availability', value: 'in_stock' });
+            }
+            if (this.availability.to_order) {
+                chips.push({ id: 'avail-to_order', label: 'Под заказ', type: 'availability', value: 'to_order' });
+            }
+
+            Object.entries(this.compatibility).forEach(([field, value]) => {
+                if (value) {
+                    const labels = { mark: 'Марка', model: 'Модель', generation: 'Поколение', engine: 'Двигатель' };
+                    chips.push({ id: 'compat-' + field, label: `${labels[field]}: ${value}`, type: 'compatibility', field });
+                }
+            });
+
+            return chips;
+        },
+
+        emitChips() {
+            window.dispatchEvent(new CustomEvent('filters-chips', { detail: { chips: this.buildChips() } }));
+        },
+
+        removeChipByData(chipData) {
+            switch (chipData.type) {
+                case 'brand': {
+                    const brand = this.brands.find(b => b.name === chipData.value);
+                    if (brand) brand.checked = false;
+                    break;
+                }
+                case 'price':
+                    this.priceMin = this.rangeMin;
+                    this.priceMax = this.rangeMax;
+                    break;
+                case 'availability':
+                    this.availability[chipData.value] = false;
+                    break;
+                case 'compatibility':
+                    this.compatibility[chipData.field] = '';
+                    break;
+            }
+        },
+
+        clearAll() {
+            this.brands.forEach(b => b.checked = false);
+            this.priceMin = this.rangeMin;
+            this.priceMax = this.rangeMax;
+            this.availability = { in_stock: false, to_order: false };
+            this.compatibility = { mark: '', model: '', generation: '', engine: '' };
+        },
+
+        submitForm() {
+            if (!this._ready) return;
+            const form = this.$el.closest('form');
+            if (!form) return;
+            form.dispatchEvent(new Event('submit', { cancelable: true, bubbles: true }));
         },
 
         get leftPercent() {
@@ -91,22 +186,48 @@ document.addEventListener('alpine:init', () => {
             return this.brands.filter((b) => b.name.toLowerCase().includes(q));
         },
 
+        get visibleBrands() {
+            const list = this.brandSearch ? this.filteredBrands : this.brands;
+            if (this.brandShowAll || this.brandSearch) return list;
+            return list.slice(0, this.visibleCount);
+        },
+
+        get checkedBrandNames() {
+            return this.brands.filter(b => b.checked).map(b => b.name).join(',');
+        },
+
+        get checkedAvailabilityKeys() {
+            return Object.entries(this.availability).filter(([, v]) => v).map(([k]) => k).join(',');
+        },
+
         getSelectedLabel(field) {
             const val = this.compatibility[field];
-            if (!val) return this.selectOptions[field][0].label;
-            const opt = this.selectOptions[field].find(o => o.value === val);
-            return opt ? opt.label : this.selectOptions[field][0].label;
+            if (!val) return (this.selectOptions[field] || [])[0]?.label || '';
+            const opt = (this.selectOptions[field] || []).find(o => o.value === val);
+            return opt ? opt.label : (this.selectOptions[field] || [])[0]?.label || '';
         },
 
         selectOption(field, value) {
             this.compatibility[field] = value;
             this.selectOpen[field] = false;
+            this.emitChips();
         },
 
         toggleSelect(field) {
             const wasOpen = this.selectOpen[field];
             Object.keys(this.selectOpen).forEach(k => this.selectOpen[k] = false);
             this.selectOpen[field] = !wasOpen;
+
+            if (!wasOpen) {
+                this.$nextTick(() => {
+                    const refKey = 'select' + field.charAt(0).toUpperCase() + field.slice(1);
+                    const el = this.$refs[refKey];
+                    if (!el) return;
+                    const rect = el.getBoundingClientRect();
+                    const spaceBelow = window.innerHeight - rect.bottom;
+                    this.selectFlip[field] = spaceBelow < 200;
+                });
+            }
         },
 
         closeSelect(field) {
@@ -135,6 +256,12 @@ document.addEventListener('alpine:init', () => {
             if (brand) {
                 brand.checked = !brand.checked;
             }
+            this.emitChips();
+        },
+
+        toggleAvailability(key) {
+            this.availability[key] = !this.availability[key];
+            this.emitChips();
         },
 
         openMobile() {
@@ -145,6 +272,11 @@ document.addEventListener('alpine:init', () => {
         closeMobile() {
             this.mobileOpen = false;
             document.body.style.overflow = '';
+        },
+
+        applyFilters() {
+            this.closeMobile();
+            this.$nextTick(() => this.submitForm());
         },
 
         onTrackClick(event) {
@@ -160,6 +292,7 @@ document.addEventListener('alpine:init', () => {
             } else {
                 this.priceMax = Math.max(value, this.priceMin);
             }
+            this.emitChips();
         },
 
         startDrag(side, event) {
@@ -200,6 +333,7 @@ document.addEventListener('alpine:init', () => {
                 document.removeEventListener('mouseup', onUp);
                 document.removeEventListener('touchmove', onMove);
                 document.removeEventListener('touchend', onUp);
+                this.emitChips();
             };
 
             document.addEventListener('mousemove', onMove);
@@ -209,11 +343,9 @@ document.addEventListener('alpine:init', () => {
         },
 
         resetFilters() {
-            this.priceMin = this.rangeMin;
-            this.priceMax = this.rangeMax;
-            this.brands.forEach((b) => (b.checked = false));
+            this.clearAll();
             this.brandSearch = '';
-            this.compatibility = { mark: '', model: '', generation: '', engine: '' };
+            this.$nextTick(() => this.submitForm());
         },
     }));
 });

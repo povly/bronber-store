@@ -71,7 +71,7 @@
         padding: 2px 8px;
         border-radius: 6px;
         font-size: 10px;
-        font-weight: 500;
+        font-weight: 600;
         color: var(--color-white);
         line-height: 1.4;
 
@@ -221,7 +221,7 @@
 @media (min-width: 1100px) {
     .product-grid {
         &__list {
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 24px;
         }
     }

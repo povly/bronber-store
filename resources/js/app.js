@@ -13,4 +13,20 @@ Alpine.plugin(collapse)
 Alpine.plugin(modal)
 
 window.Alpine = Alpine
+
+window.submitFilters = function (event) {
+    event.preventDefault();
+    const form = event.target;
+    const params = new URLSearchParams();
+
+    for (const [name, value] of new FormData(form).entries()) {
+        const trimmed = String(value).trim();
+        if (trimmed === '') continue;
+        params.set(name, trimmed);
+    }
+
+    const qs = params.toString();
+    window.location.href = form.action + (qs ? '?' + qs : '');
+};
+
 Alpine.start()

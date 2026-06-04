@@ -24,6 +24,7 @@
                 </div>
 
                 <div class="site-footer__social">
+                    <span class="site-footer__social-label">Соц.сети</span>
                     <a href="#" class="site-footer__social-link" aria-label="Instagram">
                         <svg width="27" height="27" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="white" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
                     </a>
@@ -72,7 +73,18 @@
                         <li><a href="#">Блог</a></li>
                         <li><a href="#">Новости</a></li>
                         <li><a href="#">Карьера</a></li>
-                        <li><a href="#">Контакты</a></li>
+                    </ul>
+                </div>
+
+                <div class="site-footer__column" x-data="{ open: false }">
+                    <button class="site-footer__column-header" type="button" @click="open = !open">
+                        <span>Контакты</span>
+                        <svg class="site-footer__chevron" :class="{ 'site-footer__chevron--open': open }" width="17" height="15" viewBox="0 0 17 15" fill="none"><path d="M1 1l7.5 12L16 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                    <ul class="site-footer__column-list" x-show="open" x-collapse>
+                        <li><a href="tel:+79854498000">+7 (985) 449-8000</a></li>
+                        <li><a href="mailto:info@bronber.com">info@bronber.com</a></li>
+                        <li><a href="#">Обратная связь</a></li>
                     </ul>
                 </div>
             </div>

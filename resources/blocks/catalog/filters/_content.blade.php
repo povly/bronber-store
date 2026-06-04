@@ -167,8 +167,9 @@
                 >
             </div>
             <div class="catalog-filters__checkbox-list">
-                <template x-for="brand in filteredBrands" :key="brand.id">
+                <template x-for="brand in visibleBrands" :key="brand.id">
                     <label class="catalog-filters__checkbox" @click.prevent="toggleBrand(brand.id)">
+                        <input type="checkbox" :value="brand.name" class="catalog-filters__input-hidden" :checked="brand.checked" x-effect="$el.checked = brand.checked">
                         <span class="catalog-filters__checkbox-box" :class="{ 'is-checked': brand.checked }">
                             <svg class="catalog-filters__checkbox-icon" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                                 <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -179,7 +180,7 @@
                     </label>
                 </template>
             </div>
-            <button type="button" class="catalog-filters__show-more">Показать еще</button>
+            <button type="button" class="catalog-filters__show-more" x-show="filteredBrands.length > visibleCount" @click="brandShowAll = !brandShowAll" x-text="brandShowAll ? 'Скрыть' : `Показать еще (${filteredBrands.length - visibleCount})`"></button>
         </div>
     </div>
 
@@ -193,16 +194,18 @@
         </div>
         <div class="catalog-filters__section-body" x-show="isSectionOpen('availability')" x-collapse>
             <div class="catalog-filters__checkbox-list">
-                <label class="catalog-filters__checkbox">
-                    <span class="catalog-filters__checkbox-box is-checked">
+                <label class="catalog-filters__checkbox" @click.prevent="toggleAvailability('in_stock')">
+                    <input type="checkbox" value="in_stock" class="catalog-filters__input-hidden" :checked="availability.in_stock" x-effect="$el.checked = availability.in_stock">
+                    <span class="catalog-filters__checkbox-box" :class="{ 'is-checked': availability.in_stock }">
                         <svg class="catalog-filters__checkbox-icon" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                             <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </span>
                     <span class="catalog-filters__checkbox-label">В наличии</span>
                 </label>
-                <label class="catalog-filters__checkbox">
-                    <span class="catalog-filters__checkbox-box">
+                <label class="catalog-filters__checkbox" @click.prevent="toggleAvailability('to_order')">
+                    <input type="checkbox" value="to_order" class="catalog-filters__input-hidden" :checked="availability.to_order" x-effect="$el.checked = availability.to_order">
+                    <span class="catalog-filters__checkbox-box" :class="{ 'is-checked': availability.to_order }">
                         <svg class="catalog-filters__checkbox-icon" viewBox="0 0 12 12" fill="none" aria-hidden="true">
                             <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -224,13 +227,13 @@
         <div class="catalog-filters__section-body" x-show="isSectionOpen('compatibility')" x-collapse>
             <div class="catalog-filters__selects">
                 <div class="catalog-filters__select-group">
-                    <span class="catalog-filters__select-label">Марка</span>
-                    <div class="catalog-filters__custom-select" @click.away="closeSelect('mark')">
+                    <div class="catalog-filters__custom-select" x-ref="selectMark" @click.away="closeSelect('mark')">
                         <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('mark')">
-                            <span x-text="getSelectedLabel('mark')"></span>
+                            <span class="catalog-filters__select-label">Марка</span>
+                            <span class="catalog-filters__select-value" x-text="getSelectedLabel('mark')"></span>
                             <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.mark }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
-                        <div class="catalog-filters__custom-select-dropdown" x-show="selectOpen.mark" x-transition>
+                        <div class="catalog-filters__custom-select-dropdown" :class="{ 'is-above': selectFlip.mark }" x-show="selectOpen.mark" x-transition>
                             <template x-for="option in selectOptions.mark" :key="option.value">
                                 <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.mark === option.value }" @click="selectOption('mark', option.value)" x-text="option.label"></button>
                             </template>
@@ -238,13 +241,13 @@
                     </div>
                 </div>
                 <div class="catalog-filters__select-group">
-                    <span class="catalog-filters__select-label">Модель</span>
-                    <div class="catalog-filters__custom-select" @click.away="closeSelect('model')">
+                    <div class="catalog-filters__custom-select" x-ref="selectModel" @click.away="closeSelect('model')">
                         <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('model')">
-                            <span x-text="getSelectedLabel('model')"></span>
+                            <span class="catalog-filters__select-label">Модель</span>
+                            <span class="catalog-filters__select-value" x-text="getSelectedLabel('model')"></span>
                             <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.model }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
-                        <div class="catalog-filters__custom-select-dropdown" x-show="selectOpen.model" x-transition>
+                        <div class="catalog-filters__custom-select-dropdown" :class="{ 'is-above': selectFlip.model }" x-show="selectOpen.model" x-transition>
                             <template x-for="option in selectOptions.model" :key="option.value">
                                 <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.model === option.value }" @click="selectOption('model', option.value)" x-text="option.label"></button>
                             </template>
@@ -252,13 +255,13 @@
                     </div>
                 </div>
                 <div class="catalog-filters__select-group">
-                    <span class="catalog-filters__select-label">Поколение</span>
-                    <div class="catalog-filters__custom-select" @click.away="closeSelect('generation')">
+                    <div class="catalog-filters__custom-select" x-ref="selectGeneration" @click.away="closeSelect('generation')">
                         <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('generation')">
-                            <span x-text="getSelectedLabel('generation')"></span>
+                            <span class="catalog-filters__select-label">Поколение</span>
+                            <span class="catalog-filters__select-value" x-text="getSelectedLabel('generation')"></span>
                             <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.generation }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
-                        <div class="catalog-filters__custom-select-dropdown" x-show="selectOpen.generation" x-transition>
+                        <div class="catalog-filters__custom-select-dropdown" :class="{ 'is-above': selectFlip.generation }" x-show="selectOpen.generation" x-transition>
                             <template x-for="option in selectOptions.generation" :key="option.value">
                                 <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.generation === option.value }" @click="selectOption('generation', option.value)" x-text="option.label"></button>
                             </template>
@@ -266,13 +269,13 @@
                     </div>
                 </div>
                 <div class="catalog-filters__select-group">
-                    <span class="catalog-filters__select-label">Двигатель</span>
-                    <div class="catalog-filters__custom-select" @click.away="closeSelect('engine')">
+                    <div class="catalog-filters__custom-select" x-ref="selectEngine" @click.away="closeSelect('engine')">
                         <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('engine')">
-                            <span x-text="getSelectedLabel('engine')"></span>
+                            <span class="catalog-filters__select-label">Двигатель</span>
+                            <span class="catalog-filters__select-value" x-text="getSelectedLabel('engine')"></span>
                             <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.engine }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
-                        <div class="catalog-filters__custom-select-dropdown" x-show="selectOpen.engine" x-transition>
+                        <div class="catalog-filters__custom-select-dropdown" :class="{ 'is-above': selectFlip.engine }" x-show="selectOpen.engine" x-transition>
                             <template x-for="option in selectOptions.engine" :key="option.value">
                                 <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.engine === option.value }" @click="selectOption('engine', option.value)" x-text="option.label"></button>
                             </template>
@@ -288,7 +291,7 @@
         <button type="button" class="catalog-filters__btn catalog-filters__btn--reset" @click="resetFilters()">
             Сбросить
         </button>
-        <button type="button" class="catalog-filters__btn catalog-filters__btn--apply" @click="closeMobile()">
+        <button type="button" class="catalog-filters__btn catalog-filters__btn--apply" @click="applyFilters()">
             Применить
         </button>
     </div>
