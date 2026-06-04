@@ -123,11 +123,13 @@
                         class="catalog-filters__range-thumb catalog-filters__range-thumb--left"
                         @mousedown="startDrag('left', $event)"
                         @touchstart="startDrag('left', $event)"
+                        @click.stop
                     ></div>
                     <div
                         class="catalog-filters__range-thumb catalog-filters__range-thumb--right"
                         @mousedown="startDrag('right', $event)"
                         @touchstart="startDrag('right', $event)"
+                        @click.stop
                     ></div>
                 </div>
                 <div class="catalog-filters__range-inputs">
@@ -135,6 +137,8 @@
                         type="text"
                         class="catalog-filters__range-input"
                         x-model="priceMin"
+                        @change="onPriceChange('min')"
+                        @keydown.enter.prevent="$el.blur()"
                         inputmode="numeric"
                     >
                     <span class="catalog-filters__range-separator">—</span>
@@ -142,6 +146,8 @@
                         type="text"
                         class="catalog-filters__range-input"
                         x-model="priceMax"
+                        @change="onPriceChange('max')"
+                        @keydown.enter.prevent="$el.blur()"
                         inputmode="numeric"
                     >
                 </div>

@@ -11,7 +11,7 @@
                     <img data-src="https://placehold.co/400x400/eaeaea/bfbfbf?text=Product" alt="Product" class="lazy">
                 </div>
                 <button class="product-card__fav" type="button" aria-label="В избранное">
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 15.75s-7.5-4.5-7.5-8.25a4.5 4.5 0 0 1 7.5-3.375A4.5 4.5 0 0 1 16.5 7.5c0 3.75-7.5 8.25-7.5 8.25z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg width="24" height="24" viewBox="0 0 18 18" fill="none"><path d="M9 15.75s-7.5-4.5-7.5-8.25a4.5 4.5 0 0 1 7.5-3.375A4.5 4.5 0 0 1 16.5 7.5c0 3.75-7.5 8.25-7.5 8.25z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </button>
                 <div class="product-card__badges">
                     @if($i === 1 || $i === 4)
@@ -28,7 +28,7 @@
                 <div class="product-card__rating">
                     <div class="product-card__stars">
                         @for ($s = 0; $s < 5; $s++)
-                        <svg class="product-card__star" width="15" height="15" viewBox="0 0 15 15"><path d="M7.5 1l1.8 4.2H14l-3.7 2.8 1.4 4.5L7.5 10l-4.2 2.5 1.4-4.5L1 5.2h4.7z" fill="{{$s < 4 ? '#FFB800' : '#E1E1E1'}}"/></svg>
+                        <svg class="product-card__star" width="24" height="24" viewBox="0 0 15 15"><path d="M7.5 1l1.8 4.2H14l-3.7 2.8 1.4 4.5L7.5 10l-4.2 2.5 1.4-4.5L1 5.2h4.7z" fill="{{$s < 4 ? '#FFB800' : '#E1E1E1'}}"/></svg>
                         @endfor
                     </div>
                     <span class="product-card__reviews">{{ $i < 3 ? '122' : '12' }}</span>

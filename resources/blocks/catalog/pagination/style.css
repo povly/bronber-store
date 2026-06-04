@@ -36,7 +36,7 @@
     &__pages {
         display: flex;
         align-items: center;
-        gap: 4px;
+        gap: 10px;
     }
 
     &__page,
@@ -129,7 +129,7 @@
 
     @media (min-width: 1100px) {
         &__pages {
-            gap: 4px;
+            gap: 10px;
             width: 396px;
             justify-content: center;
         }
@@ -142,11 +142,11 @@
         }
 
         &__page--active {
-            background: linear-gradient(to right, var(--color-purple), var(--color-purple));
+            background: linear-gradient(to right, var(--color-black-soft), var(--color-black));
         }
 
         &__arrow--next {
-            background: linear-gradient(to right, var(--color-purple), var(--color-purple));
+            background: linear-gradient(to right, var(--color-black-soft), var(--color-black));
         }
     }
 }

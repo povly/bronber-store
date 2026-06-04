@@ -180,6 +180,21 @@ document.addEventListener('alpine:init', () => {
             return total > 0 ? ((this.priceMax - this.rangeMin) / total) * 100 : 100;
         },
 
+        onPriceChange(side) {
+            if (side === 'min') {
+                const val = Number(this.priceMin);
+                this.priceMin = isNaN(val)
+                    ? this.rangeMin
+                    : Math.max(this.rangeMin, Math.min(val, this.priceMax));
+            } else {
+                const val = Number(this.priceMax);
+                this.priceMax = isNaN(val)
+                    ? this.rangeMax
+                    : Math.min(this.rangeMax, Math.max(val, this.priceMin));
+            }
+            this.emitChips();
+        },
+
         get filteredBrands() {
             if (!this.brandSearch) return this.brands;
             const q = this.brandSearch.toLowerCase();
