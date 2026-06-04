@@ -1,4 +1,4 @@
-.store-header {
+.header {
     position: relative;
     z-index: 100;
     background: transparent;
@@ -97,7 +97,7 @@
     }
 }
 
-.store-header__search-mobile {
+.header__search-mobile {
     display: flex;
     align-items: center;
     margin-top: 16px;
@@ -137,7 +137,7 @@
 }
 
 @media (min-width: 1100px) {
-    .store-header {
+    .header {
         position: sticky;
         top: 0;
         padding: 0;
@@ -162,7 +162,13 @@
             background: var(--color-white);
             border: 1px solid var(--color-purple);
             border-radius: 5px;
-            overflow: hidden;
+            overflow: visible;
+            position: relative;
+        }
+
+        &__search-type {
+            position: relative;
+            height: 100%;
         }
 
         &__search-dropdown {
@@ -183,9 +189,54 @@
             min-width: 162px;
             justify-content: center;
             transition: background-color 0.2s ease;
+            border-radius: 5px 0 0 5px;
 
             &:hover {
                 background: var(--color-purple-dark);
+            }
+        }
+
+        &__search-chevron--open {
+            transform: rotate(180deg);
+        }
+
+        &__search-list {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            min-width: 100%;
+            background: var(--color-white);
+            border: 1px solid var(--color-purple);
+            border-radius: 5px;
+            list-style: none;
+            padding: 4px 0;
+            margin: 0;
+            z-index: 200;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        &__search-option {
+            display: block;
+            width: 100%;
+            padding: 10px 16px;
+            border: none;
+            background: none;
+            font-family: var(--font-manrope);
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--color-black);
+            text-align: left;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: background-color 0.15s ease;
+
+            &:hover {
+                background: var(--color-gray-subtle);
+            }
+
+            &.is-active {
+                color: var(--color-purple);
+                font-weight: 600;
             }
         }
 
@@ -293,7 +344,7 @@
         }
     }
 
-    .store-header__search-mobile {
+    .header__search-mobile {
         display: none;
     }
 }

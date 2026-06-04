@@ -1,10 +1,5 @@
 @extends('layouts.app')
 
-@section('header')
-    @include('common.top-bar.top-bar')
-    @include('common.header.header')
-@endsection
-
 @section('content')
     <main class="catalog-page">
         <form method="GET" action="{{ route('catalog') }}" @submit.prevent="submitFilters($event)">
@@ -19,9 +14,4 @@
             </div>
         </form>
     </main>
-@endsection
-
-@section('footer')
-    @include('common.footer.footer')
-    @include('common.mobile-nav.mobile-nav')
 @endsection
