@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="footer__social">
-                    <span class="footer__social-label">Соц.сети</span>
+                    <span class="footer__social-label">{{ __('store.footer_social') }}</span>
                     <a href="#" class="footer__social-link" aria-label="Instagram">
                         <svg width="27" height="27" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="white" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="white" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1.5" fill="white"/></svg>
                     </a>
@@ -37,54 +37,54 @@
             <div class="footer__columns">
                 <div class="footer__column" x-data="{ open: false }">
                     <button class="footer__column-header" type="button" @click="open = !open">
-                        <span>Каталог</span>
+                        <span>{{ __('store.footer_col_catalog') }}</span>
                         <svg class="footer__chevron" :class="{ 'footer__chevron--open': open }" width="17" height="15" viewBox="0 0 17 15" fill="none"><path d="M1 1l7.5 12L16 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
                     <ul class="footer__column-list" :class="{ 'is-open': open }">
-                        <li><a href="#">Двигатель</a></li>
-                        <li><a href="#">Тормозная система</a></li>
-                        <li><a href="#">Фильтры</a></li>
-                        <li><a href="#">Подвеска</a></li>
-                        <li><a href="#">Электрика</a></li>
-                        <li><a href="#">Аксессуары</a></li>
+                        <li><a href="#">{{ __('store.footer_cat_engine') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_cat_brakes') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_cat_filters') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_cat_suspension') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_cat_electric') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_cat_accessories') }}</a></li>
                     </ul>
                 </div>
 
                 <div class="footer__column" x-data="{ open: false }">
                     <button class="footer__column-header" type="button" @click="open = !open">
-                        <span>Покупателям</span>
+                        <span>{{ __('store.footer_col_buyers') }}</span>
                         <svg class="footer__chevron" :class="{ 'footer__chevron--open': open }" width="17" height="15" viewBox="0 0 17 15" fill="none"><path d="M1 1l7.5 12L16 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
                     <ul class="footer__column-list" :class="{ 'is-open': open }">
-                        <li><a href="#">Доставка и оплата</a></li>
-                        <li><a href="#">Гарантия и возврат</a></li>
-                        <li><a href="#">Программа лояльности</a></li>
-                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">{{ __('store.footer_buy_delivery') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_buy_guarantee') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_buy_loyalty') }}</a></li>
+                        <li><a href="#">{{ __('store.top_faq') }}</a></li>
                     </ul>
                 </div>
 
                 <div class="footer__column" x-data="{ open: false }">
                     <button class="footer__column-header" type="button" @click="open = !open">
-                        <span>Компания</span>
+                        <span>{{ __('store.footer_col_company') }}</span>
                         <svg class="footer__chevron" :class="{ 'footer__chevron--open': open }" width="17" height="15" viewBox="0 0 17 15" fill="none"><path d="M1 1l7.5 12L16 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
                     <ul class="footer__column-list" :class="{ 'is-open': open }">
-                        <li><a href="#">О компании</a></li>
-                        <li><a href="#">Блог</a></li>
-                        <li><a href="#">Новости</a></li>
-                        <li><a href="#">Карьера</a></li>
+                        <li><a href="#">{{ __('store.footer_com_about') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_com_blog') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_com_news') }}</a></li>
+                        <li><a href="#">{{ __('store.footer_com_career') }}</a></li>
                     </ul>
                 </div>
 
                 <div class="footer__column" x-data="{ open: false }">
                     <button class="footer__column-header" type="button" @click="open = !open">
-                        <span>Контакты</span>
+                        <span>{{ __('store.footer_col_contacts') }}</span>
                         <svg class="footer__chevron" :class="{ 'footer__chevron--open': open }" width="17" height="15" viewBox="0 0 17 15" fill="none"><path d="M1 1l7.5 12L16 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                     </button>
                     <ul class="footer__column-list" :class="{ 'is-open': open }">
                         <li><a href="tel:+79854498000">+7 (985) 449-8000</a></li>
                         <li><a href="mailto:info@bronber.com">info@bronber.com</a></li>
-                        <li><a href="#">Обратная связь</a></li>
+                        <li><a href="#">{{ __('store.footer_con_feedback') }}</a></li>
                     </ul>
                 </div>
             </div>
@@ -92,7 +92,7 @@
             <div class="footer__auth">
                 <a href="#" class="footer__auth-link">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    <span>Регистрация | Вход</span>
+                    <span>{{ __('store.footer_auth') }}</span>
                 </a>
             </div>
 
@@ -104,10 +104,10 @@
             <div class="footer__divider"></div>
 
             <div class="footer__bottom">
-                <p class="footer__legal"><a href="#">Политика конфиденциальности</a></p>
-                <p class="footer__legal"><a href="#">Пользовательское соглашение</a></p>
-                <p class="footer__legal">&copy; 2026. Все права защищены</p>
-                <p class="footer__legal">Сайт разработан командой Павла Климаш</p>
+                <p class="footer__legal"><a href="#">{{ __('store.footer_privacy') }}</a></p>
+                <p class="footer__legal"><a href="#">{{ __('store.footer_terms') }}</a></p>
+                <p class="footer__legal">{{ __('store.footer_copyright') }}</p>
+                <p class="footer__legal">{{ __('store.footer_developer') }}</p>
             </div>
         </div>
     </div>

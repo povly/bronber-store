@@ -23,7 +23,13 @@ class AppServiceProvider extends ServiceProvider
         $this->app['view']->addLocation(resource_path('blocks'));
 
         View::composer('common.header.header', function (\Illuminate\View\View $view) {
-            $view->with('searchTypes', config('search.types'));
+            $searchTypes = collect(config('search.types'))->map(fn (array $type) => [
+                'value' => $type['value'],
+                'label' => __($type['label']),
+            ])->all();
+
+            $view->with('searchTypes', $searchTypes);
+            $view->with('availableLocales', config('app.available_locales'));
         });
     }
 }

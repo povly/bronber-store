@@ -15,17 +15,21 @@
             <div class="top-bar__separator"></div>
 
             <nav class="top-bar__links">
-                <a href="#" class="top-bar__link">Доставка и оплата</a>
-                <a href="#" class="top-bar__link">Гарантия и возврат</a>
-                <a href="#" class="top-bar__link">Карьера</a>
-                <a href="#" class="top-bar__link">FAQ</a>
-                <a href="#" class="top-bar__link">Контакты</a>
+                <a href="#" class="top-bar__link">{{ __('store.top_delivery') }}</a>
+                <a href="#" class="top-bar__link">{{ __('store.top_guarantee') }}</a>
+                <a href="#" class="top-bar__link">{{ __('store.top_career') }}</a>
+                <a href="#" class="top-bar__link">{{ __('store.top_faq') }}</a>
+                <a href="#" class="top-bar__link">{{ __('store.top_contacts') }}</a>
             </nav>
 
             <div class="top-bar__lang">
-                <button class="top-bar__lang-btn is-active">RU</button>
-                <span class="top-bar__lang-divider">|</span>
-                <button class="top-bar__lang-btn">EN</button>
+                @foreach(config('app.available_locales') as $locale)
+                    @php $isDefault = $locale === config('app.available_locales.0'); @endphp
+                    <a href="{{ $isDefault ? '/' : '/' . $locale }}" class="top-bar__lang-btn {{ app()->getLocale() === $locale ? 'is-active' : '' }}">{{ strtoupper($locale) }}</a>
+                    @if(!$loop->last)
+                        <span class="top-bar__lang-divider">|</span>
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>
