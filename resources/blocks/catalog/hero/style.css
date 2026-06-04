@@ -1,0 +1,376 @@
+.catalog-hero {
+    padding-top: 20px;
+    padding-bottom: 16px;
+
+    /* ── Breadcrumb ─────────────────────────────────── */
+
+    &__breadcrumb {
+        display: none;
+    }
+
+    &__breadcrumb-list {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        flex-wrap: wrap;
+    }
+
+    &__breadcrumb-item {
+        display: flex;
+        align-items: center;
+        gap: 0;
+
+        &:not(:last-child)::after {
+            content: ' / ';
+            color: var(--color-gray-mid);
+            font-family: var(--font-manrope);
+            font-weight: 500;
+            font-size: 16px;
+            margin: 0 4px;
+        }
+
+        &:last-child::after {
+            content: '';
+        }
+    }
+
+    &__breadcrumb-link {
+        color: var(--color-gray-mid);
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        text-decoration: none;
+
+        &:hover {
+            color: var(--color-purple);
+        }
+    }
+
+    &__breadcrumb-current {
+        color: var(--color-gray-mid);
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    /* ── Title ──────────────────────────────────────── */
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: 25px;
+        color: var(--color-black);
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    /* ── Product count ──────────────────────────────── */
+
+    &__count {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-black);
+        margin: 4px 0 0;
+    }
+
+    /* ── Mobile filter/sort buttons ─────────────────── */
+
+    &__filter-btns {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 16px;
+    }
+
+    &__filter-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        height: 32px;
+        border-radius: 5px;
+        font-family: var(--font-manrope);
+        font-weight: 600;
+        font-size: 12px;
+        cursor: pointer;
+        border: none;
+        padding: 0 12px;
+        white-space: nowrap;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        &--primary {
+            width: 155px;
+            background: var(--color-purple);
+            color: var(--color-white);
+        }
+
+        &--outline {
+            width: 156px;
+            background: var(--color-white);
+            border: 1px solid var(--color-gray-placeholder);
+            color: var(--color-black);
+        }
+    }
+
+    &__filter-icon {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+    &__sort-icon {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+    /* ── Mobile chips row ───────────────────────────── */
+
+    &__chips {
+        margin-top: 16px;
+    }
+
+    &__chips-scroll {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 4px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    &__chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        height: 32px;
+        padding: 0 10px;
+        background: var(--color-white);
+        border: 1px solid var(--color-purple);
+        border-radius: 5px;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-purple);
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        transition: background 0.15s ease;
+
+        &:hover {
+            background: color-mix(in srgb, var(--color-purple) 8%, var(--color-white));
+        }
+    }
+
+    &__chip-text {
+        line-height: 1;
+    }
+
+    &__chip-close {
+        width: 12px;
+        height: 12px;
+        flex-shrink: 0;
+        color: var(--color-purple);
+    }
+
+    &__chips-clear {
+        background: none;
+        border: none;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-purple);
+        cursor: pointer;
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 0;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    /* ── Desktop bar (hidden on mobile) ─────────────── */
+
+    &__desktop-bar {
+        display: none;
+    }
+
+    &__desktop-bar-label {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        color: var(--color-black);
+        white-space: nowrap;
+    }
+
+    &__desktop-bar-chips {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    &__desktop-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        height: 32px;
+        padding: 0 12px;
+        background: var(--color-purple);
+        border: 1px solid var(--color-purple);
+        border-radius: 5px;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-white);
+        cursor: pointer;
+        white-space: nowrap;
+        transition: opacity 0.15s ease;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    &__desktop-chip-text {
+        line-height: 1;
+    }
+
+    &__desktop-chip-close {
+        width: 12px;
+        height: 12px;
+        flex-shrink: 0;
+        color: var(--color-white);
+    }
+
+    /* ── Sort dropdown (desktop) ────────────────────── */
+
+    &__sort {
+        position: relative;
+        margin-left: auto;
+    }
+
+    &__sort-trigger {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        height: 36px;
+        padding: 0 14px;
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-placeholder);
+        border-radius: 5px;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-black);
+        cursor: pointer;
+        white-space: nowrap;
+        transition: border-color 0.15s ease;
+
+        &:hover {
+            border-color: var(--color-gray-mid);
+        }
+    }
+
+    &__sort-value {
+        line-height: 1;
+    }
+
+    &__sort-chevron {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+        transition: transform 0.2s ease;
+
+        &.is-open {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__sort-dropdown {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        min-width: 200px;
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-placeholder);
+        border-radius: 5px;
+        box-shadow: var(--shadow-card);
+        z-index: 100;
+        padding: 4px 0;
+    }
+
+    &__sort-option {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 10px 14px;
+        background: none;
+        border: none;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-black);
+        cursor: pointer;
+        transition: background 0.1s ease;
+
+        &:hover {
+            background: var(--color-off-white);
+        }
+
+        &.is-active {
+            color: var(--color-purple);
+            font-weight: 600;
+        }
+    }
+
+    /* ── Desktop breakpoint ─────────────────────────── */
+
+    @media (min-width: 1100px) {
+        padding-top: 24px;
+        padding-bottom: 20px;
+
+        &__breadcrumb {
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        &__title {
+            font-size: 40px;
+        }
+
+        &__count {
+            font-size: 16px;
+            margin-top: 6px;
+        }
+
+        &__filter-btns {
+            display: none;
+        }
+
+        &__chips {
+            display: none;
+        }
+
+        &__desktop-bar {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 16px;
+        }
+    }
+}

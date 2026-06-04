@@ -31,6 +31,18 @@
     --color-page-bg: #F8F8F8;
     --color-white: #FFFFFF;
 
+    /* Shadows */
+    --shadow-overlay: 0 0 0 9999px rgba(0, 0, 0, 0.5);
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-dropdown: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --shadow-thumb: 0 1px 3px rgba(0, 0, 0, 0.2);
+    --shadow-thumb-active: 0 1px 6px rgba(0, 0, 0, 0.3);
+
+    /* Overlay opacities */
+    --color-overlay: rgba(0, 0, 0, 0.5);
+    --color-white-10: rgba(255, 255, 255, 0.1);
+    --color-white-20: rgba(255, 255, 255, 0.2);
+
     /* Legacy */
     --color-cream: #EFECE3;
     --color-sky-blue: #8FABD4;
@@ -53,5 +65,34 @@ body {
 }
 
 .container {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto;
     padding: 0 23px;
+}
+
+@media (min-width: 1100px) {
+    .container {
+        padding: 0 30px;
+    }
+}
+
+.catalog-page__body {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+@media (min-width: 1100px) {
+    .catalog-page__body {
+        flex-direction: row;
+        gap: 30px;
+    }
+
+    .catalog-page__content {
+        flex: 1;
+        min-width: 0;
+    }
 }

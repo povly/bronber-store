@@ -1,0 +1,295 @@
+{{-- Card 1: Каталог товаров --}}
+<div class="catalog-filters__card">
+    <h2 class="catalog-filters__heading">Каталог товаров</h2>
+
+    <ul class="catalog-filters__category-list">
+        {{-- Active category: Тормозная система (expanded) --}}
+        <li>
+            <div
+                class="catalog-filters__category-item is-active"
+                @click="toggleCategory('brakes')"
+            >
+                <span>Тормозная система</span>
+                <svg class="catalog-filters__category-chevron" :class="{ 'is-open': openCategories.brakes }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <ul class="catalog-filters__subcategory-list" x-show="openCategories.brakes" x-collapse>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Комплект тормозной системы</a>
+                </li>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Комплекты карбон-керамической тормозной системы</a>
+                </li>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Тормозные суппорты</a>
+                </li>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Тормозные колодки</a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- Collapsed: Чип-тюнинг --}}
+        <li>
+            <div
+                class="catalog-filters__category-item"
+                :class="{ 'is-active': activeCategory === 'chiptuning' }"
+                @click="toggleCategory('chiptuning')"
+            >
+                <span class="catalog-filters__category-name">Чип-тюнинг</span>
+                <svg class="catalog-filters__category-chevron" :class="{ 'is-open': openCategories.chiptuning }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <ul class="catalog-filters__subcategory-list" x-show="openCategories.chiptuning" x-collapse>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Прошивки</a>
+                </li>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Модули</a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- Collapsed: Диски --}}
+        <li>
+            <div
+                class="catalog-filters__category-item"
+                :class="{ 'is-active': activeCategory === 'discs' }"
+                @click="toggleCategory('discs')"
+            >
+                <span class="catalog-filters__category-name">Диски</span>
+                <svg class="catalog-filters__category-chevron" :class="{ 'is-open': openCategories.discs }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <ul class="catalog-filters__subcategory-list" x-show="openCategories.discs" x-collapse>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Литые диски</a>
+                </li>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Кованые диски</a>
+                </li>
+            </ul>
+        </li>
+
+        {{-- Collapsed: Оптика --}}
+        <li>
+            <div
+                class="catalog-filters__category-item"
+                :class="{ 'is-active': activeCategory === 'optics' }"
+                @click="toggleCategory('optics')"
+            >
+                <span class="catalog-filters__category-name">Оптика</span>
+                <svg class="catalog-filters__category-chevron" :class="{ 'is-open': openCategories.optics }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <ul class="catalog-filters__subcategory-list" x-show="openCategories.optics" x-collapse>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Фары</a>
+                </li>
+                <li class="catalog-filters__subcategory-item">
+                    <a href="#">Противотуманки</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+{{-- Card 2: Фильтры --}}
+<div class="catalog-filters__card">
+    <h2 class="catalog-filters__heading">Фильтры</h2>
+
+    {{-- Section: Цена --}}
+    <div class="catalog-filters__section">
+        <div class="catalog-filters__section-header" @click="toggleSection('price')">
+            <span class="catalog-filters__section-title">Цена, ₽</span>
+            <svg class="catalog-filters__section-chevron" :class="{ 'is-open': isSectionOpen('price') }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="catalog-filters__section-body" x-show="isSectionOpen('price')" x-collapse>
+            <div class="catalog-filters__range">
+                <div
+                    class="catalog-filters__range-track"
+                    x-ref="track"
+                    :style="`--range-left: ${leftPercent}%; --range-right: ${rightPercent}%`"
+                    @click="onTrackClick($event)"
+                >
+                    <div class="catalog-filters__range-fill"></div>
+                    <div
+                        class="catalog-filters__range-thumb catalog-filters__range-thumb--left"
+                        @mousedown="startDrag('left', $event)"
+                        @touchstart="startDrag('left', $event)"
+                    ></div>
+                    <div
+                        class="catalog-filters__range-thumb catalog-filters__range-thumb--right"
+                        @mousedown="startDrag('right', $event)"
+                        @touchstart="startDrag('right', $event)"
+                    ></div>
+                </div>
+                <div class="catalog-filters__range-inputs">
+                    <input
+                        type="text"
+                        class="catalog-filters__range-input"
+                        x-model="priceMin"
+                        inputmode="numeric"
+                    >
+                    <span class="catalog-filters__range-separator">—</span>
+                    <input
+                        type="text"
+                        class="catalog-filters__range-input"
+                        x-model="priceMax"
+                        inputmode="numeric"
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Section: Бренд --}}
+    <div class="catalog-filters__section">
+        <div class="catalog-filters__section-header" @click="toggleSection('brand')">
+            <span class="catalog-filters__section-title">Бренд</span>
+            <svg class="catalog-filters__section-chevron" :class="{ 'is-open': isSectionOpen('brand') }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="catalog-filters__section-body" x-show="isSectionOpen('brand')" x-collapse>
+            <div class="catalog-filters__search">
+                <input
+                    type="text"
+                    class="catalog-filters__search-input"
+                    placeholder="Поиск по названию"
+                    x-model="brandSearch"
+                >
+            </div>
+            <div class="catalog-filters__checkbox-list">
+                <template x-for="brand in filteredBrands" :key="brand.id">
+                    <label class="catalog-filters__checkbox" @click.prevent="toggleBrand(brand.id)">
+                        <span class="catalog-filters__checkbox-box" :class="{ 'is-checked': brand.checked }">
+                            <svg class="catalog-filters__checkbox-icon" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                                <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </span>
+                        <span class="catalog-filters__checkbox-label" x-text="brand.name"></span>
+                        <span class="catalog-filters__checkbox-count" x-text="'(' + brand.count + ')'"></span>
+                    </label>
+                </template>
+            </div>
+            <button type="button" class="catalog-filters__show-more">Показать еще</button>
+        </div>
+    </div>
+
+    {{-- Section: Наличие --}}
+    <div class="catalog-filters__section">
+        <div class="catalog-filters__section-header" @click="toggleSection('availability')">
+            <span class="catalog-filters__section-title">Наличие</span>
+            <svg class="catalog-filters__section-chevron" :class="{ 'is-open': isSectionOpen('availability') }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="catalog-filters__section-body" x-show="isSectionOpen('availability')" x-collapse>
+            <div class="catalog-filters__checkbox-list">
+                <label class="catalog-filters__checkbox">
+                    <span class="catalog-filters__checkbox-box is-checked">
+                        <svg class="catalog-filters__checkbox-icon" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                            <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <span class="catalog-filters__checkbox-label">В наличии</span>
+                </label>
+                <label class="catalog-filters__checkbox">
+                    <span class="catalog-filters__checkbox-box">
+                        <svg class="catalog-filters__checkbox-icon" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                            <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <span class="catalog-filters__checkbox-label">Под заказ</span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    {{-- Section: Совместимость --}}
+    <div class="catalog-filters__section">
+        <div class="catalog-filters__section-header" @click="toggleSection('compatibility')">
+            <span class="catalog-filters__section-title">Совместимость</span>
+            <svg class="catalog-filters__section-chevron" :class="{ 'is-open': isSectionOpen('compatibility') }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="catalog-filters__section-body" x-show="isSectionOpen('compatibility')" x-collapse>
+            <div class="catalog-filters__selects">
+                <div class="catalog-filters__select-group">
+                    <span class="catalog-filters__select-label">Марка</span>
+                    <div class="catalog-filters__custom-select" @click.away="closeSelect('mark')">
+                        <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('mark')">
+                            <span x-text="getSelectedLabel('mark')"></span>
+                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.mark }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="catalog-filters__custom-select-dropdown" x-show="selectOpen.mark" x-transition>
+                            <template x-for="option in selectOptions.mark" :key="option.value">
+                                <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.mark === option.value }" @click="selectOption('mark', option.value)" x-text="option.label"></button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="catalog-filters__select-group">
+                    <span class="catalog-filters__select-label">Модель</span>
+                    <div class="catalog-filters__custom-select" @click.away="closeSelect('model')">
+                        <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('model')">
+                            <span x-text="getSelectedLabel('model')"></span>
+                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.model }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="catalog-filters__custom-select-dropdown" x-show="selectOpen.model" x-transition>
+                            <template x-for="option in selectOptions.model" :key="option.value">
+                                <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.model === option.value }" @click="selectOption('model', option.value)" x-text="option.label"></button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="catalog-filters__select-group">
+                    <span class="catalog-filters__select-label">Поколение</span>
+                    <div class="catalog-filters__custom-select" @click.away="closeSelect('generation')">
+                        <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('generation')">
+                            <span x-text="getSelectedLabel('generation')"></span>
+                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.generation }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="catalog-filters__custom-select-dropdown" x-show="selectOpen.generation" x-transition>
+                            <template x-for="option in selectOptions.generation" :key="option.value">
+                                <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.generation === option.value }" @click="selectOption('generation', option.value)" x-text="option.label"></button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="catalog-filters__select-group">
+                    <span class="catalog-filters__select-label">Двигатель</span>
+                    <div class="catalog-filters__custom-select" @click.away="closeSelect('engine')">
+                        <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('engine')">
+                            <span x-text="getSelectedLabel('engine')"></span>
+                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.engine }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        </button>
+                        <div class="catalog-filters__custom-select-dropdown" x-show="selectOpen.engine" x-transition>
+                            <template x-for="option in selectOptions.engine" :key="option.value">
+                                <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.engine === option.value }" @click="selectOption('engine', option.value)" x-text="option.label"></button>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Action buttons --}}
+    <div class="catalog-filters__actions">
+        <button type="button" class="catalog-filters__btn catalog-filters__btn--reset" @click="resetFilters()">
+            Сбросить
+        </button>
+        <button type="button" class="catalog-filters__btn catalog-filters__btn--apply" @click="closeMobile()">
+            Применить
+        </button>
+    </div>
+</div>

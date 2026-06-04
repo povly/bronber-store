@@ -1,0 +1,93 @@
+.top-bar {
+    display: none;
+    height: 46px;
+    background: linear-gradient(to right, var(--color-black-soft), var(--color-black));
+
+    @media (min-width: 1100px) {
+        display: block;
+    }
+
+    &__inner {
+        display: flex;
+        align-items: center;
+        height: 100%;
+    }
+
+    &__phone {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--color-white);
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    &__phone-icon {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+    }
+
+    &__separator {
+        width: 1px;
+        height: 20px;
+        background: var(--color-white);
+        margin: 0 24px;
+        flex-shrink: 0;
+    }
+
+    &__links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+
+    &__link {
+        color: var(--color-white);
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        text-decoration: none;
+        white-space: nowrap;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    &__lang {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: auto;
+        color: var(--color-white);
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        white-space: nowrap;
+    }
+
+    &__lang-btn {
+        background: none;
+        border: none;
+        color: var(--color-white);
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        cursor: pointer;
+        padding: 0;
+        opacity: 0.5;
+
+        &:hover,
+        &.is-active {
+            opacity: 1;
+        }
+    }
+
+    &__lang-divider {
+        opacity: 0.5;
+    }
+}
