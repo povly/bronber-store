@@ -1,8 +1,9 @@
 import.meta.glob(['../images/**', '../fonts/**']);
 
-import './components/modal';
-import './alpine';
+import Alpine from 'alpinejs'
+import modal from './alpine/plugins/modal'
 
-document.addEventListener('DOMContentLoaded', () => {
+Alpine.plugin(modal)
 
-});
+window.Alpine = Alpine
+Alpine.start()
