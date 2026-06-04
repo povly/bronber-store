@@ -19,11 +19,11 @@
                     </svg>
                 </button>
                 <ul class="header__search-list" x-show="searchDropdownOpen" x-transition x-cloak>
-                    <template x-for="type in searchTypes" :key="type.value">
+                    @foreach($searchTypes as $type)
                         <li>
-                            <button type="button" class="header__search-option" :class="{ 'is-active': searchType === type.value }" @click="selectSearchType(type.value)" x-text="type.label"></button>
+                            <button type="button" class="header__search-option" :class="{ 'is-active': searchType === '{{ $type['value'] }}' }" @click="selectSearchType('{{ $type['value'] }}')">{{ $type['label'] }}</button>
                         </li>
-                    </template>
+                    @endforeach
                 </ul>
             </div>
             <input

@@ -3,14 +3,9 @@ document.addEventListener('alpine:init', () => {
         chips: [],
         sortOpen: false,
         sortDropdownOpen: false,
-        currentSort: data.currentSort || 'popular',
+        currentSort: data.currentSort,
         _ready: false,
-        sortOptions: data.sortOptions || {
-            popular: 'По популярности',
-            price_asc: 'Сначала дешёвые',
-            price_desc: 'Сначала дорогие',
-            newest: 'По новизне',
-        },
+        sortOptions: data.sortOptions,
 
         init() {
             // Read sort from URL

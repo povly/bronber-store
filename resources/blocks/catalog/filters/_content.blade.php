@@ -173,18 +173,18 @@
                 >
             </div>
             <div class="catalog-filters__checkbox-list">
-                <template x-for="brand in visibleBrands" :key="brand.id">
-                    <label class="catalog-filters__checkbox" @click.prevent="toggleBrand(brand.id)">
-                        <input type="checkbox" :value="brand.name" class="catalog-filters__input-hidden" :checked="brand.checked" x-effect="$el.checked = brand.checked">
-                        <span class="catalog-filters__checkbox-box" :class="{ 'is-checked': brand.checked }">
-                            <svg class="catalog-filters__checkbox-icon" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                                <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </span>
-                        <span class="catalog-filters__checkbox-label" x-text="brand.name"></span>
-                        <span class="catalog-filters__checkbox-count" x-text="'(' + brand.count + ')'"></span>
-                    </label>
-                </template>
+                @foreach($allBrands as $brand)
+                <label class="catalog-filters__checkbox" x-show="isBrandVisible({{ $brand['id'] }})" @click.prevent="toggleBrand({{ $brand['id'] }})">
+                    <input type="checkbox" value="{{ $brand['name'] }}" class="catalog-filters__input-hidden" x-effect="$el.checked = getBrand({{ $brand['id'] }})?.checked ?? false">
+                    <span class="catalog-filters__checkbox-box" :class="{ 'is-checked': getBrand({{ $brand['id'] }})?.checked }">
+                        <svg class="catalog-filters__checkbox-icon" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                            <path d="M2 6l3 3 5-5" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                    <span class="catalog-filters__checkbox-label">{{ $brand['name'] }}</span>
+                    <span class="catalog-filters__checkbox-count">({{ $brand['count'] }})</span>
+                </label>
+                @endforeach
             </div>
             <button type="button" class="catalog-filters__show-more" x-show="filteredBrands.length > visibleCount" @click="brandShowAll = !brandShowAll" x-text="brandShowAll ? 'Скрыть' : `Показать еще (${filteredBrands.length - visibleCount})`"></button>
         </div>
@@ -240,9 +240,9 @@
                             <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.mark }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
                         <div class="catalog-filters__custom-select-dropdown" :class="{ 'is-above': selectFlip.mark }" x-show="selectOpen.mark" x-transition>
-                            <template x-for="option in selectOptions.mark" :key="option.value">
-                                <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.mark === option.value }" @click="selectOption('mark', option.value)" x-text="option.label"></button>
-                            </template>
+                            @foreach($allSelectOptions['mark'] as $option)
+                            <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.mark === '{{ $option['value'] }}' }" @click="selectOption('mark', '{{ $option['value'] }}')">{{ $option['label'] }}</button>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -254,9 +254,9 @@
                             <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.model }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
                         <div class="catalog-filters__custom-select-dropdown" :class="{ 'is-above': selectFlip.model }" x-show="selectOpen.model" x-transition>
-                            <template x-for="option in selectOptions.model" :key="option.value">
-                                <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.model === option.value }" @click="selectOption('model', option.value)" x-text="option.label"></button>
-                            </template>
+                            @foreach($allSelectOptions['model'] as $option)
+                            <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.model === '{{ $option['value'] }}' }" @click="selectOption('model', '{{ $option['value'] }}')">{{ $option['label'] }}</button>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -268,9 +268,9 @@
                             <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.generation }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
                         <div class="catalog-filters__custom-select-dropdown" :class="{ 'is-above': selectFlip.generation }" x-show="selectOpen.generation" x-transition>
-                            <template x-for="option in selectOptions.generation" :key="option.value">
-                                <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.generation === option.value }" @click="selectOption('generation', option.value)" x-text="option.label"></button>
-                            </template>
+                            @foreach($allSelectOptions['generation'] as $option)
+                            <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.generation === '{{ $option['value'] }}' }" @click="selectOption('generation', '{{ $option['value'] }}')">{{ $option['label'] }}</button>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -282,9 +282,9 @@
                             <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.engine }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         </button>
                         <div class="catalog-filters__custom-select-dropdown" :class="{ 'is-above': selectFlip.engine }" x-show="selectOpen.engine" x-transition>
-                            <template x-for="option in selectOptions.engine" :key="option.value">
-                                <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.engine === option.value }" @click="selectOption('engine', option.value)" x-text="option.label"></button>
-                            </template>
+                            @foreach($allSelectOptions['engine'] as $option)
+                            <button type="button" class="catalog-filters__custom-select-option" :class="{ 'is-active': compatibility.engine === '{{ $option['value'] }}' }" @click="selectOption('engine', '{{ $option['value'] }}')">{{ $option['label'] }}</button>
+                            @endforeach
                         </div>
                     </div>
                 </div>

@@ -211,6 +211,22 @@ document.addEventListener('alpine:init', () => {
             return this.brands.filter(b => b.checked).map(b => b.name).join(',');
         },
 
+        getBrand(id) {
+            return this.brands.find(b => b.id === id);
+        },
+
+        get visibleBrandIds() {
+            const list = this.brandSearch
+                ? this.brands.filter(b => b.name.toLowerCase().includes(this.brandSearch.toLowerCase()))
+                : this.brands;
+            const sliced = (this.brandShowAll || this.brandSearch) ? list : list.slice(0, this.visibleCount);
+            return new Set(sliced.map(b => b.id));
+        },
+
+        isBrandVisible(brandId) {
+            return this.visibleBrandIds.has(brandId);
+        },
+
         get checkedAvailabilityKeys() {
             return Object.entries(this.availability).filter(([, v]) => v).map(([k]) => k).join(',');
         },

@@ -3,10 +3,9 @@ document.addEventListener('alpine:init', () => {
         menuOpen: false,
         searchDropdownOpen: false,
         searchType: searchTypes[0]?.value ?? 'name',
-        searchTypes: searchTypes,
 
         get searchTypeLabel() {
-            const type = this.searchTypes.find(t => t.value === this.searchType);
+            const type = searchTypes.find(t => t.value === this.searchType);
             return type ? type.label : '';
         },
 

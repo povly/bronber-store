@@ -14,8 +14,8 @@
     'visibleCount' => 4,
 ])
 
-<div x-data="catalogFilters({{ Js::from([
-    'brands' => $brands ?: [
+@php
+    $defaultBrands = [
         ['id' => 1, 'name' => 'Bosch', 'count' => 24, 'checked' => false],
         ['id' => 2, 'name' => 'DeatschWerks', 'count' => 15, 'checked' => false],
         ['id' => 3, 'name' => 'Denso', 'count' => 21, 'checked' => false],
@@ -23,13 +23,20 @@
         ['id' => 5, 'name' => 'Continental', 'count' => 8, 'checked' => false],
         ['id' => 6, 'name' => 'Delphi', 'count' => 11, 'checked' => false],
         ['id' => 7, 'name' => 'Pierburg', 'count' => 4, 'checked' => false],
-    ],
-    'selectOptions' => $selectOptions ?: [
+    ];
+    $defaultSelectOptions = [
         'mark' => [['value' => '', 'label' => 'Выберите марку'], ['value' => 'BMW', 'label' => 'BMW'], ['value' => 'Audi', 'label' => 'Audi'], ['value' => 'Mercedes', 'label' => 'Mercedes'], ['value' => 'Volkswagen', 'label' => 'Volkswagen']],
         'model' => [['value' => '', 'label' => 'Выберите модель'], ['value' => '5 серия', 'label' => '5 серия'], ['value' => '3 серия', 'label' => '3 серия'], ['value' => '7 серия', 'label' => '7 серия'], ['value' => 'X5', 'label' => 'X5']],
         'generation' => [['value' => '', 'label' => 'Выберите поколение'], ['value' => 'G30', 'label' => 'G30'], ['value' => 'F10', 'label' => 'F10'], ['value' => 'E60', 'label' => 'E60']],
         'engine' => [['value' => '', 'label' => 'Выберите двигатель'], ['value' => '2.0d', 'label' => '2.0d'], ['value' => '3.0i', 'label' => '3.0i'], ['value' => '530d', 'label' => '530d'], ['value' => '540i', 'label' => '540i']],
-    ],
+    ];
+    $allBrands = $brands ?: $defaultBrands;
+    $allSelectOptions = $selectOptions ?: $defaultSelectOptions;
+@endphp
+
+<div x-data="catalogFilters({{ Js::from([
+    'brands' => $allBrands,
+    'selectOptions' => $allSelectOptions,
     'compatibility' => $compatibility,
     'priceMin' => $priceMin ?? $rangeMin,
     'priceMax' => $priceMax ?? $rangeMax,
