@@ -1,0 +1,26 @@
+:root {
+    --font-montserrat: 'Montserrat', sans-serif;
+    --color-cream: #EFECE3;
+    --color-sky-blue: #8FABD4;
+    --color-ocean-blue: #4A70A9;
+    --color-black: #262626;
+}
+
+html {
+    scroll-behavior: smooth;
+    scrollbar-gutter: stable;
+}
+
+body {
+    font-family: var(--font-montserrat);
+    font-weight: 400;
+    position: relative;
+    isolation: isolate;
+    font-size: fluid-type(320px, 1200px, 14px, 20px);
+    color: var(--color-black);
+    line-height: normal;
+}
+
+.container {
+    padding: 0 10px;
+}
