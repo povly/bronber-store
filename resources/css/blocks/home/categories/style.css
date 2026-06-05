@@ -1,153 +1,114 @@
 .home-categories {
-    padding: 30px 0;
-
-    /* ── Header ─────────────────────────────────────── */
-
-    &__header {
-        margin-bottom: 20px;
-    }
-
-    &__title {
-        font-family: var(--font-manrope);
-        font-weight: 800;
-        font-size: 25px;
-        color: var(--color-black);
-        margin: 0;
-        line-height: 1.2;
-    }
-
-    &__subtitle {
-        font-family: var(--font-manrope);
-        font-weight: 400;
-        font-size: 14px;
-        color: var(--color-gray);
-        margin: 4px 0 0;
-    }
-
-    /* ── Grid ───────────────────────────────────────── */
-
     &__grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
         gap: 10px;
+        display: grid;
     }
-
-    /* ── Card ───────────────────────────────────────── */
 
     &__card {
+        box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.1);
+        background: var(--gradient-white);
         display: flex;
-        flex-direction: column;
-        background: var(--color-white);
-        border-radius: 5px;
-        overflow: hidden;
-        text-decoration: none;
-        transition: box-shadow 0.2s ease;
+        align-items: center;
+        gap: 10px;
+        min-height: fluid-type(320px, 768px, 77px, 154px);
+        border-radius: 7px;
+        padding: 20px 20px 20px fluid-type(320px, 768px, 81px, 162px);
+        position: relative;
 
-        &:hover {
-            box-shadow: var(--shadow-card);
+        &-body {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
 
-            .home-categories__card-arrow {
-                transform: translateX(2px);
+        &-tag {
+            display: none;
+        }
+
+        &-image {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: fluid-type(320px, 768px, 72px, 144px);
+            flex-shrink: 0;
+            left: 0;
+            padding: 12px 0 12px 8px;
+
+            img {
+                object-fit: contain;
+            }
+        }
+
+        &-name {
+            font-weight: 800;
+            font-size: 16px;
+            line-height: 100%;
+            text-wrap: balance;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        &__grid {
+            grid-template-columns: repeat(4, 1fr);
+            gap: fluid-type(768px, 1200px, 12px, 19px) fluid-type(768px, 1200px, 13px, 18px);
+        }
+
+        &__card {
+            padding: fluid-type(768px, 1200px, 150px, 232px) 10px fluid-type(768px, 1200px, 8px, 16px);
+
+            &-arrow {
+                display: none;
+            }
+
+            &-name {
+                text-align: center;
+                font-size: fluid-type(768px, 1200px, 14px, 18px);
+            }
+
+            &-image {
+                width: 100%;
+                height: fluid-type(768px, 1200px, 150px, 232px);
+                padding: 10px 20px;
+            }
+
+            &-body {
+                justify-content: center;
+            }
+
+            &-tag {
+                display: flex;
+                top: fluid-type(768px, 1200px, 7px, 11px);
+                right: fluid-type(768px, 1200px, 7px, 11px);
+                position: absolute;
             }
         }
     }
 
-    &__card-image {
-        position: relative;
-        aspect-ratio: 1 / 1;
-        background: var(--color-gray-pale);
-
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-    }
-
-    &__card-body {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 10px 12px;
-        gap: 8px;
-        position: relative;
-    }
-
-    &__card-name {
-        font-family: var(--font-manrope);
-        font-weight: 600;
-        font-size: 13px;
-        color: var(--color-black);
-        line-height: 1.3;
-    }
-
-    &__card-arrow {
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
-        color: var(--color-purple);
-        transition: transform 0.2s ease;
-    }
-
-    &__card-badge {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        display: inline-block;
-        padding: 4px 12px;
-        background: linear-gradient(135deg, var(--color-purple) 0%, var(--color-purple-dark) 100%);
-        border-radius: 5px;
-        font-family: var(--font-manrope);
-        font-weight: 600;
-        font-size: 12px;
-        color: var(--color-white);
-        line-height: 1.4;
-    }
-
-    /* ── Desktop breakpoint ─────────────────────────── */
-
-    @media (min-width: 1100px) {
-        padding: 50px 0;
-
-        &__header {
-            margin-bottom: 30px;
-        }
-
-        &__title {
-            font-size: 40px;
-            line-height: 40px;
-        }
-
-        &__subtitle {
-            font-size: 16px;
-            margin-top: 8px;
-        }
-
+    @media screen and (min-width: 1200px) {
         &__grid {
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
+            gap: fluid-type(1200px, 1440px, 19px, 24px) fluid-type(1200px, 1440px, 18px, 24px);
         }
 
-        &__card-body {
-            padding: 14px 16px;
-        }
+        &__card {
+            min-height: fluid-type(1200px, 1440px, 291px, 380px);
+            padding: fluid-type(1200px, 1440px, 232px, 304px) 10px fluid-type(1200px, 1440px, 16px, 26px);
 
-        &__card-name {
-            font-size: 22px;
-            font-weight: 800;
-        }
+            &-name {
+                font-size: fluid-type(1200px, 1440px, 18px, 22px);
+                line-height: fluid-type(1200px, 1440px, 110%, 115%);
+            }
 
-        &__card-arrow {
-            width: 20px;
-            height: 20px;
-        }
+            &-image {
+                width: 100%;
+                height: fluid-type(1200px, 1440px, 232px, 304px);
+                padding: 10px 20px;
+            }
 
-        &__card-badge {
-            top: 14px;
-            left: 14px;
-            font-size: 14px;
-            padding: 5px 14px;
+            &-tag {
+                top: fluid-type(1200px, 1440px, 11px, 15px);
+                right: fluid-type(1200px, 1440px, 11px, 15px);
+            }
         }
     }
 }

@@ -49,6 +49,8 @@
     --color-ocean-blue: #4A70A9;
 
     --gradient-black: linear-gradient(90deg, var(--color-black-soft) 0%, var(--color-black) 100%);
+    --gradient-purple: linear-gradient(135deg, var(--color-purple) 0%, var(--color-purple-dark) 100%);
+    --gradient-white: linear-gradient(135deg, var(--color-white) 0%, var(--color-page-bg) 100%);
 }
 
 html {
@@ -75,6 +77,19 @@ button {
     max-width: 100%;
     margin: 0 auto;
     padding: 0 fluid-type(375px, 768px, 23px, 24px);
+}
+
+.img {
+    &--full {
+        :is(picture, img){
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            object-fit: cover;
+        }
+    }
 }
 
 @media (min-width: 768px) {

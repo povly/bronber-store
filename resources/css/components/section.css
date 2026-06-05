@@ -1,0 +1,31 @@
+.section {
+    padding-top: fluid-type(320px, 768px, 50px, 70px);
+
+    &__top {
+        margin-bottom: fluid-type(768px, 1200px, 22px, 26px);
+    }
+
+    &__title {
+        font-weight: 800;
+        font-size: 25px;
+        line-height: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+        padding-top: fluid-type(768px, 1200px, 70px, 76px);
+
+        &__title {
+            font-weight: 700;
+            font-size: fluid-type(768px, 1200px, 25px, 32px);
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        padding-top: fluid-type(1200px, 1440px, 76px, 100px);
+        margin-bottom: fluid-type(1200px, 1440px, 23px, 32px);
+
+        &__title {
+            font-size: fluid-type(1200px, 1440px, 32px, 40px);
+        }
+    }
+}

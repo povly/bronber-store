@@ -4,6 +4,8 @@
 @import 'common/base.css';
 @import 'components/btn.css';
 @import 'components/slider.css';
+@import 'components/section.css';
+@import 'components/tag.css';
 
 @import 'blocks/common/top-bar/style.css';
 @import 'blocks/common/header/style.css';
