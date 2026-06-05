@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app['view']->addLocation(resource_path('blocks'));
+        $this->app['view']->addLocation(resource_path('views/blocks'));
 
         View::composer('common.header.header', function (\Illuminate\View\View $view) {
             $searchTypes = collect(config('search.types'))->map(fn (array $type) => [

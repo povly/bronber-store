@@ -1,0 +1,96 @@
+.home-hero {
+    padding-top: fluid-type(1200px, 1440px, 20px, 24px);
+
+    &__slide {
+        background: var(--color-white);
+        min-height: fluid-type(320px, 768px, 400px, 439px);
+        border-radius: 7px;
+        padding: fluid-type(320px, 768px, 20px, 74px) fluid-type(320px, 768px, 20px, 26px) fluid-type(320px, 768px, 20px, 30px);
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        font-weight: 800;
+        font-size: fluid-type(320px, 768px, 20px, 32px);
+        line-height: 110%;
+    }
+
+    &__text {
+        margin-top: fluid-type(320px, 768px, 12px, 18px);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 130%;
+    }
+
+    &__title, &__text {
+        text-wrap: balance;
+        max-width: 380px;
+    }
+
+    &__btn {
+        margin-top: auto;
+    }
+
+    &__pc {
+        display: none;
+    }
+
+    @media screen and (min-width: 1200px) {
+        &__slider {
+            display: none;
+        }
+
+        &__pc {
+            display: grid;
+            grid-template-columns: fluid-type(1200px, 1440px, 683px, 895px) auto;
+            gap: fluid-type(1200px, 1440px, 20px, 24px);
+            grid-template-areas: "a b" "a c";
+        }
+
+        &__slide {
+            min-height: fluid-type(1200px, 1440px, 417px, 546px);
+            box-shadow: 0 4px 25px 4px rgba(0, 0, 0, 0.05);
+            padding: fluid-type(1200px, 1440px, 88px, 124px) fluid-type(1200px, 1440px, 36px, 47px) fluid-type(1200px, 1440px, 23px, 50px);
+
+            &--1 {
+                grid-area: a;
+
+                .home-hero {
+                    &__title {
+                        font-size: fluid-type(1200px, 1440px, 32px, 40px);
+                        max-width: fluid-type(1200px, 1440px, 380px, 460px);
+                    }
+
+                    &__text {
+                        max-width: fluid-type(1200px, 1440px, 300px, 330px);
+                    }
+                }
+            }
+
+            &--2 {
+                grid-area: b;
+            }
+
+            &--3 {
+                grid-area: c;
+            }
+
+            &--2, &--3 {
+                min-height: 100%;
+                padding: fluid-type(1200px, 1440px, 30px, 40px) fluid-type(1200px, 1440px, 23px, 30px) fluid-type(1200px, 1440px, 23px, 30px);
+
+                .home-hero {
+                    &__title {
+                        font-size: fluid-type(1200px, 1440px, 20px, 25px);
+                    }
+
+                    &__text {
+                        margin-top: fluid-type(1200px, 1440px, 10px, 14px);
+                        font-size: fluid-type(1200px, 1440px, 16px, 18px);
+                    }
+                }
+            }
+        }
+    }
+}

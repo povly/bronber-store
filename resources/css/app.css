@@ -1,3 +1,11 @@
 @import 'common/fonts.css';
+@import '../../node_modules/normalize.css';
 @import 'common/reset.css';
 @import 'common/base.css';
+@import 'components/btn.css';
+@import 'components/slider.css';
+
+@import 'blocks/common/top-bar/style.css';
+@import 'blocks/common/header/style.css';
+@import 'blocks/common/footer/style.css';
+@import 'blocks/common/mobile-nav/style.css';

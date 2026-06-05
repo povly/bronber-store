@@ -9,12 +9,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 $register = function () {
-    Route::get('/', fn () => view('main'))->name('home');
+    Route::get('/', fn () => view('home'))->name('home');
     Route::get('/catalog', fn () => view('main'))->name('catalog');
 };
 
 // Default locale (no prefix)
-Route::middleware('locale:' . config('app.available_locales.0'))->group($register);
+Route::middleware('locale:'.config('app.available_locales.0'))->group($register);
 
 // Non-default locales (/{locale} prefix)
 foreach (array_slice(config('app.available_locales'), 1) as $locale) {

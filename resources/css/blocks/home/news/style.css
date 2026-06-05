@@ -1,0 +1,197 @@
+.home-news {
+    padding: 40px 0;
+
+    /* ── Header ─────────────────────────────────────── */
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+    }
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: 25px;
+        color: var(--color-black);
+        margin: 0;
+        line-height: 1.2;
+    }
+
+    &__all-link {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-family: var(--font-manrope);
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--color-purple);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__all-link-icon {
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+    /* ── Card list ─────────────────────────────────── */
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* ── Card ───────────────────────────────────────── */
+
+    &__card {
+        background: var(--color-white);
+        border-radius: 5px;
+        overflow: hidden;
+        box-shadow: var(--shadow-card);
+        transition: box-shadow 0.3s ease;
+
+        &:hover {
+            box-shadow: var(--shadow-dropdown);
+        }
+    }
+
+    &__card-image {
+        width: 100%;
+        aspect-ratio: 464 / 300;
+        overflow: hidden;
+        background: var(--color-gray-pale);
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+    }
+
+    &__card-body {
+        padding: 16px;
+    }
+
+    &__card-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 10px;
+    }
+
+    &__card-tag {
+        display: inline-block;
+        padding: 2px 10px;
+        background: rgba(114, 18, 188, 0.08);
+        color: var(--color-purple);
+        font-family: var(--font-manrope);
+        font-weight: 600;
+        font-size: 12px;
+        border-radius: 10px;
+        line-height: 1.6;
+    }
+
+    &__card-date {
+        font-family: var(--font-manrope);
+        font-weight: 400;
+        font-size: 13px;
+        color: var(--color-gray-mid);
+    }
+
+    &__card-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 16px;
+        color: var(--color-black);
+        margin: 0 0 8px;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__card-desc {
+        font-family: var(--font-manrope);
+        font-weight: 400;
+        font-size: 14px;
+        color: var(--color-gray);
+        margin: 0 0 14px;
+        line-height: 1.5;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__card-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-family: var(--font-manrope);
+        font-weight: 600;
+        font-size: 14px;
+        color: var(--color-purple);
+        text-decoration: none;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__card-link-icon {
+        width: 14px;
+        height: 14px;
+        flex-shrink: 0;
+    }
+
+    /* ── Desktop breakpoint ─────────────────────────── */
+
+    @media (min-width: 1100px) {
+        padding: 60px 0;
+
+        &__title {
+            font-size: 40px;
+            line-height: 40px;
+        }
+
+        &__all-link {
+            font-size: 16px;
+        }
+
+        &__list {
+            flex-direction: row;
+            gap: 24px;
+        }
+
+        &__card {
+            flex: 1;
+            min-width: 0;
+        }
+
+        &__card-body {
+            padding: 20px;
+        }
+
+        &__card-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        &__card-desc {
+            font-size: 15px;
+            margin-bottom: 18px;
+        }
+    }
+}

@@ -47,6 +47,8 @@
     --color-cream: #EFECE3;
     --color-sky-blue: #8FABD4;
     --color-ocean-blue: #4A70A9;
+
+    --gradient-black: linear-gradient(90deg, var(--color-black-soft) 0%, var(--color-black) 100%);
 }
 
 html {
@@ -62,36 +64,27 @@ body {
     font-size: fluid-type(320px, 1200px, 14px, 18px);
     color: var(--color-black);
     line-height: normal;
+    background: var(--color-page-bg);
+}
+
+button {
+    background: transparent;
 }
 
 .container {
-    max-width: 1440px;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 23px;
+    padding: 0 fluid-type(375px, 768px, 23px, 24px);
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 768px) {
     .container {
-        padding: 0 30px;
+        padding: 0 fluid-type(768px, 1200px, 24px, 50px);
     }
 }
 
-.catalog-page__body {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding-top: 20px;
-    padding-bottom: 40px;
-}
-
-@media (min-width: 1100px) {
-    .catalog-page__body {
-        flex-direction: row;
-        gap: 30px;
-    }
-
-    .catalog-page__content {
-        flex: 1;
-        min-width: 0;
+@media (min-width: 1200px) {
+    .container {
+        max-width: calc(1440px + calc(fluid-type(768px, 1200px, 24px, 50px) * 2));
     }
 }

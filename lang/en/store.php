@@ -5,6 +5,7 @@ return [
     // Search
     'search_placeholder' => 'Search by name, SKU or VIN',
     'search_placeholder_mobile' => 'Search...',
+    'search_placeholder_desktop' => 'Search by name, SKU or VIN',
     'search_type_name' => 'By name',
     'search_type_sku' => 'By SKU',
     'search_type_vin' => 'By VIN',
