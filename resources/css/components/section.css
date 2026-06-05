@@ -25,7 +25,10 @@
 
     @media screen and (min-width: 1200px) {
         padding-top: fluid-type(1200px, 1440px, 76px, 100px);
-        margin-bottom: fluid-type(1200px, 1440px, 23px, 32px);
+
+        &__top {
+            margin-bottom: fluid-type(1200px, 1440px, 23px, 32px);
+        }
 
         &__title {
             font-size: fluid-type(1200px, 1440px, 32px, 40px);

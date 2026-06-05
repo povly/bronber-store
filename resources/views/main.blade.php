@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
+
 @section('content')
     <main class="catalog-page">
         <form method="GET" action="{{ route('catalog') }}" x-data="filters" @submit.prevent="submit($el)">

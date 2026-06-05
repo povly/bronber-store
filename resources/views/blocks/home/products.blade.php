@@ -1,9 +1,5 @@
 @props(['title' => 'Рекомендованные товары'])
 
-@push('block-styles')
-    @vite(['resources/css/blocks/home/products/style.css'])
-@endpush
-
 <section class="home-products section" x-data="slider({ grid: { below: 1200, breakpoints: { 0: { cols: 2, rows: 2 } } }, breakpoints: { 1200: 4 }, pagination: true })" @resize.window.debounce.150ms="onResize()">
     <div class="container">
         <div class="section__top home-products__header">

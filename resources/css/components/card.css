@@ -93,7 +93,7 @@
         flex-direction: column;
         font-size: fluid-type(320px, 768px, 18px, 28px);
         line-height: 100%;
-        align-items: center;
+        justify-content: center;
     }
 
     &__price {
@@ -195,6 +195,7 @@
         &__prices {
             flex-direction: row;
             gap: 11px;
+            align-items: center;
         }
     }
 
