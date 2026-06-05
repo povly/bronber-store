@@ -5,9 +5,9 @@
         @include('blocks.home.hero')
         @include('blocks.home.categories')
         @include('blocks.home.advs')
-        @include('blocks.home.products.products', ['title' => 'Рекомендованные товары'])
-        @include('blocks.home.products.products', ['title' => 'Топливные насосы'])
-        @include('blocks.home.products.products', ['title' => 'Тормозные диски'])
+        @include('blocks.home.products', ['title' => 'Рекомендованные товары'])
+        @include('blocks.home.products', ['title' => 'Топливные насосы'])
+        @include('blocks.home.products', ['title' => 'Тормозные диски'])
         @include('blocks.home.partners.partners')
         @include('blocks.home.news.news')
     </main>

@@ -1,0 +1,116 @@
+@props(['class' => '', 'inStock' => null])
+
+@php
+    $tagEl = $href ? 'a' : 'article';
+    $tagAttrs = $tagEl === 'a'
+        ? 'href="' . e($href) . '"'
+        : '';
+    $class .= $inStock === false ? ' card--out-of-stock' : ($inStock === true ? ' card--in-stock' : '');
+@endphp
+
+<{{ $tagEl }} {{ $tagAttrs }} {{ $attributes->merge(['class' => "card {$class}"]) }}>
+<div class="card__image-wrap">
+    <div class="card__image img--full">
+        <x-img :path="$image" :alt="$imageAlt ?? $title" width="155" height="155"/>
+    </div>
+    <button class="card__fav" type="button" aria-label="В избранное">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_755_489)">
+                <g filter="url(#filter0_d_755_489)">
+                    <path
+                        d="M4 11.5C4.00002 10.3872 4.33759 9.30062 4.96813 8.3837C5.59867 7.46678 6.49252 6.7627 7.53161 6.36444C8.5707 5.96618 9.70616 5.89248 10.788 6.15308C11.8699 6.41368 12.8472 6.99632 13.591 7.82404C13.6434 7.88005 13.7067 7.92471 13.7771 7.95524C13.8474 7.98577 13.9233 8.00152 14 8.00152C14.0767 8.00152 14.1526 7.98577 14.2229 7.95524C14.2933 7.92471 14.3566 7.88005 14.409 7.82404C15.1504 6.99094 16.128 6.40341 17.2116 6.13964C18.2952 5.87588 19.4335 5.94839 20.4749 6.34752C21.5163 6.74666 22.4114 7.45349 23.0411 8.37394C23.6708 9.29439 24.0053 10.3848 24 11.5C24 13.79 22.5 15.5 21 17L15.508 22.313C15.3217 22.527 15.0919 22.699 14.834 22.8173C14.5762 22.9357 14.296 22.9979 14.0123 22.9997C13.7285 23.0015 13.4476 22.9429 13.1883 22.8278C12.9289 22.7127 12.697 22.5437 12.508 22.332L7 17C5.5 15.5 4 13.8 4 11.5Z"
+                        stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </g>
+            </g>
+            <defs>
+                <filter id="filter0_d_755_489" x="-1" y="0.983887" width="30" height="27.0159"
+                        filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                    <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                    <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                                   result="hardAlpha"/>
+                    <feOffset/>
+                    <feGaussianBlur stdDeviation="2"/>
+                    <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_755_489"/>
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_755_489" result="shape"/>
+                </filter>
+                <clipPath id="clip0_755_489">
+                    <rect width="28" height="28" fill="white"/>
+                </clipPath>
+            </defs>
+        </svg>
+    </button>
+    @if($discount || $sale)
+        <div class="card__badges">
+            @if($discount)
+                <span class="card__badge tag card__badge--discount">{{ $discount }}</span>
+            @endif
+            @if($sale)
+                <span class="card__badge tag card__badge--sale">{{ $sale }}</span>
+            @endif
+        </div>
+    @endif
+</div>
+<div class="card__body">
+    @if($tag)
+        <span class="tag">{{ $tag }}</span>
+    @endif
+    <h3 class="card__title">{{ $title }}</h3>
+    <div class="card__rating">
+        <div class="card__stars">
+            @for ($s = 0; $s < 5; $s++)
+                @if($s < $rating)
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.5251 2.29502C11.5689 2.20648 11.6366 2.13195 11.7205 2.07984C11.8045 2.02773 11.9013 2.00012 12.0001 2.00012C12.0989 2.00012 12.1957 2.02773 12.2796 2.07984C12.3636 2.13195 12.4313 2.20648 12.4751 2.29502L14.7851 6.97402C14.9373 7.28198 15.1619 7.54842 15.4397 7.75047C15.7175 7.95251 16.0402 8.08413 16.3801 8.13402L21.5461 8.89002C21.644 8.9042 21.7359 8.94549 21.8116 9.00921C21.8872 9.07294 21.9435 9.15656 21.9741 9.25062C22.0047 9.34468 22.0084 9.44542 21.9847 9.54145C21.961 9.63748 21.9109 9.72497 21.8401 9.79402L18.1041 13.432C17.8577 13.6721 17.6734 13.9685 17.5669 14.2956C17.4605 14.6228 17.4352 14.9709 17.4931 15.31L18.3751 20.45C18.3924 20.5479 18.3818 20.6486 18.3446 20.7407C18.3074 20.8328 18.245 20.9126 18.1646 20.971C18.0842 21.0294 17.9891 21.064 17.89 21.0709C17.7908 21.0778 17.6918 21.0567 17.6041 21.01L12.9861 18.582C12.6818 18.4222 12.3433 18.3388 11.9996 18.3388C11.6559 18.3388 11.3174 18.4222 11.0131 18.582L6.39609 21.01C6.30842 21.0564 6.20949 21.0773 6.11054 21.0703C6.0116 21.0632 5.91661 21.0286 5.83639 20.9702C5.75616 20.9119 5.69392 20.8322 5.65675 20.7402C5.61957 20.6483 5.60895 20.5477 5.62609 20.45L6.50709 15.311C6.56529 14.9717 6.54007 14.6234 6.43363 14.2961C6.32718 13.9687 6.1427 13.6722 5.89609 13.432L2.16009 9.79502C2.08868 9.72605 2.03808 9.63841 2.01405 9.54209C1.99002 9.44577 1.99353 9.34463 2.02417 9.25021C2.05481 9.15578 2.11136 9.07186 2.18737 9.008C2.26338 8.94414 2.35579 8.90291 2.45409 8.88902L7.61909 8.13402C7.95935 8.08451 8.28248 7.95307 8.56067 7.751C8.83887 7.54893 9.06379 7.28229 9.21609 6.97402L11.5251 2.29502Z"
+                            fill="#FFA903" stroke="#FFA903" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"/>
+                    </svg>
+                @else
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.5251 2.29502C11.5689 2.20648 11.6366 2.13195 11.7205 2.07984C11.8045 2.02773 11.9013 2.00012 12.0001 2.00012C12.0989 2.00012 12.1957 2.02773 12.2796 2.07984C12.3636 2.13195 12.4313 2.20648 12.4751 2.29502L14.7851 6.97402C14.9373 7.28198 15.1619 7.54842 15.4397 7.75047C15.7175 7.95251 16.0402 8.08413 16.3801 8.13402L21.5461 8.89002C21.644 8.9042 21.7359 8.94549 21.8116 9.00921C21.8872 9.07294 21.9435 9.15656 21.9741 9.25062C22.0047 9.34468 22.0084 9.44542 21.9847 9.54145C21.961 9.63748 21.9109 9.72497 21.8401 9.79402L18.1041 13.432C17.8577 13.6721 17.6734 13.9685 17.5669 14.2956C17.4605 14.6228 17.4352 14.9709 17.4931 15.31L18.3751 20.45C18.3924 20.5479 18.3818 20.6486 18.3446 20.7407C18.3074 20.8328 18.245 20.9126 18.1646 20.971C18.0842 21.0294 17.9891 21.064 17.89 21.0709C17.7908 21.0778 17.6918 21.0567 17.6041 21.01L12.9861 18.582C12.6818 18.4222 12.3433 18.3388 11.9996 18.3388C11.6559 18.3388 11.3174 18.4222 11.0131 18.582L6.39609 21.01C6.30842 21.0564 6.20949 21.0773 6.11054 21.0703C6.0116 21.0632 5.91661 21.0286 5.83639 20.9702C5.75616 20.9119 5.69392 20.8322 5.65675 20.7402C5.61957 20.6483 5.60895 20.5477 5.62609 20.45L6.50709 15.311C6.56529 14.9717 6.54007 14.6234 6.43363 14.2961C6.32718 13.9687 6.1427 13.6722 5.89609 13.432L2.16009 9.79502C2.08868 9.72605 2.03808 9.63841 2.01405 9.54209C1.99002 9.44577 1.99353 9.34463 2.02417 9.25021C2.05481 9.15578 2.11136 9.07186 2.18737 9.008C2.26338 8.94414 2.35579 8.90291 2.45409 8.88902L7.61909 8.13402C7.95935 8.08451 8.28248 7.95307 8.56067 7.751C8.83887 7.54893 9.06379 7.28229 9.21609 6.97402L11.5251 2.29502Z"
+                            fill="#E7E7E7" stroke="#E7E7E7" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"/>
+                    </svg>
+                @endif
+            @endfor
+        </div>
+        <span class="card__reviews">
+                <span class="card__reviews-svg">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M22 17C22 17.5304 21.7893 18.0391 21.4142 18.4142C21.0391 18.7893 20.5304 19 20 19H6.828C6.29761 19.0001 5.78899 19.2109 5.414 19.586L3.212 21.788C3.1127 21.8873 2.9862 21.9549 2.84849 21.9823C2.71077 22.0097 2.56803 21.9956 2.43831 21.9419C2.30858 21.8881 2.1977 21.7971 2.11969 21.6804C2.04167 21.5637 2.00002 21.4264 2 21.286V5C2 4.46957 2.21071 3.96086 2.58579 3.58579C2.96086 3.21071 3.46957 3 4 3H20C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V17Z"
+                            stroke="#797878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 11H17" stroke="#797878" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path d="M7 15H13" stroke="#797878" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                        <path d="M7 7H15" stroke="#797878" stroke-width="2" stroke-linecap="round"
+                              stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <span class="card__reviews-span">{{ $reviewsCount }}</span>
+            </span>
+    </div>
+    <div class="card__bottom">
+        <div class="card__prices">
+            <span class="card__price">{{ $price }}</span>
+            @if($inStock === false)
+                <span class="card__out-of-stock">Нет в наличии</span>
+            @elseif($oldPrice)
+                <span class="card__old-price">{{ $oldPrice }}</span>
+            @endif
+        </div>
+        <button class="card__cart" data-active="В корзине" data-hover="В корзину" type="button" aria-label="В корзину" {{ $inStock === false ? 'disabled' : '' }}>
+                <span class="card__cart-text">В корзину</span>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 22C8.55228 22 9 21.5523 9 21C9 20.4477 8.55228 20 8 20C7.44772 20 7 20.4477 7 21C7 21.5523 7.44772 22 8 22Z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M19 22C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20C18.4477 20 18 20.4477 18 21C18 21.5523 18.4477 22 19 22Z" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M2.05078 2.05005H4.05078L6.71078 14.47C6.80836 14.9249 7.06145 15.3315 7.42649 15.6199C7.79153 15.9083 8.24569 16.0604 8.71078 16.05H18.4908C18.946 16.0493 19.3873 15.8933 19.7418 15.6079C20.0964 15.3224 20.3429 14.9246 20.4408 14.48L22.0908 7.05005H5.12078" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M22 7H5L7.5 16L20 15.5L22 7Z" fill="transparent" />
+                </svg>
+            </button>
+    </div>
+</div>
+</{{ $tagEl }}>

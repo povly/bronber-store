@@ -2,7 +2,7 @@
     @vite(['resources/css/blocks/home/partners/style.css'])
 @endpush
 
-<section class="home-partners" x-data="slider({ desktop: 6, mobile: 3 })" @resize.window.debounce.150ms="onResize()">
+<section class="home-partners" x-data="slider({ breakpoints: { 0: 3, 768: 4, 1200: 6 } })" @resize.window.debounce.150ms="onResize()">
     <div class="container">
         <div class="home-partners__header">
             <h2 class="home-partners__heading">Наши партнеры</h2>

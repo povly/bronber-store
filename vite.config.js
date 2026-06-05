@@ -5,10 +5,11 @@ import {browserslistToTargets} from 'lightningcss';
 import {babel} from '@rollup/plugin-babel';
 import {globSync} from 'glob';
 
-const blockStyles = globSync('resources/blocks/**/style.css');
+const blockStyles = globSync('resources/css/blocks/**/style.css');
+const blockScripts = globSync('resources/js/blocks/**/style.js');
 
 export default defineConfig({
-    css: {
+    ss: {
         lightningcss: {
             targets: browserslistToTargets(
                 browserslist([
@@ -19,7 +20,7 @@ export default defineConfig({
                     'IE 11',
                     'android 4.4',
                     'ios 9',
-               ])
+                ])
             ),
         },
     },
@@ -30,11 +31,12 @@ export default defineConfig({
                 'resources/js/lazyload.js',
                 'resources/js/app.js',
                 ...blockStyles,
+                ...blockScripts,
             ],
             refresh: true,
         }),
         babel({
-            babelHelpers: 'bundled',
+            babelHelpers: 'bundled', // Важно! Это решит ошибку 'addHelper'
             exclude: 'node_modules/**',
             extensions: ['.js', '.jsx', '.es6', '.es', '.mjs'],
             presets: [
@@ -53,6 +55,9 @@ export default defineConfig({
             ],
         }),
     ],
+    corePlugins: {
+        preflight: false,
+    },
     server: {
         watch: {
             ignored: ['**/storage/framework/views/**'],
@@ -61,6 +66,6 @@ export default defineConfig({
     build: {
         cssMinify: 'lightningcss',
         minify: true,
-        target: 'es2015',
+        target: 'es2017',
     },
 });

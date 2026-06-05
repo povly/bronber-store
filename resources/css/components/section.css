@@ -3,6 +3,9 @@
 
     &__top {
         margin-bottom: fluid-type(768px, 1200px, 22px, 26px);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     &__title {

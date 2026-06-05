@@ -1,100 +1,29 @@
 .home-products {
-    padding: 30px 0;
-
-    /* ── Header ─────────────────────────────────────── */
-
-    &__header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-
-    &__title {
-        font-family: var(--font-manrope);
-        font-weight: 800;
-        font-size: 25px;
-        color: var(--color-black);
-        margin: 0;
-        line-height: 1.2;
-    }
-
-    &__nav {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-    }
-
-    &__link {
-        font-family: var(--font-manrope);
-        font-weight: 500;
-        font-size: 14px;
-        color: var(--color-purple);
-        text-decoration: none;
-        white-space: nowrap;
-
-        &:hover {
-            text-decoration: underline;
-        }
-    }
-
-    &__arrows {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
-    &__arrow {
-        width: 36px;
-        height: 36px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid var(--color-gray-border);
-        border-radius: 5px;
-        background: var(--color-white);
-        cursor: pointer;
-        color: var(--color-black);
-        transition: border-color 0.15s ease, color 0.15s ease;
-
-        &:hover:not(:disabled) {
-            border-color: var(--color-purple);
-            color: var(--color-purple);
-        }
-
-        &:disabled {
-            opacity: 0.35;
-            cursor: not-allowed;
-        }
-    }
-
     &__slider {
-        --slider-gap: 10px;
-        --slider-slide: calc(50% - 5px);
+        --slider-gap: fluid-type(320px, 768px, 16px, 30px);
     }
 
-    /* ── Desktop breakpoint ─────────────────────────── */
+    &__track {
+        row-gap: fluid-type(320px, 768px, 25px, 31px);
+    }
 
-    @media (min-width: 1100px) {
-        padding: 50px 0;
-
-        &__title {
-            font-size: 40px;
-            line-height: 40px;
-        }
-
-        &__link {
-            font-size: 16px;
-        }
-
-        &__arrow {
-            width: 42px;
-            height: 42px;
-        }
+    @media (min-width: 1200px) {
+        --slider-gap: fluid-type(1200px, 1440px, 20px, 24px);
 
         &__slider {
-            --slider-gap: 24px;
-            --slider-slide: calc((100% - 72px) / 4);
+            --slider-slide: calc((100% - 3 * var(--slider-gap)) / 4);
+        }
+
+        &__arrows {
+            margin-top: 0;
+
+            &--mb {
+                display: none;
+            }
+
+            &--pc {
+                display: flex;
+            }
         }
     }
 }

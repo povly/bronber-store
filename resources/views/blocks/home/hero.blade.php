@@ -2,7 +2,7 @@
     @vite(['resources/css/blocks/home/hero/style.css'])
 @endpush
 
-<section class="home-hero" x-data="slider({ desktop: 1, mobile: 1, pagination: true })" @resize.window.debounce.150ms="onResize()">
+<section class="home-hero" x-data="slider({ breakpoints: { 0: 1 }, pagination: true })" @resize.window.debounce.150ms="onResize()">
     <div class="container">
         <div class="home-hero__slider slider">
             <div class="home-hero__track slider__track" x-ref="track"
