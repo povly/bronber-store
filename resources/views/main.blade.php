@@ -2,7 +2,7 @@
 
 @section('content')
     <main class="catalog-page">
-        <form method="GET" action="{{ route('catalog') }}" @submit.prevent="submitFilters($event)">
+        <form method="GET" action="{{ route('catalog') }}" x-data="filters" @submit.prevent="submit($el)">
             @include('catalog.hero.hero')
 
             <div class="catalog-page__body container">

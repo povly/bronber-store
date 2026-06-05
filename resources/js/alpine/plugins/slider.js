@@ -3,6 +3,7 @@ export default function (Alpine) {
         index: 0,
         startX: 0,
         deltaX: 0,
+        currentOffset: 0,
         isDragging: false,
         track: null,
         pagination: opts.pagination ?? false,
@@ -33,7 +34,16 @@ export default function (Alpine) {
         },
 
         get offset() {
-            return this.index * (this.slideWidth + this.gap);
+            if (!this.track || !this.track.children.length) return 0;
+            const slide = this.track.children[this.index];
+            return slide ? slide.offsetLeft : 0;
+        },
+
+        get maxOffset() {
+            if (!this.track || !this.track.children.length) return 0;
+            const last = this.track.children[this.maxIndex];
+            if (!last) return 0;
+            return Math.max(0, last.offsetLeft + last.offsetWidth - this.track.parentElement.offsetWidth);
         },
 
         get canPrev() { return this.index > 0 },
@@ -65,6 +75,7 @@ export default function (Alpine) {
             this.isDragging = true;
             this.startX = e.clientX ?? e.touches[0].clientX;
             this.deltaX = 0;
+            this.currentOffset = this.offset;
             this.track.style.setProperty('--slider-transition', 'none');
             this.track.style.cursor = 'grabbing';
         },
@@ -73,7 +84,8 @@ export default function (Alpine) {
             if (!this.isDragging) return;
             const clientX = e.clientX ?? e.touches[0].clientX;
             this.deltaX = clientX - this.startX;
-            this.track.style.setProperty('--slider-offset', `-${this.offset - this.deltaX}px`);
+            const nextOffset = Math.max(0, Math.min(this.currentOffset - this.deltaX, this.maxOffset));
+            this.track.style.setProperty('--slider-offset', `-${nextOffset}px`);
         },
 
         onPointerUp() {
@@ -81,9 +93,29 @@ export default function (Alpine) {
             this.isDragging = false;
             this.track.style.removeProperty('--slider-transition');
             this.track.style.cursor = '';
+
+            const projectedOffset = this.currentOffset - this.deltaX;
             const threshold = this.slideWidth * 0.2;
-            if (this.deltaX > threshold && this.canPrev) this.index--;
-            else if (this.deltaX < -threshold && this.canNext) this.index++;
+
+            let newIndex = this.index;
+            if (this.deltaX > threshold && this.canPrev) {
+                newIndex = this.index - 1;
+            } else if (this.deltaX < -threshold && this.canNext) {
+                newIndex = this.index + 1;
+            } else {
+                let closest = this.index;
+                let closestDist = Infinity;
+                for (let i = 0; i <= this.maxIndex; i++) {
+                    const d = Math.abs(this.track.children[i].offsetLeft - projectedOffset);
+                    if (d < closestDist) {
+                        closestDist = d;
+                        closest = i;
+                    }
+                }
+                newIndex = closest;
+            }
+
+            this.index = newIndex;
             this.snap();
         },
 

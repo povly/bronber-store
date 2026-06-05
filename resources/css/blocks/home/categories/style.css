@@ -20,6 +20,7 @@
             align-items: center;
             justify-content: space-between;
             width: 100%;
+            gap: 10px;
         }
 
         &-tag {
@@ -92,7 +93,7 @@
 
         &__card {
             min-height: fluid-type(1200px, 1440px, 291px, 380px);
-            padding: fluid-type(1200px, 1440px, 232px, 304px) 10px fluid-type(1200px, 1440px, 16px, 26px);
+            padding: fluid-type(1200px, 1440px, 232px, 304px) fluid-type(1200px, 1440px, 10px, 20px) fluid-type(1200px, 1440px, 16px, 26px);
 
             &-name {
                 font-size: fluid-type(1200px, 1440px, 18px, 22px);
@@ -102,7 +103,7 @@
             &-image {
                 width: 100%;
                 height: fluid-type(1200px, 1440px, 232px, 304px);
-                padding: 10px 20px;
+                padding: fluid-type(1200px, 1440px, 10px, 20px) 20px;
             }
 
             &-tag {

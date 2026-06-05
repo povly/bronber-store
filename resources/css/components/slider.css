@@ -23,8 +23,6 @@
         user-select: none;
         touch-action: pan-y;
         cursor: grab;
-        padding: 10px;
-        margin: -10px;
 
         &:active {
             cursor: grabbing;

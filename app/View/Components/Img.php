@@ -12,7 +12,7 @@ class Img extends Component
     /**
      * Supported image formats in priority order (best compression first).
      */
-    protected const FORMATS = ['avif', 'webp', 'png', 'jpg', 'jpeg', 'gif'];
+    protected const FORMATS = ['avif', 'webp', 'png', 'jpg', 'jpeg', 'gif', 'svg'];
 
     /**
      * Resolved image source path (relative to public/) with the best available format.
@@ -23,6 +23,16 @@ class Img extends Component
      * Whether a valid image file was found on disk.
      */
     public readonly bool $found;
+
+    /**
+     * Whether the resolved image is an SVG file.
+     */
+    public readonly bool $isSvg;
+
+    /**
+     * Inline SVG content (only populated when isSvg is true).
+     */
+    public readonly string $svgContent;
 
     /**
      * Create a new component instance.
@@ -39,6 +49,8 @@ class Img extends Component
 
         $this->src = $resolved;
         $this->found = $resolved !== '';
+        $this->isSvg = $this->found && str_ends_with(strtolower($resolved), '.svg');
+        $this->svgContent = $this->isSvg ? $this->readSvg($resolved) : '';
     }
 
     /**
@@ -78,7 +90,24 @@ class Img extends Component
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Read and sanitize an SVG file for inline embedding.
+     */
+    protected function readSvg(string $path): string
+    {
+        $content = file_get_contents(public_path($path));
+
+        if ($content === false) {
+            return '';
+        }
+
+        // Strip XML declaration
+        $content = preg_replace('/<\?xml[^?]*\?>\s*/', '', $content);
+
+        return trim($content);
+    }
+
+    /**
+     * Get the View / contents that represent the component.
      */
     public function render(): View|Closure|string
     {

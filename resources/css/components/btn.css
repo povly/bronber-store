@@ -16,6 +16,10 @@
     &--primary {
         background: var(--gradient-black);
         color: var(--color-white);
+
+        &:hover {
+            color: var(--color-white);
+        }
     }
 
     &__icon {

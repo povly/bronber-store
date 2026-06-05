@@ -1,0 +1,90 @@
+.home-advs {
+    &__pc {
+        display: none;
+    }
+
+    &__slide {
+        background: var(--color-white);
+        min-height: 239px;
+        border-radius: 7px;
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        gap: 26px;
+    }
+
+    &__title {
+        font-weight: 800;
+        font-size: 25px;
+        line-height: 100%;
+    }
+
+    &__svg {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 65px;
+        height: 65px;
+        border-radius: 100%;
+        background: var(--gradient-black);
+    }
+
+    &__text {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 120%;
+        text-wrap: balance;
+    }
+
+    @media screen and (min-width: 768px) {
+        &__slider {
+            display: none;
+        }
+
+        &__pc {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 51px fluid-type(768px, 1200px, 100px, 151px);
+            border-radius: 5px;
+            box-shadow: 2px 2px 8px 0 rgba(0, 0, 0, 0.1);
+            background: var(--color-white);
+            padding: 46px 118px;
+        }
+
+        &__slide {
+            padding: 0;
+            min-height: auto;
+            gap: fluid-type(1200px, 1440px, 20px, 27px);
+        }
+
+        &__svg {
+            width: fluid-type(1200px, 1440px, 50px, 65px);
+            height: fluid-type(1200px, 1440px, 50px, 65px);
+
+            svg {
+                width: fluid-type(1200px, 1440px, 35px, 45px);
+            }
+        }
+
+        &__title {
+            font-size: fluid-type(1200px, 1440px, 18px, 24px);
+        }
+
+        &__text {
+            font-size: fluid-type(1200px, 1440px, 16px, 20px);
+            font-family: var(--font-helvetica-neue);
+            font-weight: 400;
+        }
+    }
+
+    @media screen and (min-width: 1200px){
+        &__pc {
+            grid-template-columns: repeat(4, 1fr);
+            padding: fluid-type(1200px, 1440px, 38px, 50px) fluid-type(1200px, 1440px, 48px, 58px);
+            gap: 100px;
+        }
+    }
+}
