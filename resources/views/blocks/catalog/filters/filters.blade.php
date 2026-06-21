@@ -1,5 +1,5 @@
 @push('block-styles')
-    @vite(['resources/css/blocks/catalog/filters/style.css'])
+    @vite(['resources/css/blocks/catalog/filters/style.css', 'resources/js/blocks/catalog/hero/index.js', 'resources/js/blocks/catalog/filters/index.js'])
 @endpush
 
 @props([

@@ -2,7 +2,7 @@
 .article {
     position: relative;
     display: block;
-    height: fluid-type(1200px, 1920px, 490px, 650px);
+    height: fluid-type(1200px, 1440px, 490px, 650px);
     border-radius: 7px;
     overflow: hidden;
     text-decoration: none;
@@ -79,7 +79,7 @@
     }
 
     &__desc {
-        font-size: fluid-type(1200px, 1920px, 14px, 18px);
+        font-size: fluid-type(1200px, 1440px, 14px, 18px);
         line-height: 130%;
         margin: fluid-type(768px, 1200px, 11px, 14px) 0 0;
         display: -webkit-box;

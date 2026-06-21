@@ -38,7 +38,7 @@ return [
     'footer_privacy' => 'Политика конфиденциальности',
     'footer_terms' => 'Пользовательское соглашение',
     'footer_copyright' => '© 2026. Все права защищены',
-    'footer_developer' => 'Сайт разработан командой Павла Климаш',
+    'footer_developer' => 'Сайт разработан командой <br>Павла Климаш',
 
     // Footer columns
     'footer_col_catalog' => 'Каталог',
@@ -62,6 +62,7 @@ return [
     'footer_com_blog' => 'Блог',
     'footer_com_news' => 'Новости',
     'footer_com_career' => 'Карьера',
+    'footer_com_contacts' => 'Контакты',
 
     'footer_con_feedback' => 'Обратная связь',
 

@@ -7,8 +7,6 @@ import slider from './alpine/plugins/slider'
 import filters from './alpine/plugins/filters'
 
 import '../js/blocks/common/header/index.js'
-import '../js/blocks/catalog/filters/index.js'
-import '../js/blocks/catalog/hero/index.js'
 
 Alpine.plugin(collapse)
 Alpine.plugin(modal)

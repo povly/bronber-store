@@ -38,7 +38,7 @@ return [
     'footer_privacy' => 'Privacy Policy',
     'footer_terms' => 'Terms of Service',
     'footer_copyright' => '© 2026. All rights reserved',
-    'footer_developer' => 'Developed by Pavel Klimash team',
+    'footer_developer' => 'Developed by <br>Pavel Klimash team',
 
     // Footer columns
     'footer_col_catalog' => 'Catalog',
@@ -62,6 +62,7 @@ return [
     'footer_com_blog' => 'Blog',
     'footer_com_news' => 'News',
     'footer_com_career' => 'Career',
+    'footer_com_contacts' => 'Contacts',
 
     'footer_con_feedback' => 'Feedback',
 

@@ -37,6 +37,11 @@
         position: absolute;
         top: fluid-type(320px, 768px, 8px, 11px);
         right: fluid-type(320px, 768px, 8px, 11px);
+        margin-left: 30px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 2px;
     }
 
     &__title {
@@ -71,7 +76,7 @@
 
     &__reviews {
         &-svg {
-            display: none
+            display: none;
         }
 
         &-span {
@@ -106,7 +111,7 @@
             position: relative;
 
             &::after {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 50%;
                 transform: translateY(-50%);
@@ -133,7 +138,7 @@
             background: var(--gradient-purple);
 
             path {
-                &:nth-child(4){
+                &:nth-child(4) {
                     fill: var(--color-white);
                 }
             }
@@ -162,7 +167,7 @@
                 grid-template-columns: 0fr auto;
 
                 path {
-                    &:nth-child(4){
+                    &:nth-child(4) {
                         fill: transparent;
                     }
                 }
@@ -222,7 +227,7 @@
             top: fluid-type(1200px, 1440px, 6px, 9px);
             right: fluid-type(1200px, 1440px, 6px, 9px);
         }
-        
+
         &__raging {
             gap: fluid-type(1200px, 1440px, 10px, 13px);
         }

@@ -106,13 +106,14 @@
 
         <div class="catalog-hero__filter-btns">
             <button class="catalog-hero__filter-btn catalog-hero__filter-btn--primary" type="button" @click="$dispatch('open-filters')">
-                <svg class="catalog-hero__filter-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M2.5 5H17.5M5 10H15M7.5 15H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                Фильтры
+                <span>Фильтры</span>
             </button>
             <div class="catalog-hero__mobile-sort" @click.away="sortOpen = false">
                 <button class="catalog-hero__filter-btn catalog-hero__filter-btn--outline" type="button" @click="sortOpen = !sortOpen">
-                    <svg width="17" height="13" viewBox="0 0 17 13" fill="none"><path d="M1 1l7.5 11L16 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    Сортировка
+                    <span>Сортировка</span>
+                    <svg width="17" height="13" viewBox="0 0 17 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7.46967 9.53033C7.76256 9.82322 8.23744 9.82322 8.53033 9.53033L13.3033 4.75736C13.5962 4.46447 13.5962 3.98959 13.3033 3.6967C13.0104 3.40381 12.5355 3.40381 12.2426 3.6967L8 7.93934L3.75736 3.6967C3.46447 3.40381 2.98959 3.40381 2.6967 3.6967C2.40381 3.98959 2.40381 4.46447 2.6967 4.75736L7.46967 9.53033ZM8 8L7.25 8L7.25 9L8 9L8.75 9L8.75 8L8 8Z" fill="#BFBFBF" />
+                    </svg>
                 </button>
                 <div class="catalog-hero__mobile-sort-dropdown" style="display:none;" x-show="sortOpen" x-transition>
                     @foreach($allSortOptions as $key => $label)

@@ -12,11 +12,11 @@
 <body :class="{ 'overflow-hidden': $store.modal.stack.length }">
 
 @include('blocks.common.header.header')
+@include('blocks.common.mobile-nav.mobile-nav')
 
 @yield('content')
 
 @include('blocks.common.footer.footer')
-@include('blocks.common.mobile-nav.mobile-nav')
 
 @vite(['resources/js/lazyload.js', 'resources/js/app.js'])
 @stack('block-scripts')
