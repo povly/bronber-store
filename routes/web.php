@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +13,12 @@ $register = function () {
     Route::get('/', fn () => view('home'))->name('home');
     Route::get('/catalog', fn () => view('main'))->name('catalog');
 };
+
+Route::get('/clear-cache', function () {
+    Artisan::call('optimize:clear');
+
+    return response()->json(['status' => 'ok']);
+});
 
 // Default locale (no prefix)
 Route::middleware('locale:'.config('app.available_locales.0'))->group($register);

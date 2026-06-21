@@ -4,17 +4,19 @@
 
 <section class="product-grid">
     <div class="product-grid__list">
-        @for ($i = 0; $i < 6; $i++)
+        @for ($i = 0; $i < 15; $i++)
+            @php $p = $i % 4; @endphp
         <x-product-card
             title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
-            image="https://placehold.co/400x400/eaeaea/bfbfbf?text=Product"
-            :rating="$i !== 2 ? 4 : 0"
-            :reviews-count="$i !== 2 ? ($i < 3 ? 122 : 12) : 0"
-            :in-stock="$i !== 2"
+            :image="'/images/home/products/1/' . ($p + 1)"
+            :rating="$p !== 2 ? 4 : 0"
+            :reviews-count="$p !== 2 ? ($p < 3 ? 122 : 12) : 0"
+            :in-stock="$p !== 2"
             price="1100 ₽"
-            :old-price="($i === 1 || $i === 4) ? '1300 ₽' : null"
-            :discount="($i === 1 || $i === 4) ? '-15%' : null"
-            :sale="$i === 1 ? 'Распродажа' : null"
+            :old-price="($p === 1 || $p === 3) ? '1300 ₽' : null"
+            :discount="($p === 1 || $p === 3) ? '-15%' : null"
+            :sale="$p === 1 ? 'Распродажа' : null"
+            :lazy="false"
         />
         @endfor
     </div>

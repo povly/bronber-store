@@ -96,10 +96,16 @@
                 </div>
                 <input
                     type="text"
-                    class="header__search-input"
+                    class="header__search-input header__search-input--mobile"
                     placeholder="{{ __('store.search_placeholder_mobile') }}"
-                    :placeholder="isDesktop ? '{{ __('store.search_placeholder_desktop') }}' : '{{ __('store.search_placeholder_mobile') }}'"
-                    x-ref="searchInput"
+                    x-ref="searchInputMobile"
+                    name="search"
+                >
+                <input
+                    type="text"
+                    class="header__search-input header__search-input--desktop"
+                    placeholder="{{ __('store.search_placeholder_desktop') }}"
+                    x-ref="searchInputDesktop"
                     name="search"
                 >
                 <button type="button" class="header__search-btn" aria-label="{{ __('store.search_button') }}">

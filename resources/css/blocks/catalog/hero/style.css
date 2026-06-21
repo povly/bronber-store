@@ -402,7 +402,7 @@
 
     /* ── Desktop breakpoint ─────────────────────────── */
 
-    @media (min-width: 1100px) {
+    @media (min-width: 1200px) {
         padding-top: 24px;
         padding-bottom: 20px;
 

@@ -23,6 +23,7 @@
         ['id' => 5, 'name' => 'Continental', 'count' => 8, 'checked' => false],
         ['id' => 6, 'name' => 'Delphi', 'count' => 11, 'checked' => false],
         ['id' => 7, 'name' => 'Pierburg', 'count' => 4, 'checked' => false],
+        ['id' => 8, 'name' => 'Mando', 'count' => 6, 'checked' => false],
     ];
     $defaultSelectOptions = [
         'mark' => [['value' => '', 'label' => 'Выберите марку'], ['value' => 'BMW', 'label' => 'BMW'], ['value' => 'Audi', 'label' => 'Audi'], ['value' => 'Mercedes', 'label' => 'Mercedes'], ['value' => 'Volkswagen', 'label' => 'Volkswagen']],
@@ -32,6 +33,55 @@
     ];
     $allBrands = $brands ?: $defaultBrands;
     $allSelectOptions = $selectOptions ?: $defaultSelectOptions;
+
+    // --- Read ALL filter state from URL for server-side rendering ---
+
+    // Price
+    $priceMin = request()->filled('price_min') ? (int) request()->input('price_min') : ($priceMin ?? $rangeMin);
+    $priceMax = request()->filled('price_max') ? (int) request()->input('price_max') : ($priceMax ?? $rangeMax);
+
+    // Brands
+    $activeBrandNames = request()->filled('brand')
+        ? array_filter(array_map('trim', explode(',', request()->input('brand'))))
+        : [];
+    foreach ($allBrands as &$brand) {
+        $brand['checked'] = in_array($brand['name'], $activeBrandNames);
+    }
+    unset($brand);
+
+    // Availability
+    $activeAvailabilityKeys = request()->filled('availability')
+        ? array_filter(array_map('trim', explode(',', request()->input('availability'))))
+        : [];
+    $availability = [
+        'in_stock' => in_array('in_stock', $activeAvailabilityKeys),
+        'to_order' => in_array('to_order', $activeAvailabilityKeys),
+    ];
+
+    // Compatibility
+    $compatibility = [
+        'mark' => request()->filled('mark') ? request()->input('mark') : ($compatibility['mark'] ?? ''),
+        'model' => request()->filled('model') ? request()->input('model') : ($compatibility['model'] ?? ''),
+        'generation' => request()->filled('generation') ? request()->input('generation') : ($compatibility['generation'] ?? ''),
+        'engine' => request()->filled('engine') ? request()->input('engine') : ($compatibility['engine'] ?? ''),
+    ];
+
+    // Helper: find select label by value
+    $selectLabel = function (string $field) use ($allSelectOptions, $compatibility): string {
+        foreach ($allSelectOptions[$field] ?? [] as $opt) {
+            if ($opt['value'] === ($compatibility[$field] ?? '')) {
+                return $opt['label'];
+            }
+        }
+        return $allSelectOptions[$field][0]['label'] ?? '';
+    };
+
+    // Range slider CSS percentages
+    $initLeftPercent = $rangeMax > $rangeMin ? (($priceMin - $rangeMin) / ($rangeMax - $rangeMin)) * 100 : 0;
+    $initRightPercent = $rangeMax > $rangeMin ? (($priceMax - $rangeMin) / ($rangeMax - $rangeMin)) * 100 : 100;
+
+    // Whether availability section should start open
+    $availabilityOpen = !empty($activeAvailabilityKeys);
 @endphp
 
 <div x-data="catalogFilters({{ Js::from([
@@ -44,6 +94,14 @@
     'rangeMax' => $rangeMax,
     'availability' => $availability,
     'visibleCount' => $visibleCount,
+    'openSections' => [
+        'price' => true,
+        'brand' => true,
+        'availability' => $availabilityOpen,
+        'compatibility' => true,
+    ],
+    'openCategories' => ['brakes' => true],
+    'activeCategory' => 'brakes',
 ]) }})" x-init="init()" @open-filters.window="openMobile()">
     {{-- Hidden inputs — single instance for form submission --}}
     <input type="hidden" name="price_min" :value="priceMin" :disabled="priceMin <= rangeMin">
@@ -86,14 +144,6 @@
             @include('catalog.filters._content')
         </div>
     </div>
-
-    {{-- Mobile trigger button --}}
-    <button type="button" class="catalog-filters__mobile-trigger" @click="openMobile()">
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        Фильтры
-    </button>
 
     {{-- Desktop sidebar --}}
     <aside class="catalog-filters">

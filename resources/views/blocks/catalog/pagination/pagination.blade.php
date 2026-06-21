@@ -3,10 +3,6 @@
 @endpush
 
 <div class="catalog-pagination">
-    <div class="catalog-pagination__show-more">
-        <button type="button">Показать еще</button>
-    </div>
-
     <div class="catalog-pagination__pages">
         <button type="button" class="catalog-pagination__arrow catalog-pagination__arrow--prev" aria-label="Предыдущая страница">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

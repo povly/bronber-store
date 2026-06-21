@@ -3,13 +3,6 @@ document.addEventListener('alpine:init', () => {
         menuOpen: false,
         searchDropdownOpen: false,
         searchType: searchTypes[0]?.value ?? 'name',
-        isDesktop: window.innerWidth >= 1200,
-
-        init() {
-            window.addEventListener('resize', () => {
-                this.isDesktop = window.innerWidth >= 1200;
-            });
-        },
 
         get searchTypeLabel() {
             const type = searchTypes.find(t => t.value === this.searchType);
@@ -20,7 +13,13 @@ document.addEventListener('alpine:init', () => {
             this.searchType = type;
             this.searchDropdownOpen = false;
             this.$nextTick(() => {
-                this.$refs.searchInput.focus();
+                const desktop = this.$refs.searchInputDesktop;
+                const mobile = this.$refs.searchInputMobile;
+                if (desktop && getComputedStyle(desktop).display !== 'none') {
+                    desktop.focus();
+                } else if (mobile) {
+                    mobile.focus();
+                }
             });
         },
 

@@ -33,7 +33,7 @@
     }
 }
 
-@media (min-width: 1100px) {
+@media (min-width: 1200px) {
     .catalog-filters-overlay,
     .catalog-filters-panel {
         display: none !important;
@@ -48,7 +48,7 @@
     width: 326px;
     flex-shrink: 0;
 
-    @media (min-width: 1100px) {
+    @media (min-width: 1200px) {
         display: flex;
     }
 
@@ -127,7 +127,10 @@
         margin: 0;
         padding: 0;
         overflow: hidden;
-        transition: max-height 0.3s ease;
+
+        &.is-hidden {
+            display: none;
+        }
     }
 
     &__subcategory-item {
@@ -193,7 +196,9 @@
     }
 
     &__section-body {
-        transition: max-height 0.3s ease;
+        &.is-hidden {
+            display: none;
+        }
     }
 
     /* --- Price range --- */
@@ -204,8 +209,8 @@
     }
 
     &__range-track {
-        --range-left: 5%;
-        --range-right: 50%;
+        --range-left: 0%;
+        --range-right: 100%;
         position: relative;
         height: 4px;
         background: var(--color-gray-near);
@@ -584,7 +589,7 @@
         cursor: pointer;
         margin-bottom: 16px;
 
-        @media (min-width: 1100px) {
+        @media (min-width: 1200px) {
             display: none;
         }
     }
@@ -623,5 +628,12 @@
 
     &__mobile-body {
         padding: 20px;
+    }
+}
+
+
+@media (min-width: 1200px) {
+    .catalog-filters {
+        width: fluid-type(1200px, 1440px, 250px, 326px);
     }
 }

@@ -58,6 +58,10 @@
             &::placeholder {
                 color: var(--color-gray-placeholder);
             }
+
+            &--desktop {
+                display: none;
+            }
         }
 
         &-btn {
@@ -180,6 +184,14 @@
             &-input {
                 border-color: var(--color-gray-border);
                 padding: 8px calc(30px + fluid-type(1200px, 1440px, 10px, 16px)) 8px fluid-type(1200px, 1440px, 16px, 23px);
+
+                &--mobile {
+                    display: none;
+                }
+
+                &--desktop {
+                    display: block;
+                }
             }
 
             &-btn {
