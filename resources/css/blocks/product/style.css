@@ -797,6 +797,10 @@
             flex-shrink: 0;
         }
 
+        &__thumbs-track {
+            gap: 13px;
+        }
+
         &__thumb {
             width: 105px;
             height: 105px;
@@ -888,6 +892,14 @@
 
         &__thumbs {
             max-height: 620px;
+        }
+
+        &__thumbs-track {
+            gap: 17px;
+        }
+
+        &__gallery {
+            gap: 17px;
         }
 
         &__title {
