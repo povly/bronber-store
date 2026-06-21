@@ -80,6 +80,11 @@
                                 </div>
                             @endforeach
                         </div>
+                        <button type="button" class="product__gallery-action" aria-label="Поделиться">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 8C17.2091 8 19 6.20914 19 4C19 1.79086 17.2091 0 15 0C12.7909 0 11 1.79086 11 4C11 4.21 11.02 4.42 11.05 4.63L7.38 6.95C6.63 6.36 5.69 6 4.67 6C2.19 6 0.17 8.01 0.17 10.5C0.17 12.99 2.19 15 4.67 15C5.69 15 6.63 14.64 7.38 14.05L11.05 16.37C11.02 16.58 11 16.79 11 17C11 19.2091 12.7909 21 15 21C17.2091 21 19 19.2091 19 17C19 14.7909 17.2091 13 15 13C13.98 13 13.04 13.36 12.29 13.95L8.62 11.63C8.65 11.42 8.67 11.21 8.67 11C8.67 10.79 8.65 10.58 8.62 10.37L12.29 8.05C13.04 8.64 13.98 9 15 9M15 2C16.1 2 17 2.9 17 4C17 5.1 16.1 6 15 6C13.9 6 13 5.1 13 4C13 2.9 13.9 2 15 2M4.67 13C3.29 13 2.17 11.88 2.17 10.5C2.17 9.12 3.29 8 4.67 8C6.05 8 7.17 9.12 7.17 10.5C7.17 11.88 6.05 13 4.67 13M15 19C13.9 19 13 18.1 13 17C13 15.9 13.9 15 15 15C16.1 15 17 15.9 17 17C17 18.1 16.1 19 15 19Z" fill="currentColor" transform="translate(2 2)"/>
+                            </svg>
+                        </button>
                         <x-slider-pagination />
                     </div>
                 </div>
@@ -116,7 +121,10 @@
 
                 {{-- Availability (mobile: after buy-row, tablet+: right column bottom) --}}
                 <div class="product__availability">
-                    <p class="product__stock">{{ $product['inStock'] ? 'В наличии' : 'Нет в наличии' }}</p>
+                    <p class="product__stock">
+                        <span class="product__stock-dot" aria-hidden="true"></span>
+                        {{ $product['inStock'] ? 'В наличии' : 'Нет в наличии' }}
+                    </p>
                     <p class="product__delivery-note">Бесплатная доставка при заказе от 5000 ₽</p>
                 </div>
 
@@ -165,15 +173,19 @@
 
     {{-- Reviews (slider) --}}
     <div class="container">
-        <div class="product__reviews-head">
-            <h2 class="product__section-title">Отзывы ({{ $product['reviewCount'] }})</h2>
-            <button type="button" class="product__reviews-all">
-                <span class="product__reviews-all-short">Смотреть все</span>
-                <span class="product__reviews-all-full">Смотреть все отзывы</span>
-            </button>
-        </div>
+        <div class="product__reviews-section" x-data="slider({ breakpoints: { 0: 1, 1200: 2 } })" @resize.window.debounce.150ms="onResize()">
+            <div class="product__reviews-head">
+                <h2 class="product__section-title">Отзывы ({{ $product['reviewCount'] }})</h2>
+                <div class="product__reviews-arrows slider__arrows slider__arrows--pc">
+                    <button class="slider__arrow slider__arrow--prev product__reviews-arrow" type="button" aria-label="Назад" @click="prev()" :disabled="!canPrev">
+                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z" fill="#080808"/></svg>
+                    </button>
+                    <button class="slider__arrow slider__arrow--next product__reviews-arrow" type="button" aria-label="Вперёд" @click="next()" :disabled="!canNext">
+                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM21.2803 6.05328C21.5732 5.76039 21.5732 5.28551 21.2803 4.99262L16.5074 0.219648C16.2145 -0.073245 15.7396 -0.073245 15.4467 0.219648C15.1538 0.512542 15.1538 0.987415 15.4467 1.28031L19.6893 5.52295L15.4467 9.76559C15.1538 10.0585 15.1538 10.5334 15.4467 10.8263C15.7396 11.1191 16.2145 11.1191 16.5074 10.8263L21.2803 6.05328ZM0.75 5.52295V6.27295H20.75V5.52295V4.77295H0.75V5.52295Z" fill="#030303"/></svg>
+                    </button>
+                </div>
+            </div>
 
-        <div class="product__reviews" x-data="slider({ breakpoints: { 0: 1, 1200: 2 } })" @resize.window.debounce.150ms="onResize()">
             <div class="slider product__reviews-slider">
                 <div class="slider__track product__reviews-track" x-ref="track"
                      @pointerdown.prevent="onPointerDown($event)"
@@ -187,8 +199,15 @@
                                 <div class="product__review-meta">
                                     <p class="product__review-name">{{ $review['name'] }}</p>
                                     <p class="product__review-car">{{ $review['car'] }}</p>
-                                    <p class="product__review-date">{{ $review['date'] }}</p>
                                 </div>
+                                <p class="product__review-date">{{ $review['date'] }}</p>
+                            </div>
+                            <div class="product__review-stars" aria-hidden="true">
+                                @for($s = 0; $s < 5; $s++)
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" class="product__rating-star is-filled">
+                                        <path d="M12 2L14.55 8.63L21.56 9.27L16.27 13.97L17.84 20.82L12 17.27L6.16 20.82L7.73 13.97L2.44 9.27L9.45 8.63L12 2Z"/>
+                                    </svg>
+                                @endfor
                             </div>
                             <p class="product__review-text">{{ $review['text'] }}</p>
 
@@ -202,16 +221,12 @@
                         </article>
                     @endforeach
                 </div>
-
-                <div class="product__reviews-arrows slider__arrows slider__arrows--pc">
-                    <button class="slider__arrow slider__arrow--prev product__reviews-arrow" type="button" aria-label="Назад" @click="prev()" :disabled="!canPrev">
-                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z" fill="#080808"/></svg>
-                    </button>
-                    <button class="slider__arrow slider__arrow--next product__reviews-arrow" type="button" aria-label="Вперёд" @click="next()" :disabled="!canNext">
-                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM21.2803 6.05328C21.5732 5.76039 21.5732 5.28551 21.2803 4.99262L16.5074 0.219648C16.2145 -0.073245 15.7396 -0.073245 15.4467 0.219648C15.1538 0.512542 15.1538 0.987415 15.4467 1.28031L19.6893 5.52295L15.4467 9.76559C15.1538 10.0585 15.1538 10.5334 15.4467 10.8263C15.7396 11.1191 16.2145 11.1191 16.5074 10.8263L21.2803 6.05328ZM0.75 5.52295V6.27295H20.75V5.52295V4.77295H0.75V5.52295Z" fill="#030303"/></svg>
-                    </button>
-                </div>
             </div>
+
+            <button type="button" class="product__reviews-all">
+                <span class="product__reviews-all-short">Смотреть все</span>
+                <span class="product__reviews-all-full">Смотреть все отзывы</span>
+            </button>
         </div>
     </div>
 
