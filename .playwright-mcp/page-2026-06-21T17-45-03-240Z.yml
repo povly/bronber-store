@@ -1,0 +1,200 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "bronber — На главную" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+      - generic [ref=e24]:
+        - img [ref=e26]
+        - generic [ref=e30]:
+          - textbox "Поиск..." [ref=e31]
+          - button "Искать" [ref=e32] [cursor=pointer]:
+            - img [ref=e33]
+        - link "Избранное" [ref=e37] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e38]
+  - main [ref=e40]:
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - navigation "Breadcrumb" [ref=e43]:
+          - list [ref=e44]:
+            - listitem [ref=e45]:
+              - link "Главная" [ref=e46] [cursor=pointer]:
+                - /url: /
+              - text: /
+            - listitem [ref=e47]:
+              - link "Корзина" [ref=e48] [cursor=pointer]:
+                - /url: /cart
+              - text: /
+            - listitem [ref=e49]:
+              - generic [ref=e50]: Оформление заказа
+        - heading "Оформление заказа" [level=1] [ref=e51]
+      - generic [ref=e54]:
+        - generic [ref=e55]:
+          - generic [ref=e56]:
+            - text: Уже есть аккаунт?
+            - link "Войти" [ref=e57] [cursor=pointer]:
+              - /url: "#"
+          - generic [ref=e58]:
+            - generic [ref=e59]:
+              - generic [ref=e60]: "1"
+              - heading "Контактные данные" [level=2] [ref=e61]
+            - generic [ref=e62]:
+              - generic [ref=e63]:
+                - generic [ref=e64]: Имя и фамилия*
+                - textbox "Имя и фамилия*" [ref=e65]:
+                  - /placeholder: Введите имя и фамилию
+              - generic [ref=e66]:
+                - generic [ref=e67]: Телефон*
+                - textbox "Телефон*" [ref=e68]:
+                  - /placeholder: +7 (_ _ _) _ _ _ - _ _ - _ _
+              - generic [ref=e69]:
+                - generic [ref=e70]: E-mail
+                - textbox "E-mail" [ref=e71]:
+                  - /placeholder: example@gmail.com
+              - generic [ref=e72]:
+                - generic [ref=e73]: Город*
+                - textbox "Город*" [ref=e74]:
+                  - /placeholder: Введите город
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: Вам перезвонить?
+              - generic [ref=e77]:
+                - generic [ref=e78] [cursor=pointer]:
+                  - radio "Да, есть вопросы"
+                  - generic [ref=e80]: Да, есть вопросы
+                - generic [ref=e81] [cursor=pointer]:
+                  - radio "Нет, звоните по необходимости" [checked]
+                  - generic [ref=e83]: Нет, звоните по необходимости
+            - generic [ref=e84]:
+              - generic [ref=e85]:
+                - generic [ref=e86]: Компания доставки*
+                - combobox "Компания доставки*" [ref=e87] [cursor=pointer]:
+                  - option "Выберите компанию" [disabled] [selected]
+                  - option "СДЭК"
+                  - option "Почта России"
+              - generic [ref=e88]:
+                - generic [ref=e89]: Отделение*
+                - combobox "Отделение*" [ref=e90] [cursor=pointer]:
+                  - option "Выберите отделение" [disabled] [selected]
+          - generic [ref=e92]:
+            - generic [ref=e93]:
+              - generic [ref=e94]: "2"
+              - heading "Способ доставки" [level=2] [ref=e95]
+            - generic [ref=e96]:
+              - generic [ref=e97] [cursor=pointer]:
+                - radio "В отделение По тарифам компании" [checked]
+                - generic [ref=e99]:
+                  - paragraph [ref=e100]: В отделение
+                  - paragraph [ref=e101]: По тарифам компании
+              - generic [ref=e102] [cursor=pointer]:
+                - radio "Самовывоз Из нашего магазина"
+                - generic [ref=e104]:
+                  - paragraph [ref=e105]: Самовывоз
+                  - paragraph [ref=e106]: Из нашего магазина
+              - generic [ref=e107] [cursor=pointer]:
+                - radio "Курьером До двери"
+                - generic [ref=e109]:
+                  - paragraph [ref=e110]: Курьером
+                  - paragraph [ref=e111]: До двери
+          - generic [ref=e113]:
+            - generic [ref=e114]:
+              - generic [ref=e115]: "3"
+              - heading "Способ оплаты" [level=2] [ref=e116]
+            - generic [ref=e117]:
+              - generic [ref=e118] [cursor=pointer]:
+                - radio "Банковская карта Онлайн оплата" [checked]
+                - generic [ref=e120]:
+                  - paragraph [ref=e121]: Банковская карта
+                  - paragraph [ref=e122]: Онлайн оплата
+              - generic [ref=e123] [cursor=pointer]:
+                - radio "При получении В пункте выдачи"
+                - generic [ref=e125]:
+                  - paragraph [ref=e126]: При получении
+                  - paragraph [ref=e127]: В пункте выдачи
+          - generic [ref=e129]:
+            - generic [ref=e130]:
+              - generic [ref=e131]: "4"
+              - heading "Комментарий к заказу" [level=2] [ref=e132]
+              - generic [ref=e133]: (необязательно)
+            - textbox "Укажите дополнительную информацию" [ref=e134]
+        - complementary [ref=e135]:
+          - heading "Ваш заказ" [level=2] [ref=e136]
+          - generic [ref=e137]:
+            - generic [ref=e138]: Товаров
+            - generic [ref=e139]: "5"
+          - generic [ref=e140]:
+            - generic [ref=e141]: Сумма
+            - generic [ref=e142]: 6 600 ₽
+          - generic [ref=e143]:
+            - generic [ref=e144]: Доставка
+            - generic [ref=e145]: Уточняется
+          - generic [ref=e147]:
+            - generic [ref=e148]: К оплате
+            - generic [ref=e149]: 6 600 ₽
+          - button "Оформить заказ" [ref=e150] [cursor=pointer]
+          - link "Вернуться в корзину" [ref=e151] [cursor=pointer]:
+            - /url: http://bronber_store.test/cart
+  - contentinfo [ref=e152]:
+    - generic [ref=e154]:
+      - generic [ref=e155]:
+        - link "bronber — На главную" [ref=e157] [cursor=pointer]:
+          - /url: /
+          - img [ref=e158]
+        - generic [ref=e177]:
+          - generic [ref=e178]:
+            - link "+7 (985) 449-8000" [ref=e179] [cursor=pointer]:
+              - /url: tel:+79854498000
+              - img [ref=e180]
+              - generic [ref=e183]: +7 (985) 449-8000
+            - link "info@bronber.com" [ref=e184] [cursor=pointer]:
+              - /url: mailto:info@bronber.com
+              - img [ref=e185]
+              - generic [ref=e188]: info@bronber.com
+          - generic [ref=e190]:
+            - link "Instagram" [ref=e191] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e192]
+            - link "YouTube" [ref=e195] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e196]
+        - navigation [ref=e198]:
+          - button "Каталог" [ref=e200] [cursor=pointer]:
+            - generic [ref=e201]: Каталог
+            - img [ref=e202]
+          - button "Покупателям" [ref=e205] [cursor=pointer]:
+            - generic [ref=e206]: Покупателям
+            - img [ref=e207]
+          - button "Компания" [ref=e210] [cursor=pointer]:
+            - generic [ref=e211]: Компания
+            - img [ref=e212]
+      - img [ref=e215]
+      - link "Регистрация | Вход" [ref=e225] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e226]
+        - generic [ref=e229]: Регистрация | Вход
+      - generic [ref=e230]:
+        - generic [ref=e231]:
+          - paragraph [ref=e232]:
+            - link "Политика конфиденциальности" [ref=e233] [cursor=pointer]:
+              - /url: "#"
+          - paragraph [ref=e234]:
+            - link "Пользовательское соглашение" [ref=e235] [cursor=pointer]:
+              - /url: "#"
+        - paragraph [ref=e236]: © 2026. Все права защищены
+        - link "Сайт разработан командой Павла Климаш" [ref=e237] [cursor=pointer]:
+          - /url: "#!"
+          - text: Сайт разработан командой
+          - text: Павла Климаш
+  - generic [ref=e240]:
+    - generic [ref=e242]:
+      - generic [ref=e249] [cursor=pointer]: "8"
+      - generic [ref=e252] [cursor=pointer]: "3"
+      - generic [ref=e255] [cursor=pointer]: "1"
+    - generic [ref=e256]:
+      - generic [ref=e264] [cursor=pointer]: GET /checkout
+      - generic [ref=e265] [cursor=pointer]:
+        - generic: 29.57ms
+      - generic [ref=e267] [cursor=pointer]:
+        - generic: 7MB
+      - generic [ref=e269] [cursor=pointer]:
+        - generic: 13.x

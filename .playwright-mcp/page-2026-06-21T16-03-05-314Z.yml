@@ -1,0 +1,677 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - link "+7 (985) 449-8000" [ref=e6] [cursor=pointer]:
+          - /url: tel:+79854498000
+          - img [ref=e7]
+          - generic [ref=e10]: +7 (985) 449-8000
+        - navigation [ref=e11]:
+          - link "Доставка и оплата" [ref=e12] [cursor=pointer]:
+            - /url: "#!"
+          - link "Гарантия и возврат" [ref=e13] [cursor=pointer]:
+            - /url: "#!"
+      - generic [ref=e14]:
+        - navigation [ref=e15]:
+          - link "Карьера" [ref=e16] [cursor=pointer]:
+            - /url: "#!"
+          - link "FAQ" [ref=e17] [cursor=pointer]:
+            - /url: "#!"
+          - link "Контакты" [ref=e18] [cursor=pointer]:
+            - /url: "#!"
+        - generic [ref=e19]:
+          - link "RU" [ref=e20] [cursor=pointer]:
+            - /url: /
+          - link "EN" [ref=e22] [cursor=pointer]:
+            - /url: /en
+    - generic [ref=e23]:
+      - link "bronber — На главную" [ref=e24] [cursor=pointer]:
+        - /url: /
+        - img [ref=e25]
+      - generic [ref=e44]:
+        - generic [ref=e45]:
+          - button "По названию" [ref=e47] [cursor=pointer]:
+            - generic [ref=e48]: По названию
+            - img [ref=e49]
+          - textbox "Поиск по названию, артикулу или VIN" [ref=e51]
+          - button "Искать" [ref=e52] [cursor=pointer]:
+            - img [ref=e53]
+        - generic [ref=e56]:
+          - link "Избранное" [ref=e57] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e58]
+          - link "Профиль" [ref=e60] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e61]
+          - link "Корзина" [ref=e64] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e65]
+            - generic [ref=e69]: "3"
+    - navigation [ref=e70]:
+      - generic [ref=e71]:
+        - button "Каталог товаров" [ref=e73] [cursor=pointer]:
+          - generic [ref=e74]:
+            - img [ref=e75]
+            - img [ref=e77]
+            - img [ref=e79]
+            - img [ref=e81]
+          - link "Каталог" [ref=e83]:
+            - /url: "#"
+        - generic [ref=e84]:
+          - link "Новинки" [ref=e85] [cursor=pointer]:
+            - /url: "#"
+          - link "Акции" [ref=e86] [cursor=pointer]:
+            - /url: "#"
+          - link "Блог" [ref=e87] [cursor=pointer]:
+            - /url: "#"
+          - link "Бонусы" [ref=e88] [cursor=pointer]:
+            - /url: "#"
+          - link "О компании" [ref=e89] [cursor=pointer]:
+            - /url: "#"
+  - main [ref=e90]:
+    - generic [ref=e91]:
+      - generic [ref=e93]:
+        - navigation "Breadcrumb" [ref=e94]:
+          - list [ref=e95]:
+            - listitem [ref=e96]:
+              - link "Главная" [ref=e97] [cursor=pointer]:
+                - /url: /
+              - text: /
+            - listitem [ref=e98]:
+              - generic [ref=e99]: Каталог
+        - heading "Каталог" [level=1] [ref=e100]
+        - generic [ref=e101]:
+          - paragraph [ref=e102]: Найдено 148 товаров
+          - generic [ref=e104]:
+            - generic [ref=e105]: "Сортировка:"
+            - button "По популярности" [ref=e107] [cursor=pointer]:
+              - generic [ref=e108]: По популярности
+              - img [ref=e109]
+      - generic [ref=e111]:
+        - complementary [ref=e113]:
+          - generic [ref=e114]:
+            - heading "Каталог товаров" [level=2] [ref=e115]
+            - list [ref=e117]:
+              - listitem [ref=e118]:
+                - generic [ref=e119] [cursor=pointer]:
+                  - generic [ref=e120]: Тормозная система
+                  - img [ref=e121]
+                - list [ref=e123]:
+                  - listitem [ref=e124] [cursor=pointer]:
+                    - link "Комплект тормозной системы" [ref=e125]:
+                      - /url: "#"
+                  - listitem [ref=e126] [cursor=pointer]:
+                    - link "Комплекты карбон-керамической тормозной системы" [ref=e127]:
+                      - /url: "#"
+                  - listitem [ref=e128] [cursor=pointer]:
+                    - link "Тормозные суппорты" [ref=e129]:
+                      - /url: "#"
+                  - listitem [ref=e130] [cursor=pointer]:
+                    - link "Тормозные колодки" [ref=e131]:
+                      - /url: "#"
+              - listitem [ref=e132]:
+                - generic [ref=e133] [cursor=pointer]:
+                  - generic [ref=e134]: Чип-тюнинг
+                  - img [ref=e135]
+              - listitem [ref=e137]:
+                - generic [ref=e138] [cursor=pointer]:
+                  - generic [ref=e139]: Диски
+                  - img [ref=e140]
+              - listitem [ref=e142]:
+                - generic [ref=e143] [cursor=pointer]:
+                  - generic [ref=e144]: Оптика
+                  - img [ref=e145]
+          - generic [ref=e149]:
+            - heading "Фильтры" [level=2] [ref=e150]
+            - generic [ref=e151]:
+              - generic [ref=e152] [cursor=pointer]:
+                - generic [ref=e153]: Цена, ₽
+                - img [ref=e154]
+              - generic [ref=e161]:
+                - textbox [ref=e162]: "0"
+                - generic [ref=e163]: —
+                - textbox [ref=e164]: "10000"
+            - generic [ref=e165]:
+              - generic [ref=e166] [cursor=pointer]:
+                - generic [ref=e167]: Бренд
+                - img [ref=e168]
+              - generic [ref=e170]:
+                - textbox "Поиск по названию" [ref=e172]
+                - generic [ref=e173]:
+                  - generic [ref=e174] [cursor=pointer]:
+                    - checkbox "Bosch (24)"
+                    - img [ref=e176]
+                    - generic [ref=e178]: Bosch
+                    - generic [ref=e179]: (24)
+                  - generic [ref=e180] [cursor=pointer]:
+                    - checkbox "DeatschWerks (15)"
+                    - img [ref=e182]
+                    - generic [ref=e184]: DeatschWerks
+                    - generic [ref=e185]: (15)
+                  - generic [ref=e186] [cursor=pointer]:
+                    - checkbox "Denso (21)"
+                    - img [ref=e188]
+                    - generic [ref=e190]: Denso
+                    - generic [ref=e191]: (21)
+                  - generic [ref=e192] [cursor=pointer]:
+                    - checkbox "Valeo (6)"
+                    - img [ref=e194]
+                    - generic [ref=e196]: Valeo
+                    - generic [ref=e197]: (6)
+                - button "Показать еще (4)" [ref=e198] [cursor=pointer]
+            - generic [ref=e200] [cursor=pointer]:
+              - generic [ref=e201]: Наличие
+              - img [ref=e202]
+            - generic [ref=e204]:
+              - generic [ref=e205] [cursor=pointer]:
+                - generic [ref=e206]: Совместимость
+                - img [ref=e207]
+              - generic [ref=e210]:
+                - button "Марка Выберите марку" [ref=e213] [cursor=pointer]:
+                  - generic: Марка
+                  - generic [ref=e214]: Выберите марку
+                  - img [ref=e215]
+                - button "Модель Выберите модель" [ref=e219] [cursor=pointer]:
+                  - generic: Модель
+                  - generic [ref=e220]: Выберите модель
+                  - img [ref=e221]
+                - button "Поколение Выберите поколение" [ref=e225] [cursor=pointer]:
+                  - generic: Поколение
+                  - generic [ref=e226]: Выберите поколение
+                  - img [ref=e227]
+                - button "Двигатель Выберите двигатель" [ref=e231] [cursor=pointer]:
+                  - generic: Двигатель
+                  - generic [ref=e232]: Выберите двигатель
+                  - img [ref=e233]
+            - generic [ref=e235]:
+              - button "Сбросить" [ref=e236] [cursor=pointer]
+              - button "Применить" [ref=e237] [cursor=pointer]
+        - generic [ref=e240]:
+          - article [ref=e241]:
+            - generic [ref=e242]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e244]
+              - button "В избранное" [ref=e245] [cursor=pointer]:
+                - img [ref=e246]
+            - generic [ref=e250]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e251]
+              - generic [ref=e252]:
+                - generic [ref=e253]:
+                  - img [ref=e254]
+                  - img [ref=e256]
+                  - img [ref=e258]
+                  - img [ref=e260]
+                  - img [ref=e262]
+                - generic [ref=e264]:
+                  - img [ref=e266]
+                  - generic [ref=e268]: "122"
+              - generic [ref=e269]:
+                - generic [ref=e271]: 1100 ₽
+                - button "В корзину" [ref=e272] [cursor=pointer]:
+                  - img [ref=e273]
+          - article [ref=e278]:
+            - generic [ref=e279]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e281]
+              - button "В избранное" [ref=e282] [cursor=pointer]:
+                - img [ref=e283]
+              - generic [ref=e287]:
+                - generic [ref=e288]: "-15%"
+                - generic [ref=e289]: Распродажа
+            - generic [ref=e290]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e291]
+              - generic [ref=e292]:
+                - generic [ref=e293]:
+                  - img [ref=e294]
+                  - img [ref=e296]
+                  - img [ref=e298]
+                  - img [ref=e300]
+                  - img [ref=e302]
+                - generic [ref=e304]:
+                  - img [ref=e306]
+                  - generic [ref=e308]: "122"
+              - generic [ref=e309]:
+                - generic [ref=e310]:
+                  - generic [ref=e311]: 1100 ₽
+                  - generic [ref=e312]: 1300 ₽
+                - button "В корзину" [ref=e313] [cursor=pointer]:
+                  - img [ref=e314]
+          - article [ref=e319]:
+            - generic [ref=e320]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e322]
+              - button "В избранное" [ref=e323] [cursor=pointer]:
+                - img [ref=e324]
+            - generic [ref=e328]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e329]
+              - generic [ref=e330]:
+                - generic [ref=e331]:
+                  - img [ref=e332]
+                  - img [ref=e334]
+                  - img [ref=e336]
+                  - img [ref=e338]
+                  - img [ref=e340]
+                - generic [ref=e342]:
+                  - img [ref=e344]
+                  - generic [ref=e346]: "0"
+              - generic [ref=e347]:
+                - generic [ref=e348]:
+                  - generic [ref=e349]: 1100 ₽
+                  - generic [ref=e350]: Нет в наличии
+                - button "В корзину" [disabled] [ref=e351] [cursor=pointer]:
+                  - img [ref=e352]
+          - article [ref=e357]:
+            - generic [ref=e358]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e360]
+              - button "В избранное" [ref=e361] [cursor=pointer]:
+                - img [ref=e362]
+              - generic [ref=e367]: "-15%"
+            - generic [ref=e368]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e369]
+              - generic [ref=e370]:
+                - generic [ref=e371]:
+                  - img [ref=e372]
+                  - img [ref=e374]
+                  - img [ref=e376]
+                  - img [ref=e378]
+                  - img [ref=e380]
+                - generic [ref=e382]:
+                  - img [ref=e384]
+                  - generic [ref=e386]: "12"
+              - generic [ref=e387]:
+                - generic [ref=e388]:
+                  - generic [ref=e389]: 1100 ₽
+                  - generic [ref=e390]: 1300 ₽
+                - button "В корзину" [ref=e391] [cursor=pointer]:
+                  - img [ref=e392]
+          - article [ref=e397]:
+            - generic [ref=e398]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e400]
+              - button "В избранное" [ref=e401] [cursor=pointer]:
+                - img [ref=e402]
+            - generic [ref=e406]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e407]
+              - generic [ref=e408]:
+                - generic [ref=e409]:
+                  - img [ref=e410]
+                  - img [ref=e412]
+                  - img [ref=e414]
+                  - img [ref=e416]
+                  - img [ref=e418]
+                - generic [ref=e420]:
+                  - img [ref=e422]
+                  - generic [ref=e424]: "122"
+              - generic [ref=e425]:
+                - generic [ref=e427]: 1100 ₽
+                - button "В корзину" [ref=e428] [cursor=pointer]:
+                  - img [ref=e429]
+          - article [ref=e434]:
+            - generic [ref=e435]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e437]
+              - button "В избранное" [ref=e438] [cursor=pointer]:
+                - img [ref=e439]
+              - generic [ref=e443]:
+                - generic [ref=e444]: "-15%"
+                - generic [ref=e445]: Распродажа
+            - generic [ref=e446]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e447]
+              - generic [ref=e448]:
+                - generic [ref=e449]:
+                  - img [ref=e450]
+                  - img [ref=e452]
+                  - img [ref=e454]
+                  - img [ref=e456]
+                  - img [ref=e458]
+                - generic [ref=e460]:
+                  - img [ref=e462]
+                  - generic [ref=e464]: "122"
+              - generic [ref=e465]:
+                - generic [ref=e466]:
+                  - generic [ref=e467]: 1100 ₽
+                  - generic [ref=e468]: 1300 ₽
+                - button "В корзину" [ref=e469] [cursor=pointer]:
+                  - img [ref=e470]
+          - article [ref=e475]:
+            - generic [ref=e476]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e478]
+              - button "В избранное" [ref=e479] [cursor=pointer]:
+                - img [ref=e480]
+            - generic [ref=e484]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e485]
+              - generic [ref=e486]:
+                - generic [ref=e487]:
+                  - img [ref=e488]
+                  - img [ref=e490]
+                  - img [ref=e492]
+                  - img [ref=e494]
+                  - img [ref=e496]
+                - generic [ref=e498]:
+                  - img [ref=e500]
+                  - generic [ref=e502]: "0"
+              - generic [ref=e503]:
+                - generic [ref=e504]:
+                  - generic [ref=e505]: 1100 ₽
+                  - generic [ref=e506]: Нет в наличии
+                - button "В корзину" [disabled] [ref=e507] [cursor=pointer]:
+                  - img [ref=e508]
+          - article [ref=e513]:
+            - generic [ref=e514]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e516]
+              - button "В избранное" [ref=e517] [cursor=pointer]:
+                - img [ref=e518]
+              - generic [ref=e523]: "-15%"
+            - generic [ref=e524]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e525]
+              - generic [ref=e526]:
+                - generic [ref=e527]:
+                  - img [ref=e528]
+                  - img [ref=e530]
+                  - img [ref=e532]
+                  - img [ref=e534]
+                  - img [ref=e536]
+                - generic [ref=e538]:
+                  - img [ref=e540]
+                  - generic [ref=e542]: "12"
+              - generic [ref=e543]:
+                - generic [ref=e544]:
+                  - generic [ref=e545]: 1100 ₽
+                  - generic [ref=e546]: 1300 ₽
+                - button "В корзину" [ref=e547] [cursor=pointer]:
+                  - img [ref=e548]
+          - article [ref=e553]:
+            - generic [ref=e554]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e556]
+              - button "В избранное" [ref=e557] [cursor=pointer]:
+                - img [ref=e558]
+            - generic [ref=e562]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e563]
+              - generic [ref=e564]:
+                - generic [ref=e565]:
+                  - img [ref=e566]
+                  - img [ref=e568]
+                  - img [ref=e570]
+                  - img [ref=e572]
+                  - img [ref=e574]
+                - generic [ref=e576]:
+                  - img [ref=e578]
+                  - generic [ref=e580]: "122"
+              - generic [ref=e581]:
+                - generic [ref=e583]: 1100 ₽
+                - button "В корзину" [ref=e584] [cursor=pointer]:
+                  - img [ref=e585]
+          - article [ref=e590]:
+            - generic [ref=e591]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e593]
+              - button "В избранное" [ref=e594] [cursor=pointer]:
+                - img [ref=e595]
+              - generic [ref=e599]:
+                - generic [ref=e600]: "-15%"
+                - generic [ref=e601]: Распродажа
+            - generic [ref=e602]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e603]
+              - generic [ref=e604]:
+                - generic [ref=e605]:
+                  - img [ref=e606]
+                  - img [ref=e608]
+                  - img [ref=e610]
+                  - img [ref=e612]
+                  - img [ref=e614]
+                - generic [ref=e616]:
+                  - img [ref=e618]
+                  - generic [ref=e620]: "122"
+              - generic [ref=e621]:
+                - generic [ref=e622]:
+                  - generic [ref=e623]: 1100 ₽
+                  - generic [ref=e624]: 1300 ₽
+                - button "В корзину" [ref=e625] [cursor=pointer]:
+                  - img [ref=e626]
+          - article [ref=e631]:
+            - generic [ref=e632]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e634]
+              - button "В избранное" [ref=e635] [cursor=pointer]:
+                - img [ref=e636]
+            - generic [ref=e640]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e641]
+              - generic [ref=e642]:
+                - generic [ref=e643]:
+                  - img [ref=e644]
+                  - img [ref=e646]
+                  - img [ref=e648]
+                  - img [ref=e650]
+                  - img [ref=e652]
+                - generic [ref=e654]:
+                  - img [ref=e656]
+                  - generic [ref=e658]: "0"
+              - generic [ref=e659]:
+                - generic [ref=e660]:
+                  - generic [ref=e661]: 1100 ₽
+                  - generic [ref=e662]: Нет в наличии
+                - button "В корзину" [disabled] [ref=e663] [cursor=pointer]:
+                  - img [ref=e664]
+          - article [ref=e669]:
+            - generic [ref=e670]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e672]
+              - button "В избранное" [ref=e673] [cursor=pointer]:
+                - img [ref=e674]
+              - generic [ref=e679]: "-15%"
+            - generic [ref=e680]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e681]
+              - generic [ref=e682]:
+                - generic [ref=e683]:
+                  - img [ref=e684]
+                  - img [ref=e686]
+                  - img [ref=e688]
+                  - img [ref=e690]
+                  - img [ref=e692]
+                - generic [ref=e694]:
+                  - img [ref=e696]
+                  - generic [ref=e698]: "12"
+              - generic [ref=e699]:
+                - generic [ref=e700]:
+                  - generic [ref=e701]: 1100 ₽
+                  - generic [ref=e702]: 1300 ₽
+                - button "В корзину" [ref=e703] [cursor=pointer]:
+                  - img [ref=e704]
+          - article [ref=e709]:
+            - generic [ref=e710]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e712]
+              - button "В избранное" [ref=e713] [cursor=pointer]:
+                - img [ref=e714]
+            - generic [ref=e718]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e719]
+              - generic [ref=e720]:
+                - generic [ref=e721]:
+                  - img [ref=e722]
+                  - img [ref=e724]
+                  - img [ref=e726]
+                  - img [ref=e728]
+                  - img [ref=e730]
+                - generic [ref=e732]:
+                  - img [ref=e734]
+                  - generic [ref=e736]: "122"
+              - generic [ref=e737]:
+                - generic [ref=e739]: 1100 ₽
+                - button "В корзину" [ref=e740] [cursor=pointer]:
+                  - img [ref=e741]
+          - article [ref=e746]:
+            - generic [ref=e747]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e749]
+              - button "В избранное" [ref=e750] [cursor=pointer]:
+                - img [ref=e751]
+              - generic [ref=e755]:
+                - generic [ref=e756]: "-15%"
+                - generic [ref=e757]: Распродажа
+            - generic [ref=e758]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e759]
+              - generic [ref=e760]:
+                - generic [ref=e761]:
+                  - img [ref=e762]
+                  - img [ref=e764]
+                  - img [ref=e766]
+                  - img [ref=e768]
+                  - img [ref=e770]
+                - generic [ref=e772]:
+                  - img [ref=e774]
+                  - generic [ref=e776]: "122"
+              - generic [ref=e777]:
+                - generic [ref=e778]:
+                  - generic [ref=e779]: 1100 ₽
+                  - generic [ref=e780]: 1300 ₽
+                - button "В корзину" [ref=e781] [cursor=pointer]:
+                  - img [ref=e782]
+          - article [ref=e787]:
+            - generic [ref=e788]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e790]
+              - button "В избранное" [ref=e791] [cursor=pointer]:
+                - img [ref=e792]
+            - generic [ref=e796]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e797]
+              - generic [ref=e798]:
+                - generic [ref=e799]:
+                  - img [ref=e800]
+                  - img [ref=e802]
+                  - img [ref=e804]
+                  - img [ref=e806]
+                  - img [ref=e808]
+                - generic [ref=e810]:
+                  - img [ref=e812]
+                  - generic [ref=e814]: "0"
+              - generic [ref=e815]:
+                - generic [ref=e816]:
+                  - generic [ref=e817]: 1100 ₽
+                  - generic [ref=e818]: Нет в наличии
+                - button "В корзину" [disabled] [ref=e819] [cursor=pointer]:
+                  - img [ref=e820]
+      - generic [ref=e826]:
+        - button "Предыдущая страница" [ref=e827] [cursor=pointer]:
+          - img [ref=e828]
+        - button "1" [ref=e830]
+        - button "2" [ref=e831] [cursor=pointer]
+        - button "3" [ref=e832] [cursor=pointer]
+        - generic [ref=e833]: ...
+        - button "11" [ref=e834] [cursor=pointer]
+        - button "Следующая страница" [ref=e835] [cursor=pointer]:
+          - img [ref=e836]
+  - contentinfo [ref=e838]:
+    - generic [ref=e840]:
+      - generic [ref=e841]:
+        - generic [ref=e842]:
+          - link "bronber — На главную" [ref=e843] [cursor=pointer]:
+            - /url: /
+            - img [ref=e844]
+          - img [ref=e864]
+          - link "Регистрация | Вход" [ref=e874] [cursor=pointer]:
+            - /url: "#"
+            - img [ref=e875]
+            - generic [ref=e878]: Регистрация | Вход
+        - generic [ref=e879]:
+          - generic [ref=e880]:
+            - generic [ref=e881]: Контакты
+            - link "+7 (985) 449-8000" [ref=e882] [cursor=pointer]:
+              - /url: tel:+79854498000
+              - img [ref=e883]
+              - generic [ref=e886]: +7 (985) 449-8000
+            - link "info@bronber.com" [ref=e887] [cursor=pointer]:
+              - /url: mailto:info@bronber.com
+              - img [ref=e888]
+              - generic [ref=e891]: info@bronber.com
+          - generic [ref=e892]:
+            - generic [ref=e893]: Соц.сети
+            - generic [ref=e894]:
+              - link "Instagram" [ref=e895] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e896]
+              - link "YouTube" [ref=e899] [cursor=pointer]:
+                - /url: "#"
+                - img [ref=e900]
+        - navigation [ref=e902]:
+          - generic [ref=e903]:
+            - button "Каталог" [ref=e904] [cursor=pointer]:
+              - generic [ref=e905]: Каталог
+            - list [ref=e906]:
+              - listitem [ref=e907]:
+                - link "Двигатель" [ref=e908] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e909]:
+                - link "Тормозная система" [ref=e910] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e911]:
+                - link "Фильтры" [ref=e912] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e913]:
+                - link "Подвеска" [ref=e914] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e915]:
+                - link "Электрика" [ref=e916] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e917]:
+                - link "Аксессуары" [ref=e918] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e919]:
+            - button "Покупателям" [ref=e920] [cursor=pointer]:
+              - generic [ref=e921]: Покупателям
+            - list [ref=e922]:
+              - listitem [ref=e923]:
+                - link "Доставка и оплата" [ref=e924] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e925]:
+                - link "Гарантия и возврат" [ref=e926] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e927]:
+                - link "Программа лояльности" [ref=e928] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e929]:
+                - link "FAQ" [ref=e930] [cursor=pointer]:
+                  - /url: "#"
+          - generic [ref=e931]:
+            - button "Компания" [ref=e932] [cursor=pointer]:
+              - generic [ref=e933]: Компания
+            - list [ref=e934]:
+              - listitem [ref=e935]:
+                - link "О компании" [ref=e936] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e937]:
+                - link "Блог" [ref=e938] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e939]:
+                - link "Новости" [ref=e940] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e941]:
+                - link "Карьера" [ref=e942] [cursor=pointer]:
+                  - /url: "#"
+              - listitem [ref=e943]:
+                - link "Контакты" [ref=e944] [cursor=pointer]:
+                  - /url: "#"
+      - generic [ref=e945]:
+        - generic [ref=e946]:
+          - paragraph [ref=e947]:
+            - link "Политика конфиденциальности" [ref=e948] [cursor=pointer]:
+              - /url: "#"
+          - paragraph [ref=e949]:
+            - link "Пользовательское соглашение" [ref=e950] [cursor=pointer]:
+              - /url: "#"
+        - paragraph [ref=e951]: © 2026. Все права защищены
+        - link "Сайт разработан командой Павла Климаш" [ref=e952] [cursor=pointer]:
+          - /url: "#!"
+          - text: Сайт разработан командой
+          - text: Павла Климаш
+  - generic [ref=e955]:
+    - generic [ref=e957]:
+      - generic [ref=e958] [cursor=pointer]:
+        - generic: Request
+      - generic [ref=e959] [cursor=pointer]:
+        - generic: Timeline
+      - generic [ref=e960] [cursor=pointer]:
+        - generic: Views
+        - generic [ref=e961]: "43"
+      - generic [ref=e962] [cursor=pointer]:
+        - generic: Queries
+        - generic [ref=e963]: "3"
+      - generic [ref=e964] [cursor=pointer]:
+        - generic: Models
+        - generic [ref=e965]: "1"
+    - generic [ref=e966]:
+      - generic [ref=e974] [cursor=pointer]: GET /catalog
+      - generic [ref=e975] [cursor=pointer]:
+        - generic: 40.61ms
+      - generic [ref=e977] [cursor=pointer]:
+        - generic: 7MB
+      - generic [ref=e979] [cursor=pointer]:
+        - generic: 13.x

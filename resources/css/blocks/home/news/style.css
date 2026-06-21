@@ -1,7 +1,5 @@
 /* ── Home news section ────────────────────────────── */
 .home-news {
-    padding-bottom: 30px;
-
     /* ── Slider ──────────────────────────────────────── */
     &__slider {
         --slider-gap: fluid-type(768px, 1200px, 14px, 18px);
@@ -10,8 +8,7 @@
     &__arrows {
         margin-top: 0;
     }
-
-    /* ── Footer ──────────────────────────────────────── */
+    
     &__footer {
         display: flex;
         align-items: center;
@@ -20,14 +17,10 @@
         margin-top: fluid-type(1200px, 1440px, 20px, 26px);
     }
 
-    /* ── Arrows visibility ───────────────────────────── */
     &__arrows--top {
         display: none;
     }
 
-    /* ════════════════════════════════════════════════════
-       Breakpoint: 768px (2 cards)
-       ════════════════════════════════════════════════════ */
     @media (min-width: 768px) {
         &__slider {
             --slider-slide: calc((100% - var(--slider-gap)) / 2);
@@ -38,12 +31,7 @@
         }
     }
 
-    /* ════════════════════════════════════════════════════
-       Breakpoint: 1200px (3 cards, grid)
-       ════════════════════════════════════════════════════ */
     @media (min-width: 1200px) {
-        padding-bottom: fluid-type(1200px, 1440px, 30px, 60px);
-
         &__slider {
             --slider-gap: fluid-type(1200px, 1440px, 18px, 24px);
         }

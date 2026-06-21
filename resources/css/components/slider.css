@@ -16,8 +16,7 @@
     &__track {
         display: flex;
         gap: var(--slider-gap);
-        transition: var(--slider-transition);
-        transform: translateX(var(--slider-offset));
+        transition: transform var(--slider-duration) var(--slider-ease);
         will-change: transform;
         -webkit-user-select: none;
         user-select: none;
@@ -28,7 +27,6 @@
             cursor: grabbing;
         }
     }
-
     &__slide {
         flex: 0 0 var(--slider-slide);
         min-width: 0;
@@ -99,6 +97,22 @@
             &__slide {
                 flex: none;
                 min-width: 0;
+            }
+        }
+    }
+
+    &--vertical {
+        overflow: hidden;
+
+        .slider {
+            &__track {
+                flex-direction: column;
+                touch-action: pan-x;
+                cursor: grab;
+
+                &:active {
+                    cursor: grabbing;
+                }
             }
         }
     }

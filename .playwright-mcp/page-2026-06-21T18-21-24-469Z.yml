@@ -1,0 +1,356 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "bronber — На главную" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+      - generic [ref=e24]:
+        - img [ref=e26]
+        - generic [ref=e30]:
+          - textbox "Поиск..." [ref=e31]
+          - button "Искать" [ref=e32] [cursor=pointer]:
+            - img [ref=e33]
+        - link "Избранное" [ref=e37] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e38]
+  - main [ref=e40]:
+    - generic [ref=e41]:
+      - navigation "Breadcrumb" [ref=e43]:
+        - list [ref=e44]:
+          - listitem [ref=e45]:
+            - link "Главная" [ref=e46] [cursor=pointer]:
+              - /url: /
+            - text: /
+          - listitem [ref=e47]:
+            - link "Каталог" [ref=e48] [cursor=pointer]:
+              - /url: http://bronber_store.test/catalog
+            - text: /
+          - listitem [ref=e49]:
+            - link "Топливные насосы" [ref=e50] [cursor=pointer]:
+              - /url: http://bronber_store.test/catalog
+            - text: /
+          - listitem [ref=e51]:
+            - generic [ref=e52]: Топливный насос Bosch
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - generic [ref=e58]:
+            - button "Фото 1" [ref=e59] [cursor=pointer]
+            - button "Фото 2" [ref=e60] [cursor=pointer]
+            - button "Фото 3" [ref=e61] [cursor=pointer]
+            - button "Фото 4" [ref=e62] [cursor=pointer]
+          - generic [ref=e63]:
+            - generic [ref=e64]:
+              - img "Топливный насос Bosch" [ref=e66]
+              - img "Топливный насос Bosch" [ref=e68]
+              - img "Топливный насос Bosch" [ref=e70]
+              - img "Топливный насос Bosch" [ref=e72]
+            - generic [ref=e73]:
+              - button [ref=e74] [cursor=pointer]
+              - button [ref=e75] [cursor=pointer]
+              - button [ref=e76] [cursor=pointer]
+              - button [ref=e77] [cursor=pointer]
+        - generic [ref=e78]:
+          - heading "Топливный насос Bosch" [level=1] [ref=e79]
+          - generic [ref=e80]:
+            - paragraph [ref=e81]: "Артикул: 0 580 464 070"
+            - generic [ref=e82]:
+              - img [ref=e83]
+              - generic [ref=e85]: "8"
+            - generic [ref=e86]: Оригинал
+          - generic [ref=e87]:
+            - paragraph [ref=e88]: В наличии
+            - paragraph [ref=e89]: Бесплатная доставка при заказе от 5000 ₽
+          - generic [ref=e90]:
+            - generic [ref=e91]: 1 100 ₽
+            - generic [ref=e92]: 1 300 ₽
+            - generic [ref=e93]: Экономия 200 ₽
+          - paragraph [ref=e94]: +110 баллов
+          - generic [ref=e95]:
+            - generic [ref=e96]:
+              - button "Уменьшить количество" [ref=e97] [cursor=pointer]
+              - generic [ref=e99]: "1"
+              - button "Увеличить количество" [ref=e100] [cursor=pointer]
+            - button "В корзину" [ref=e102] [cursor=pointer]
+            - button "В избранное" [ref=e103] [cursor=pointer]:
+              - img [ref=e104]
+      - list [ref=e107]:
+        - listitem [ref=e108]:
+          - img [ref=e110]
+          - generic [ref=e113]: Оригинал
+        - listitem [ref=e114]:
+          - img [ref=e116]
+          - generic [ref=e118]: Гарантия
+        - listitem [ref=e119]:
+          - img [ref=e121]
+          - generic [ref=e124]: Быстрая доставка
+        - listitem [ref=e125]:
+          - img [ref=e127]
+          - generic [ref=e130]: Возврат
+      - generic [ref=e132]:
+        - tablist [ref=e133]:
+          - tab "Описание" [ref=e134] [cursor=pointer]
+          - tab "Характеристики" [ref=e135] [cursor=pointer]
+          - tab "Совместимость" [ref=e136] [cursor=pointer]
+        - paragraph [ref=e139]: Топливный насос Bosch 0 580 464 070 обеспечивает стабильную подачу топлива и надежную работу двигателя. Высокое качество изготовления и соответствие оригинальным спецификациям гарантируют долговечность и эффективность работы топливной системы.
+      - generic [ref=e140]:
+        - generic [ref=e141]:
+          - heading "Отзывы (8)" [level=2] [ref=e142]
+          - button "Смотреть все отзывы" [ref=e143] [cursor=pointer]
+        - generic [ref=e146]:
+          - article [ref=e147]:
+            - generic [ref=e148]:
+              - generic [ref=e149]: А
+              - generic [ref=e150]:
+                - paragraph [ref=e151]: Александр
+                - paragraph [ref=e152]: BMW 5 серия
+                - paragraph [ref=e153]: 15/05/2026
+            - paragraph [ref=e154]: Топливный насос Bosch 0 580 464 070 обеспечивает стабильную подачу топлива и надежную работу двигателя. Качество отличное, рекомендую.
+          - article [ref=e156]:
+            - generic [ref=e157]:
+              - generic [ref=e158]: М
+              - generic [ref=e159]:
+                - paragraph [ref=e160]: Михаил
+                - paragraph [ref=e161]: Audi A4
+                - paragraph [ref=e162]: 10/05/2026
+            - paragraph [ref=e163]: Отличный насос, работает исправно уже полгода. Цена приемлемая, доставка быстрая.
+      - generic [ref=e166]:
+        - heading "С этим товаром покупают" [level=2] [ref=e168]
+        - generic [ref=e170]:
+          - article [ref=e172]:
+            - generic [ref=e173]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e175]
+              - button "В избранное" [ref=e176] [cursor=pointer]:
+                - img [ref=e177]
+              - generic [ref=e182]: ТОП
+            - generic [ref=e183]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e184]
+              - generic [ref=e185]:
+                - generic [ref=e186]:
+                  - img [ref=e187]
+                  - img [ref=e189]
+                  - img [ref=e191]
+                  - img [ref=e193]
+                  - img [ref=e195]
+                - generic [ref=e197]: "12"
+              - generic [ref=e198]:
+                - generic [ref=e200]: 1100 ₽
+                - button "В корзину" [ref=e201] [cursor=pointer]:
+                  - img [ref=e202]
+          - article [ref=e208]:
+            - generic [ref=e209]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e211]
+              - button "В избранное" [ref=e212] [cursor=pointer]:
+                - img [ref=e213]
+              - generic [ref=e218]: "-15%"
+            - generic [ref=e219]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e220]
+              - generic [ref=e221]:
+                - generic [ref=e222]:
+                  - img [ref=e223]
+                  - img [ref=e225]
+                  - img [ref=e227]
+                  - img [ref=e229]
+                  - img [ref=e231]
+                - generic [ref=e233]: "8"
+              - generic [ref=e234]:
+                - generic [ref=e235]:
+                  - generic [ref=e236]: 1100 ₽
+                  - generic [ref=e237]: 1300 ₽
+                - button "В корзину" [ref=e238] [cursor=pointer]:
+                  - img [ref=e239]
+          - article [ref=e245]:
+            - generic [ref=e246]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e248]
+              - button "В избранное" [ref=e249] [cursor=pointer]:
+                - img [ref=e250]
+            - generic [ref=e254]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e255]
+              - generic [ref=e256]:
+                - generic [ref=e257]:
+                  - img [ref=e258]
+                  - img [ref=e260]
+                  - img [ref=e262]
+                  - img [ref=e264]
+                  - img [ref=e266]
+                - generic [ref=e268]: "0"
+              - generic [ref=e269]:
+                - generic [ref=e270]:
+                  - generic [ref=e271]: 1100 ₽
+                  - generic [ref=e272]: 1300 ₽
+                - button "В корзину" [ref=e273] [cursor=pointer]:
+                  - img [ref=e274]
+          - article [ref=e280]:
+            - generic [ref=e281]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e283]
+              - button "В избранное" [ref=e284] [cursor=pointer]:
+                - img [ref=e285]
+              - generic [ref=e290]: Распродажа
+            - generic [ref=e291]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e292]
+              - generic [ref=e293]:
+                - generic [ref=e294]:
+                  - img [ref=e295]
+                  - img [ref=e297]
+                  - img [ref=e299]
+                  - img [ref=e301]
+                  - img [ref=e303]
+                - generic [ref=e305]: "0"
+              - generic [ref=e306]:
+                - generic [ref=e307]:
+                  - generic [ref=e308]: 1100 ₽
+                  - generic [ref=e309]: Нет в наличии
+                - button "В корзину" [disabled] [ref=e310] [cursor=pointer]:
+                  - img [ref=e311]
+          - article [ref=e317]:
+            - generic [ref=e318]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e320]
+              - button "В избранное" [ref=e321] [cursor=pointer]:
+                - img [ref=e322]
+              - generic [ref=e327]: ТОП
+            - generic [ref=e328]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e329]
+              - generic [ref=e330]:
+                - generic [ref=e331]:
+                  - img [ref=e332]
+                  - img [ref=e334]
+                  - img [ref=e336]
+                  - img [ref=e338]
+                  - img [ref=e340]
+                - generic [ref=e342]: "12"
+              - generic [ref=e343]:
+                - generic [ref=e345]: 1100 ₽
+                - button "В корзину" [ref=e346] [cursor=pointer]:
+                  - img [ref=e347]
+          - article [ref=e353]:
+            - generic [ref=e354]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e356]
+              - button "В избранное" [ref=e357] [cursor=pointer]:
+                - img [ref=e358]
+              - generic [ref=e363]: "-15%"
+            - generic [ref=e364]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e365]
+              - generic [ref=e366]:
+                - generic [ref=e367]:
+                  - img [ref=e368]
+                  - img [ref=e370]
+                  - img [ref=e372]
+                  - img [ref=e374]
+                  - img [ref=e376]
+                - generic [ref=e378]: "8"
+              - generic [ref=e379]:
+                - generic [ref=e380]:
+                  - generic [ref=e381]: 1100 ₽
+                  - generic [ref=e382]: 1300 ₽
+                - button "В корзину" [ref=e383] [cursor=pointer]:
+                  - img [ref=e384]
+          - article [ref=e390]:
+            - generic [ref=e391]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e393]
+              - button "В избранное" [ref=e394] [cursor=pointer]:
+                - img [ref=e395]
+            - generic [ref=e399]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e400]
+              - generic [ref=e401]:
+                - generic [ref=e402]:
+                  - img [ref=e403]
+                  - img [ref=e405]
+                  - img [ref=e407]
+                  - img [ref=e409]
+                  - img [ref=e411]
+                - generic [ref=e413]: "0"
+              - generic [ref=e414]:
+                - generic [ref=e415]:
+                  - generic [ref=e416]: 1100 ₽
+                  - generic [ref=e417]: 1300 ₽
+                - button "В корзину" [ref=e418] [cursor=pointer]:
+                  - img [ref=e419]
+          - article [ref=e425]:
+            - generic [ref=e426]:
+              - img "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [ref=e428]
+              - button "В избранное" [ref=e429] [cursor=pointer]:
+                - img [ref=e430]
+            - generic [ref=e434]:
+              - heading "DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda" [level=3] [ref=e435]
+              - generic [ref=e436]:
+                - generic [ref=e437]:
+                  - img [ref=e438]
+                  - img [ref=e440]
+                  - img [ref=e442]
+                  - img [ref=e444]
+                  - img [ref=e446]
+                - generic [ref=e448]: "0"
+              - generic [ref=e449]:
+                - generic [ref=e450]:
+                  - generic [ref=e451]: 1100 ₽
+                  - generic [ref=e452]: 1300 ₽
+                - button "В корзину" [ref=e453] [cursor=pointer]:
+                  - img [ref=e454]
+        - generic [ref=e459]:
+          - button "Назад" [disabled] [ref=e460] [cursor=pointer]:
+            - img [ref=e461]
+          - button "Вперёд" [ref=e463] [cursor=pointer]:
+            - img [ref=e464]
+  - contentinfo [ref=e466]:
+    - generic [ref=e468]:
+      - generic [ref=e469]:
+        - link "bronber — На главную" [ref=e471] [cursor=pointer]:
+          - /url: /
+          - img [ref=e472]
+        - generic [ref=e491]:
+          - generic [ref=e492]:
+            - link "+7 (985) 449-8000" [ref=e493] [cursor=pointer]:
+              - /url: tel:+79854498000
+              - img [ref=e494]
+              - generic [ref=e497]: +7 (985) 449-8000
+            - link "info@bronber.com" [ref=e498] [cursor=pointer]:
+              - /url: mailto:info@bronber.com
+              - img [ref=e499]
+              - generic [ref=e502]: info@bronber.com
+          - generic [ref=e504]:
+            - link "Instagram" [ref=e505] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e506]
+            - link "YouTube" [ref=e509] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e510]
+        - navigation [ref=e512]:
+          - button "Каталог" [ref=e514] [cursor=pointer]:
+            - generic [ref=e515]: Каталог
+            - img [ref=e516]
+          - button "Покупателям" [ref=e519] [cursor=pointer]:
+            - generic [ref=e520]: Покупателям
+            - img [ref=e521]
+          - button "Компания" [ref=e524] [cursor=pointer]:
+            - generic [ref=e525]: Компания
+            - img [ref=e526]
+      - img [ref=e529]
+      - link "Регистрация | Вход" [ref=e539] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e540]
+        - generic [ref=e543]: Регистрация | Вход
+      - generic [ref=e544]:
+        - generic [ref=e545]:
+          - paragraph [ref=e546]:
+            - link "Политика конфиденциальности" [ref=e547] [cursor=pointer]:
+              - /url: "#"
+          - paragraph [ref=e548]:
+            - link "Пользовательское соглашение" [ref=e549] [cursor=pointer]:
+              - /url: "#"
+        - paragraph [ref=e550]: © 2026. Все права защищены
+        - link "Сайт разработан командой Павла Климаш" [ref=e551] [cursor=pointer]:
+          - /url: "#!"
+          - text: Сайт разработан командой
+          - text: Павла Климаш
+  - generic [ref=e554]:
+    - generic [ref=e556]:
+      - generic [ref=e563] [cursor=pointer]: "26"
+      - generic [ref=e566] [cursor=pointer]: "3"
+      - generic [ref=e569] [cursor=pointer]: "1"
+    - generic [ref=e570]:
+      - generic [ref=e578] [cursor=pointer]: GET /product
+      - generic [ref=e579] [cursor=pointer]:
+        - generic: 39.77ms
+      - generic [ref=e581] [cursor=pointer]:
+        - generic: 7MB
+      - generic [ref=e583] [cursor=pointer]:
+        - generic: 13.x

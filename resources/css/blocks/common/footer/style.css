@@ -1,5 +1,5 @@
 .footer {
-    margin-top: 40px;
+    margin-top: fluid-type(1200px, 1440px, 70px, 100px);
     padding-bottom: 20px;
 
     &__inner {

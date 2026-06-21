@@ -5,9 +5,11 @@ export default function (Alpine) {
         deltaX: 0,
         currentOffset: 0,
         isDragging: false,
+        dragMoved: false,
         track: null,
         viewport: window.innerWidth,
         pagination: opts.pagination ?? false,
+        verticalAbove: opts.verticalAbove ?? null,
         gridConfig: opts.grid?.breakpoints ?? null,
         gridBelow: opts.grid?.below ?? null,
         gridAbove: opts.grid?.above ?? null,
@@ -20,9 +22,15 @@ export default function (Alpine) {
             return true;
         },
 
+        get isVertical() {
+            return this.verticalAbove !== null && this.viewport >= this.verticalAbove;
+        },
+
         init() {
             this.track = this.$refs.track;
+            this.updateVerticalMode();
             this.updateGridMode();
+            this.snap();
         },
 
         resolveBreakpoint(config) {
@@ -82,7 +90,8 @@ export default function (Alpine) {
                 if (current && next) return next.offsetLeft - current.offsetLeft;
                 return current ? current.offsetWidth : 0;
             }
-            return this.track.children[0].offsetWidth;
+            const child = this.track.children[0];
+            return this.isVertical ? child.offsetHeight : child.offsetWidth;
         },
 
         get gap() {
@@ -98,7 +107,8 @@ export default function (Alpine) {
                 return item ? item.offsetLeft : 0;
             }
             const slide = this.track.children[this.index];
-            return slide ? slide.offsetLeft : 0;
+            if (!slide) return 0;
+            return this.isVertical ? slide.offsetTop : slide.offsetLeft;
         },
 
         get maxOffset() {
@@ -112,6 +122,9 @@ export default function (Alpine) {
             }
             const last = this.track.children[this.track.children.length - 1];
             if (!last) return 0;
+            if (this.isVertical) {
+                return Math.max(0, last.offsetTop + last.offsetHeight - this.track.parentElement.offsetHeight);
+            }
             return Math.max(0, last.offsetLeft + last.offsetWidth - this.track.parentElement.offsetWidth);
         },
 
@@ -148,28 +161,36 @@ export default function (Alpine) {
 
         snap() {
             if (this.isDragging) return;
-            this.track.style.setProperty('--slider-offset', `-${this.offset}px`);
+            this.applyTransform(this.offset);
+        },
+
+        applyTransform(offset) {
+            const axis = this.isVertical ? 'Y' : 'X';
+            this.track.style.transform = `translate3d(${axis === 'X' ? `-${offset}px` : '0'}, ${axis === 'Y' ? `-${offset}px` : '0'}, 0)`;
         },
 
         onPointerDown(e) {
             if (e.button && e.button !== 0) return;
+            if (this.maxIndex === 0) return;
             this.isDragging = true;
-            this.startX = e.clientX ?? e.touches[0].clientX;
+            this.dragMoved = false;
+            const coord = this.isVertical ? (e.clientY ?? e.touches?.[0]?.clientY) : (e.clientX ?? e.touches?.[0]?.clientX);
+            this.startX = coord;
             this.deltaX = 0;
             this.currentOffset = this.offset;
             this.cachedMaxOffset = this.maxOffset;
             this.cachedSlideWidth = this.slideWidth;
-            this.track.style.setProperty('--slider-transition', 'none');
+            this.track.style.transition = 'none';
             this.track.style.cursor = 'grabbing';
-
         },
 
         onPointerMove(e) {
             if (!this.isDragging) return;
-            const clientX = e.clientX ?? e.touches[0].clientX;
-            this.deltaX = clientX - this.startX;
+            const coord = this.isVertical ? (e.clientY ?? e.touches?.[0]?.clientY) : (e.clientX ?? e.touches?.[0]?.clientX);
+            this.deltaX = coord - this.startX;
+            if (Math.abs(this.deltaX) > 5) this.dragMoved = true;
             const nextOffset = Math.max(0, Math.min(this.currentOffset - this.deltaX, this.cachedMaxOffset));
-            this.track.style.setProperty('--slider-offset', `-${nextOffset}px`);
+            this.applyTransform(nextOffset);
         },
 
         onPointerUp() {
@@ -190,7 +211,8 @@ export default function (Alpine) {
                 let closestDist = Infinity;
                 for (let i = 0; i <= this.maxIndex; i++) {
                     const itemIndex = this.isGrid ? i * this.gridRows : i;
-                    const d = Math.abs(this.track.children[itemIndex].offsetLeft - projectedOffset);
+                    const itemPos = this.isVertical ? this.track.children[itemIndex].offsetTop : this.track.children[itemIndex].offsetLeft;
+                    const d = Math.abs(itemPos - projectedOffset);
                     if (d < closestDist) {
                         closestDist = d;
                         closest = i;
@@ -202,25 +224,57 @@ export default function (Alpine) {
             this.index = newIndex;
             const targetOffset = this.offset;
 
-            requestAnimationFrame(() => {
-                this.track.style.setProperty('--slider-transition', '');
-                this.track.style.setProperty('--slider-offset', `-${targetOffset}px`);
-            });
+            this.track.style.transition = '';
+            this.applyTransform(targetOffset);
         },
 
         onResize() {
             if (this.isDragging) return;
 
             const wasGrid = this.isGrid;
+            const wasVertical = this.isVertical;
             this.viewport = window.innerWidth;
+            this.updateVerticalMode();
             this.updateGridMode();
 
-            if (wasGrid !== this.isGrid) {
+            if (wasGrid !== this.isGrid || wasVertical !== this.isVertical) {
                 this.index = 0;
             }
 
             if (this.index > this.maxIndex) this.index = this.maxIndex;
             this.snap();
+        },
+
+        updateVerticalMode() {
+            if (this.verticalAbove === null) return;
+            const sliderEl = this.track?.parentElement;
+            if (!sliderEl) return;
+            sliderEl.classList.toggle('slider--vertical', this.isVertical);
+        },
+
+        get canScroll() {
+            return this.maxIndex > 0;
+        },
+
+        ensureVisible(targetIndex) {
+            const lastVisible = this.index + this.perView - 1;
+            const firstVisible = this.index;
+
+            if (targetIndex >= lastVisible && this.canNext) {
+                this.index++;
+                this.snap();
+            } else if (targetIndex <= firstVisible && this.canPrev) {
+                this.index--;
+                this.snap();
+            }
+        },
+
+        suppressDragClick(e) {
+            if (this.dragMoved) {
+                this.dragMoved = false;
+                e.preventDefault();
+                e.stopPropagation();
+            }
         },
 
         updateGridMode() {

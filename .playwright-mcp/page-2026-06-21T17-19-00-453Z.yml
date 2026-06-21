@@ -1,0 +1,150 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "bronber — На главную" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - img [ref=e5]
+      - generic [ref=e24]:
+        - img [ref=e26]
+        - generic [ref=e30]:
+          - textbox "Поиск..." [ref=e31]
+          - button "Искать" [ref=e32] [cursor=pointer]:
+            - img [ref=e33]
+        - link "Избранное" [ref=e37] [cursor=pointer]:
+          - /url: "#"
+          - img [ref=e38]
+  - main [ref=e40]:
+    - generic [ref=e42]:
+      - navigation "Breadcrumb" [ref=e43]:
+        - list [ref=e44]:
+          - listitem [ref=e45]:
+            - link "Главная" [ref=e46] [cursor=pointer]:
+              - /url: /
+            - text: /
+          - listitem [ref=e47]:
+            - generic [ref=e48]: Корзина
+      - heading "Корзина" [level=1] [ref=e49]
+      - generic [ref=e50]:
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - generic [ref=e55]:
+                - paragraph [ref=e56]: DeatschWerks 9-651-1008
+                - paragraph [ref=e57]: "Артикул: 0 580 464 070"
+                - paragraph [ref=e58]: "Бренд: DeatschWerks"
+                - paragraph [ref=e59]: "Цена: 1 100 ₽"
+              - generic [ref=e60]:
+                - generic [ref=e62]:
+                  - button "Уменьшить количество" [ref=e63] [cursor=pointer]
+                  - generic [ref=e65]: "1"
+                  - button "Увеличить количество" [ref=e66] [cursor=pointer]
+                - button "Удалить товар" [ref=e68] [cursor=pointer]:
+                  - img [ref=e69]
+            - generic [ref=e71]:
+              - generic [ref=e73]:
+                - paragraph [ref=e74]: DeatschWerks 9-651-1008
+                - paragraph [ref=e75]: "Артикул: 0 580 464 070"
+                - paragraph [ref=e76]: "Бренд: DeatschWerks"
+                - paragraph [ref=e77]: "Цена: 1 100 ₽"
+              - generic [ref=e78]:
+                - generic [ref=e80]:
+                  - button "Уменьшить количество" [ref=e81] [cursor=pointer]
+                  - generic [ref=e83]: "2"
+                  - button "Увеличить количество" [ref=e84] [cursor=pointer]
+                - button "Удалить товар" [ref=e86] [cursor=pointer]:
+                  - img [ref=e87]
+            - generic [ref=e89]:
+              - generic [ref=e91]:
+                - paragraph [ref=e92]: DeatschWerks 9-651-1008
+                - paragraph [ref=e93]: "Артикул: 0 580 464 070"
+                - paragraph [ref=e94]: "Бренд: DeatschWerks"
+                - paragraph [ref=e95]: "Цена: 1 100 ₽"
+              - generic [ref=e96]:
+                - generic [ref=e98]:
+                  - button "Уменьшить количество" [ref=e99] [cursor=pointer]
+                  - generic [ref=e101]: "2"
+                  - button "Увеличить количество" [ref=e102] [cursor=pointer]
+                - button "Удалить товар" [ref=e104] [cursor=pointer]:
+                  - img [ref=e105]
+          - complementary [ref=e107]:
+            - heading "Ваш заказ" [level=2] [ref=e108]
+            - generic [ref=e109]:
+              - generic [ref=e110]: Товаров
+              - generic [ref=e111]: "5"
+            - generic [ref=e112]:
+              - generic [ref=e113]: Сумма
+              - generic [ref=e114]: 5 500 ₽
+            - generic [ref=e115]:
+              - generic [ref=e116]: Доставка
+              - generic [ref=e117]: Уточняется
+            - generic [ref=e119]:
+              - generic [ref=e120]: К оплате
+              - generic [ref=e121]: 5 500 ₽
+            - button "Оформить заказ" [ref=e122] [cursor=pointer]
+            - link "Вернуться в каталог" [ref=e123] [cursor=pointer]:
+              - /url: http://bronber_store.test/catalog
+        - button "Очистить корзину" [ref=e125] [cursor=pointer]
+  - contentinfo [ref=e126]:
+    - generic [ref=e128]:
+      - generic [ref=e129]:
+        - link "bronber — На главную" [ref=e131] [cursor=pointer]:
+          - /url: /
+          - img [ref=e132]
+        - generic [ref=e151]:
+          - generic [ref=e152]:
+            - link "+7 (985) 449-8000" [ref=e153] [cursor=pointer]:
+              - /url: tel:+79854498000
+              - img [ref=e154]
+              - generic [ref=e157]: +7 (985) 449-8000
+            - link "info@bronber.com" [ref=e158] [cursor=pointer]:
+              - /url: mailto:info@bronber.com
+              - img [ref=e159]
+              - generic [ref=e162]: info@bronber.com
+          - generic [ref=e164]:
+            - link "Instagram" [ref=e165] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e166]
+            - link "YouTube" [ref=e169] [cursor=pointer]:
+              - /url: "#"
+              - img [ref=e170]
+        - navigation [ref=e172]:
+          - button "Каталог" [ref=e174] [cursor=pointer]:
+            - generic [ref=e175]: Каталог
+            - img [ref=e176]
+          - button "Покупателям" [ref=e179] [cursor=pointer]:
+            - generic [ref=e180]: Покупателям
+            - img [ref=e181]
+          - button "Компания" [ref=e184] [cursor=pointer]:
+            - generic [ref=e185]: Компания
+            - img [ref=e186]
+      - img [ref=e189]
+      - link "Регистрация | Вход" [ref=e199] [cursor=pointer]:
+        - /url: "#"
+        - img [ref=e200]
+        - generic [ref=e203]: Регистрация | Вход
+      - generic [ref=e204]:
+        - generic [ref=e205]:
+          - paragraph [ref=e206]:
+            - link "Политика конфиденциальности" [ref=e207] [cursor=pointer]:
+              - /url: "#"
+          - paragraph [ref=e208]:
+            - link "Пользовательское соглашение" [ref=e209] [cursor=pointer]:
+              - /url: "#"
+        - paragraph [ref=e210]: © 2026. Все права защищены
+        - link "Сайт разработан командой Павла Климаш" [ref=e211] [cursor=pointer]:
+          - /url: "#!"
+          - text: Сайт разработан командой
+          - text: Павла Климаш
+  - generic [ref=e214]:
+    - generic [ref=e216]:
+      - generic [ref=e223] [cursor=pointer]: "8"
+      - generic [ref=e226] [cursor=pointer]: "3"
+      - generic [ref=e229] [cursor=pointer]: "1"
+    - generic [ref=e230]:
+      - generic [ref=e238] [cursor=pointer]: GET /cart
+      - generic [ref=e239] [cursor=pointer]:
+        - generic: 52.52ms
+      - generic [ref=e241] [cursor=pointer]:
+        - generic: 7MB
+      - generic [ref=e243] [cursor=pointer]:
+        - generic: 13.x

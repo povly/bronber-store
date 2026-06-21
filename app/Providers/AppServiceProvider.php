@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Vite::usePreloadTagAttributes(fn () => false);
+
         $this->app['view']->addLocation(resource_path('views/blocks'));
 
         View::composer('blocks.common.header.header', function (\Illuminate\View\View $view) {

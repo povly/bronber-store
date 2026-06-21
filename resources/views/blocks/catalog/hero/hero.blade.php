@@ -4,7 +4,7 @@
 
 @props([
     'title' => 'Каталог',
-    'productCount' => 0,
+    'productCount' => 148,
     'currentSort' => 'popular',
     'sortOptions' => [],
     'activeChips' => [],
@@ -90,16 +90,10 @@
     'sortOptions' => $allSortOptions,
 ]) }})" x-init="init()">
     <div class="container">
-        <nav class="catalog-hero__breadcrumb" aria-label="Breadcrumb">
-            <ul class="catalog-hero__breadcrumb-list">
-                <li class="catalog-hero__breadcrumb-item">
-                    <a href="/" class="catalog-hero__breadcrumb-link">Главная</a>
-                </li>
-                <li class="catalog-hero__breadcrumb-item">
-                    <span class="catalog-hero__breadcrumb-current">{{ $title }}</span>
-                </li>
-            </ul>
-        </nav>
+        <x-breadcrumbs
+            class="catalog-hero__breadcrumb"
+            :items="[['label' => 'Главная', 'url' => '/'], ['label' => $title]]"
+        />
 
         <h1 class="catalog-hero__title">{{ $title }}</h1>
         <p class="catalog-hero__count catalog-hero__count--mobile">Найдено {{ $productCount }} товаров</p>

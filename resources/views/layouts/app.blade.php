@@ -7,6 +7,7 @@
     <title>@yield('title', 'Мой сайт')</title>
     @vite(['resources/css/app.css'])
     @stack('block-styles')
+    @stack('head-scripts')
     @yield('head')
 </head>
 <body :class="{ 'overflow-hidden': $store.modal.stack.length }">

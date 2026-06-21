@@ -6,7 +6,7 @@ import {babel} from '@rollup/plugin-babel';
 import {globSync} from 'glob';
 
 const blockStyles = globSync('resources/css/blocks/**/style.css');
-const blockScripts = globSync('resources/js/blocks/**/style.js');
+const blockScripts = globSync('resources/js/blocks/**/index.js');
 
 export default defineConfig({
     ss: {

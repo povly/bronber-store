@@ -1,0 +1,623 @@
+.checkout {
+    padding-top: 20px;
+    padding-bottom: 40px;
+
+    /* ── Breadcrumb ───────────────────────────────────── */
+
+    &__breadcrumb {
+        margin-bottom: 12px;
+    }
+
+    /* ── Title ────────────────────────────────────────── */
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: 25px;
+        line-height: 30px;
+        color: var(--color-black);
+        margin: 0 0 16px;
+    }
+
+    /* ── Body: lives outside .container so mobile cards can be full-width.
+           At ≥768px replicates container padding to align with title/breadcrumb. */
+
+    &__body {
+        /* mobile: no horizontal padding → cards span edge-to-edge */
+    }
+
+    /* ── Form ─────────────────────────────────────────── */
+
+    &__form {
+        width: 100%;
+    }
+
+    /* ── Grid layout ──────────────────────────────────── */
+
+    &__grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* ── Form card ────────────────────────────────────── */
+
+    &__form-card {
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: 20px 22px;
+    }
+
+    /* ── Login link ───────────────────────────────────── */
+
+    &__login-link {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        color: var(--color-gray-light);
+        margin: 0 0 20px;
+
+        a {
+            color: var(--color-purple);
+            text-decoration: none;
+            margin-left: 4px;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    /* ── Section ──────────────────────────────────────── */
+
+    &__section {
+        margin: 0;
+    }
+
+    &__section-head {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+
+    &__step {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--color-purple);
+        color: var(--color-white);
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 14px;
+        line-height: 14px;
+        flex-shrink: 0;
+    }
+
+    &__section-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 18px;
+        color: var(--color-black);
+        margin: 0;
+    }
+
+    &__optional {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 14px;
+        color: var(--color-gray-mid);
+    }
+
+    /* ── Separator ────────────────────────────────────── */
+
+    &__separator {
+        height: 1px;
+        background: var(--color-gray-bg);
+        margin: 20px 0;
+    }
+
+    /* ── Fields grid ──────────────────────────────────── */
+
+    &__fields {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    &__fields--delivery {
+        margin-top: 20px;
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__label {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 16px;
+        color: var(--color-black);
+    }
+
+    /* ── Inputs ───────────────────────────────────────── */
+
+    &__input {
+        width: 100%;
+        height: 48px;
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-border);
+        border-radius: 5px;
+        padding: 0 22px;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 16px;
+        color: var(--color-black);
+        outline: none;
+        transition: border-color 0.2s ease;
+
+        &::placeholder {
+            color: var(--color-gray-placeholder);
+            font-weight: 500;
+        }
+
+        &:focus {
+            border-color: var(--color-purple);
+        }
+
+        &--select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            padding-right: 50px;
+            background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23000000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 22px center;
+        }
+    }
+
+    /* ── Subgroup: callback radios ────────────────────── */
+
+    &__subgroup {
+        margin-bottom: 20px;
+    }
+
+    &__subgroup-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 16px;
+        color: var(--color-black);
+        margin: 0 0 12px;
+    }
+
+    &__radios-inline {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__radio-inline {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 16px;
+        color: var(--color-black);
+
+        input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            width: 0;
+            height: 0;
+        }
+    }
+
+    &__radio-dot {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 1px solid var(--color-gray-border);
+        background: var(--color-white);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s ease;
+    }
+
+    &__radio-inline input[type="radio"]:checked + &__radio-dot {
+        border-color: var(--color-purple);
+
+        &::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-purple);
+        }
+    }
+
+    /* ── Visually hide real radios (cards) ────────────── */
+
+    &__card input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+        width: 0;
+        height: 0;
+    }
+
+    /* ── Cards grid (delivery/payment) ────────────────── */
+
+    &__cards-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__card {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        padding: 16px 22px;
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-border);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: border-color 0.2s ease;
+        min-height: 76px;
+
+        &.is-selected {
+            border-color: var(--color-purple);
+        }
+    }
+
+    &__card-radio {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        border: 1px solid var(--color-gray-border);
+        background: var(--color-white);
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s ease;
+    }
+
+    &__card.is-selected &__card-radio {
+        border-color: var(--color-purple);
+
+        &::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-purple);
+        }
+    }
+
+    &__card-body {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__card-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 16px;
+        color: var(--color-black);
+        margin: 0 0 4px;
+    }
+
+    &__card-subtitle {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 14px;
+        color: var(--color-gray-mid);
+        margin: 0;
+    }
+
+    /* ── Textarea ─────────────────────────────────────── */
+
+    &__textarea {
+        width: 100%;
+        height: 100px;
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-border);
+        border-radius: 5px;
+        padding: 14px 22px;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 16px;
+        color: var(--color-black);
+        outline: none;
+        resize: none;
+        transition: border-color 0.2s ease;
+
+        &::placeholder {
+            color: var(--color-gray-placeholder);
+        }
+
+        &:focus {
+            border-color: var(--color-purple);
+        }
+    }
+
+    /* ── Summary card (identical to cart) ─────────────── */
+
+    &__summary {
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: 20px 22px;
+    }
+
+    &__summary-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 24px;
+        color: var(--color-black);
+        margin: 0 0 20px;
+    }
+
+    &__summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        &--total {
+            margin-bottom: 0;
+        }
+    }
+
+    &__summary-row--total &__summary-label {
+        font-size: 20px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    &__summary-row--total &__summary-value {
+        font-size: 20px;
+        line-height: 20px;
+        font-weight: 700;
+    }
+
+    &__summary-label {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20.8px;
+        color: var(--color-black);
+    }
+
+    &__summary-value {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20.8px;
+        color: var(--color-black);
+    }
+
+    &__summary-separator {
+        height: 1px;
+        background: var(--color-gray-bg);
+        margin: 0 0 16px;
+    }
+
+    /* ── Checkout button ──────────────────────────────── */
+
+    &__checkout {
+        width: 100%;
+        height: 54px;
+        background: var(--gradient-purple);
+        color: var(--color-white);
+        font-family: var(--font-manrope);
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 16px;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    /* ── Back to cart link ────────────────────────────── */
+
+    &__back {
+        display: block;
+        text-align: center;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 14px;
+        color: var(--color-purple);
+        text-decoration: none;
+        margin-top: 16px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    /* ══ Tablet+ (≥768px): align body with .container ━━━━━━━━━━ */
+
+    @media (min-width: 768px) {
+        &__body {
+            margin: 0 auto;
+            max-width: 100%;
+            padding-left: fluid-type(768px, 1200px, 24px, 50px);
+            padding-right: fluid-type(768px, 1200px, 24px, 50px);
+        }
+
+        &__form-card {
+            padding: 20px 24px;
+        }
+
+        &__summary {
+            padding: 20px 24px;
+        }
+    }
+
+    /* ══ Desktop (≥1200px): two-column layout ━━━━━━━━━━━━━━━━━ */
+
+    @media (min-width: 1200px) {
+        padding-top: 24px;
+
+        &__body {
+            max-width: calc(1440px + calc(fluid-type(768px, 1200px, 24px, 50px) * 2));
+        }
+
+        &__title {
+            font-size: 32px;
+            line-height: 32px;
+            margin-bottom: 24px;
+        }
+
+        /* ── Two-column grid ── */
+
+        &__grid {
+            display: grid;
+            grid-template-columns: 1fr 287px;
+            gap: 12px;
+            align-items: start;
+        }
+
+        /* ── Form card ── */
+
+        &__form-card {
+            padding: 26px 30px;
+            position: relative;
+        }
+
+        /* ── Login link positioned top-right ── */
+
+        &__login-link {
+            position: absolute;
+            top: 26px;
+            right: 30px;
+            margin-bottom: 0;
+            font-size: 16px;
+            line-height: 16px;
+        }
+
+        /* ── Section title ── */
+
+        &__section-title {
+            font-size: 20px;
+            line-height: 20px;
+        }
+
+        /* ── Separator ── */
+
+        &__separator {
+            margin: 24px 0;
+        }
+
+        /* ── Fields grid: 2-col ── */
+
+        &__fields {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 19px;
+        }
+
+        /* ── Subgroup ── */
+
+        &__subgroup-title {
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        &__radios-inline {
+            flex-direction: row;
+            gap: 24px;
+        }
+
+        &__radio-inline {
+            font-size: 16px;
+            line-height: 16px;
+        }
+
+        /* ── Cards grid: 2-col ── */
+
+        &__cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 19px;
+        }
+
+        /* ── Textarea ── */
+
+        &__textarea {
+            height: 132px;
+        }
+
+        /* ── Summary ── */
+
+        &__summary {
+            padding: 26px 22px;
+        }
+
+        &__summary-title {
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        &__summary-row--total &__summary-label {
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        &__summary-row--total &__summary-value {
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        &__checkout {
+            font-size: 12px;
+            line-height: 12px;
+        }
+    }
+
+    /* ══ Wide desktop (≥1440px): 3-col grids ════════════════ */
+
+    @media (min-width: 1440px) {
+        &__fields,
+        &__cards-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        &__fields--delivery {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
+
+[x-cloak] { display: none !important; }

@@ -1,0 +1,571 @@
+.cart {
+    padding-top: 20px;
+    padding-bottom: 40px;
+
+    /* ── Breadcrumb ───────────────────────────────────── */
+
+    &__breadcrumb {
+        margin-bottom: 12px;
+    }
+
+    /* ── Title ────────────────────────────────────────── */
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: 25px;
+        line-height: 30px;
+        color: var(--color-black);
+        margin: 0 0 16px;
+    }
+
+    /* ── Empty state ──────────────────────────────────── */
+
+    &__empty {
+        text-align: center;
+        padding: 60px 0;
+    }
+
+    &__empty-text {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 18px;
+        color: var(--color-black);
+        margin: 0 0 16px;
+    }
+
+    &__empty-link {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-purple);
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    /* ── Body: lives outside .container so mobile cards can be full-width.
+           At ≥768px replicates container padding to align with title/breadcrumb. */
+
+    &__body {
+        /* mobile: no horizontal padding → cards span edge-to-edge */
+    }
+
+    /* ── Grid layout ──────────────────────────────────── */
+
+    &__grid {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* ── Items card ───────────────────────────────────── */
+
+    &__items {
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: 16px 22px;
+    }
+
+    /* ── Table header (desktop only) ──────────────────── */
+
+    &__items-head {
+        display: none;
+    }
+
+    /* ── Item row (mobile = 2-row grid, desktop = 6-col grid) ── */
+
+    &__item {
+        display: grid;
+        grid-template-areas:
+            "image info remove"
+            "price qty   qty";
+        grid-template-columns: 80px 1fr 25px;
+        grid-template-rows: auto auto;
+        gap: 12px 9px;
+        padding: 16px 0;
+        align-items: start;
+
+        &:not(:last-child) {
+            border-bottom: 1px solid var(--color-gray-bg);
+        }
+
+        &:first-child {
+            padding-top: 0;
+        }
+
+        &:last-child {
+            padding-bottom: 0;
+        }
+    }
+
+    &__item-image {
+        grid-area: image;
+        width: 80px;
+        height: 80px;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+
+    &__item-info {
+        grid-area: info;
+        min-width: 0;
+    }
+
+    &__item-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19.2px;
+        color: var(--color-black);
+        margin: 0 0 3px;
+        overflow-wrap: anywhere;
+    }
+
+    &__item-article,
+    &__item-brand {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 18.2px;
+        color: var(--color-gray-mid);
+        margin: 0;
+    }
+
+    &__item-price-mobile {
+        grid-area: price;
+        align-self: center;
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20.8px;
+        color: var(--color-black);
+        margin: 0;
+    }
+
+    &__item-unitprice {
+        display: none;
+    }
+
+    &__item-qty {
+        grid-area: qty;
+        justify-self: end;
+    }
+
+    &__item-total {
+        display: none;
+    }
+
+    &__item-remove {
+        grid-area: remove;
+        justify-self: end;
+        align-self: start;
+        width: 25px;
+        height: 25px;
+        flex-shrink: 0;
+        color: var(--color-black-soft);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.2s ease;
+
+        svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        &:hover {
+            opacity: 0.7;
+        }
+    }
+
+    /* ── Quantity stepper ─────────────────────────────── */
+
+    &__qty {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 114px;
+        height: 44px;
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-border);
+        border-radius: 5px;
+        padding: 0 14px;
+    }
+
+    &__qty-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        flex-shrink: 0;
+    }
+
+    &__qty-icon {
+        display: block;
+        position: relative;
+
+        &--minus {
+            width: 16px;
+            height: 2px;
+            background: var(--color-black-soft);
+        }
+
+        &--plus {
+            width: 16px;
+            height: 16px;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                background: var(--color-black-soft);
+            }
+
+            &::before {
+                top: 7px;
+                left: 0;
+                width: 16px;
+                height: 2px;
+            }
+
+            &::after {
+                top: 0;
+                left: 7px;
+                width: 2px;
+                height: 16px;
+            }
+        }
+    }
+
+    &__qty-value {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 1;
+        color: var(--color-black);
+        text-align: center;
+    }
+
+    /* ── Clear cart ───────────────────────────────────── */
+
+    &__clear-wrap {
+        text-align: right;
+        margin: 16px 22px 0;
+    }
+
+    &__clear {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 16px;
+        color: var(--color-gray-light);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: var(--color-purple);
+        }
+    }
+
+    /* ── Summary card ─────────────────────────────────── */
+
+    &__summary {
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: 20px 22px;
+    }
+
+    &__summary-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 24px;
+        color: var(--color-black);
+        margin: 0 0 20px;
+    }
+
+    &__summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 16px;
+
+        &--total {
+            margin-bottom: 0;
+        }
+    }
+
+    &__summary-row--total &__summary-label {
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    &__summary-row--total &__summary-value {
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+    &__summary-label {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20.8px;
+        color: var(--color-black);
+    }
+
+    &__summary-value {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 20.8px;
+        color: var(--color-black);
+    }
+
+    &__summary-separator {
+        height: 1px;
+        background: var(--color-gray-bg);
+        margin: 0 0 16px;
+    }
+
+    /* ── Checkout button ──────────────────────────────── */
+
+    &__checkout {
+        width: 100%;
+        height: 54px;
+        background: var(--gradient-purple);
+        color: var(--color-white);
+        font-family: var(--font-manrope);
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 14px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 16px;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.9;
+        }
+    }
+
+    /* ── Back to catalog link ─────────────────────────── */
+
+    &__back {
+        display: block;
+        text-align: center;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 14px;
+        color: var(--color-purple);
+        text-decoration: none;
+        margin-top: 16px;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    /* ══ Tablet+ (≥768px): align body with .container ━━━━━━━━━━ */
+
+    @media (min-width: 768px) {
+        &__body {
+            margin: 0 auto;
+            max-width: 100%;
+            padding-left: fluid-type(768px, 1200px, 24px, 50px);
+            padding-right: fluid-type(768px, 1200px, 24px, 50px);
+        }
+
+        &__items {
+            padding: 20px 24px;
+        }
+
+        &__summary {
+            padding: 20px 24px;
+        }
+
+        &__clear-wrap {
+            margin-left: 0;
+            margin-right: 0;
+        }
+    }
+
+    @media (min-width: 1200px) {
+        padding-top: 24px;
+
+        &__body {
+            max-width: calc(1440px + calc(fluid-type(768px, 1200px, 24px, 50px) * 2));
+        }
+
+        &__title {
+            font-size: 32px;
+            line-height: 32px;
+            margin-bottom: 24px;
+        }
+
+        /* ── Two-column grid ── */
+
+        &__grid {
+            display: grid;
+            grid-template-columns: 1fr 287px;
+            gap: 12px;
+            align-items: start;
+        }
+
+        /* ── Items card ── */
+
+        &__items {
+            padding: 26px 30px;
+        }
+
+        /* ── Table header: same grid as item row ── */
+
+        &__items-head {
+            display: grid;
+            grid-template-columns: 100px 1fr 97px 115px 120px 25px;
+            gap: 19px;
+            align-items: center;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--color-gray-bg);
+            margin-bottom: 4px;
+        }
+
+        &__head-title {
+            grid-column: 1 / 3;
+            font-family: var(--font-manrope);
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 18px;
+            color: var(--color-black);
+        }
+
+        &__head-price {
+            grid-column: 3;
+            text-align: right;
+            font-family: var(--font-manrope);
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 18px;
+            color: var(--color-black);
+        }
+
+        &__head-qty {
+            grid-column: 4;
+            text-align: center;
+            font-family: var(--font-manrope);
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 18px;
+            color: var(--color-black);
+        }
+
+        &__head-sum {
+            grid-column: 5;
+            text-align: right;
+            font-family: var(--font-manrope);
+            font-weight: 700;
+            font-size: 18px;
+            line-height: 18px;
+            color: var(--color-black);
+        }
+
+        &__head-action {
+            grid-column: 6;
+        }
+
+        /* ── Item row: single-row 6-col grid ── */
+
+        &__item {
+            grid-template-areas: "image info unitprice qty total remove";
+            grid-template-columns: 100px 1fr 97px 115px 120px 25px;
+            grid-template-rows: auto;
+            gap: 19px;
+            align-items: center;
+            min-height: 150px;
+            padding: 16px 0;
+        }
+
+        &__item-image {
+            width: 100px;
+            height: 100px;
+        }
+
+        &__item-price-mobile {
+            display: none;
+        }
+
+        &__item-unitprice {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-family: var(--font-manrope);
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 20.8px;
+            color: var(--color-black);
+        }
+
+        &__item-qty {
+            justify-self: center;
+        }
+
+        &__qty {
+            width: 115px;
+            height: 40px;
+        }
+
+        &__item-total {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            font-family: var(--font-manrope);
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 20.8px;
+            color: var(--color-black);
+        }
+
+        &__item-remove {
+            justify-self: end;
+        }
+
+        /* ── Summary ── */
+
+        &__summary {
+            padding: 26px 22px;
+        }
+
+        &__summary-title {
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        &__summary-row--total &__summary-label {
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        &__summary-row--total &__summary-value {
+            font-size: 18px;
+            line-height: 18px;
+        }
+
+        &__checkout {
+            font-size: 12px;
+            line-height: 12px;
+        }
+
+        &__clear-wrap {
+            margin-top: 16px;
+        }
+    }
+}
+
+[x-cloak] { display: none !important; }

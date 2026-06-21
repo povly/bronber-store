@@ -2,60 +2,10 @@
     padding-top: 20px;
     padding-bottom: 16px;
 
-    /* ── Breadcrumb ─────────────────────────────────── */
+    /* ── Breadcrumb (visibility/spacing only — visual styles in components/breadcrumbs.css) ── */
 
     &__breadcrumb {
         display: none;
-    }
-
-    &__breadcrumb-list {
-        display: flex;
-        align-items: center;
-        gap: 0;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        flex-wrap: wrap;
-    }
-
-    &__breadcrumb-item {
-        display: flex;
-        align-items: center;
-        gap: 0;
-
-        &:not(:last-child)::after {
-            content: ' / ';
-            color: var(--color-gray-mid);
-            font-family: var(--font-manrope);
-            font-weight: 500;
-            font-size: 16px;
-            margin: 0 4px;
-        }
-
-        &:last-child::after {
-            content: '';
-        }
-    }
-
-    &__breadcrumb-link {
-        color: var(--color-gray-mid);
-        font-family: var(--font-manrope);
-        font-weight: 500;
-        font-size: 16px;
-        text-decoration: none;
-        line-height: 20.8px;
-
-        &:hover {
-            color: var(--color-purple);
-        }
-    }
-
-    &__breadcrumb-current {
-        color: var(--color-gray-mid);
-        font-family: var(--font-manrope);
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 20.8px;
     }
 
     /* ── Title ──────────────────────────────────────── */

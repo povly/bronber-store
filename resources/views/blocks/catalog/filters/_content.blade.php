@@ -2,7 +2,7 @@
 <div class="catalog-filters__card">
     <h2 class="catalog-filters__heading">Каталог товаров</h2>
 
-    <ul class="catalog-filters__category-list">
+    <ul class="catalog-filters__category-list" x-scrollable="{ thumbColor: '#bfbfbf', thumbWidth: 4, thumbRadius: 4, trackOffset: 3 }">
         {{-- Active category: Тормозная система (expanded) --}}
         <li>
             <div

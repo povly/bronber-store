@@ -8,6 +8,8 @@
 @import 'components/tag.css';
 @import 'components/card.css';
 @import 'components/article.css';
+@import 'components/breadcrumbs.css';
+@import 'components/scrollable.css';
 
 @import 'blocks/common/top-bar/style.css';
 @import 'blocks/common/header/style.css';
