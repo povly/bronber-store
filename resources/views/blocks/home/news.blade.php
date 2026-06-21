@@ -9,21 +9,42 @@
             'date' => '25/12/25',
             'title' => 'Запуск нового направления BRONBER Auto Service',
             'desc' => 'Открываем новое направление в сфере автосервиса. Современное оборудование, квалифицированные специалисты и широкий спектр услуг для вашего автомобиля.',
-            'image' => 'https://placehold.co/464x650/2a2a2a/555555?text=BRONBER',
+            'image' => '/images/blog/1.jpg',
         ],
         [
             'tag' => '#событие',
             'date' => '18/12/25',
             'title' => 'Открытие нового магазина автозапчастей',
             'desc' => 'Рады сообщить об открытии нового магазина. Более 50 000 наименований запчастей в наличии и под заказ с быстрой доставкой.',
-            'image' => 'https://placehold.co/464x650/333333/666666?text=Store',
+            'image' => '/images/blog/2.jpg',
         ],
         [
             'tag' => '#партнерство',
             'date' => '10/12/25',
             'title' => 'Новое партнерство с ведущими производителями',
             'desc' => 'Заключили соглашения с крупнейшими мировыми производителями автозапчастей. Теперь в ассортименте ещё больше оригинальных деталей.',
-            'image' => 'https://placehold.co/464x650/1a1a1a/555555?text=Partners',
+            'image' => '/images/blog/3.jpg',
+        ],
+        [
+            'tag' => '#запуск',
+            'date' => '25/12/25',
+            'title' => 'Запуск нового направления BRONBER Auto Service',
+            'desc' => 'Открываем новое направление в сфере автосервиса. Современное оборудование, квалифицированные специалисты и широкий спектр услуг для вашего автомобиля.',
+            'image' => '/images/blog/1.jpg',
+        ],
+        [
+            'tag' => '#событие',
+            'date' => '18/12/25',
+            'title' => 'Открытие нового магазина автозапчастей',
+            'desc' => 'Рады сообщить об открытии нового магазина. Более 50 000 наименований запчастей в наличии и под заказ с быстрой доставкой.',
+            'image' => '/images/blog/2.jpg',
+        ],
+        [
+            'tag' => '#партнерство',
+            'date' => '10/12/25',
+            'title' => 'Новое партнерство с ведущими производителями',
+            'desc' => 'Заключили соглашения с крупнейшими мировыми производителями автозапчастей. Теперь в ассортименте ещё больше оригинальных деталей.',
+            'image' => '/images/blog/3.jpg',
         ],
     ];
 @endphp
@@ -55,22 +76,19 @@
 
                 @foreach($news as $item)
                     <article class="home-news__slide slider__slide">
-                        <a href="#" class="home-news__card">
-                            <img data-src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="home-news__card-image lazy" width="464" height="650">
-                            <span class="home-news__card-shade home-news__card-shade--top"></span>
-                            <span class="home-news__card-shade home-news__card-shade--bottom"></span>
-                            <div class="home-news__card-top">
-                                <span class="home-news__card-date">{{ $item['date'] }}</span>
-                                <span class="home-news__card-tag">{{ $item['tag'] }}</span>
+                        <a href="#" class="article">
+                            <img data-src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="article__image lazy" width="464" height="650">
+                            <span class="article__shade article__shade--top"></span>
+                            <span class="article__shade article__shade--bottom"></span>
+                            <div class="article__top">
+                                <span class="article__tag">{{ $item['tag'] }}</span>
+                                <span class="article__date">{{ $item['date'] }}</span>
                             </div>
-                            <div class="home-news__card-body">
-                                <h3 class="home-news__card-title">{{ $item['title'] }}</h3>
-                                <p class="home-news__card-desc">{{ $item['desc'] }}</p>
-                                <span class="home-news__card-more">
+                            <div class="article__body">
+                                <h3 class="article__title">{{ $item['title'] }}</h3>
+                                <p class="article__desc">{{ $item['desc'] }}</p>
+                                <span class="article__more btn btn--white">
                                     Детальнее
-                                    <svg class="home-news__card-more-icon" width="14" height="14" viewBox="0 0 16 16" fill="none">
-                                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
                                 </span>
                             </div>
                         </a>
@@ -80,7 +98,7 @@
         </div>
 
         <div class="home-news__footer">
-            <x-btn href="/news" variant="primary" class="home-news__all-btn" text="Все новости" />
+            <x-btn href="/news" variant="primary" class="home-news__all-btn btn btn--primary" text="Все новости" />
             <div class="home-news__arrows home-news__arrows--bottom slider__arrows">
                 <button class="slider__arrow slider__arrow--prev home-news__arrow home-news__arrow--prev" type="button" aria-label="Назад" @click="prev()" :disabled="!canPrev">
                     <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">

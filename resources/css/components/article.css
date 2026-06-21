@@ -1,0 +1,130 @@
+/* ── Article card ─────────────────────────────────── */
+.article {
+    position: relative;
+    display: block;
+    height: fluid-type(1200px, 1920px, 490px, 650px);
+    border-radius: 7px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-white);
+    width: 100%;
+
+    &__image {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    &:hover &__image {
+        transform: scale(1.05);
+    }
+
+    &__shade {
+        position: absolute;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+
+        &--top {
+            top: 0;
+            height: 30%;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), transparent);
+        }
+
+        &--bottom {
+            bottom: 0;
+            height: 65%;
+            background: linear-gradient(to bottom, transparent 30%, rgba(0, 0, 0, 0.95));
+        }
+    }
+
+    &__top {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 2;
+    }
+
+    &__date,
+    &__tag {
+        font-weight: 500;
+        font-size: fluid-type(768px, 1200px, 12px, 16px);
+        color: var(--color-white);
+    }
+
+    &__body {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 25px;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__title {
+        font-weight: 800;
+        font-size: fluid-type(768px, 1200px, 20px, 22px);
+        color: var(--color-white);
+        line-height: fluid-type(768px, 1200px, 120%, 125%);
+    }
+
+    &__desc {
+        font-size: fluid-type(1200px, 1920px, 14px, 18px);
+        line-height: 130%;
+        margin: fluid-type(768px, 1200px, 11px, 14px) 0 0;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        color: var(--color-white);
+    }
+
+    &__more {
+        display: none;
+    }
+
+    /* ════════════════════════════════════════════════════
+       Breakpoint: 1200px
+       ════════════════════════════════════════════════════ */
+    @media (min-width: 1200px) {
+        &__top {
+            padding: fluid-type(1200px, 1440px, 23px, 30px);
+        }
+
+        &__body {
+            padding: fluid-type(1200px, 1440px, 23px, 30px);
+        }
+
+        &__date,
+        &__tag {
+            font-size: fluid-type(1200px, 1440px, 16px, 20px);
+        }
+
+        &__title {
+            font-weight: 800;
+            font-size: fluid-type(1200px, 1440px, 22px, 30px);
+            line-height: 120%;
+        }
+
+        &__desc {
+            display: -webkit-box;
+            line-height: normal;
+            margin-top: fluid-type(1200px, 1440px, 14px, 19px);
+        }
+
+        &__more {
+            display: flex;
+            margin-top: fluid-type(1200px, 1440px, 19px, 24px);
+        }
+    }
+}
