@@ -55,6 +55,12 @@
         background: var(--color-white);
         border-radius: 5px;
         padding: 20px;
+
+        .x-scrollable {
+            &__wrapper {
+                --x-scroll-track-offset: -15px !important;
+            }
+        }
     }
 
     /* --- Headings --- */

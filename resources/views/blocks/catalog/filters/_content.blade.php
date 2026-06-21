@@ -10,9 +10,10 @@
                 @click="toggleCategory('brakes')"
             >
                 <span>Тормозная система</span>
-                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.brakes }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.brakes }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
                 </svg>
+                
             </div>
             <ul class="catalog-filters__subcategory-list" :class="{ 'is-hidden': !openCategories.brakes }">
                 <li class="catalog-filters__subcategory-item">
@@ -38,8 +39,8 @@
                 @click="toggleCategory('chiptuning')"
             >
                 <span class="catalog-filters__category-name">Чип-тюнинг</span>
-                <svg class="catalog-filters__category-chevron" :class="{ 'is-open': openCategories.chiptuning }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.chiptuning }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
                 </svg>
             </div>
             <ul class="catalog-filters__subcategory-list is-hidden" :class="{ 'is-hidden': !openCategories.chiptuning }">
@@ -60,8 +61,8 @@
                 @click="toggleCategory('discs')"
             >
                 <span class="catalog-filters__category-name">Диски</span>
-                <svg class="catalog-filters__category-chevron" :class="{ 'is-open': openCategories.discs }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.discs }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
                 </svg>
             </div>
             <ul class="catalog-filters__subcategory-list is-hidden" :class="{ 'is-hidden': !openCategories.discs }">
@@ -82,8 +83,8 @@
                 @click="toggleCategory('optics')"
             >
                 <span class="catalog-filters__category-name">Оптика</span>
-                <svg class="catalog-filters__category-chevron" :class="{ 'is-open': openCategories.optics }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.optics }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
                 </svg>
             </div>
             <ul class="catalog-filters__subcategory-list is-hidden" :class="{ 'is-hidden': !openCategories.optics }">
@@ -106,8 +107,8 @@
     <div class="catalog-filters__section">
         <div class="catalog-filters__section-header" @click="toggleSection('price')">
             <span class="catalog-filters__section-title">Цена, ₽</span>
-            <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('price') }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('price') }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
             </svg>
         </div>
         <div class="catalog-filters__section-body" :class="{ 'is-hidden': !isSectionOpen('price') }">
@@ -162,8 +163,8 @@
     <div class="catalog-filters__section">
         <div class="catalog-filters__section-header" @click="toggleSection('brand')">
             <span class="catalog-filters__section-title">Бренд</span>
-            <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('brand') }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('brand') }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
             </svg>
         </div>
         <div class="catalog-filters__section-body" :class="{ 'is-hidden': !isSectionOpen('brand') }">
@@ -199,8 +200,8 @@
     <div class="catalog-filters__section">
         <div class="catalog-filters__section-header" @click="toggleSection('availability')">
             <span class="catalog-filters__section-title">Наличие</span>
-            <svg class="catalog-filters__section-chevron {{ $availabilityOpen ? 'is-open' : '' }}" :class="{ 'is-open': isSectionOpen('availability') }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg class="catalog-filters__section-chevron {{ $availabilityOpen ? 'is-open' : '' }}" :class="{ 'is-open': isSectionOpen('availability') }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
             </svg>
         </div>
         <div class="catalog-filters__section-body {{ !$availabilityOpen ? 'is-hidden' : '' }}" :class="{ 'is-hidden': !isSectionOpen('availability') }">
@@ -231,8 +232,8 @@
     <div class="catalog-filters__section">
         <div class="catalog-filters__section-header" @click="toggleSection('compatibility')">
             <span class="catalog-filters__section-title">Совместимость</span>
-            <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('compatibility') }" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('compatibility') }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
             </svg>
         </div>
         <div class="catalog-filters__section-body" :class="{ 'is-hidden': !isSectionOpen('compatibility') }">
@@ -242,7 +243,9 @@
                         <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('mark')">
                             <span class="catalog-filters__select-label">Марка</span>
                             <span class="catalog-filters__select-value" x-text="getSelectedLabel('mark')">{{ $selectLabel('mark') }}</span>
-                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.mark }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.mark }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
+                            </svg>
                         </button>
                         <div class="catalog-filters__custom-select-dropdown" style="display:none;" :class="{ 'is-above': selectFlip.mark }" x-show="selectOpen.mark" x-transition>
                             @foreach($allSelectOptions['mark'] as $option)
@@ -256,7 +259,9 @@
                         <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('model')">
                             <span class="catalog-filters__select-label">Модель</span>
                             <span class="catalog-filters__select-value" x-text="getSelectedLabel('model')">{{ $selectLabel('model') }}</span>
-                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.model }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.model }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
+                            </svg>
                         </button>
                         <div class="catalog-filters__custom-select-dropdown" style="display:none;" :class="{ 'is-above': selectFlip.model }" x-show="selectOpen.model" x-transition>
                             @foreach($allSelectOptions['model'] as $option)
@@ -270,7 +275,9 @@
                         <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('generation')">
                             <span class="catalog-filters__select-label">Поколение</span>
                             <span class="catalog-filters__select-value" x-text="getSelectedLabel('generation')">{{ $selectLabel('generation') }}</span>
-                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.generation }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.generation }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
+                            </svg>
                         </button>
                         <div class="catalog-filters__custom-select-dropdown" style="display:none;" :class="{ 'is-above': selectFlip.generation }" x-show="selectOpen.generation" x-transition>
                             @foreach($allSelectOptions['generation'] as $option)
@@ -284,7 +291,9 @@
                         <button type="button" class="catalog-filters__custom-select-trigger" @click="toggleSelect('engine')">
                             <span class="catalog-filters__select-label">Двигатель</span>
                             <span class="catalog-filters__select-value" x-text="getSelectedLabel('engine')">{{ $selectLabel('engine') }}</span>
-                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.engine }" width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5L6 6.5L11 1.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg class="catalog-filters__custom-select-chevron" :class="{ 'is-open': selectOpen.engine }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
+                            </svg>
                         </button>
                         <div class="catalog-filters__custom-select-dropdown" style="display:none;" :class="{ 'is-above': selectFlip.engine }" x-show="selectOpen.engine" x-transition>
                             @foreach($allSelectOptions['engine'] as $option)

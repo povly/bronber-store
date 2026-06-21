@@ -158,7 +158,9 @@
                     <div class="catalog-hero__sort" @click.away="sortDropdownOpen = false">
                         <button class="catalog-hero__sort-trigger" type="button" @click="sortDropdownOpen = !sortDropdownOpen">
                         <span class="catalog-hero__sort-value" x-text="sortOptions[currentSort]">{{ $allSortOptions[$currentSort] ?? '' }}</span>
-                            <svg class="catalog-hero__sort-chevron" :class="{ 'is-open': sortDropdownOpen }" width="17" height="13" viewBox="0 0 17 13" fill="none"><path d="M1 1l7.5 11L16 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <svg class="catalog-hero__sort-chevron" :class="{ 'is-open': sortDropdownOpen }" width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M4.99311 6.05335C5.286 6.34625 5.76087 6.34625 6.05377 6.05335L10.8267 1.28038C11.1196 0.987488 11.1196 0.512614 10.8267 0.219721C10.5338 -0.0731719 10.059 -0.0731719 9.76608 0.219721L5.52344 4.46236L1.2808 0.219721C0.987904 -0.0731723 0.51303 -0.0731723 0.220137 0.219721C-0.0727566 0.512614 -0.0727566 0.987488 0.220137 1.28038L4.99311 6.05335ZM5.52344 4.74695L4.77344 4.74695L4.77344 5.52302L5.52344 5.52302L6.27344 5.52302L6.27344 4.74695L5.52344 4.74695Z" fill="#BFBFBF" />
+                            </svg>
                         </button>
                         <div class="catalog-hero__sort-dropdown" x-show="sortDropdownOpen" x-transition style="display:none;">
                             @foreach($allSortOptions as $key => $label)
