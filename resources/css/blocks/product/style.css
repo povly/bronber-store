@@ -924,6 +924,11 @@
     /* ══ Wide desktop ≥1440px — fluid type scale-up ═════ */
 
     @media (min-width: 1440px) {
+        &__hero-grid {
+            grid-template-columns: minmax(0, 777px) minmax(0, 1fr);
+            gap: 50px;
+        }
+
         &__thumb {
             width: 142px;
             height: 142px;
