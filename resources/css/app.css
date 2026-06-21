@@ -10,6 +10,7 @@
 @import 'components/article.css';
 @import 'components/breadcrumbs.css';
 @import 'components/scrollable.css';
+@import 'components/qty.css';
 
 @import 'blocks/common/top-bar/style.css';
 @import 'blocks/common/header/style.css';

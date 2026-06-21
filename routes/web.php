@@ -15,9 +15,9 @@ $register = function () {
 
     Route::get('/cart', function () {
         $items = [
-            ['id' => 1, 'image' => 'https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => 1100, 'qty' => 1],
-            ['id' => 2, 'image' => 'https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => 1100, 'qty' => 2],
-            ['id' => 3, 'image' => 'https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => 1100, 'qty' => 2],
+            ['id' => 1, 'image' => '/images/cart/product.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => 1100, 'qty' => 1],
+            ['id' => 2, 'image' => '/images/cart/product.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => 1100, 'qty' => 2],
+            ['id' => 3, 'image' => '/images/cart/product.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => 1100, 'qty' => 2],
         ];
 
         $format = static fn (int $price) => number_format($price, 0, ',', ' ').' ₽';

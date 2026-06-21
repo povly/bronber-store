@@ -8,10 +8,7 @@
 
 <section class="cart" x-data="cart({{ Js::from(['items' => $items]) }})">
     <div class="container">
-        <x-breadcrumbs
-            class="cart__breadcrumb"
-            :items="[['label' => 'Главная', 'url' => '/'], ['label' => 'Корзина']]"
-        />
+        <x-breadcrumbs class="cart__breadcrumb" :items="[['label' => 'Главная', 'url' => '/'], ['label' => 'Корзина']]" />
 
         <h1 class="cart__title">Корзина</h1>
     </div>
@@ -25,12 +22,10 @@
     </div>
 
     {{-- Filled state: body lives OUTSIDE container so cards can be full-width on mobile --}}
-    <div class="cart__body" x-show="items.length > 0" x-cloak>
+    <div class="cart__body">
 
         <div class="cart__grid">
-
-            {{-- Left column: items --}}
-            <div class="cart__items">
+            <div class="cart__grid-block">
                 <div class="cart__items-head">
                     <span class="cart__head-title">Товар</span>
                     <span class="cart__head-price">Цена</span>
@@ -39,49 +34,62 @@
                     <span class="cart__head-action" aria-hidden="true"></span>
                 </div>
 
-                @foreach($items as $item)
-                    <div class="cart__item" x-show="hasItem({{ $item['id'] }})">
-                        <img class="cart__item-image" src="{{ $item['image'] }}" alt="" loading="lazy">
+                <div class="cart__items">
 
-                        <div class="cart__item-info">
-                            <p class="cart__item-title">{{ $item['title'] }}</p>
-                            <p class="cart__item-article">Артикул: <span>{{ $item['article'] }}</span></p>
-                            <p class="cart__item-brand">Бренд: <span>{{ $item['brand'] }}</span></p>
-                        </div>
-
-                        <p class="cart__item-price-mobile">Цена: <span>{{ $formatPrice($item['price']) }}</span></p>
-
-                        <div class="cart__item-unitprice">
-                            <span>{{ $formatPrice($item['price']) }}</span>
-                        </div>
-
-                        <div class="cart__item-qty">
-                            <div class="cart__qty">
-                                <button type="button" class="cart__qty-btn" @click="dec({{ $item['id'] }})" aria-label="Уменьшить количество">
-                                    <span class="cart__qty-icon cart__qty-icon--minus"></span>
-                                </button>
-                                <span class="cart__qty-value" x-text="itemQty({{ $item['id'] }})"></span>
-                                <button type="button" class="cart__qty-btn" @click="inc({{ $item['id'] }})" aria-label="Увеличить количество">
-                                    <span class="cart__qty-icon cart__qty-icon--plus"></span>
-                                </button>
+                    @foreach ($items as $item)
+                        <div class="cart__item" x-show="hasItem({{ $item['id'] }})">
+                            <div class="cart__item-image img--full">
+                                <x-img :lazy="false" :path="$item['image']" :alt="$item['title']" width="80"
+                                    height="80" />
                             </div>
-                        </div>
 
-                        <div class="cart__item-total">
-                            <span x-text="itemTotal({{ $item['id'] }})"></span>
-                        </div>
+                            <div class="cart__item-info">
+                                <p class="cart__item-title">{{ $item['title'] }}</p>
+                                <p class="cart__item-article">Артикул: <span>{{ $item['article'] }}</span></p>
+                                <p class="cart__item-brand">Бренд: <a href="#!">{{ $item['brand'] }}</a></p>
+                            </div>
 
-                        <button type="button" class="cart__item-remove" @click="remove({{ $item['id'] }})" aria-label="Удалить товар">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 6H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M8 6V4.5C8 4.10218 8.15804 3.72064 8.43934 3.43934C8.72064 3.15804 9.10218 3 9.5 3H14.5C14.8978 3 15.2794 3.15804 15.5607 3.43934C15.842 3.72064 16 4.10218 16 4.5V6M19 6V20C19 20.3978 18.842 20.7794 18.5607 21.0607C18.2794 21.342 17.8978 21.5 17.5 21.5H6.5C6.10218 21.5 5.72064 21.342 5.43934 21.0607C5.15804 20.7794 5 20.3978 5 20V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M10 11V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                                <path d="M14 11V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            </svg>
-                        </button>
-                    </div>
-                @endforeach
+                            <p class="cart__item-price-mobile">Цена: <span>{{ $formatPrice($item['price']) }}</span></p>
+
+                            <div class="cart__item-unitprice">
+                                <span>{{ $formatPrice($item['price']) }}</span>
+                            </div>
+
+                            <div class="cart__item-qty">
+                                <div class="cart__qty">
+                                    <button type="button" class="cart__qty-btn" @click="dec({{ $item['id'] }})"
+                                        aria-label="Уменьшить количество">
+                                        <span class="cart__qty-icon cart__qty-icon--minus"></span>
+                                    </button>
+                                    <span class="cart__qty-value" x-text="itemQty({{ $item['id'] }})"></span>
+                                    <button type="button" class="cart__qty-btn" @click="inc({{ $item['id'] }})"
+                                        aria-label="Увеличить количество">
+                                        <span class="cart__qty-icon cart__qty-icon--plus"></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="cart__item-total">
+                                <span x-text="itemTotal({{ $item['id'] }})"></span>
+                            </div>
+
+                            <button type="button" class="cart__item-remove" @click="remove({{ $item['id'] }})"
+                                aria-label="Удалить товар">
+                                <svg width="25" height="25" viewBox="0 0 25 25" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M5.20312 7.29167H19.7865M10.4115 10.4167V18.75M14.5781 10.4167V18.75M10.4115 3.125H14.5781C14.8544 3.125 15.1193 3.23475 15.3147 3.4301C15.51 3.62545 15.6198 3.8904 15.6198 4.16667V7.29167H9.36979V4.16667C9.36979 3.8904 9.47954 3.62545 9.67489 3.4301C9.87024 3.23475 10.1352 3.125 10.4115 3.125ZM6.24479 7.29167H18.7448V20.8333C18.7448 21.1096 18.635 21.3746 18.4397 21.5699C18.2443 21.7653 17.9794 21.875 17.7031 21.875H7.28646C7.01019 21.875 6.74524 21.7653 6.54989 21.5699C6.35454 21.3746 6.24479 21.1096 6.24479 20.8333V7.29167Z"
+                                        stroke="#7212BC" stroke-width="1.6" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
+                    @endforeach
+                </div>
+
+                <button type="button" class="cart__clear" @click="clear()">Очистить корзину</button>
             </div>
+
 
             {{-- Right column: summary --}}
             <aside class="cart__summary">
@@ -112,10 +120,6 @@
                 <a href="{{ route('catalog') }}" class="cart__back">Вернуться в каталог</a>
             </aside>
 
-        </div>
-
-        <div class="cart__clear-wrap">
-            <button type="button" class="cart__clear" @click="clear()">Очистить корзину</button>
         </div>
 
     </div>

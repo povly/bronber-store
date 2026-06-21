@@ -1,22 +1,14 @@
 .cart {
-    padding-top: 20px;
-    padding-bottom: 40px;
-
-    /* ── Breadcrumb ───────────────────────────────────── */
-
-    &__breadcrumb {
-        margin-bottom: 12px;
-    }
+    padding-top: 25px;
 
     /* ── Title ────────────────────────────────────────── */
 
     &__title {
-        font-family: var(--font-manrope);
         font-weight: 800;
         font-size: 25px;
-        line-height: 30px;
-        color: var(--color-black);
-        margin: 0 0 16px;
+        line-height: 100%;
+        margin-bottom: 25px;
+        margin-top: 0;
     }
 
     /* ── Empty state ──────────────────────────────────── */
@@ -46,30 +38,17 @@
         }
     }
 
-    /* ── Body: lives outside .container so mobile cards can be full-width.
-           At ≥768px replicates container padding to align with title/breadcrumb. */
-
-    &__body {
-        /* mobile: no horizontal padding → cards span edge-to-edge */
-    }
-
-    /* ── Grid layout ──────────────────────────────────── */
-
     &__grid {
         display: flex;
         flex-direction: column;
         gap: 12px;
+
+        &-block {
+            background: var(--color-white);
+            border-radius: 5px;
+            padding: 20px 22px;
+        }
     }
-
-    /* ── Items card ───────────────────────────────────── */
-
-    &__items {
-        background: var(--color-white);
-        border-radius: 5px;
-        padding: 16px 22px;
-    }
-
-    /* ── Table header (desktop only) ──────────────────── */
 
     &__items-head {
         display: none;
@@ -81,23 +60,16 @@
         display: grid;
         grid-template-areas:
             "image info remove"
-            "price qty   qty";
+            "price price qty";
         grid-template-columns: 80px 1fr 25px;
         grid-template-rows: auto auto;
-        gap: 12px 9px;
-        padding: 16px 0;
+        gap: 20px 9px;
+        padding: 20px 0;
         align-items: start;
-
-        &:not(:last-child) {
-            border-bottom: 1px solid var(--color-gray-bg);
-        }
+        border-bottom: 1px solid var(--color-gray-bg);
 
         &:first-child {
             padding-top: 0;
-        }
-
-        &:last-child {
-            padding-bottom: 0;
         }
     }
 
@@ -105,44 +77,45 @@
         grid-area: image;
         width: 80px;
         height: 80px;
-        border-radius: 5px;
-        object-fit: cover;
+
+        img {
+            object-fit: contain;
+        }
     }
 
     &__item-info {
         grid-area: info;
         min-width: 0;
+        display: grid;
+        gap: 3px;
     }
 
     &__item-title {
-        font-family: var(--font-manrope);
         font-weight: 700;
         font-size: 16px;
-        line-height: 19.2px;
-        color: var(--color-black);
-        margin: 0 0 3px;
-        overflow-wrap: anywhere;
+        line-height: 120%;
+        text-wrap: balance;
+        padding-right: 5px;
     }
 
     &__item-article,
     &__item-brand {
-        font-family: var(--font-manrope);
         font-weight: 500;
         font-size: 14px;
-        line-height: 18.2px;
+        line-height: 130%;
         color: var(--color-gray-mid);
-        margin: 0;
+
+        a {
+            color: var(--color-purple);
+        }
     }
 
     &__item-price-mobile {
         grid-area: price;
         align-self: center;
-        font-family: var(--font-manrope);
         font-weight: 700;
         font-size: 16px;
-        line-height: 20.8px;
-        color: var(--color-black);
-        margin: 0;
+        line-height: 130%;
     }
 
     &__item-unitprice {
@@ -162,23 +135,7 @@
         grid-area: remove;
         justify-self: end;
         align-self: start;
-        width: 25px;
-        height: 25px;
         flex-shrink: 0;
-        color: var(--color-black-soft);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: opacity 0.2s ease;
-
-        svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        &:hover {
-            opacity: 0.7;
-        }
     }
 
     /* ── Quantity stepper ─────────────────────────────── */
@@ -220,7 +177,7 @@
 
             &::before,
             &::after {
-                content: '';
+                content: "";
                 position: absolute;
                 background: var(--color-black-soft);
             }
@@ -250,27 +207,14 @@
         text-align: center;
     }
 
-    /* ── Clear cart ───────────────────────────────────── */
-
-    &__clear-wrap {
-        text-align: right;
-        margin: 16px 22px 0;
-    }
-
     &__clear {
-        font-family: var(--font-manrope);
         font-weight: 500;
         font-size: 16px;
-        line-height: 16px;
+        line-height: 100%;
+        text-align: center;
         color: var(--color-gray-light);
-        background: none;
-        border: none;
-        cursor: pointer;
-        transition: color 0.2s ease;
-
-        &:hover {
-            color: var(--color-purple);
-        }
+        margin: 20px auto 0;
+        display: flex;
     }
 
     /* ── Summary card ─────────────────────────────────── */
@@ -401,7 +345,9 @@
         padding-top: 24px;
 
         &__body {
-            max-width: calc(1440px + calc(fluid-type(768px, 1200px, 24px, 50px) * 2));
+            max-width: calc(
+                1440px + calc(fluid-type(768px, 1200px, 24px, 50px) * 2)
+            );
         }
 
         &__title {
@@ -516,7 +462,7 @@
             justify-self: center;
         }
 
-        &__qty {
+        .qty {
             width: 115px;
             height: 40px;
         }
@@ -568,4 +514,6 @@
     }
 }
 
-[x-cloak] { display: none !important; }
+[x-cloak] {
+    display: none !important;
+}
