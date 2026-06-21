@@ -10,6 +10,7 @@ import slider from './alpine/plugins/slider'
 import filters from './alpine/plugins/filters'
 import scrollable from './alpine/plugins/scrollable'
 import qty from './alpine/plugins/qty'
+import select from './alpine/plugins/select'
 
 Alpine.plugin(collapse)
 Alpine.plugin(modal)
@@ -17,6 +18,7 @@ Alpine.plugin(slider)
 Alpine.plugin(filters)
 Alpine.plugin(scrollable)
 Alpine.plugin(qty)
+Alpine.plugin(select)
 
 window.Alpine = Alpine
 
