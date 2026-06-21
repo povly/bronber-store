@@ -5,7 +5,7 @@
     $attrs = $tag === 'a' ? 'href="' . e($href) . '"' : 'type="button"';
 @endphp
 
-<{{ $tag }} {{ $attrs }} {{ $attributes->merge(['class' => "btn btn--{$variant} {$class}"]) }}>
+<{{ $tag }} {!! $attrs !!} {{ $attributes->merge(['class' => "btn btn--{$variant} {$class}"]) }}>
     @if ($icon)
         <span class="btn__icon">{!! $icon !!}</span>
     @endif
