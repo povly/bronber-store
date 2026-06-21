@@ -653,51 +653,37 @@
 
         &__hero-grid {
             display: grid;
-            grid-template-columns: minmax(0, auto) minmax(0, 1fr);
+            grid-template-columns: minmax(0, 329px) minmax(0, 1fr);
             grid-template-areas:
                 "gallery info-top"
                 "gallery buy-info"
                 "gallery availability";
-            gap: 24px;
+            gap: 36px;
             align-items: start;
         }
 
         &__info-top { grid-area: info-top; }
-        &__gallery { grid-area: gallery; flex-direction: row; gap: 13px; }
+        &__gallery { grid-area: gallery; flex-direction: column-reverse; gap: 20px; }
         &__buy-info { grid-area: buy-info; }
         &__availability { grid-area: availability; }
 
-        &__thumbs {
-            max-height: 460px;
-            flex-shrink: 0;
-        }
-
         &__thumbs-track {
-            gap: 13px;
-        }
-
-        &__thumb {
-            width: 105px;
-            height: 105px;
+            gap: 10px;
         }
 
         &__main {
-            flex: 1;
-            min-width: 0;
+            flex: none;
         }
 
-        &__title {
-            font-size: 28px;
-            line-height: 1.2;
+        &__badge {
+            background: rgba(114, 18, 188, 0.03);
+            border: none;
+            border-radius: 5px;
+            padding: 7px 16px;
         }
 
         &__buy-row {
             gap: 12px;
-        }
-
-        &__qty {
-            width: 140px;
-            height: 60px;
         }
 
         &__add-cart {
@@ -708,7 +694,7 @@
         }
 
         &__tabs-card {
-            padding: 26px 30px;
+            padding: 20px;
         }
 
         &__reviews-all-short {
@@ -740,12 +726,8 @@
             scroll-snap-align: start;
         }
 
-        &__reviews-slider {
-            --slider-slide: calc((100% - var(--slider-gap)) / 2);
-        }
-
         &__review {
-            padding: 24px;
+            padding: 30px;
         }
 
         &__avatar {
@@ -766,10 +748,6 @@
         &__review-text {
             font-size: 18px;
         }
-
-        &__section-title {
-            font-size: 32px;
-        }
     }
 
     /* ══ Desktop ≥1200px ══════════════════════════════════ */
@@ -787,11 +765,14 @@
         }
 
         &__gallery {
+            flex-direction: row;
             gap: 13px;
         }
 
         &__thumbs {
             --slider-slide: auto;
+            max-height: 460px;
+            flex-shrink: 0;
         }
 
         &__thumb {
@@ -799,10 +780,9 @@
             height: 105px;
         }
 
-        &__main-image {
-            aspect-ratio: auto;
-            max-width: 460px;
-            max-height: 460px;
+        &__main {
+            flex: 1;
+            min-width: 0;
         }
 
         &__title {
