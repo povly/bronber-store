@@ -82,7 +82,17 @@
                         </div>
                         <button type="button" class="product__gallery-action" aria-label="Поделиться">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M15 8C17.2091 8 19 6.20914 19 4C19 1.79086 17.2091 0 15 0C12.7909 0 11 1.79086 11 4C11 4.21 11.02 4.42 11.05 4.63L7.38 6.95C6.63 6.36 5.69 6 4.67 6C2.19 6 0.17 8.01 0.17 10.5C0.17 12.99 2.19 15 4.67 15C5.69 15 6.63 14.64 7.38 14.05L11.05 16.37C11.02 16.58 11 16.79 11 17C11 19.2091 12.7909 21 15 21C17.2091 21 19 19.2091 19 17C19 14.7909 17.2091 13 15 13C13.98 13 13.04 13.36 12.29 13.95L8.62 11.63C8.65 11.42 8.67 11.21 8.67 11C8.67 10.79 8.65 10.58 8.62 10.37L12.29 8.05C13.04 8.64 13.98 9 15 9M15 2C16.1 2 17 2.9 17 4C17 5.1 16.1 6 15 6C13.9 6 13 5.1 13 4C13 2.9 13.9 2 15 2M4.67 13C3.29 13 2.17 11.88 2.17 10.5C2.17 9.12 3.29 8 4.67 8C6.05 8 7.17 9.12 7.17 10.5C7.17 11.88 6.05 13 4.67 13M15 19C13.9 19 13 18.1 13 17C13 15.9 13.9 15 15 15C16.1 15 17 15.9 17 17C17 18.1 16.1 19 15 19Z" fill="currentColor" transform="translate(2 2)"/>
+                                <path d="M15 8C17.2091 8 19 6.20914 19 4C19 1.79086 17.2091 0 15 0C12.7909 0 11 1.79086 11 4C11 4.21 11.02 4.42 11.05 4.63L7.38 6.95C6.63 6.36 5.69 6 4.67 6C2.19 6 0.17 8.01 0.17 10.5C0.17 12.99 2.19 15 4.67 15C5.69 15 6.63 14.64 7.38 14.05L11.05 16.37C11.02 16.58 11 16.79 11 17C11 19.2091 12.7909 21 15 21C17.2091 21 19 19.2091 19 17C19 14.7909 17.2091 13 15 13C13.98 13 13.04 13.36 12.29 13.95L8.62 11.63C8.65 11.42 8.67 11.21 8.67 11C8.67 10.79 8.65 10.58 8.62 10.37L12.29 8.05C13.04 8.64 13.98 9 15 9M15 2C16.1 2 17 2.9 17 4C17 5.1 16.1 6 15 6C13.9 6 13 5.1 13 4C13 2.9 13.9 2 15 2M4.67 13C3.29 13 2.17 11.88 2.17 10.5C2.17 9.12 3.29 8 4.67 8C6.05 8 7.17 9.12 7.17 11.88 6.05 13 4.67 13M15 19C13.9 19 13 18.1 13 17C13 15.9 13.9 15 15 15C16.1 15 17 15.9 17 17C17 18.1 16.1 19 15 19Z" fill="currentColor" transform="translate(2 2)"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="product__gallery-nav product__gallery-nav--prev" @click="prev()" :disabled="!canPrev" aria-label="Предыдущее фото">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <button type="button" class="product__gallery-nav product__gallery-nav--next" @click="next()" :disabled="!canNext" aria-label="Следующее фото">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                         <x-slider-pagination />
