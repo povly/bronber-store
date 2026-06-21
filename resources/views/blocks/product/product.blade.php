@@ -116,6 +116,12 @@
                                 <path d="M12 21S4.5 15.5 2.5 10.5C1 6.5 4 3 7.5 3C9.5 3 11 4 12 5.5C13 4 14.5 3 16.5 3C20 3 23 6.5 21.5 10.5C19.5 15.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
+
+                        <button type="button" class="product__favorite" :class="{ 'is-active': favorited }" @click="favorited = !favorited" aria-label="В избранное">
+                            <svg width="24" height="24" viewBox="0 0 24 24" :fill="favorited ? 'currentColor' : 'none'" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                <path d="M12 21S4.5 15.5 2.5 10.5C1 6.5 4 3 7.5 3C9.5 3 11 4 12 5.5C13 4 14.5 3 16.5 3C20 3 23 6.5 21.5 10.5C19.5 15.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 

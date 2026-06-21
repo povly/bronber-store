@@ -361,6 +361,24 @@
         flex-shrink: 0;
     }
 
+    &__favorite {
+        display: none;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        background: var(--color-white);
+        border: 1px solid var(--color-gray-border);
+        border-radius: 5px;
+        cursor: pointer;
+        color: var(--color-black);
+        transition: color 0.2s ease, border-color 0.2s ease;
+
+        &.is-active {
+            color: var(--color-purple);
+            border-color: var(--color-purple);
+        }
+    }
+
     /* ══ Tabs card ════════════════════════════════════════ */
 
     &__tabs-card {
@@ -769,6 +787,10 @@
             gap: 13px;
         }
 
+        &__gallery-action {
+            display: none;
+        }
+
         &__thumbs {
             --slider-slide: auto;
             max-height: 460px;
@@ -795,13 +817,40 @@
             font-size: 31px;
         }
 
+        &__savings {
+            font-size: 16px;
+        }
+
+        &__bonus {
+            font-size: 16px;
+        }
+
+        &__buy-row {
+            gap: 10px;
+        }
+
+        &__qty {
+            width: 140px;
+            height: 54px;
+        }
+
         &__add-cart {
+            width: 182px;
+            height: 54px;
+            max-width: none;
+            flex: 0 0 auto;
             font-size: 12px;
             line-height: 12px;
         }
 
+        &__favorite {
+            display: flex;
+            width: 54px;
+            height: 54px;
+        }
+
         &__tabs-card {
-            padding: 26px 30px;
+            padding: 34px 40px;
         }
 
         &__tab {
@@ -815,19 +864,72 @@
         &__compat-models {
             font-size: 16px;
         }
+
+        &__section-title {
+            font-size: 32px;
+        }
+
+        &__reviews-all {
+            font-size: 12px;
+        }
+
+        &__reviews-slider {
+            --slider-slide: calc((100% - var(--slider-gap)) / 2);
+        }
     }
 
     /* ══ Wide desktop ≥1440px — fluid type scale-up ═════ */
 
     @media (min-width: 1440px) {
+        &__thumb {
+            width: 142px;
+            height: 142px;
+        }
+
+        &__thumbs {
+            max-height: 620px;
+        }
+
         &__title {
             font-size: 36px;
             line-height: 1.1;
         }
 
+        &__article {
+            font-size: 16px;
+        }
+
         &__price,
         &__old-price {
             font-size: 36px;
+        }
+
+        &__savings {
+            font-size: 18px;
+        }
+
+        &__bonus {
+            font-size: 18px;
+        }
+
+        &__delivery-note {
+            font-size: 18px;
+        }
+
+        &__qty {
+            height: 60px;
+        }
+
+        &__add-cart {
+            width: 220px;
+            height: 60px;
+            font-size: 14px;
+            line-height: 14px;
+        }
+
+        &__favorite {
+            width: 60px;
+            height: 60px;
         }
 
         &__section-title {
@@ -836,6 +938,10 @@
 
         &__tab {
             font-size: 22px;
+        }
+
+        &__tabs-card {
+            padding: 44px 40px;
         }
 
         &__description,
@@ -848,6 +954,15 @@
 
         &__review-text {
             font-size: 18px;
+        }
+
+        &__reviews-all {
+            font-size: 14px;
+        }
+
+        &__review-photo {
+            width: 142px;
+            height: 142px;
         }
     }
 }

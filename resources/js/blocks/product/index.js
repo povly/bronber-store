@@ -2,6 +2,7 @@ document.addEventListener('alpine:init', () => {
     Alpine.data('product', () => ({
         qty: 1,
         tab: 'description',
+        favorited: false,
 
         inc() {
             this.qty++;
