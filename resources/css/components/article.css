@@ -93,6 +93,12 @@
         display: none;
     }
 
+    &__reveal {
+        overflow: hidden;
+        max-height: 0;
+        transition: max-height 0.4s ease;
+    }
+
     /* ════════════════════════════════════════════════════
        Breakpoint: 1200px
        ════════════════════════════════════════════════════ */
@@ -102,7 +108,9 @@
         }
 
         &__body {
-            padding: fluid-type(1200px, 1440px, 23px, 30px);
+            padding: var(--article-body-padding);
+            --article-body-padding: fluid-type(1200px, 1440px, 23px, 30px);
+            --article-btn-margin-top: fluid-type(1200px, 1440px, 19px, 24px);
         }
 
         &__date,
@@ -124,7 +132,11 @@
 
         &__more {
             display: flex;
-            margin-top: fluid-type(1200px, 1440px, 19px, 24px);
+            margin-top: var(--article-btn-margin-top);
+        }
+
+        &:hover &__reveal {
+            max-height: calc(var(--article-btn-height, 0px) + var(--article-btn-margin-top, 0px));
         }
     }
 }

@@ -179,7 +179,7 @@
                     <p><a href="#">{{ __('store.footer_terms') }}</a></p>
                 </div>
                 <p class="footer__copyright footer__legal">{{ __('store.footer_copyright') }}</p>
-                <p class="footer__developer footer__legal">{!! __('store.footer_developer') !!}</p>
+                <a href="#!" class="footer__developer footer__legal">{!! __('store.footer_developer') !!}</a>
             </div>
         </div>
     </div>

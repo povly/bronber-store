@@ -15,4 +15,18 @@ Alpine.plugin(filters)
 
 window.Alpine = Alpine
 
-Alpine.start()
+document.addEventListener('DOMContentLoaded', () => {
+    Alpine.start()
+    
+    function setArticleBtnHeight() {
+        document.querySelectorAll('.article').forEach(article => {
+            const btn = article.querySelector('.article__more')
+            if (btn) {
+                article.style.setProperty('--article-btn-height', `${btn.offsetHeight}px`)
+            }
+        })
+    }
+    
+    setArticleBtnHeight()
+    window.addEventListener('resize', setArticleBtnHeight)
+})
