@@ -110,15 +110,7 @@
                     <p class="product__bonus">+{{ $product['bonusPoints'] }} баллов</p>
 
                     <div class="product__buy-row">
-                        <div class="qty">
-                            <button type="button" class="qty__btn" @click="dec()" aria-label="Уменьшить количество">
-                                <span class="qty__icon qty__icon--minus"></span>
-                            </button>
-                            <span class="qty__value" x-text="qty"></span>
-                            <button type="button" class="qty__btn" @click="inc()" aria-label="Увеличить количество">
-                                <span class="qty__icon qty__icon--plus"></span>
-                            </button>
-                        </div>
+                        <x-qty />
 
                         <button type="button" class="product__add-cart">
                             <span class="product__add-cart-text">В корзину</span>

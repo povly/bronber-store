@@ -27,11 +27,11 @@
         <div class="cart__grid">
             <div class="cart__grid-block">
                 <div class="cart__items-head">
-                    <span class="cart__head-title">Товар</span>
-                    <span class="cart__head-price">Цена</span>
-                    <span class="cart__head-qty">Кол-во</span>
-                    <span class="cart__head-sum">Сумма</span>
-                    <span class="cart__head-action" aria-hidden="true"></span>
+                    <span class="cart__head-item cart__head-title">Товар</span>
+                    <span class="cart__head-item cart__head-price cart__head--center">Цена</span>
+                    <span class="cart__head-item cart__head-qty cart__head--center">Кол-во</span>
+                    <span class="cart__head-item cart__head-sum cart__head--center">Сумма</span>
+                    <span class="cart__head-item cart__head-action" aria-hidden="true"></span>
                 </div>
 
                 <div class="cart__items">
@@ -56,17 +56,10 @@
                             </div>
 
                             <div class="cart__item-qty">
-                                <div class="cart__qty">
-                                    <button type="button" class="cart__qty-btn" @click="dec({{ $item['id'] }})"
-                                        aria-label="Уменьшить количество">
-                                        <span class="cart__qty-icon cart__qty-icon--minus"></span>
-                                    </button>
-                                    <span class="cart__qty-value" x-text="itemQty({{ $item['id'] }})"></span>
-                                    <button type="button" class="cart__qty-btn" @click="inc({{ $item['id'] }})"
-                                        aria-label="Увеличить количество">
-                                        <span class="cart__qty-icon cart__qty-icon--plus"></span>
-                                    </button>
-                                </div>
+                                <x-qty
+                                    :data="'qty(' . $item['qty'] . ')'"
+                                    :watch="'setQty(' . $item['id'] . ', v)'"
+                                />
                             </div>
 
                             <div class="cart__item-total">
@@ -87,7 +80,7 @@
                     @endforeach
                 </div>
 
-                <button type="button" class="cart__clear" @click="clear()">Очистить корзину</button>
+                <button type="button" class="cart__clear">Очистить корзину</button>
             </div>
 
 
@@ -115,9 +108,14 @@
                     <span class="cart__summary-value" x-text="formatPrice(total)"></span>
                 </div>
 
-                <a href="{{ route('checkout') }}" type="button" class="cart__checkout">Оформить заказ</a>
+                <a href="{{ route('checkout') }}" type="button" class="cart__checkout btn--primary btn">Оформить заказ</a>
 
-                <a href="{{ route('catalog') }}" class="cart__back">Вернуться в каталог</a>
+                <a href="{{ route('catalog') }}" class="cart__back">
+                    <svg width="22" height="12" viewBox="0 0 22 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z" fill="#7212BC" />
+                    </svg>
+                    <span>Вернуться в каталог</span>
+                </a>
             </aside>
 
         </div>

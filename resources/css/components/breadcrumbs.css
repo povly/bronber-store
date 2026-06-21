@@ -1,27 +1,24 @@
 .breadcrumbs {
     display: none;
+    margin-bottom: fluid-type(1200px, 1440px, 7px, 11px);
     
     &__list {
         display: flex;
         align-items: center;
-        gap: 0;
-        list-style: none;
-        margin: 0;
-        padding: 0;
         flex-wrap: wrap;
     }
 
     &__item {
         display: flex;
         align-items: center;
-        gap: 0;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 130%;
+        color: var(--color-gray-mid);
 
         &:not(:last-child)::after {
             content: ' / ';
             color: var(--color-gray-mid);
-            font-family: var(--font-manrope);
-            font-weight: 500;
-            font-size: 16px;
             margin: 0 4px;
         }
 
@@ -29,25 +26,8 @@
             content: '';
         }
     }
-
-    &__link {
-        color: var(--color-gray-mid);
-        font-family: var(--font-manrope);
-        font-weight: 500;
-        font-size: 16px;
-        text-decoration: none;
-        line-height: 20.8px;
-
-        &:hover {
-            color: var(--color-purple);
-        }
-    }
-
-    &__current {
-        color: var(--color-gray-mid);
-        font-family: var(--font-manrope);
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 20.8px;
+    
+    @media (min-width: 1200px) {
+        display: flex;
     }
 }

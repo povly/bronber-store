@@ -34,17 +34,10 @@ document.addEventListener('alpine:init', () => {
             return item ? this.formatPrice(item.price * item.qty) : '';
         },
 
-        inc(id) {
+        setQty(id, qty) {
             const item = this.items.find((i) => i.id === id);
             if (item) {
-                item.qty++;
-            }
-        },
-
-        dec(id) {
-            const item = this.items.find((i) => i.id === id);
-            if (item && item.qty > 1) {
-                item.qty--;
+                item.qty = qty;
             }
         },
 
