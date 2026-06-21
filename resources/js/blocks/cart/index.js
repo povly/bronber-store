@@ -21,6 +21,19 @@ document.addEventListener('alpine:init', () => {
             }).format(price) + ' ₽';
         },
 
+        hasItem(id) {
+            return this.items.some((i) => i.id === id);
+        },
+
+        itemQty(id) {
+            return this.items.find((i) => i.id === id)?.qty ?? 0;
+        },
+
+        itemTotal(id) {
+            const item = this.items.find((i) => i.id === id);
+            return item ? this.formatPrice(item.price * item.qty) : '';
+        },
+
         inc(id) {
             const item = this.items.find((i) => i.id === id);
             if (item) {

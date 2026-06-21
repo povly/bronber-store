@@ -39,39 +39,39 @@
                     <span class="cart__head-action" aria-hidden="true"></span>
                 </div>
 
-                <template x-for="item in items" :key="item.id">
-                    <div class="cart__item">
-                        <img class="cart__item-image" :src="item.image" alt="" loading="lazy">
+                @foreach($items as $item)
+                    <div class="cart__item" x-show="hasItem({{ $item['id'] }})">
+                        <img class="cart__item-image" src="{{ $item['image'] }}" alt="" loading="lazy">
 
                         <div class="cart__item-info">
-                            <p class="cart__item-title" x-text="item.title"></p>
-                            <p class="cart__item-article">Артикул: <span x-text="item.article"></span></p>
-                            <p class="cart__item-brand">Бренд: <span x-text="item.brand"></span></p>
+                            <p class="cart__item-title">{{ $item['title'] }}</p>
+                            <p class="cart__item-article">Артикул: <span>{{ $item['article'] }}</span></p>
+                            <p class="cart__item-brand">Бренд: <span>{{ $item['brand'] }}</span></p>
                         </div>
 
-                        <p class="cart__item-price-mobile">Цена: <span x-text="formatPrice(item.price)"></span></p>
+                        <p class="cart__item-price-mobile">Цена: <span>{{ $formatPrice($item['price']) }}</span></p>
 
                         <div class="cart__item-unitprice">
-                            <span x-text="formatPrice(item.price)"></span>
+                            <span>{{ $formatPrice($item['price']) }}</span>
                         </div>
 
                         <div class="cart__item-qty">
                             <div class="cart__qty">
-                                <button type="button" class="cart__qty-btn" @click="dec(item.id)" aria-label="Уменьшить количество">
+                                <button type="button" class="cart__qty-btn" @click="dec({{ $item['id'] }})" aria-label="Уменьшить количество">
                                     <span class="cart__qty-icon cart__qty-icon--minus"></span>
                                 </button>
-                                <span class="cart__qty-value" x-text="item.qty"></span>
-                                <button type="button" class="cart__qty-btn" @click="inc(item.id)" aria-label="Увеличить количество">
+                                <span class="cart__qty-value" x-text="itemQty({{ $item['id'] }})"></span>
+                                <button type="button" class="cart__qty-btn" @click="inc({{ $item['id'] }})" aria-label="Увеличить количество">
                                     <span class="cart__qty-icon cart__qty-icon--plus"></span>
                                 </button>
                             </div>
                         </div>
 
                         <div class="cart__item-total">
-                            <span x-text="formatPrice(item.price * item.qty)"></span>
+                            <span x-text="itemTotal({{ $item['id'] }})"></span>
                         </div>
 
-                        <button type="button" class="cart__item-remove" @click="remove(item.id)" aria-label="Удалить товар">
+                        <button type="button" class="cart__item-remove" @click="remove({{ $item['id'] }})" aria-label="Удалить товар">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3 6H21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
                                 <path d="M8 6V4.5C8 4.10218 8.15804 3.72064 8.43934 3.43934C8.72064 3.15804 9.10218 3 9.5 3H14.5C14.8978 3 15.2794 3.15804 15.5607 3.43934C15.842 3.72064 16 4.10218 16 4.5V6M19 6V20C19 20.3978 18.842 20.7794 18.5607 21.0607C18.2794 21.342 17.8978 21.5 17.5 21.5H6.5C6.10218 21.5 5.72064 21.342 5.43934 21.0607C5.15804 20.7794 5 20.3978 5 20V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -80,7 +80,7 @@
                             </svg>
                         </button>
                     </div>
-                </template>
+                @endforeach
             </div>
 
             {{-- Right column: summary --}}

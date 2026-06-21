@@ -20,7 +20,9 @@ $register = function () {
             ['id' => 3, 'image' => 'https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => 1100, 'qty' => 2],
         ];
 
-        return view('cart', ['items' => $items]);
+        $format = static fn (int $price) => number_format($price, 0, ',', ' ').' ₽';
+
+        return view('cart', ['items' => $items, 'formatPrice' => $format]);
     })->name('cart');
 
     Route::get('/checkout', function () {
