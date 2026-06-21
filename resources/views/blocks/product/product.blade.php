@@ -24,6 +24,28 @@
         <div class="container">
             <div class="product__hero-grid">
 
+                {{-- Title + meta (mobile: above gallery, tablet+: right column top) --}}
+                <div class="product__info-top">
+                    <h1 class="product__title">{{ $product['title'] }}</h1>
+
+                    <div class="product__meta">
+                        <p class="product__article">Артикул: {{ $product['article'] }}</p>
+
+                        <div class="product__rating">
+                            @for($s = 0; $s < 5; $s++)
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" class="product__rating-star{{ $s < round($product['rating'] / 2) ? ' is-filled' : '' }}">
+                                    <path d="M12 2L14.55 8.63L21.56 9.27L16.27 13.97L17.84 20.82L12 17.27L6.16 20.82L7.73 13.97L2.44 9.27L9.45 8.63L12 2Z"/>
+                                </svg>
+                            @endfor
+                            <span class="product__rating-value">{{ $product['rating'] }}</span>
+                        </div>
+
+                        @if($product['isOriginal'])
+                            <span class="product__badge">Оригинал</span>
+                        @endif
+                    </div>
+                </div>
+
                 {{-- Gallery: vertical thumbs slider (linked) + horizontal main slider --}}
                 <div class="product__gallery" x-data="{ active: 0 }">
                     <div class="product__thumbs slider" x-data="slider({ verticalAbove: 1200, breakpoints: { 0: 4 } })" @resize.window.debounce.150ms="onResize()"
@@ -62,30 +84,8 @@
                     </div>
                 </div>
 
-                {{-- Buy panel --}}
-                <div class="product__buy">
-                    <h1 class="product__title">{{ $product['title'] }}</h1>
-
-                    <div class="product__meta">
-                        <p class="product__article">Артикул: {{ $product['article'] }}</p>
-
-                        <div class="product__rating">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                                <path d="M12 2L14.55 8.63L21.56 9.27L16.27 13.97L17.84 20.82L12 17.27L6.16 20.82L7.73 13.97L2.44 9.27L9.45 8.63L12 2Z"/>
-                            </svg>
-                            <span>{{ $product['rating'] }}</span>
-                        </div>
-
-                        @if($product['isOriginal'])
-                            <span class="product__badge">Оригинал</span>
-                        @endif
-                    </div>
-
-                    <div class="product__availability">
-                        <p class="product__stock">{{ $product['inStock'] ? 'В наличии' : 'Нет в наличии' }}</p>
-                        <p class="product__delivery-note">Бесплатная доставка при заказе от 5000 ₽</p>
-                    </div>
-
+                {{-- Buy info: price, bonus, buy-row (mobile: after gallery, tablet+: right column) --}}
+                <div class="product__buy-info">
                     <div class="product__price-block">
                         <span class="product__price">{{ $priceFormatted }}</span>
                         <span class="product__old-price">{{ $oldPriceFormatted }}</span>
@@ -105,60 +105,23 @@
                             </button>
                         </div>
 
-                        <button type="button" class="product__add-cart">В корзину</button>
-
-                        <button type="button" class="product__favorite" aria-label="В избранное">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <button type="button" class="product__add-cart">
+                            <span class="product__add-cart-text">В корзину</span>
+                            <svg class="product__add-cart-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path d="M12 21S4.5 15.5 2.5 10.5C1 6.5 4 3 7.5 3C9.5 3 11 4 12 5.5C13 4 14.5 3 16.5 3C20 3 23 6.5 21.5 10.5C19.5 15.5 12 21 12 21Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </button>
                     </div>
                 </div>
 
+                {{-- Availability (mobile: after buy-row, tablet+: right column bottom) --}}
+                <div class="product__availability">
+                    <p class="product__stock">{{ $product['inStock'] ? 'В наличии' : 'Нет в наличии' }}</p>
+                    <p class="product__delivery-note">Бесплатная доставка при заказе от 5000 ₽</p>
+                </div>
+
             </div>
         </div>
-    </div>
-
-    {{-- Highlights row --}}
-    <div class="container">
-        <ul class="product__highlights">
-            <li class="product__highlight">
-                <span class="product__highlight-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L3 7V12C3 16.97 7.03 21 12 21S21 16.97 21 12V7L12 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                        <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-                <span class="product__highlight-label">Оригинал</span>
-            </li>
-            <li class="product__highlight">
-                <span class="product__highlight-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 22S4 16 4 10C4 6 7 4 10 4C11 4 12 4.5 12 5.5C12 4.5 13 4 14 4C17 4 20 6 20 10C20 16 12 22 12 22Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                    </svg>
-                </span>
-                <span class="product__highlight-label">Гарантия</span>
-            </li>
-            <li class="product__highlight">
-                <span class="product__highlight-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 7H21V17H3V7Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                        <path d="M7 7V5C7 4 8 3 9 3H15C16 3 17 4 17 5V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                        <path d="M3 12H21" stroke="currentColor" stroke-width="1.5"/>
-                    </svg>
-                </span>
-                <span class="product__highlight-label">Быстрая доставка</span>
-            </li>
-            <li class="product__highlight">
-                <span class="product__highlight-icon" aria-hidden="true">
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M3 9H21L19 19H5L3 9Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
-                        <path d="M8 9V6C8 4 10 3 12 3C14 3 16 4 16 6V9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </span>
-                <span class="product__highlight-label">Возврат</span>
-            </li>
-        </ul>
     </div>
 
     {{-- Tabs card --}}
@@ -204,7 +167,10 @@
     <div class="container">
         <div class="product__reviews-head">
             <h2 class="product__section-title">Отзывы ({{ $product['reviewCount'] }})</h2>
-            <button type="button" class="product__reviews-all">Смотреть все отзывы</button>
+            <button type="button" class="product__reviews-all">
+                <span class="product__reviews-all-short">Смотреть все</span>
+                <span class="product__reviews-all-full">Смотреть все отзывы</span>
+            </button>
         </div>
 
         <div class="product__reviews" x-data="slider({ breakpoints: { 0: 1, 1200: 2 } })" @resize.window.debounce.150ms="onResize()">
