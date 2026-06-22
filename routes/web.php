@@ -59,7 +59,6 @@ $register = function () {
                 'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=500',
                 'https://images.unsplash.com/photo-1503736334956-4c8f8e92946d?w=500',
             ],
-            'description' => 'Топливный насос Bosch 0 580 464 070 обеспечивает стабильную подачу топлива и надежную работу двигателя. Высокое качество изготовления и соответствие оригинальным спецификациям гарантируют долговечность и эффективность работы топливной системы.',
             'specs' => [
                 ['label' => 'Бренд', 'value' => 'Bosch'],
                 ['label' => 'Страна производства', 'value' => 'Германия'],
@@ -74,6 +73,8 @@ $register = function () {
                 ['brand' => 'Volkswagen', 'models' => 'VW Passat B5, VW Golf 4, VW Touareg'],
             ],
             'reviews' => [
+                ['name' => 'Александр', 'initial' => 'А', 'car' => 'BMW 5 серия', 'date' => '15/05/2026', 'text' => 'Топливный насос Bosch 0 580 464 070 обеспечивает стабильную подачу топлива и надежную работу двигателя. Качество отличное, рекомендую.', 'photos' => ['https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200', 'https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200', 'https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200']],
+                ['name' => 'Михаил', 'initial' => 'М', 'car' => 'Audi A4', 'date' => '10/05/2026', 'text' => 'Отличный насос, работает исправно уже полгода. Цена приемлемая, доставка быстрая.', 'photos' => ['https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200']],
                 ['name' => 'Александр', 'initial' => 'А', 'car' => 'BMW 5 серия', 'date' => '15/05/2026', 'text' => 'Топливный насос Bosch 0 580 464 070 обеспечивает стабильную подачу топлива и надежную работу двигателя. Качество отличное, рекомендую.', 'photos' => ['https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200', 'https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200', 'https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200']],
                 ['name' => 'Михаил', 'initial' => 'М', 'car' => 'Audi A4', 'date' => '10/05/2026', 'text' => 'Отличный насос, работает исправно уже полгода. Цена приемлемая, доставка быстрая.', 'photos' => ['https://images.unsplash.com/photo-1606767340814-3d0bd9c7d6b7?w=200']],
             ],

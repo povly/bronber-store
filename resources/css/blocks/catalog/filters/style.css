@@ -152,6 +152,7 @@
         color: var(--color-black);
         line-height: 20.8px;
         cursor: pointer;
+        position: relative;
 
         &:first-child {
             font-weight: 700;
@@ -334,7 +335,6 @@
         align-items: center;
         gap: 10px;
         cursor: pointer;
-        padding: 6px 0;
         line-height: 32px;
     }
 

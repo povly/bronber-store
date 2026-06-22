@@ -16,7 +16,7 @@
                 
             </div>
             <ul class="catalog-filters__subcategory-list" :class="{ 'is-hidden': !openCategories.brakes }">
-                <li class="catalog-filters__subcategory-item">
+                <li class="catalog-filters__subcategory-item is-active">
                     <a href="#">Комплект тормозной системы</a>
                 </li>
                 <li class="catalog-filters__subcategory-item">
