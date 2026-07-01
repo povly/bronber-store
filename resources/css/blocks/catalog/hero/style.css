@@ -1,33 +1,19 @@
 .catalog-hero {
     padding-top: 20px;
-    padding-bottom: 16px;
-
-    /* ── Breadcrumb (visibility/spacing only — visual styles in components/breadcrumbs.css) ── */
-
-    &__breadcrumb {
-        display: none;
-    }
-
-    /* ── Title ──────────────────────────────────────── */
+    padding-bottom: fluid-type(375px, 768px, 34px, 42px);
 
     &__title {
-        font-family: var(--font-manrope);
         font-weight: 800;
         font-size: 25px;
-        color: var(--color-black);
-        margin: 0;
-        line-height: 1.2;
+        margin: 0 0 10px;
+        line-height: 100%;
     }
 
-    /* ── Product count ──────────────────────────────── */
-
     &__count {
-        font-family: var(--font-manrope);
         font-weight: 500;
         font-size: 14px;
-        color: var(--color-black);
-        margin: 4px 0 0;
-        line-height: 20.8px;
+        line-height: 130%;
+        margin-bottom: 18px;
 
         &--mobile {
             display: block;
@@ -35,127 +21,67 @@
     }
 
     &__filter-btns {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        margin-top: 16px;
+        display: grid;
+        grid-template-columns: 155fr 155fr;
+        gap: 18px;
     }
 
     &__filter-btn {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 6px;
-        height: 32px;
+        gap: 3px;
+        padding: 10px;
         border-radius: 5px;
-        font-family: var(--font-manrope);
+        line-height: 1;
         font-weight: 600;
         font-size: 12px;
-        cursor: pointer;
-        border: none;
-        padding: 0 12px;
-        white-space: nowrap;
-        transition: opacity 0.2s ease;
-
-        &:hover {
-            opacity: 0.9;
-        }
+        line-height: 100%;
 
         &--primary {
-            width: 155px;
-            background: var(--color-purple);
+            background: linear-gradient(90deg, #222 0%, #000 100%);
             color: var(--color-white);
         }
 
         &--outline {
-            width: 156px;
+            width: 100%;
             background: var(--color-white);
             border: 1px solid var(--color-gray-placeholder);
             color: var(--color-black);
         }
     }
-
-    &__filter-icon {
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
-    }
-
-    &__sort-icon {
-        width: 16px;
-        height: 16px;
-        flex-shrink: 0;
-    }
-
-    /* ── Mobile chips row ───────────────────────────── */
-
     &__chips {
-        margin-top: 16px;
+        margin-top: 18px;
     }
 
     &__chips-scroll {
         display: flex;
         align-items: center;
-        gap: 8px;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-        padding-bottom: 4px;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
+        flex-wrap: wrap;
+        gap: 10px;
     }
 
     &__chip {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        height: 32px;
-        padding: 0 10px;
-        background: var(--color-white);
         border: 1px solid var(--color-purple);
         border-radius: 5px;
-        font-family: var(--font-manrope);
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        padding: 9px 12px;
         font-weight: 500;
         font-size: 14px;
+        line-height: 100%;
         color: var(--color-purple);
-        cursor: pointer;
-        white-space: nowrap;
-        flex-shrink: 0;
-        transition: background 0.15s ease;
+        background: rgba(114, 18, 188, 0.03);
 
-        &:hover {
-            background: color-mix(in srgb, var(--color-purple) 8%, var(--color-white));
-        }
-    }
-
-    &__chip-text {
-        line-height: 1;
-    }
-
-    &__chip-close {
-        width: 12px;
-        height: 12px;
-        flex-shrink: 0;
-        color: var(--color-purple);
     }
 
     &__chips-clear {
-        background: none;
-        border: none;
-        font-family: var(--font-manrope);
         font-weight: 500;
         font-size: 14px;
+        line-height: 100%;
         color: var(--color-purple);
-        cursor: pointer;
-        white-space: nowrap;
-        flex-shrink: 0;
-        padding: 0;
-
-        &:hover {
-            text-decoration: underline;
-        }
+        margin-left: 8px;
     }
 
     /* ── Desktop bar (hidden on mobile) ─────────────── */
@@ -180,12 +106,14 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        margin-left: auto;
     }
 
     &__desktop-bar-label {
         font-family: var(--font-manrope);
         font-weight: 500;
-        font-size: 16px;
+        font-size: fluid-type(1200px, 1920px, 14px, 16px);
+        line-height: 130%;
         color: var(--color-black);
         white-space: nowrap;
     }
@@ -369,6 +297,7 @@
         &__count {
             font-size: 16px;
             margin: 0;
+            width: fluid-type(1200px, 1440px, 250px, 326px);
 
             &--mobile {
                 display: none;
@@ -384,10 +313,21 @@
         }
 
         &__desktop-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
             margin-top: 16px;
+            display: grid;
+            gap: fluid-type(1200px, 1440px, 30px, 40px);
+            grid-template-columns: auto minmax(0, 1fr);
+            align-items: center;
+
+            &-right {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            &-chips {
+                gap: 10px;
+            }
         }
 
         &__chips-clear {

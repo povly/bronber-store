@@ -2,7 +2,7 @@
     &__list {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: fluid-type(375px, 768px, 25px, 30px) fluid-type(375px, 768px, 18px, 30px);
     }
 }
 
@@ -11,7 +11,7 @@
     .product-grid {
         &__list {
             grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
+            gap: fluid-type(1200px, 1920px, 32px, 36px) fluid-type(1200px, 1920px, 20px, 24px);
         }
     }
 

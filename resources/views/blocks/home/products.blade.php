@@ -34,44 +34,44 @@
                 @pointercancel.window="onPointerUp()">
 
                 <div class="home-products__slide slider__slide">
-                    <x-product-card title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
+                    <x-product-card article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
                         image="/images/home/products/1/1.png" :rating="4" reviews-count="12" price="1100 ₽"
                         sale="ТОП" />
                 </div>
                 <div class="home-products__slide slider__slide">
-                    <x-product-card title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
+                    <x-product-card article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
                         image="/images/home/products/1/2.png" :rating="5" reviews-count="8" price="1100 ₽"
                         old-price="1300 ₽" sale="-15%" />
                 </div>
                 <div class="home-products__slide slider__slide">
-                    <x-product-card title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
+                    <x-product-card article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
                         image="/images/home/products/1/3.png" :rating="0" reviews-count="0" price="1100 ₽"
                         old-price="1300 ₽" />
                 </div>
                 <div class="home-products__slide slider__slide">
-                    <x-product-card title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
+                    <x-product-card article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
                         image="/images/home/products/1/4.png" :rating="0" reviews-count="0" price="1100 ₽"
                         sale="Распродажа" :in-stock="false" />
                 </div>
 
                 <div class="home-products__slide slider__slide">
-                    <x-product-card title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
+                    <x-product-card article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
                         image="/images/home/products/1/1.png" :rating="4" reviews-count="12" price="1100 ₽"
                         sale="ТОП" />
                 </div>
                 <div class="home-products__slide slider__slide">
-                    <x-product-card title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
+                    <x-product-card article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
                         image="/images/home/products/1/2.png" :rating="5" reviews-count="8" price="1100 ₽"
                         old-price="1300 ₽" sale="-15%" />
                 </div>
                 <div class="home-products__slide slider__slide">
-                    <x-product-card title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
+                    <x-product-card article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
                         image="/images/home/products/1/3.png" :rating="0" reviews-count="0" price="1100 ₽"
                         old-price="1300 ₽" />
                 </div>
 
                 <div class="home-products__slide slider__slide">
-                    <x-product-card title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
+                    <x-product-card article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
                         image="/images/home/products/1/3.png" :rating="0" reviews-count="0" price="1100 ₽"
                         old-price="1300 ₽" />
                 </div>

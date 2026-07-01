@@ -11,6 +11,7 @@ import filters from './alpine/plugins/filters'
 import scrollable from './alpine/plugins/scrollable'
 import qty from './alpine/plugins/qty'
 import select from './alpine/plugins/select'
+import favorite from './alpine/plugins/favorite'
 
 Alpine.plugin(collapse)
 Alpine.plugin(modal)
@@ -19,6 +20,7 @@ Alpine.plugin(filters)
 Alpine.plugin(scrollable)
 Alpine.plugin(qty)
 Alpine.plugin(select)
+Alpine.plugin(favorite)
 
 window.Alpine = Alpine
 

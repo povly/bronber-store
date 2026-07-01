@@ -122,10 +122,20 @@
         @if(!empty($activeChips))
         <div class="catalog-hero__chips">
             <div class="catalog-hero__chips-scroll">
-                @foreach($activeChips as $chip)
+                @foreach($activeChips as $key => $chip)
                 <button class="catalog-hero__chip" type="button" @click="removeChip({{ Js::from($chip) }})">
                     <span class="catalog-hero__chip-text">{{ $chip['label'] }}</span>
-                    <svg class="catalog-hero__chip-close" width="11" height="11" viewBox="0 0 16 16" fill="none"><path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <svg class="catalog-hero__chip-close" width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g clip-path="url(#clip0_755_2876{{$key}})">
+                    <path d="M10.0832 0.916656L0.916504 10.0833" stroke="#7212BC" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M0.916504 0.916656L10.0832 10.0833" stroke="#7212BC" stroke-linecap="round" stroke-linejoin="round"/>
+                    </g>
+                    <defs>
+                    <clipPath id="clip0_755_2876{{$key}}">
+                    <rect width="11" height="11" fill="white"/>
+                    </clipPath>
+                    </defs>
+                    </svg>
                 </button>
                 @endforeach
                 <button class="catalog-hero__chips-clear" type="button" @click="clearChips()">Сбросить</button>

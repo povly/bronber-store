@@ -21,6 +21,7 @@ class ProductCard extends Component
         public readonly ?string $discount = null,
         public readonly ?string $sale = null,
         public readonly ?string $tag = null,
+        public readonly ?string $index = null,
     ) {}
 
     public function render(): View|Closure|string
