@@ -1,5 +1,5 @@
 .catalog-hero {
-    padding-top: 20px;
+    padding-top: fluid-type(375px, 768px, 24px, 32px);
     padding-bottom: fluid-type(375px, 768px, 34px, 42px);
 
     &__title {
@@ -107,6 +107,7 @@
         align-items: center;
         gap: 8px;
         margin-left: auto;
+        flex-shrink: 0;
     }
 
     &__desktop-bar-label {
@@ -162,20 +163,20 @@
 
     &__sort {
         position: relative;
+        flex-shrink: 0;
     }
 
     &__sort-trigger {
         display: flex;
         align-items: center;
         gap: 8px;
-        height: 34px;
-        padding: 0 14px;
         background: var(--color-white);
         border: 1px solid var(--color-gray-placeholder);
         border-radius: 5px;
-        font-family: var(--font-manrope);
+        padding: fluid-type(1200px, 1440px, 9px, 10px) 15px;
         font-weight: 500;
         font-size: 14px;
+        line-height: 100%;
         color: var(--color-black);
         cursor: pointer;
         white-space: nowrap;
@@ -281,8 +282,7 @@
     /* ── Desktop breakpoint ─────────────────────────── */
 
     @media (min-width: 1200px) {
-        padding-top: 24px;
-        padding-bottom: 20px;
+        padding-bottom: fluid-type(375px, 768px, 24px, 32px);
 
         &__breadcrumb {
             display: block;
