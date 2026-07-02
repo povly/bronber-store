@@ -1,14 +1,12 @@
-[x-cloak] { display: none !important; }
-
 .faq {
-    padding-top: fluid-type(320px, 768px, 50px, 70px);
+    padding-top: fluid-type(375px, 768px, 25px, 32px);
 
     &__title {
-        font-family: var(--font-manrope);
         font-weight: 800;
-        font-size: 25px;
+        margin-top: 0;
+        font-size: fluid-type(768px, 1200px, 25px, 32px);
         line-height: 110%;
-        margin-bottom: fluid-type(320px, 768px, 24px, 32px);
+        margin-bottom: fluid-type(320px, 768px, 32px, 40px);
     }
 
     &__list {
@@ -69,8 +67,6 @@
     }
 
     @media screen and (min-width: 768px) {
-        padding-top: fluid-type(768px, 1200px, 70px, 76px);
-
         &__title {
             font-size: 25px;
             margin-bottom: fluid-type(768px, 1200px, 28px, 32px);
@@ -91,7 +87,6 @@
     }
 
     @media screen and (min-width: 1200px) {
-        padding-top: fluid-type(1200px, 1440px, 76px, 100px);
 
         &__title {
             font-size: fluid-type(1200px, 1440px, 32px, 40px);

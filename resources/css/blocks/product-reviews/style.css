@@ -1,6 +1,6 @@
 .reviews {
     padding-bottom: fluid-type(375px, 768px, 30px, 40px);
-    padding-top: 25px;
+    padding-top: fluid-type(768px, 1200px, 25px, 32px);
 
     /* ══ Title ════════════════════════════════════════════ */
     &__title {
@@ -9,6 +9,7 @@
         line-height: 100%;
         margin: 0 0 fluid-type(1200px, 1440px, 24px, 32px);
     }
+
 
     /* ══ Product summary card ══════════════════════════════ */
     &__product {
@@ -194,7 +195,7 @@
     &__list {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: fluid-type(375px, 768px, 20px, 24px);
     }
 
     /* ══ Review card ═══════════════════════════════════════ */
@@ -208,8 +209,8 @@
     &__card-head {
         display: flex;
         align-items: center;
-        gap: 16px;
-        margin-bottom: 12px;
+        gap: fluid-type(768px, 1200px, 16px, 24px);
+        margin-bottom: 15px;
     }
 
     &__avatar {
@@ -233,28 +234,25 @@
     }
 
     &__card-name {
-        font-family: var(--font-manrope);
         font-weight: 800;
         font-size: 18px;
-        color: var(--color-black);
-        margin: 0 0 2px;
+        line-height: 100%;
+        margin: 0 0 3px;
     }
 
     &__card-car {
-        font-family: var(--font-manrope);
         font-weight: 500;
         font-size: 14px;
+        line-height: 130%;
         color: var(--color-gray-mid);
-        margin: 0;
     }
 
     /* Mobile: date in rating row (with stars); tablet+: date in head */
     &__card-date {
-        font-family: var(--font-manrope);
         font-weight: 500;
         font-size: 14px;
+        line-height: 130%;
         color: var(--color-gray-mid);
-        margin: 0;
 
         &--head {
             display: none;
@@ -269,7 +267,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        margin-bottom: 35px;
+        margin-bottom: 32px;
     }
 
     &__card-stars {
@@ -278,26 +276,24 @@
     }
 
     &__card-text {
-        font-family: var(--font-manrope);
         font-weight: 500;
         font-size: 16px;
-        line-height: 1.3;
-        color: var(--color-black);
-        margin: 0;
+        line-height: 130%;
     }
 
     &__card-photos {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
+        flex-wrap: wrap;
         gap: 13px;
         margin-top: 38px;
     }
 
     &__card-photo {
         position: relative;
-        aspect-ratio: 1;
         border-radius: 5px;
         overflow: hidden;
+        width: 138px;
+        height: 138px;
 
         img {
             width: 100%;
@@ -339,11 +335,6 @@
        Tablet ≥768px
        ══════════════════════════════════════════════════════ */
     @media (min-width: 768px) {
-        &__title {
-            font-size: fluid-type(768px, 1200px, 28px, 32px);
-            margin-bottom: fluid-type(768px, 1200px, 24px, 30px);
-        }
-
         /* Product card: image | info+side */
         &__product {
             display: grid;
@@ -358,18 +349,25 @@
             display: block;
             border-radius: 10px;
             overflow: hidden;
+            box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.1);
+            padding: 15px;
+        }
+
+        &__product-text {
+            display: flex;
+            flex-direction: column;
+            min-height: 100%;
         }
 
         &__product-side {
-            margin-top: 0;
-        }
-
-        &__product-actions {
-            gap: 12px;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
         &__cart-btn {
-            flex: 0 0 170px;
+            min-width: 170px;
         }
 
         /* Sorting dropdown visible on tablet+ */
@@ -404,6 +402,9 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
+            min-width: 173px;
+            justify-content: space-between;
+            flex-shrink: 0;
         }
 
         &__sort-chevron {
@@ -459,11 +460,18 @@
             }
         }
 
+        &__product {
+            &-bonus {
+                margin-bottom: 0;
+            }
+        }
+
         /* Review card tablet */
+
         &__card {
             padding: 30px;
         }
-
+        
         &__avatar {
             width: 80px;
             height: 80px;
@@ -502,26 +510,14 @@
         }
 
         &__card-photos {
-            display: flex;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x proximity;
-            scrollbar-width: none;
-            -webkit-overflow-scrolling: touch;
-            gap: 13px;
-            margin-top: 24px;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
+            gap: 10px;
+            margin-top: 32px;
         }
 
         &__card-photo {
             flex-shrink: 0;
-            width: 105px;
-            height: 105px;
-            aspect-ratio: auto;
-            scroll-snap-align: start;
+            width: fluid-type(768px, 1200px, 105px, 142px);
+            height: fluid-type(768px, 1200px, 105px, 142px);
         }
 
         &__card-more {
@@ -570,6 +566,46 @@
 
         &__filters {
             margin-bottom: fluid-type(1200px, 1440px, 24px, 30px);
+        }
+
+        &__cart {
+            &-btn {
+                min-height: fluid-type(1200px, 1440px, 54px, 60px);
+                min-width: fluid-type(1200px, 1440px, 182px, 220px);
+            }
+        }
+
+        &__fav {
+            &-btn {
+                width: fluid-type(1200px, 1440px, 54px, 60px);
+                min-height: fluid-type(1200px, 1440px, 54px, 60px);
+            }
+        }
+
+        &__product {
+            gap: 20px;
+            grid-template-columns: 97px auto;
+            
+            &-image {
+                width: 97px;
+                height: 97px;
+                padding: 7px;
+            }
+
+            &-text {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: row;
+            }
+
+            &-side {
+                margin-top: 0;
+            }
+
+            &-prices {
+                margin-bottom: 7px;
+            }
         }
     }
 }
