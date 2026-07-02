@@ -2,7 +2,7 @@
     @vite(['resources/css/blocks/home/partners/style.css'])
 @endpush
 
-<section class="home-partners section" x-data="slider({ grid: { breakpoints: { 0: { cols: 2, rows: 4 }, 768: { cols: 5, rows: 2 } } }, pagination: true })" @resize.window.debounce.150ms="onResize()">
+<section class="home-partners section" x-data="slider({breakpoints: { 0: { grid: { cols: 2, rows: 4 } }, 768: { grid: { cols: 5, rows: 2 } } } })" @resize.window.debounce.150ms="onResize()">
     <div class="container">
         <div class="home-partners__header section__top">
             <h2 class="home-partners__title section__title">Наши партнеры</h2>

@@ -49,7 +49,7 @@
     ];
 @endphp
 
-<section class="home-news section" x-data="slider({ grid: { above: 1200, breakpoints: { 1200: 3 } }, breakpoints: { 0: 1, 768: 2 } })" @resize.window.debounce.150ms="onResize()">
+<section class="home-news section" x-data="slider({ breakpoints: { 0: { perView: 1 }, 768: { perView: 2 }, 1200: { grid: { cols: 3 } } } })" @resize.window.debounce.150ms="onResize()">
     <div class="container">
         <div class="home-news__header section__top">
             <h2 class="home-news__title section__title">Новости</h2>

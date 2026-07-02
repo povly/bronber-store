@@ -1,4 +1,12 @@
 export default function (Alpine) {
+    const defaults = {
+        perView: 1,
+        autoHeight: false,
+        vertical: false,
+        pagination: false,
+        grid: null,
+    };
+
     Alpine.data('slider', (opts = {}) => ({
         index: 0,
         startX: 0,
@@ -8,31 +16,14 @@ export default function (Alpine) {
         dragMoved: false,
         track: null,
         viewport: window.innerWidth,
-        pagination: opts.pagination ?? false,
-        verticalAbove: opts.verticalAbove ?? null,
-        gridConfig: opts.grid?.breakpoints ?? null,
-        gridBelow: opts.grid?.below ?? null,
-        gridAbove: opts.grid?.above ?? null,
         breakpointsConfig: opts.breakpoints ?? null,
+        resolvedBp: null,
 
-        get isGrid() {
-            if (!opts.grid) return false;
-            if (this.gridBelow !== null) return this.viewport < this.gridBelow;
-            if (this.gridAbove !== null) return this.viewport >= this.gridAbove;
-            return true;
-        },
-
-        get isVertical() {
-            return this.verticalAbove !== null && this.viewport >= this.verticalAbove;
-        },
-
-        init() {
-            this.track = this.$refs.track;
-            this.updateVerticalMode();
-            this.updateGridMode();
-            this.snap();
-        },
-
+        /**
+         * Resolve breakpoint config for the current viewport.
+         * Picks the largest breakpoint key <= viewport, falling back to the smallest.
+         * Values may be a number (= perView, backward compat) or an object of overrides.
+         */
         resolveBreakpoint(config) {
             if (!config || typeof config !== 'object') return null;
 
@@ -48,29 +39,62 @@ export default function (Alpine) {
             return breakpoints.length ? config[Math.min(...breakpoints)] : null;
         },
 
-        get gridBreakpoint() {
-            const resolved = this.resolveBreakpoint(this.gridConfig);
-            if (!resolved) return { cols: 2, rows: 1 };
-            return typeof resolved === 'number'
-                ? { cols: resolved, rows: 1 }
-                : { cols: resolved.cols ?? 2, rows: resolved.rows ?? 1 };
-        },
+        /**
+         * Merge: hardcoded defaults <- top-level opts <- resolved breakpoint overrides.
+         * Uses !== undefined for grid so that null (disable grid) is a valid override.
+         */
+        get resolved() {
+            const bp = this.resolvedBp;
+            const bpOpts = bp !== null
+                ? (typeof bp === 'number' ? { perView: bp } : bp)
+                : {};
 
-        get gridCols() {
-            return this.gridBreakpoint.cols;
-        },
-
-        get gridRows() {
-            return this.gridBreakpoint.rows;
+            return {
+                perView: bpOpts.perView ?? opts.perView ?? defaults.perView,
+                autoHeight: bpOpts.autoHeight ?? opts.autoHeight ?? defaults.autoHeight,
+                vertical: bpOpts.vertical ?? opts.vertical ?? defaults.vertical,
+                pagination: bpOpts.pagination ?? opts.pagination ?? defaults.pagination,
+                grid: bpOpts.grid !== undefined ? bpOpts.grid : (opts.grid ?? defaults.grid),
+            };
         },
 
         get perView() {
-            if (this.isGrid) return this.gridCols;
+            return this.resolved.grid
+                ? this.resolved.grid.cols ?? 2
+                : this.resolved.perView;
+        },
 
-            const resolved = this.resolveBreakpoint(this.breakpointsConfig);
-            if (resolved !== null && typeof resolved === 'number') return resolved;
+        get isGrid() {
+            return this.resolved.grid !== null;
+        },
 
-            return 1;
+        get isVertical() {
+            return this.resolved.vertical;
+        },
+
+        get isAutoHeight() {
+            return this.resolved.autoHeight;
+        },
+
+        get pagination() {
+            return this.resolved.pagination;
+        },
+
+        get gridCols() {
+            return this.resolved.grid?.cols ?? 2;
+        },
+
+        get gridRows() {
+            return this.resolved.grid?.rows ?? 1;
+        },
+
+        init() {
+            this.track = this.$refs.track;
+            this.resolvedBp = this.resolveBreakpoint(this.breakpointsConfig);
+            this.updateVerticalMode();
+            this.updateGridMode();
+            this.updateAutoHeightMode();
+            this.snap();
         },
 
         get maxIndex() {
@@ -162,6 +186,7 @@ export default function (Alpine) {
         snap() {
             if (this.isDragging) return;
             this.applyTransform(this.offset);
+            this.updateHeight();
         },
 
         applyTransform(offset) {
@@ -226,6 +251,7 @@ export default function (Alpine) {
 
             this.track.style.transition = '';
             this.applyTransform(targetOffset);
+            this.updateHeight();
         },
 
         onResize() {
@@ -233,12 +259,20 @@ export default function (Alpine) {
 
             const wasGrid = this.isGrid;
             const wasVertical = this.isVertical;
+            const wasAutoHeight = this.isAutoHeight;
             this.viewport = window.innerWidth;
+            this.resolvedBp = this.resolveBreakpoint(this.breakpointsConfig);
             this.updateVerticalMode();
             this.updateGridMode();
+            this.updateAutoHeightMode();
 
             if (wasGrid !== this.isGrid || wasVertical !== this.isVertical) {
                 this.index = 0;
+            }
+
+            if (wasAutoHeight !== this.isAutoHeight && !this.isAutoHeight) {
+                const sliderEl = this.track?.parentElement;
+                if (sliderEl) sliderEl.style.height = '';
             }
 
             if (this.index > this.maxIndex) this.index = this.maxIndex;
@@ -246,10 +280,48 @@ export default function (Alpine) {
         },
 
         updateVerticalMode() {
-            if (this.verticalAbove === null) return;
             const sliderEl = this.track?.parentElement;
             if (!sliderEl) return;
             sliderEl.classList.toggle('slider--vertical', this.isVertical);
+        },
+
+        updateGridMode() {
+            const sliderEl = this.track?.parentElement;
+            if (!sliderEl) return;
+
+            sliderEl.classList.toggle('slider--grid', this.isGrid);
+
+            if (this.isGrid) {
+                this.$el.style.setProperty('--grid-cols', this.gridCols);
+                this.$el.style.setProperty('--grid-rows', this.gridRows);
+            } else {
+                this.$el.style.removeProperty('--grid-cols');
+                this.$el.style.removeProperty('--grid-rows');
+            }
+        },
+
+        updateAutoHeightMode() {
+            const sliderEl = this.track?.parentElement;
+            if (!sliderEl) return;
+            sliderEl.classList.toggle('slider--auto-height', this.isAutoHeight);
+        },
+
+        updateHeight() {
+            const sliderEl = this.track?.parentElement;
+            if (!sliderEl || !this.track?.children.length) return;
+
+            if (!this.isAutoHeight) {
+                sliderEl.style.height = '';
+                return;
+            }
+
+            const start = this.index;
+            const end = Math.min(start + this.perView, this.track.children.length);
+            let max = 0;
+            for (let i = start; i < end; i++) {
+                max = Math.max(max, this.track.children[i].offsetHeight);
+            }
+            sliderEl.style.height = max + 'px';
         },
 
         get canScroll() {
@@ -274,22 +346,6 @@ export default function (Alpine) {
                 this.dragMoved = false;
                 e.preventDefault();
                 e.stopPropagation();
-            }
-        },
-
-        updateGridMode() {
-            if (!opts.grid) return;
-            const sliderEl = this.track?.parentElement;
-            if (!sliderEl) return;
-
-            sliderEl.classList.toggle('slider--grid', this.isGrid);
-
-            if (this.isGrid) {
-                this.$el.style.setProperty('--grid-cols', this.gridCols);
-                this.$el.style.setProperty('--grid-rows', this.gridRows);
-            } else {
-                this.$el.style.removeProperty('--grid-cols');
-                this.$el.style.removeProperty('--grid-rows');
             }
         },
     }));

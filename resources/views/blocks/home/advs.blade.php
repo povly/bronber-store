@@ -2,7 +2,7 @@
     @vite(['resources/css/blocks/home/advs/style.css'])
 @endpush
 
-<section class="home-advs section" x-data="slider({ breakpoints: { 0: 1, 768: 2, 1200: 4 }, pagination: true })" @resize.window.debounce.150ms="onResize()">
+<section class="home-advs section" x-data="slider({ pagination: true, breakpoints: { 0: { perView: 1 }, 768: { perView: 2 }, 1200: { perView: 4 } } })" @resize.window.debounce.150ms="onResize()">
     <div class="container">
         <div class="home-advs__slider slider">
             <div class="home-advs__track slider__track" x-ref="track"

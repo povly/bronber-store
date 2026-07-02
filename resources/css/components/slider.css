@@ -122,6 +122,14 @@
         }
     }
 
+    &--auto-height {
+        transition: height var(--slider-duration) var(--slider-ease);
+
+        .slider__track {
+            align-items: flex-start;
+        }
+    }
+
     @media screen and (min-width: 1200px) {
         &__arrows {
             gap: fluid-type(1200px, 1440px, 8px, 10px);
