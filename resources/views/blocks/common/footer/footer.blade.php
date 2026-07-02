@@ -128,7 +128,7 @@
                         <li><a href="#">{{ __('store.footer_buy_delivery') }}</a></li>
                         <li><a href="#">{{ __('store.footer_buy_guarantee') }}</a></li>
                         <li><a href="#">{{ __('store.footer_buy_loyalty') }}</a></li>
-                        <li><a href="#">{{ __('store.top_faq') }}</a></li>
+                        <li><a href="{{ route('faq') }}">{{ __('store.top_faq') }}</a></li>
                     </ul>
                 </div>
 

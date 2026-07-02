@@ -28,7 +28,7 @@
         <div class="top-bar__right">
             <nav class="top-bar__links top-bar__links--right">
                 <a href="#!" class="top-bar__link">{{ __('store.top_career') }}</a>
-                <a href="#!" class="top-bar__link">{{ __('store.top_faq') }}</a>
+                <a href="{{ route('faq') }}" class="top-bar__link">{{ __('store.top_faq') }}</a>
                 <a href="#!" class="top-bar__link">{{ __('store.top_contacts') }}</a>
             </nav>
 
