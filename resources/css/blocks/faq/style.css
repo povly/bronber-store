@@ -6,7 +6,7 @@
         margin-top: 0;
         font-size: fluid-type(768px, 1200px, 25px, 32px);
         line-height: 110%;
-        margin-bottom: fluid-type(320px, 768px, 32px, 40px);
+        margin-bottom: fluid-type(375px, 768px, 32px, 40px);
     }
 
     &__list {
@@ -24,18 +24,16 @@
         align-items: flex-start;
         justify-content: space-between;
         gap: 16px;
-        padding: fluid-type(320px, 768px, 20px, 25px) 0 fluid-type(320px, 768px, 20px, 24px);
-        font-family: var(--font-manrope);
+        padding: fluid-type(375px, 768px, 22px, 24px) 0;
         font-weight: 700;
-        font-size: 22px;
-        line-height: 120%;
-        color: var(--color-black);
+        font-size: fluid-type(375px, 768px, 22px, 25px);
+        line-height: 100%;
         text-align: left;
     }
 
     &__icon {
         flex-shrink: 0;
-        margin-top: fluid-type(320px, 768px, 2px, 6px);
+        margin-top: fluid-type(375px, 768px, 2px, 6px);
     }
 
     &__icon-v {
@@ -49,17 +47,10 @@
     }
 
     &__answer {
-        font-family: var(--font-manrope);
         font-weight: 500;
-        font-size: 16px;
+        font-size: fluid-type(375px, 768px, 16px, 18px);
         line-height: 130%;
-        color: var(--color-black);
-        margin-top: fluid-type(320px, 768px, 20px, 30px);
-        padding-bottom: fluid-type(320px, 768px, 20px, 24px);
-    }
-
-    &__item.is-open &__question {
-        padding-bottom: 0;
+        padding-bottom: fluid-type(375px, 768px, 22px, 24px);
     }
 
     &__item.is-open &__icon-v {
@@ -67,22 +58,9 @@
     }
 
     @media screen and (min-width: 768px) {
-        &__title {
-            font-size: 25px;
-            margin-bottom: fluid-type(768px, 1200px, 28px, 32px);
-        }
-
         &__question {
-            font-size: 25px;
-            line-height: 100%;
-            padding: fluid-type(768px, 1200px, 22px, 25px) 0 fluid-type(768px, 1200px, 22px, 24px);
-        }
-
-        &__answer {
-            font-size: 18px;
-            line-height: 23.4px;
-            margin-top: fluid-type(768px, 1200px, 24px, 30px);
-            padding-bottom: fluid-type(768px, 1200px, 20px, 24px);
+            font-size: fluid-type(375px, 768px, 25px, 30px);
+            line-height: 110%;
         }
     }
 

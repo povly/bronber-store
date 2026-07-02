@@ -29,7 +29,7 @@
             <nav class="top-bar__links top-bar__links--right">
                 <a href="#!" class="top-bar__link">{{ __('store.top_career') }}</a>
                 <a href="{{ route('faq') }}" class="top-bar__link">{{ __('store.top_faq') }}</a>
-                <a href="#!" class="top-bar__link">{{ __('store.top_contacts') }}</a>
+                <a href="{{ route('contacts') }}" class="top-bar__link">{{ __('store.top_contacts') }}</a>
             </nav>
 
             <div class="top-bar__lang">

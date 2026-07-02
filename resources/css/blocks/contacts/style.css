@@ -1,0 +1,252 @@
+.contacts {
+    padding-top: fluid-type(375px, 768px, 30px, 50px);
+
+    &__top {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: fluid-type(375px, 768px, 30px, 50px);
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: fluid-type(375px, 768px, 16px, 22px);
+    }
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 40px, 40px);
+        line-height: 110%;
+        color: var(--color-black);
+        text-align: center;
+    }
+
+    &__subtitle {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 130%;
+        color: var(--color-black);
+        max-width: 320px;
+    }
+
+    &__phone {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 30px, 28px);
+        line-height: 130%;
+        color: var(--color-black);
+    }
+
+    &__address {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 16px, 14px);
+        line-height: 130%;
+        color: var(--color-black);
+
+        a {
+            color: var(--color-black);
+        }
+    }
+
+    &__form {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 24px, 32px);
+    }
+
+    &__field {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 14px, 18px);
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 24px, 32px);
+    }
+
+    &__label {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 100%;
+        color: var(--color-black);
+    }
+
+    &__input,
+    &__textarea {
+        width: 100%;
+        border: none;
+        border-bottom: 1px solid #dfdfdf;
+        background: transparent;
+        padding: 0 0 fluid-type(375px, 768px, 10px, 14px);
+        font-family: var(--font-manrope);
+        font-weight: 400;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 100%;
+        color: var(--color-black);
+        outline: none;
+        resize: none;
+
+        &::placeholder {
+            color: var(--color-gray-placeholder);
+        }
+
+        &:focus {
+            border-bottom-color: var(--color-black);
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: fluid-type(375px, 768px, 16px, 20px);
+    }
+
+    &__submit {
+        text-transform: capitalize;
+    }
+
+    &__privacy {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 14px, 12px);
+        line-height: 130%;
+        color: #696969;
+        text-align: center;
+        max-width: 323px;
+    }
+
+    &__map {
+        margin-top: fluid-type(375px, 768px, 40px, 50px);
+        border-radius: fluid-type(375px, 768px, 7px, 5px);
+        overflow: hidden;
+        aspect-ratio: 329 / 390;
+    }
+
+    @media screen and (min-width: 768px) {
+        padding-top: fluid-type(768px, 1200px, 50px, 70px);
+
+        &__top {
+            display: grid;
+            grid-template-columns: 1fr fluid-type(768px, 1200px, 340px, 580px);
+            align-items: start;
+            gap: fluid-type(768px, 1200px, 40px, 60px);
+        }
+
+        &__info {
+            align-items: flex-start;
+            text-align: left;
+            gap: fluid-type(768px, 1200px, 18px, 24px);
+        }
+
+        &__title {
+            text-align: left;
+            font-size: fluid-type(768px, 1200px, 40px, 60px);
+        }
+
+        &__subtitle {
+            font-size: fluid-type(768px, 1200px, 16px, 20px);
+            max-width: fluid-type(768px, 1200px, 250px, 400px);
+        }
+
+        &__phone {
+            font-size: fluid-type(768px, 1200px, 28px, 40px);
+        }
+
+        &__address {
+            align-items: flex-start;
+            font-size: fluid-type(768px, 1200px, 14px, 18px);
+        }
+
+        &__form {
+            gap: fluid-type(768px, 1200px, 28px, 36px);
+        }
+
+        &__field {
+            gap: fluid-type(768px, 1200px, 14px, 18px);
+        }
+
+        &__row {
+            flex-direction: row;
+            gap: fluid-type(768px, 1200px, 20px, 30px);
+        }
+
+        &__label {
+            font-size: fluid-type(768px, 1200px, 16px, 18px);
+        }
+
+        &__input,
+        &__textarea {
+            border-bottom-color: var(--color-black);
+            font-size: fluid-type(768px, 1200px, 16px, 18px);
+            padding-bottom: fluid-type(768px, 1200px, 12px, 16px);
+        }
+
+        &__bottom {
+            flex-direction: row;
+            align-items: center;
+            gap: fluid-type(768px, 1200px, 20px, 24px);
+        }
+
+        &__privacy {
+            text-align: left;
+            font-size: fluid-type(768px, 1200px, 12px, 16px);
+            max-width: fluid-type(768px, 1200px, 180px, 370px);
+        }
+
+        &__map {
+            margin-top: fluid-type(768px, 1200px, 40px, 50px);
+            border-radius: fluid-type(768px, 1200px, 5px, 8px);
+            aspect-ratio: auto;
+            height: fluid-type(768px, 1200px, 326px, 404px);
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        padding-top: fluid-type(1200px, 1440px, 70px, 90px);
+
+        &__top {
+            gap: fluid-type(1200px, 1440px, 60px, 80px);
+        }
+
+        &__title {
+            font-size: fluid-type(1200px, 1440px, 60px, 80px);
+        }
+
+        &__subtitle {
+            font-size: fluid-type(1200px, 1440px, 20px, 24px);
+            max-width: fluid-type(1200px, 1440px, 400px, 460px);
+        }
+
+        &__address {
+            font-size: fluid-type(1200px, 1440px, 18px, 18px);
+        }
+
+        &__form {
+            gap: fluid-type(1200px, 1440px, 36px, 42px);
+        }
+
+        &__row {
+            gap: fluid-type(1200px, 1440px, 30px, 40px);
+        }
+
+        &__map {
+            margin-top: fluid-type(1200px, 1440px, 50px, 70px);
+            border-radius: fluid-type(1200px, 1440px, 8px, 10px);
+            height: fluid-type(1200px, 1440px, 404px, 530px);
+        }
+    }
+}
