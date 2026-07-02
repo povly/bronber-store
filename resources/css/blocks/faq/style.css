@@ -68,23 +68,15 @@
 
         &__title {
             font-size: fluid-type(1200px, 1440px, 32px, 40px);
-            line-height: fluid-type(1200px, 1440px, 35px, 40px);
-            margin-bottom: fluid-type(1200px, 1440px, 32px, 40px);
+            margin-bottom: fluid-type(1200px, 1440px, 32px, 50px);
         }
 
         &__question {
             font-size: fluid-type(1200px, 1440px, 30px, 32px);
-            line-height: 35px;
-            padding: fluid-type(1200px, 1440px, 23px, 25px) 0 fluid-type(1200px, 1440px, 22px, 24px);
         }
 
         &__icon {
             margin-top: fluid-type(1200px, 1440px, 4px, 6px);
-        }
-
-        &__answer {
-            margin-top: fluid-type(1200px, 1440px, 26px, 30px);
-            padding-bottom: fluid-type(1200px, 1440px, 22px, 24px);
         }
     }
 }

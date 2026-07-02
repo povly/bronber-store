@@ -14,6 +14,7 @@ $register = function () {
     Route::get('/catalog', fn () => view('main'))->name('catalog');
     Route::get('/faq', fn () => view('faq'))->name('faq');
     Route::get('/contacts', fn () => view('contacts'))->name('contacts');
+    Route::get('/blog', fn () => view('blog'))->name('blog');
 
     Route::get('/cart', function () {
         $items = [
