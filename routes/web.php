@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 $register = function () {
     Route::get('/', fn () => view('home'))->name('home');
     Route::get('/catalog', fn () => view('main'))->name('catalog');
+    Route::get('/faq', fn () => view('faq'))->name('faq');
 
     Route::get('/cart', function () {
         $items = [
@@ -89,6 +90,41 @@ $register = function () {
             'savingsFormatted' => $format($product['savings']),
         ]);
     })->name('product');
+
+    Route::get('/product-reviews', function () {
+        $product = [
+            'title' => 'Топливный насос Bosch',
+            'article' => '0 580 464 070',
+            'price' => 1100,
+            'oldPrice' => 1300,
+            'bonusPoints' => 110,
+            'rating' => 8,
+            'reviewCount' => 8,
+            'image' => '/images/product/bosch.png',
+        ];
+
+        $photo = '/images/product/review.jpg';
+
+        $reviews = [
+            ['name' => 'Александр', 'initial' => 'А', 'car' => 'BMW 5 серия', 'date' => '15/05/2026', 'rating' => 5, 'text' => 'Топливный насос Bosch 0 580 464 070 обеспечивает стабильную подачу топлива и надежную работу двигателя в различных условиях эксплуатации. Оригинальная продукция Bosch отличается высоким качеством изготовления, долговечностью и соответствием заводским стандартам.', 'photos' => [$photo, $photo, $photo, $photo]],
+            ['name' => 'Михаил', 'initial' => 'М', 'car' => 'Audi A4', 'date' => '10/05/2026', 'rating' => 5, 'text' => 'Отличный насос, работает исправно уже полгода. Цена приемлемая, доставка быстрая. Рекомендую к покупке.', 'photos' => [$photo]],
+            ['name' => 'Дмитрий', 'initial' => 'Д', 'car' => 'VW Passat', 'date' => '05/05/2026', 'rating' => 5, 'text' => 'Качество на высоте, ставится без проблем. Заводится с пол-оборота, двигатель работает ровно. Bosch есть Bosch.', 'photos' => []],
+            ['name' => 'Сергей', 'initial' => 'С', 'car' => 'Mercedes E-class', 'date' => '28/04/2026', 'rating' => 5, 'text' => 'Брал как замену родному насосу на 180 тысячах пробега. Разница ощутима — мотор стал тише, приёмистей. Фотки прилагаю, всё встало как родное.', 'photos' => [$photo, $photo, $photo, $photo, $photo, $photo]],
+            ['name' => 'Андрей', 'initial' => 'А', 'car' => 'BMW 3 серия', 'date' => '20/04/2026', 'rating' => 5, 'text' => 'Оригинал, упаковка заводская, пломбы на месте. Установил сам в гараже за час. Всё работает идеально.', 'photos' => []],
+            ['name' => 'Иван', 'initial' => 'И', 'car' => 'Audi A6', 'date' => '15/04/2026', 'rating' => 5, 'text' => 'Заказывал через интернет, доставили на следующий день. Насос оригинальный, проверил по артикулу. Работает без нареканий уже три месяца.', 'photos' => [$photo, $photo]],
+            ['name' => 'Павел', 'initial' => 'П', 'car' => 'VW Golf', 'date' => '10/04/2026', 'rating' => 5, 'text' => 'Хороший насос, но цена могла бы быть пониже. В остальном претензий нет — ставится чётко, работает штатно.', 'photos' => []],
+            ['name' => 'Артём', 'initial' => 'А', 'car' => 'Skoda Octavia', 'date' => '05/04/2026', 'rating' => 5, 'text' => 'Второй раз заказаю детали в этом магазине. Качество отличное, сервис на уровне. Насос подошёл идеально, рекомендую.', 'photos' => [$photo, $photo, $photo]],
+        ];
+
+        $format = static fn (int $price) => number_format($price, 0, ',', ' ').' ₽';
+
+        return view('product-reviews', [
+            'product' => $product,
+            'reviews' => $reviews,
+            'priceFormatted' => $format($product['price']),
+            'oldPriceFormatted' => $format($product['oldPrice']),
+        ]);
+    })->name('product.reviews');
 };
 
 Route::get('/clear-cache', function () {

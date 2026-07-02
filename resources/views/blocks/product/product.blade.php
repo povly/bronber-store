@@ -569,10 +569,10 @@
             </div>
 
             <div class="product__reviews-bottom">
-                <button type="button" class="product__reviews-all btn btn--primary">
+                <a href="{{ route('product.reviews') }}" class="product__reviews-all btn btn--primary">
                     <span class="product__reviews-all-short">Смотреть все</span>
                     <span class="product__reviews-all-full">Смотреть все отзывы</span>
-                </button>
+                </a>
 
                 <div class="product__reviews-arrows slider__arrows slider__arrows--mb">
                     <button class="slider__arrow slider__arrow--prev product__reviews-arrow" type="button"
