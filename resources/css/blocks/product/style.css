@@ -124,6 +124,14 @@
         }
     }
 
+    &__info {
+        &-top {
+            &--pc {
+                display: none;
+            }
+        }
+    }
+
     &__slide {
         padding: 25px;
         height: fluid-type(375px, 768px, 329px, 629px);
@@ -152,6 +160,7 @@
         font-size: 25px;
         line-height: 100%;
         margin-bottom: 10px;
+        margin-top: 0;
     }
 
     &__meta {
@@ -166,6 +175,7 @@
         font-size: 14px;
         line-height: 130%;
         color: var(--color-gray-mid);
+        margin-bottom: 6px;
     }
 
     &__rating {
@@ -250,7 +260,7 @@
         align-items: baseline;
         flex-wrap: wrap;
         gap: 8px 12px;
-        margin-bottom: 8px;
+        margin-bottom: 24px;
     }
 
     &__price {
@@ -297,13 +307,14 @@
     }
 
     &__buy-row {
-        display: flex;
+        display: grid;
+        grid-template-columns: 114px auto;
         align-items: center;
         gap: 8px;
     }
 
     .qty {
-        width: 114px;
+        width: 100%;
         height: 60px;
 
         .qty__value {
@@ -428,11 +439,6 @@
     &__reviews-arrows {
         gap: 12px;
     }
-
-    &__reviews-all {
-        margin-top: 20px;
-    }
-
     &__section-title {
         font-family: var(--font-manrope);
         font-weight: 800;
@@ -464,7 +470,24 @@
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         gap: 13px;
-        margin-top: 12px;
+        margin-top: 38px;
+    }
+
+    &__reviews {
+        &-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+
+        &-arrows {
+            margin-top: 0;
+        }
+
+        &-all {
+            min-width: 190px;
+        }
     }
 
     &__review-photo {
@@ -529,7 +552,7 @@
     &__review-stars {
         display: flex;
         gap: 2px;
-        margin-bottom: 12px;
+        margin-bottom: 35px;
         color: var(--color-purple);
     }
 
@@ -545,34 +568,45 @@
     /* ══ Tablet ≥768px ════════════════════════════════════ */
 
     @media (min-width: 768px) {
+        &__info {
+            &-top {
+                &--mb {
+                    display: none;
+                }
+
+                &--pc {
+                    display: block;
+                }
+            }
+        }
         &__hero {
             margin-bottom: 50px;
         }
 
         &__hero-grid {
-            flex-direction: row;
+            display: grid;
             gap: 36px;
-            align-items: start;
+            grid-template-columns: minmax(0, 329fr) minmax(0, 354fr);
+            align-items: flex-start;
         }
 
         &__gallery {
-            flex: 0 0 329px;
             flex-direction: column-reverse;
             gap: 20px;
+            height: max-content;
         }
 
         &__hero-side {
-            flex: 1;
-            min-width: 0;
-            gap: 36px;
+            gap: 26px;
         }
 
         &__buy-info {
-            order: initial;
+            order: inherit;
         }
 
         &__availability {
-            order: initial;
+            order: inherit;
+            margin-top: auto;
         }
 
         &__thumbs {
@@ -587,8 +621,13 @@
             gap: 12px;
         }
 
+        &__buy {
+            &-info {
+                margin-top: 0;
+            }
+        }
+
         &__add-cart {
-            width: 230px;
             height: 60px;
             font-size: 14px;
             flex: 0 0 auto;
@@ -598,9 +637,24 @@
             padding: 20px;
         }
 
+        &__meta {
+            margin-bottom: 10px;
+        }
+
         &__reviews {
             &-all {
-                margin: 30px auto 0;
+                margin: 0 auto;
+                padding: 17px 30px;
+            }
+
+            &-arrows {
+                &.slider {
+                    &__arrows {
+                        &--mb {
+                            display: none;
+                        }
+                    }
+                }
             }
         }
 
@@ -635,6 +689,14 @@
 
         &__review {
             padding: 30px;
+
+            &-stars {
+                margin-bottom: 23px;
+            }
+
+            &-photos {
+                margin-top: 24px;
+            }
         }
 
         &__avatar {
@@ -657,11 +719,11 @@
         }
 
         &__slide {
-            height: 329px;
+            height: fluid-type(768px, 1200px, 329px, 512px);
         }
 
         &__thumb {
-            height: 75px;
+            height: fluid-type(768px, 1200px, 75px, 117px);
         }
 
         &__brand {
@@ -669,7 +731,6 @@
 
             &--pc {
                 display: flex;
-                justify-content: flex-start;
                 gap: 20px;
                 margin-top: 32px;
                 margin-bottom: 0;
@@ -680,12 +741,18 @@
     /* ══ Desktop ≥1200px ══════════════════════════════════ */
 
     @media (min-width: 1200px) {
+        padding-top: 36px;
+        
         &__hero-grid {
             gap: 34px;
+            grid-template-columns: minmax(0, 578fr) minmax(0, 488fr);
+        }
+
+        &__article {
+            margin-bottom: 20px;
         }
 
         &__gallery {
-            flex: 1.18;
             flex-direction: row;
             gap: 13px;
         }
@@ -715,17 +782,18 @@
 
         &__thumbs {
             --slider-slide: auto;
-            max-height: 460px;
+            --slider-gap: 13px;
             flex-shrink: 0;
-        }
 
-        &__thumbs-track {
-            gap: 13px;
+            .slider__track {
+                flex-direction: column;
+                touch-action: pan-x;
+            }
         }
 
         &__thumb {
-            width: 105px;
-            height: 105px;
+            width: fluid-type(1200px, 1440px, 105px, 142px);
+            height: fluid-type(1200px, 1440px, 105px, 142px);
         }
 
         &__main {
@@ -741,7 +809,7 @@
         &__price {
             &-block {
                 align-items: center;
-                margin-bottom: 32px;
+                margin-bottom: 18px;
             }
         }
 
@@ -756,6 +824,7 @@
 
         &__bonus {
             font-size: 16px;
+            margin-bottom: 52px;
         }
 
         &__buy-row {
@@ -772,8 +841,8 @@
             height: 54px;
             max-width: none;
             flex: 0 0 auto;
-            font-size: 12px;
-            line-height: 12px;
+            font-size: fluid-type(1200px, 1440px, 12px, 14px);
+            line-height: 100%;
         }
 
         &__favorite {
@@ -817,6 +886,43 @@
         &__savings {
             width: auto;
         }
+
+        &__brand {
+            justify-content: flex-start;
+            margin-top: 26px;
+        }
+        
+        &__buy {
+            &-row {
+                grid-template-columns: 140px fluid-type(1200px, 1440px, 182px, 220px) fluid-type(1200px, 1440px, 54px, 60px);
+            }
+
+            &-info {
+                order: 3;
+            }
+        }
+
+        &__availability {
+            order: 2;
+            max-width: 442px;
+        }
+
+        &__info {
+            &-top {
+                order: 1;
+            }
+        }
+
+        
+        &__feature {
+            &-info {
+                padding-top: 10px;
+            }
+        }
+
+        &__gallery {
+            height: fluid-type(1200px, 1440px, 460px, 620px);
+        }
     }
 
     /* ══ Wide desktop ≥1440px — fluid type scale-up ═════ */
@@ -828,15 +934,6 @@
 
         &__gallery {
             flex: 0 0 777px;
-        }
-
-        &__thumb {
-            width: 142px;
-            height: 142px;
-        }
-
-        &__thumbs {
-            max-height: 620px;
         }
 
         &__thumbs-track {
@@ -893,8 +990,27 @@
             font-size: 40px;
         }
 
+        &__tabs {
+            padding-bottom: 0;
+            gap: 0;
+        }
+
         &__tab {
             font-size: 22px;
+            position: relative;
+            padding: 0 40px 14px;
+
+            &.is-active {
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: calc(100%);
+                    left: 0;
+                    width: 100%;
+                    height: 2px;
+                    background-color: var(--color-purple);
+                }
+            }
         }
 
         &__tabs-card {

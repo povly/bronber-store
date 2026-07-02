@@ -291,6 +291,10 @@
             &:nth-child(n){
                padding: 24px 0; 
             }
+
+            &-title {
+                padding-right: 0;
+            }
         }
 
         &__item-price-mobile {
@@ -362,6 +366,18 @@
         &__clear {
             margin-top: fluid-type(1200px, 1440px, 18px, 24px);
             margin-right: 0;
+        }
+    }
+
+    @media (min-width: 1440px) {
+        &__item {
+            grid-template-columns: 100px 150fr 97fr 115fr 120fr 25fr;
+        }
+
+        &__items {
+            &-head {
+                grid-template-columns: 100px 150fr 97fr 115fr 120fr 25fr;
+            }
         }
     }
 }

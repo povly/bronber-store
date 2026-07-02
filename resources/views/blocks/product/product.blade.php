@@ -10,11 +10,71 @@
 <section class="product" x-data="product()">
     <div class="product__hero">
         <div class="container">
+
+            <div class="product__info-top product__info-top--mb">
+                <h1 class="product__title">{{ $product['title'] }}</h1>
+
+                <div class="product__meta">
+                    <p class="product__article">Артикул: {{ $product['article'] }}</p>
+
+                    <div class="product__rating-block">
+                        <div class="product__rating">
+                            @for ($s = 0; $s < 5; $s++)
+                                <svg class="product__rating-star{{ $s < round($product['rating'] / 2) ? ' is-filled' : '' }}"
+                                    width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.5268 1.29489C10.5706 1.20635 10.6383 1.13183 10.7223 1.07972C10.8062 1.02761 10.903 1 11.0018 1C11.1006 1 11.1974 1.02761 11.2813 1.07972C11.3653 1.13183 11.433 1.20635 11.4768 1.29489L13.7868 5.97389C13.939 6.28186 14.1636 6.5483 14.4414 6.75035C14.7192 6.95239 15.0419 7.08401 15.3818 7.13389L20.5478 7.88989C20.6457 7.90408 20.7376 7.94537 20.8133 8.00909C20.8889 8.07282 20.9452 8.15644 20.9758 8.2505C21.0064 8.34456 21.0101 8.4453 20.9864 8.54133C20.9627 8.63736 20.9126 8.72485 20.8418 8.79389L17.1058 12.4319C16.8594 12.672 16.6751 12.9684 16.5686 13.2955C16.4622 13.6227 16.4369 13.9708 16.4948 14.3099L17.3768 19.4499C17.3941 19.5477 17.3835 19.6485 17.3463 19.7406C17.3091 19.8327 17.2467 19.9125 17.1663 19.9709C17.086 20.0293 16.9908 20.0639 16.8917 20.0708C16.7926 20.0777 16.6935 20.0566 16.6058 20.0099L11.9878 17.5819C11.6835 17.4221 11.345 17.3386 11.0013 17.3386C10.6576 17.3386 10.3191 17.4221 10.0148 17.5819L5.3978 20.0099C5.31013 20.0563 5.2112 20.0772 5.11225 20.0701C5.0133 20.0631 4.91832 20.0285 4.83809 19.9701C4.75787 19.9118 4.69563 19.8321 4.65846 19.7401C4.62128 19.6481 4.61066 19.5476 4.6278 19.4499L5.5088 14.3109C5.567 13.9716 5.54178 13.6233 5.43534 13.2959C5.32889 12.9686 5.14441 12.672 4.8978 12.4319L1.1618 8.79489C1.09039 8.72593 1.03979 8.63829 1.01576 8.54197C0.991731 8.44565 0.995237 8.34451 1.02588 8.25008C1.05652 8.15566 1.11307 8.07174 1.18908 8.00788C1.26509 7.94402 1.3575 7.90279 1.4558 7.88889L6.6208 7.13389C6.96106 7.08439 7.28419 6.95295 7.56238 6.75088C7.84058 6.54881 8.0655 6.28216 8.2178 5.97389L10.5268 1.29489Z"
+                                        fill="#FFA903" stroke="#FFA903" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                            @endfor
+                        </div>
+
+                        <div class="product__rating-right">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M22 17C22 17.5304 21.7893 18.0391 21.4142 18.4142C21.0391 18.7893 20.5304 19 20 19H6.828C6.29761 19.0001 5.78899 19.2109 5.414 19.586L3.212 21.788C3.1127 21.8873 2.9862 21.9549 2.84849 21.9823C2.71077 22.0097 2.56803 21.9956 2.43831 21.9419C2.30858 21.8881 2.1977 21.7971 2.11969 21.6804C2.04167 21.5637 2.00002 21.4264 2 21.286V5C2 4.46957 2.21071 3.96086 2.58579 3.58579C2.96086 3.21071 3.46957 3 4 3H20C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V17Z"
+                                    stroke="#797878" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M7 11H17" stroke="#797878" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M7 15H13" stroke="#797878" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M7 7H15" stroke="#797878" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                            <span>8</span>
+                        </div>
+                    </div>
+
+                    @if ($product['isOriginal'])
+                        <div class="product__brand product__brand--pc">
+                            <div class="product__brand-item">
+                                <x-img path="/images/product/logo" width="158" height="37" :alt="$product['title']" :lazy="false" />
+                            </div>
+                            <span class="product__badge">
+                                <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M17.5 11.375C17.5 15.75 14.4375 17.9375 10.7975 19.2063C10.6069 19.2709 10.3998 19.2678 10.2113 19.1975C6.5625 17.9375 3.5 15.75 3.5 11.375V5.25003C3.5 5.01796 3.59219 4.7954 3.75628 4.63131C3.92038 4.46721 4.14294 4.37503 4.375 4.37503C6.125 4.37503 8.3125 3.32503 9.835 1.99503C10.0204 1.83665 10.2562 1.74963 10.5 1.74963C10.7438 1.74963 10.9796 1.83665 11.165 1.99503C12.6963 3.33378 14.875 4.37503 16.625 4.37503C16.8571 4.37503 17.0796 4.46721 17.2437 4.63131C17.4078 4.7954 17.5 5.01796 17.5 5.25003V11.375Z"
+                                        stroke="#7212BC" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M7.875 10.5L9.625 12.25L13.125 8.75" stroke="#7212BC" stroke-width="1.5"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span>Оригинал</span>
+                            </span>
+                        </div>
+                    @endif
+                </div>
+            </div>
+
             <div class="product__hero-grid">
 
                 {{-- Gallery: vertical thumbs slider (linked) + horizontal main slider --}}
                 <div class="product__gallery" x-data="{ active: 0 }">
-                    <div class="product__thumbs slider" x-data="slider({ verticalAbove: 1200, breakpoints: { 0: 4 } })"
+                    <div class="product__thumbs slider" x-data="slider({ breakpoints: { 0: { perView: 4 }, 1200: { perView: 4, vertical: true } } })"
                         @resize.window.debounce.150ms="onResize()" x-init="$watch('active', v => ensureVisible(v))">
                         <div class="slider__track product__thumbs-track" x-ref="track"
                             @click.capture="suppressDragClick($event)" @pointerdown.prevent="onPointerDown($event)"
@@ -32,7 +92,7 @@
                         </div>
                     </div>
 
-                    <div class="product__main slider" x-data="slider({ breakpoints: { 0: 1 }, pagination: true })" @resize.window.debounce.150ms="onResize()"
+                    <div class="product__main slider" x-data="slider({ perView: 1, pagination: true })" @resize.window.debounce.150ms="onResize()"
                         x-init="$watch('index', v => active = v);
                         $watch('active', v => {
                             index = v;
@@ -48,13 +108,17 @@
                                 </div>
                             @endforeach
                         </div>
-                        <button type="button" class="product__gallery-action" aria-label="Поделиться">
+                        @php($galleryFavorite = in_array($product['article'], $favorites ?? []))
+                        <button type="button" class="product__gallery-action{{ $galleryFavorite ? ' is-active' : '' }}"
+                            x-data="favorite('{{ $product['article'] }}')" :class="{ 'is-active': active }" @click="toggle()"
+                            aria-label="В избранное">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M2 9.50001C2.00002 8.38721 2.33759 7.30059 2.96813 6.38367C3.59867 5.46675 4.49252 4.76267 5.53161 4.36441C6.5707 3.96615 7.70616 3.89245 8.78801 4.15305C9.86987 4.41365 10.8472 4.99629 11.591 5.82401C11.6434 5.88002 11.7067 5.92468 11.7771 5.95521C11.8474 5.98574 11.9233 6.00149 12 6.00149C12.0767 6.00149 12.1526 5.98574 12.2229 5.95521C12.2933 5.92468 12.3566 5.88002 12.409 5.82401C13.1504 4.99091 14.128 4.40338 15.2116 4.13961C16.2952 3.87585 17.4335 3.94836 18.4749 4.34749C19.5163 4.74663 20.4114 5.45346 21.0411 6.37391C21.6708 7.29436 22.0053 8.38477 22 9.50001C22 11.79 20.5 13.5 19 15L13.508 20.313C13.3217 20.527 13.0919 20.6989 12.834 20.8173C12.5762 20.9357 12.296 20.9979 12.0123 20.9997C11.7285 21.0015 11.4476 20.9428 11.1883 20.8277C10.9289 20.7126 10.697 20.5436 10.508 20.332L5 15C3.5 13.5 2 11.8 2 9.50001Z"
-                                    fill="white" stroke="#7212BC" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
+                                    fill="{{ $galleryFavorite ? '#7212BC' : 'white' }}"
+                                    :fill="active ? '#7212BC' : 'white'" stroke="#7212BC" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </button>
                         <button type="button"
@@ -82,57 +146,92 @@
                 </div>
 
                 <div class="product__hero-side">
-                {{-- Title + meta (mobile: above gallery, tablet+: right column top) --}}
-                <div class="product__info-top">
-                    <x-breadcrumbs class="product__breadcrumb" :items="[
-                        ['label' => 'Главная', 'url' => '/'],
-                        ['label' => 'Каталог', 'url' => route('catalog')],
-                        ['label' => 'Топливные насосы', 'url' => route('catalog')],
-                        ['label' => $product['title']],
-                    ]" />
+                    {{-- Title + meta (mobile: above gallery, tablet+: right column top) --}}
+                    <div class="product__info-top product__info-top--pc">
+                        <x-breadcrumbs class="product__breadcrumb" :items="[
+                            ['label' => 'Главная', 'url' => '/'],
+                            ['label' => 'Каталог', 'url' => route('catalog')],
+                            ['label' => 'Топливные насосы', 'url' => route('catalog')],
+                            ['label' => $product['title']],
+                        ]" />
 
-                    <h1 class="product__title">{{ $product['title'] }}</h1>
+                        <h1 class="product__title">{{ $product['title'] }}</h1>
 
-                    <div class="product__meta">
-                        <p class="product__article">Артикул: {{ $product['article'] }}</p>
+                        <div class="product__meta">
+                            <p class="product__article">Артикул: {{ $product['article'] }}</p>
 
-                        <div class="product__rating-block">
-                            <div class="product__rating">
-                                @for ($s = 0; $s < 5; $s++)
-                                    <svg class="product__rating-star{{ $s < round($product['rating'] / 2) ? ' is-filled' : '' }}"
-                                        width="22" height="22" viewBox="0 0 22 22" fill="none"
+                            <div class="product__rating-block">
+                                <div class="product__rating">
+                                    @for ($s = 0; $s < 5; $s++)
+                                        <svg class="product__rating-star{{ $s < round($product['rating'] / 2) ? ' is-filled' : '' }}"
+                                            width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M10.5268 1.29489C10.5706 1.20635 10.6383 1.13183 10.7223 1.07972C10.8062 1.02761 10.903 1 11.0018 1C11.1006 1 11.1974 1.02761 11.2813 1.07972C11.3653 1.13183 11.433 1.20635 11.4768 1.29489L13.7868 5.97389C13.939 6.28186 14.1636 6.5483 14.4414 6.75035C14.7192 6.95239 15.0419 7.08401 15.3818 7.13389L20.5478 7.88989C20.6457 7.90408 20.7376 7.94537 20.8133 8.00909C20.8889 8.07282 20.9452 8.15644 20.9758 8.2505C21.0064 8.34456 21.0101 8.4453 20.9864 8.54133C20.9627 8.63736 20.9126 8.72485 20.8418 8.79389L17.1058 12.4319C16.8594 12.672 16.6751 12.9684 16.5686 13.2955C16.4622 13.6227 16.4369 13.9708 16.4948 14.3099L17.3768 19.4499C17.3941 19.5477 17.3835 19.6485 17.3463 19.7406C17.3091 19.8327 17.2467 19.9125 17.1663 19.9709C17.086 20.0293 16.9908 20.0639 16.8917 20.0708C16.7926 20.0777 16.6935 20.0566 16.6058 20.0099L11.9878 17.5819C11.6835 17.4221 11.345 17.3386 11.0013 17.3386C10.6576 17.3386 10.3191 17.4221 10.0148 17.5819L5.3978 20.0099C5.31013 20.0563 5.2112 20.0772 5.11225 20.0701C5.0133 20.0631 4.91832 20.0285 4.83809 19.9701C4.75787 19.9118 4.69563 19.8321 4.65846 19.7401C4.62128 19.6481 4.61066 19.5476 4.6278 19.4499L5.5088 14.3109C5.567 13.9716 5.54178 13.6233 5.43534 13.2959C5.32889 12.9686 5.14441 12.672 4.8978 12.4319L1.1618 8.79489C1.09039 8.72593 1.03979 8.63829 1.01576 8.54197C0.991731 8.44565 0.995237 8.34451 1.02588 8.25008C1.05652 8.15566 1.11307 8.07174 1.18908 8.00788C1.26509 7.94402 1.3575 7.90279 1.4558 7.88889L6.6208 7.13389C6.96106 7.08439 7.28419 6.95295 7.56238 6.75088C7.84058 6.54881 8.0655 6.28216 8.2178 5.97389L10.5268 1.29489Z"
+                                                fill="#FFA903" stroke="#FFA903" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    @endfor
+                                </div>
+
+                                <div class="product__rating-right">
+                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
-                                            d="M10.5268 1.29489C10.5706 1.20635 10.6383 1.13183 10.7223 1.07972C10.8062 1.02761 10.903 1 11.0018 1C11.1006 1 11.1974 1.02761 11.2813 1.07972C11.3653 1.13183 11.433 1.20635 11.4768 1.29489L13.7868 5.97389C13.939 6.28186 14.1636 6.5483 14.4414 6.75035C14.7192 6.95239 15.0419 7.08401 15.3818 7.13389L20.5478 7.88989C20.6457 7.90408 20.7376 7.94537 20.8133 8.00909C20.8889 8.07282 20.9452 8.15644 20.9758 8.2505C21.0064 8.34456 21.0101 8.4453 20.9864 8.54133C20.9627 8.63736 20.9126 8.72485 20.8418 8.79389L17.1058 12.4319C16.8594 12.672 16.6751 12.9684 16.5686 13.2955C16.4622 13.6227 16.4369 13.9708 16.4948 14.3099L17.3768 19.4499C17.3941 19.5477 17.3835 19.6485 17.3463 19.7406C17.3091 19.8327 17.2467 19.9125 17.1663 19.9709C17.086 20.0293 16.9908 20.0639 16.8917 20.0708C16.7926 20.0777 16.6935 20.0566 16.6058 20.0099L11.9878 17.5819C11.6835 17.4221 11.345 17.3386 11.0013 17.3386C10.6576 17.3386 10.3191 17.4221 10.0148 17.5819L5.3978 20.0099C5.31013 20.0563 5.2112 20.0772 5.11225 20.0701C5.0133 20.0631 4.91832 20.0285 4.83809 19.9701C4.75787 19.9118 4.69563 19.8321 4.65846 19.7401C4.62128 19.6481 4.61066 19.5476 4.6278 19.4499L5.5088 14.3109C5.567 13.9716 5.54178 13.6233 5.43534 13.2959C5.32889 12.9686 5.14441 12.672 4.8978 12.4319L1.1618 8.79489C1.09039 8.72593 1.03979 8.63829 1.01576 8.54197C0.991731 8.44565 0.995237 8.34451 1.02588 8.25008C1.05652 8.15566 1.11307 8.07174 1.18908 8.00788C1.26509 7.94402 1.3575 7.90279 1.4558 7.88889L6.6208 7.13389C6.96106 7.08439 7.28419 6.95295 7.56238 6.75088C7.84058 6.54881 8.0655 6.28216 8.2178 5.97389L10.5268 1.29489Z"
-                                            fill="#FFA903" stroke="#FFA903" stroke-width="2" stroke-linecap="round"
+                                            d="M22 17C22 17.5304 21.7893 18.0391 21.4142 18.4142C21.0391 18.7893 20.5304 19 20 19H6.828C6.29761 19.0001 5.78899 19.2109 5.414 19.586L3.212 21.788C3.1127 21.8873 2.9862 21.9549 2.84849 21.9823C2.71077 22.0097 2.56803 21.9956 2.43831 21.9419C2.30858 21.8881 2.1977 21.7971 2.11969 21.6804C2.04167 21.5637 2.00002 21.4264 2 21.286V5C2 4.46957 2.21071 3.96086 2.58579 3.58579C2.96086 3.21071 3.46957 3 4 3H20C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V17Z"
+                                            stroke="#797878" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M7 11H17" stroke="#797878" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M7 15H13" stroke="#797878" stroke-width="2" stroke-linecap="round"
+                                            stroke-linejoin="round" />
+                                        <path d="M7 7H15" stroke="#797878" stroke-width="2" stroke-linecap="round"
                                             stroke-linejoin="round" />
                                     </svg>
-                                @endfor
+                                    <span>8</span>
+                                </div>
                             </div>
 
-                            <div class="product__rating-right">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M22 17C22 17.5304 21.7893 18.0391 21.4142 18.4142C21.0391 18.7893 20.5304 19 20 19H6.828C6.29761 19.0001 5.78899 19.2109 5.414 19.586L3.212 21.788C3.1127 21.8873 2.9862 21.9549 2.84849 21.9823C2.71077 22.0097 2.56803 21.9956 2.43831 21.9419C2.30858 21.8881 2.1977 21.7971 2.11969 21.6804C2.04167 21.5637 2.00002 21.4264 2 21.286V5C2 4.46957 2.21071 3.96086 2.58579 3.58579C2.96086 3.21071 3.46957 3 4 3H20C20.5304 3 21.0391 3.21071 21.4142 3.58579C21.7893 3.96086 22 4.46957 22 5V17Z"
-                                        stroke="#797878" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M7 11H17" stroke="#797878" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M7 15H13" stroke="#797878" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M7 7H15" stroke="#797878" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                </svg>
-                                <span>8</span>
-                            </div>
+                            @if ($product['isOriginal'])
+                                <div class="product__brand product__brand--pc">
+                                    <div class="product__brand-item">
+                                        <x-img path="/images/product/logo" width="158" height="37"
+                                            :alt="$product['title']" :lazy="false" />
+                                    </div>
+                                    <span class="product__badge">
+                                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M17.5 11.375C17.5 15.75 14.4375 17.9375 10.7975 19.2063C10.6069 19.2709 10.3998 19.2678 10.2113 19.1975C6.5625 17.9375 3.5 15.75 3.5 11.375V5.25003C3.5 5.01796 3.59219 4.7954 3.75628 4.63131C3.92038 4.46721 4.14294 4.37503 4.375 4.37503C6.125 4.37503 8.3125 3.32503 9.835 1.99503C10.0204 1.83665 10.2562 1.74963 10.5 1.74963C10.7438 1.74963 10.9796 1.83665 11.165 1.99503C12.6963 3.33378 14.875 4.37503 16.625 4.37503C16.8571 4.37503 17.0796 4.46721 17.2437 4.63131C17.4078 4.7954 17.5 5.01796 17.5 5.25003V11.375Z"
+                                                stroke="#7212BC" stroke-width="1.5" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M7.875 10.5L9.625 12.25L13.125 8.75" stroke="#7212BC"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                        <span>Оригинал</span>
+                                    </span>
+                                </div>
+                            @endif
                         </div>
+                    </div>
+
+                    {{-- Availability (mobile: after buy-row, tablet+: right column bottom) --}}
+                    <div class="product__availability">
+                        <p class="product__stock">
+                            <span class="product__stock-dot" aria-hidden="true"></span>
+                            {{ $product['inStock'] ? 'В наличии' : 'Нет в наличии' }}
+                        </p>
+                        <p class="product__delivery-note">Бесплатная доставка при заказе от 5000 ₽</p>
+                    </div>
+
+                    {{-- Buy info: price, bonus, buy-row (mobile: after gallery, tablet+: right column) --}}
+                    <div class="product__buy-info">
 
                         @if ($product['isOriginal'])
-                            <div class="product__brand product__brand--pc">
+                            <div class="product__brand product__brand--mb">
                                 <div class="product__brand-item">
                                     <x-img path="/images/product/logo" width="158" height="37"
-                                        :alt="$product['title']" />
+                                        :alt="$product['title']" :lazy="false" />
                                 </div>
                                 <span class="product__badge">
                                     <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
@@ -148,100 +247,79 @@
                                 </span>
                             </div>
                         @endif
-                    </div>
-                </div>
 
-                {{-- Availability (mobile: after buy-row, tablet+: right column bottom) --}}
-                <div class="product__availability">
-                    <p class="product__stock">
-                        <span class="product__stock-dot" aria-hidden="true"></span>
-                        {{ $product['inStock'] ? 'В наличии' : 'Нет в наличии' }}
-                    </p>
-                    <p class="product__delivery-note">Бесплатная доставка при заказе от 5000 ₽</p>
-                </div>
+                        <div class="product__price-block">
+                            <span class="product__price">{{ $priceFormatted }}</span>
+                            <span class="product__old-price">{{ $oldPriceFormatted }}</span>
+                            <span class="product__savings">Экономия {{ $savingsFormatted }}</span>
+                        </div>
 
-                {{-- Buy info: price, bonus, buy-row (mobile: after gallery, tablet+: right column) --}}
-                <div class="product__buy-info">
-
-                    @if ($product['isOriginal'])
-                        <div class="product__brand product__brand--mb">
-                            <div class="product__brand-item">
-                                <x-img path="/images/product/logo" width="158" height="37" :alt="$product['title']" />
+                        <div class="product__bonus">
+                            <div class="product__bonus-svg">
+                                <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M10.5649 2.10382C10.6051 2.02265 10.6672 1.95434 10.7441 1.90657C10.821 1.85881 10.9098 1.8335 11.0003 1.8335C11.0909 1.8335 11.1797 1.85881 11.2566 1.90657C11.3335 1.95434 11.3956 2.02265 11.4358 2.10382L13.5533 6.3929C13.6928 6.6752 13.8987 6.91944 14.1533 7.10465C14.408 7.28986 14.7038 7.4105 15.0153 7.45623L19.7508 8.14923C19.8406 8.16223 19.9249 8.20008 19.9942 8.2585C20.0636 8.31691 20.1152 8.39357 20.1432 8.47979C20.1712 8.56601 20.1746 8.65835 20.1529 8.74638C20.1312 8.83441 20.0853 8.9146 20.0203 8.9779L16.5957 12.3127C16.3698 12.5328 16.2008 12.8045 16.1033 13.1044C16.0057 13.4043 15.9825 13.7234 16.0356 14.0342L16.8441 18.7459C16.8599 18.8356 16.8502 18.9279 16.8161 19.0124C16.782 19.0968 16.7249 19.17 16.6512 19.2235C16.5775 19.277 16.4902 19.3087 16.3994 19.3151C16.3085 19.3214 16.2177 19.302 16.1373 19.2592L11.9042 17.0336C11.6253 16.8871 11.3149 16.8106 10.9999 16.8106C10.6848 16.8106 10.3745 16.8871 10.0956 17.0336L5.86335 19.2592C5.78298 19.3018 5.6923 19.3209 5.60159 19.3145C5.51089 19.308 5.42382 19.2762 5.35028 19.2228C5.27675 19.1693 5.21969 19.0962 5.18562 19.0119C5.15154 18.9276 5.1418 18.8355 5.15751 18.7459L5.9651 14.0351C6.01844 13.7242 5.99533 13.4048 5.89776 13.1048C5.80018 12.8047 5.63107 12.5329 5.40501 12.3127L1.98035 8.97882C1.91489 8.9156 1.86851 8.83526 1.84648 8.74697C1.82445 8.65867 1.82766 8.56596 1.85575 8.47941C1.88384 8.39285 1.93568 8.31592 2.00535 8.25738C2.07503 8.19885 2.15974 8.16106 2.24985 8.14832L6.98443 7.45623C7.29633 7.41086 7.59254 7.29037 7.84755 7.10514C8.10256 6.91991 8.30874 6.67548 8.44835 6.3929L10.5649 2.10382Z"
+                                        stroke="#7212BC" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
                             </div>
-                            <span class="product__badge">
+                            <div class="product__bonus-text">
+                                <span>+{{ $product['bonusPoints'] }}</span> баллов
+                            </div>
+                            <div class="product__bonus-info">
                                 <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path
-                                        d="M17.5 11.375C17.5 15.75 14.4375 17.9375 10.7975 19.2063C10.6069 19.2709 10.3998 19.2678 10.2113 19.1975C6.5625 17.9375 3.5 15.75 3.5 11.375V5.25003C3.5 5.01796 3.59219 4.7954 3.75628 4.63131C3.92038 4.46721 4.14294 4.37503 4.375 4.37503C6.125 4.37503 8.3125 3.32503 9.835 1.99503C10.0204 1.83665 10.2562 1.74963 10.5 1.74963C10.7438 1.74963 10.9796 1.83665 11.165 1.99503C12.6963 3.33378 14.875 4.37503 16.625 4.37503C16.8571 4.37503 17.0796 4.46721 17.2437 4.63131C17.4078 4.7954 17.5 5.01796 17.5 5.25003V11.375Z"
-                                        stroke="#7212BC" stroke-width="1.5" stroke-linecap="round"
+                                        d="M10.5 19.25C15.3325 19.25 19.25 15.3325 19.25 10.5C19.25 5.66751 15.3325 1.75 10.5 1.75C5.66751 1.75 1.75 5.66751 1.75 10.5C1.75 15.3325 5.66751 19.25 10.5 19.25Z"
+                                        stroke="#CACACA" stroke-width="1.5" stroke-linecap="round"
                                         stroke-linejoin="round" />
-                                    <path d="M7.875 10.5L9.625 12.25L13.125 8.75" stroke="#7212BC" stroke-width="1.5"
+                                    <path d="M10.5 7V10.5" stroke="#CACACA" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M10.5 14H10.5088" stroke="#CACACA" stroke-width="1.5"
                                         stroke-linecap="round" stroke-linejoin="round" />
                                 </svg>
-                                <span>Оригинал</span>
-                            </span>
+                            </div>
                         </div>
-                    @endif
 
-                    <div class="product__price-block">
-                        <span class="product__price">{{ $priceFormatted }}</span>
-                        <span class="product__old-price">{{ $oldPriceFormatted }}</span>
-                        <span class="product__savings">Экономия {{ $savingsFormatted }}</span>
-                    </div>
+                        <div class="product__buy-row">
+                            <x-qty />
 
-                    <div class="product__bonus">
-                        <div class="product__bonus-svg">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M10.5649 2.10382C10.6051 2.02265 10.6672 1.95434 10.7441 1.90657C10.821 1.85881 10.9098 1.8335 11.0003 1.8335C11.0909 1.8335 11.1797 1.85881 11.2566 1.90657C11.3335 1.95434 11.3956 2.02265 11.4358 2.10382L13.5533 6.3929C13.6928 6.6752 13.8987 6.91944 14.1533 7.10465C14.408 7.28986 14.7038 7.4105 15.0153 7.45623L19.7508 8.14923C19.8406 8.16223 19.9249 8.20008 19.9942 8.2585C20.0636 8.31691 20.1152 8.39357 20.1432 8.47979C20.1712 8.56601 20.1746 8.65835 20.1529 8.74638C20.1312 8.83441 20.0853 8.9146 20.0203 8.9779L16.5957 12.3127C16.3698 12.5328 16.2008 12.8045 16.1033 13.1044C16.0057 13.4043 15.9825 13.7234 16.0356 14.0342L16.8441 18.7459C16.8599 18.8356 16.8502 18.9279 16.8161 19.0124C16.782 19.0968 16.7249 19.17 16.6512 19.2235C16.5775 19.277 16.4902 19.3087 16.3994 19.3151C16.3085 19.3214 16.2177 19.302 16.1373 19.2592L11.9042 17.0336C11.6253 16.8871 11.3149 16.8106 10.9999 16.8106C10.6848 16.8106 10.3745 16.8871 10.0956 17.0336L5.86335 19.2592C5.78298 19.3018 5.6923 19.3209 5.60159 19.3145C5.51089 19.308 5.42382 19.2762 5.35028 19.2228C5.27675 19.1693 5.21969 19.0962 5.18562 19.0119C5.15154 18.9276 5.1418 18.8355 5.15751 18.7459L5.9651 14.0351C6.01844 13.7242 5.99533 13.4048 5.89776 13.1048C5.80018 12.8047 5.63107 12.5329 5.40501 12.3127L1.98035 8.97882C1.91489 8.9156 1.86851 8.83526 1.84648 8.74697C1.82445 8.65867 1.82766 8.56596 1.85575 8.47941C1.88384 8.39285 1.93568 8.31592 2.00535 8.25738C2.07503 8.19885 2.15974 8.16106 2.24985 8.14832L6.98443 7.45623C7.29633 7.41086 7.59254 7.29037 7.84755 7.10514C8.10256 6.91991 8.30874 6.67548 8.44835 6.3929L10.5649 2.10382Z"
-                                    stroke="#7212BC" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                        <div class="product__bonus-text">
-                            <span>+{{ $product['bonusPoints'] }}</span> баллов
-                        </div>
-                        <div class="product__bonus-info">
-                            <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M10.5 19.25C15.3325 19.25 19.25 15.3325 19.25 10.5C19.25 5.66751 15.3325 1.75 10.5 1.75C5.66751 1.75 1.75 5.66751 1.75 10.5C1.75 15.3325 5.66751 19.25 10.5 19.25Z" stroke="#CACACA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                              <path d="M10.5 7V10.5" stroke="#CACACA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                              <path d="M10.5 14H10.5088" stroke="#CACACA" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </div>
-                    </div>
-
-                    <div class="product__buy-row">
-                        <x-qty />
-
-                        <button type="button" class="product__add-cart btn btn--primary">
-                            <span class="product__add-cart-text">В корзину</span>
-                            <svg class="product__add-cart-icon" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M8 22C8.55228 22 9 21.5523 9 21C9 20.4477 8.55228 20 8 20C7.44772 20 7 20.4477 7 21C7 21.5523 7.44772 22 8 22Z"
-                                    stroke="white" stroke-width="1.8" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path
-                                    d="M19 22C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20C18.4477 20 18 20.4477 18 21C18 21.5523 18.4477 22 19 22Z"
-                                    stroke="white" stroke-width="1.8" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                                <path
-                                    d="M2.05078 2.0498H4.05078L6.71078 14.4698C6.80836 14.9247 7.06145 15.3313 7.42649 15.6197C7.79153 15.908 8.24569 16.0602 8.71078 16.0498H18.4908C18.946 16.0491 19.3873 15.8931 19.7418 15.6076C20.0964 15.3222 20.3429 14.9243 20.4408 14.4798L22.0908 7.0498H5.12078"
-                                    stroke="white" stroke-width="1.8" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </button>
-
-                        @php($productFavorite = in_array($product['article'], $favorites ?? []))
-                        <button type="button" class="product__favorite{{ $productFavorite ? ' is-active' : '' }}" x-data="favorite('{{ $product['article'] }}')" :class="{ 'is-active': active }"
-                            @click="toggle()" aria-label="В избранное">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M2 9.49998C2.00002 8.38718 2.33759 7.30056 2.96813 6.38364C3.59867 5.46672 4.49252 4.76264 5.53161 4.36438C6.5707 3.96612 7.70616 3.89242 8.78801 4.15302C9.86987 4.41362 10.8472 4.99626 11.591 5.82398C11.6434 5.87999 11.7067 5.92465 11.7771 5.95518C11.8474 5.98571 11.9233 6.00146 12 6.00146C12.0767 6.00146 12.1526 5.98571 12.2229 5.95518C12.2933 5.92465 12.3566 5.87999 12.409 5.82398C13.1504 4.99088 14.128 4.40335 15.2116 4.13958C16.2952 3.87581 17.4335 3.94833 18.4749 4.34746C19.5163 4.7466 20.4114 5.45343 21.0411 6.37388C21.6708 7.29433 22.0053 8.38474 22 9.49998C22 11.79 20.5 13.5 19 15L13.508 20.313C13.3217 20.527 13.0919 20.6989 12.834 20.8173C12.5762 20.9357 12.296 20.9978 12.0123 20.9996C11.7285 21.0014 11.4476 20.9428 11.1883 20.8277C10.9289 20.7126 10.697 20.5436 10.508 20.332L5 15C3.5 13.5 2 11.8 2 9.49998Z" fill="{{ $productFavorite ? '#7212BC' : 'white' }}" :fill="active ? '#7212BC' : 'white'" stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <button type="button" class="product__add-cart btn btn--primary">
+                                <span class="product__add-cart-text">В корзину</span>
+                                <svg class="product__add-cart-icon" width="24" height="24"
+                                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8 22C8.55228 22 9 21.5523 9 21C9 20.4477 8.55228 20 8 20C7.44772 20 7 20.4477 7 21C7 21.5523 7.44772 22 8 22Z"
+                                        stroke="white" stroke-width="1.8" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M19 22C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20C18.4477 20 18 20.4477 18 21C18 21.5523 18.4477 22 19 22Z"
+                                        stroke="white" stroke-width="1.8" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path
+                                        d="M2.05078 2.0498H4.05078L6.71078 14.4698C6.80836 14.9247 7.06145 15.3313 7.42649 15.6197C7.79153 15.908 8.24569 16.0602 8.71078 16.0498H18.4908C18.946 16.0491 19.3873 15.8931 19.7418 15.6076C20.0964 15.3222 20.3429 14.9243 20.4408 14.4798L22.0908 7.0498H5.12078"
+                                        stroke="white" stroke-width="1.8" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                 </svg>
-                        </button>
+                            </button>
+
+                            @php($productFavorite = in_array($product['article'], $favorites ?? []))
+                            <button type="button"
+                                class="product__favorite{{ $productFavorite ? ' is-active' : '' }}"
+                                x-data="favorite('{{ $product['article'] }}')" :class="{ 'is-active': active }" @click="toggle()"
+                                aria-label="В избранное">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M2 9.49998C2.00002 8.38718 2.33759 7.30056 2.96813 6.38364C3.59867 5.46672 4.49252 4.76264 5.53161 4.36438C6.5707 3.96612 7.70616 3.89242 8.78801 4.15302C9.86987 4.41362 10.8472 4.99626 11.591 5.82398C11.6434 5.87999 11.7067 5.92465 11.7771 5.95518C11.8474 5.98571 11.9233 6.00146 12 6.00146C12.0767 6.00146 12.1526 5.98571 12.2229 5.95518C12.2933 5.92465 12.3566 5.87999 12.409 5.82398C13.1504 4.99088 14.128 4.40335 15.2116 4.13958C16.2952 3.87581 17.4335 3.94833 18.4749 4.34746C19.5163 4.7466 20.4114 5.45343 21.0411 6.37388C21.6708 7.29433 22.0053 8.38474 22 9.49998C22 11.79 20.5 13.5 19 15L13.508 20.313C13.3217 20.527 13.0919 20.6989 12.834 20.8173C12.5762 20.9357 12.296 20.9978 12.0123 20.9996C11.7285 21.0014 11.4476 20.9428 11.1883 20.8277C10.9289 20.7126 10.697 20.5436 10.508 20.332L5 15C3.5 13.5 2 11.8 2 9.49998Z"
+                                        fill="{{ $productFavorite ? '#7212BC' : 'white' }}"
+                                        :fill="active ? '#7212BC' : 'white'" stroke="#7212BC" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                </div>
                 </div>
 
             </div>
@@ -376,40 +454,46 @@
             <div class="product__tab-content">
                 <div class="product__panel" x-show="tab === 'description'">
                     <div class="product__description">
-                        <p>Топливный насос Bosch 0 580 464 070 обеспечивает стабильную подачу топлива и надежную работу двигателя в различных условиях эксплуатации. Оригинальная продукция Bosch отличается высоким качеством изготовления, долговечностью и соответствием заводским стандартам.
+                        <p>Топливный насос Bosch 0 580 464 070 обеспечивает стабильную подачу топлива и надежную работу
+                            двигателя в различных условиях эксплуатации. Оригинальная продукция Bosch отличается высоким
+                            качеством изготовления, долговечностью и соответствием заводским стандартам.
                         </p>
                         <p>Преимущества:<br>
-                        ✔ Стабильная подача топлива при любых режимах работы двигателя<br>
-                        ✔ Низкий уровень шума и вибраций<br>
-                        ✔ Устойчивость к износу и коррозии<br>омобилей<br>
-                        ✔ Соответствие оригинальным техническим требованиям производителя</p>
-                        
-                        <p>Насос изготовлен из качественных материалов и рассчитан на длительный срок службы, что делает его надежным решением для замены штатного топливного оборудования.</p>
+                            ✔ Стабильная подача топлива при любых режимах работы двигателя<br>
+                            ✔ Низкий уровень шума и вибраций<br>
+                            ✔ Устойчивость к износу и коррозии<br>омобилей<br>
+                            ✔ Соответствие оригинальным техническим требованиям производителя</p>
+
+                        <p>Насос изготовлен из качественных материалов и рассчитан на длительный срок службы, что делает
+                            его надежным решением для замены штатного топливного оборудования.</p>
                     </div>
                 </div>
 
                 <div class="product__panel" x-show="tab === 'specs'" x-cloak>
                     <div class="product__description">
                         <p><strong>Бренд</strong> — Bosch<br>
-                        <strong>Страна производства</strong> — Германия<br>
-                        <strong>Тип</strong> — Электрический топливный насос<br>
-                        <strong>Рабочее напряжение</strong> — 12 В<br>
-                        <strong>Рабочее давление</strong> — 3.0 бар<br>
-                        <strong>OEM номер</strong> — 0 580 464 070<br>
-                        <strong>Тип топлива</strong> — Бензин<br>
-                        <strong>Материал корпуса</strong> — Металл<br>
-                        <strong>Состояние</strong> — Новый<br>
-                        <strong>Гарантия</strong> — 12 месяцев</p>
+                            <strong>Страна производства</strong> — Германия<br>
+                            <strong>Тип</strong> — Электрический топливный насос<br>
+                            <strong>Рабочее напряжение</strong> — 12 В<br>
+                            <strong>Рабочее давление</strong> — 3.0 бар<br>
+                            <strong>OEM номер</strong> — 0 580 464 070<br>
+                            <strong>Тип топлива</strong> — Бензин<br>
+                            <strong>Материал корпуса</strong> — Металл<br>
+                            <strong>Состояние</strong> — Новый<br>
+                            <strong>Гарантия</strong> — 12 месяцев
+                        </p>
                     </div>
                 </div>
 
                 <div class="product__panel" x-show="tab === 'compatibility'" x-cloak>
                     <div class="product__description">
                         <p><strong>BWM</strong> — BMW 3 Series (E46), BMW 5 Series (E39), BMW X5 (E53)<br>
-                        <strong>Audi</strong> — Audi A4 B6, Audi A6 C5, Audi TT 8N<br>
-                        <strong>Volkswagen</strong> — Volkswagen Golf IV, Volkswagen Passat B5, Volkswagen Bora<br>
-                        <strong>Mercedes-Benz</strong> — Mercedes-Benz C-Class (W203), Mercedes-Benz E-Class (W210)<br>
-                        <strong>Ford</strong> — Ford Focus Mk1, Ford Mondeo Mk3</p>
+                            <strong>Audi</strong> — Audi A4 B6, Audi A6 C5, Audi TT 8N<br>
+                            <strong>Volkswagen</strong> — Volkswagen Golf IV, Volkswagen Passat B5, Volkswagen Bora<br>
+                            <strong>Mercedes-Benz</strong> — Mercedes-Benz C-Class (W203), Mercedes-Benz E-Class
+                            (W210)<br>
+                            <strong>Ford</strong> — Ford Focus Mk1, Ford Mondeo Mk3
+                        </p>
                     </div>
                 </div>
             </div>
@@ -418,7 +502,8 @@
 
     {{-- Reviews (slider) --}}
     <div class="container">
-        <div class="product__reviews-section section" x-data="slider({ breakpoints: { 0: 1, 1200: 2 } })" @resize.window.debounce.150ms="onResize()">
+        <div class="product__reviews-section section" x-data="slider({ breakpoints: { 0: { perView: 1, autoHeight: true }, 1200: { perView: 2 } } })"
+            @resize.window.debounce.150ms="onResize()">
             <div class="product__reviews-head">
                 <h2 class="product__section-title">Отзывы ({{ $product['reviewCount'] }})</h2>
                 <div class="product__reviews-arrows slider__arrows slider__arrows--pc">
@@ -473,7 +558,7 @@
                             @if (!empty($review['photos']))
                                 <div class="product__review-photos">
                                     @foreach ($review['photos'] as $photo)
-                                        <x-img path="/images/product/bosch" class="product__review-photo"
+                                        <x-img path="/images/product/review" class="product__review-photo"
                                             alt="" />
                                     @endforeach
                                 </div>
@@ -483,10 +568,33 @@
                 </div>
             </div>
 
-            <button type="button" class="product__reviews-all btn btn--primary">
-                <span class="product__reviews-all-short">Смотреть все</span>
-                <span class="product__reviews-all-full">Смотреть все отзывы</span>
-            </button>
+            <div class="product__reviews-bottom">
+                <button type="button" class="product__reviews-all btn btn--primary">
+                    <span class="product__reviews-all-short">Смотреть все</span>
+                    <span class="product__reviews-all-full">Смотреть все отзывы</span>
+                </button>
+
+                <div class="product__reviews-arrows slider__arrows slider__arrows--mb">
+                    <button class="slider__arrow slider__arrow--prev product__reviews-arrow" type="button"
+                        aria-label="Назад" @click="prev()" :disabled="!canPrev">
+                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z"
+                                fill="#080808" />
+                        </svg>
+                    </button>
+                    <button class="slider__arrow slider__arrow--next product__reviews-arrow" type="button"
+                        aria-label="Вперёд" @click="next()" :disabled="!canNext">
+                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM21.2803 6.05328C21.5732 5.76039 21.5732 5.28551 21.2803 4.99262L16.5074 0.219648C16.2145 -0.073245 15.7396 -0.073245 15.4467 0.219648C15.1538 0.512542 15.1538 0.987415 15.4467 1.28031L19.6893 5.52295L15.4467 9.76559C15.1538 10.0585 15.1538 10.5334 15.4467 10.8263C15.7396 11.1191 16.2145 11.1191 16.5074 10.8263L21.2803 6.05328ZM0.75 5.52295V6.27295H20.75V5.52295V4.77295H0.75V5.52295Z"
+                                fill="#030303" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
