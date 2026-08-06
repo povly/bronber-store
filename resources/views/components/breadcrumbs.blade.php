@@ -27,18 +27,20 @@
         $jsonLdItems[] = $listItem;
     }
 
-    $jsonLd = $jsonLdItems ? [
-        '@context' => 'https://schema.org',
-        '@type' => 'BreadcrumbList',
-        'itemListElement' => $jsonLdItems,
-    ] : null;
+    $jsonLd = $jsonLdItems
+        ? [
+            '@context' => 'https://schema.org',
+            '@type' => 'BreadcrumbList',
+            'itemListElement' => $jsonLdItems,
+        ]
+        : null;
 @endphp
 
 <nav {{ $attributes->merge(['class' => "breadcrumbs {$class}"]) }} aria-label="Breadcrumb">
     <ul class="breadcrumbs__list">
-        @foreach($breadcrumbsItems as $item)
+        @foreach ($breadcrumbsItems as $item)
             <li class="breadcrumbs__item">
-                @if(!empty($item['url']) && !$loop->last)
+                @if (!empty($item['url']) && !$loop->last)
                     <a href="{{ $item['url'] }}" class="breadcrumbs__link">{{ $item['label'] ?? '' }}</a>
                 @else
                     <span class="breadcrumbs__current">{{ $item['label'] ?? '' }}</span>
@@ -49,8 +51,8 @@
 </nav>
 
 @push('head-scripts')
-    @if($jsonLd)
-    <script type="application/ld+json">
+    @if ($jsonLd)
+        <script type="application/ld+json">
 {!! json_encode($jsonLd, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_PRETTY_PRINT) !!}
     </script>
     @endif

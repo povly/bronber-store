@@ -92,6 +92,11 @@
                         <div class="article__body">
                             <h3 class="article__title">{{ $item['title'] }}</h3>
                             <p class="article__desc">{{ $item['desc'] }}</p>
+                            <div class="article__reveal">
+                                <span class="article__more btn btn--white">
+                                    Детальнее
+                                </span>
+                            </div>
                         </div>
                     </a>
                 </article>

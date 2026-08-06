@@ -1,5 +1,6 @@
 <header class="header" x-data="storeHeader(@js($searchTypes))">
-    @include('common.top-bar.top-bar')
+    @include('blocks.common.top-bar.top-bar')
+
 
     <div class="header__top">
         <a href="/" class="header__logo" aria-label="{{ __('store.header_logo_alt') }}">
@@ -7,54 +8,56 @@
                 <g clip-path="url(#clip0_755_344)">
                     <path
                         d="M5.04056 0.104791C5.06806 0.0243227 5.11573 -0.0168457 5.18724 -0.0168457H24.7101C26.0724 -0.0168457 27.1468 0.497774 27.9334 1.52701C28.6503 2.55625 28.8263 3.7876 28.4633 5.22292C28.4541 5.26783 28.4449 5.309 28.4358 5.34456C27.9316 7.11298 26.9763 8.61193 25.5719 9.83953C26.3328 11.0765 26.4996 12.5792 26.0761 14.3476C26.0669 14.3832 26.0541 14.4243 26.0358 14.4692C25.6379 15.9046 24.8165 17.1359 23.5697 18.1651C22.2441 19.185 20.9038 19.694 19.5507 19.694H0.0149911C-0.0565147 19.694 -0.0876829 19.6529 -0.0785155 19.5724L5.04056 0.106662V0.104791ZM6.83187 12.1113L6.8062 12.2461L6.58069 13.1125L6.03614 15.1429H20.2548C20.4308 15.1429 20.6031 15.0756 20.7718 14.9408C20.9313 14.8154 21.0377 14.6564 21.0909 14.4674L21.7014 12.1113H6.83371H6.83187ZM8.02547 7.56397H22.8932L23.5166 5.22292C23.5606 5.03391 23.5386 4.87111 23.4505 4.73637C23.3442 4.60163 23.203 4.53426 23.027 4.53426H8.82303L8.0273 7.56584L8.02547 7.56397Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M44.6229 16.3219H35.0594L34.2105 19.5705C34.1757 19.651 34.1225 19.6922 34.051 19.6922H29.3427C29.2711 19.6922 29.2418 19.651 29.2491 19.5705L33.347 3.94854C33.6477 2.86503 34.2747 1.93122 35.23 1.14713C36.2292 0.370523 37.2468 -0.0168457 38.2809 -0.0168457H55.2846C56.3095 -0.0168457 57.1236 0.370523 57.7249 1.14713C58.264 1.9331 58.396 2.8669 58.1228 3.94854C57.3894 6.75555 56.6542 9.56257 55.9208 12.3677C55.6201 13.4512 54.9967 14.385 54.0506 15.1691C53.0422 15.9364 52.021 16.32 50.9869 16.32H50.6147L54.3807 19.5687H48.002L44.6192 16.32L44.6229 16.3219ZM36.253 11.7745H51.1207L53.0166 4.53239H38.1489L36.253 11.7745Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M64.5217 1.33619C65.4935 0.587648 66.4799 0.213379 67.4791 0.213379H86.8425C87.8418 0.213379 88.6338 0.587648 89.2169 1.33619C89.7376 2.09408 89.866 3.00168 89.6019 4.05712C88.5678 7.9832 87.5374 11.9093 86.5125 15.8335C86.221 16.8889 85.6141 17.7965 84.6955 18.5544C83.722 19.303 82.7374 19.6772 81.7381 19.6772H62.3747C61.3755 19.6772 60.5889 19.303 60.0132 18.5544C59.4907 17.7965 59.3587 16.8889 59.6153 15.8335C60.6494 11.9074 61.6798 7.98133 62.7048 4.05712C62.9963 3.00168 63.6013 2.09408 64.5217 1.33619ZM64.4557 15.375H81.9105L84.7615 4.51747H67.3068L64.4557 15.375Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M100.046 -0.0168457H100.059C100.085 -0.00748898 100.103 0.00186764 100.112 0.00935302H100.125L112.286 13.1818L115.708 0.104791C115.742 0.0243227 115.796 -0.0168457 115.867 -0.0168457H120.576C120.647 -0.0168457 120.676 0.0243227 120.669 0.104791L115.55 19.5705C115.524 19.651 115.475 19.6922 115.403 19.6922H110.682C110.656 19.6922 110.638 19.6828 110.629 19.666H110.616L98.4545 6.49356L95.0333 19.5705C94.9984 19.651 94.9453 19.6922 94.8738 19.6922H90.1654C90.0939 19.6922 90.0627 19.651 90.0719 19.5705L95.191 0.104791C95.2185 0.0243227 95.2661 -0.0168457 95.3376 -0.0168457H100.046Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M125.233 0.104791C125.259 0.0243227 125.309 -0.0168457 125.38 -0.0168457H144.903C146.265 -0.0168457 147.34 0.497774 148.126 1.52701C148.843 2.55625 149.019 3.7876 148.656 5.22292C148.647 5.26783 148.638 5.309 148.631 5.34456C148.126 7.11298 147.171 8.61193 145.767 9.83953C146.528 11.0765 146.694 12.5792 146.271 14.3476C146.262 14.3832 146.249 14.4243 146.23 14.4692C145.833 15.9046 145.009 17.1359 143.763 18.1651C142.437 19.185 141.097 19.694 139.744 19.694H120.208C120.136 19.694 120.107 19.6529 120.114 19.5724L125.233 0.106662V0.104791ZM127.025 12.1113L126.999 12.2461L126.774 13.1125L126.229 15.1429H140.448C140.624 15.1429 140.796 15.0756 140.965 14.9408C141.124 14.8154 141.231 14.6564 141.284 14.4674L141.894 12.1113H127.027H127.025ZM128.218 7.56397H143.086L143.709 5.22292C143.753 5.03391 143.731 4.87111 143.643 4.73637C143.537 4.60163 143.396 4.53426 143.218 4.53426H129.014L128.218 7.56584V7.56397Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M193.356 16.3219H183.792L182.943 19.5705C182.908 19.651 182.855 19.6922 182.784 19.6922H178.075C178.004 19.6922 177.973 19.651 177.982 19.5705L182.08 3.94854C182.38 2.86503 183.007 1.93122 183.963 1.14713C184.962 0.370523 185.979 -0.0168457 187.014 -0.0168457H204.017C205.042 -0.0168457 205.856 0.370523 206.458 1.14713C206.997 1.9331 207.129 2.8669 206.855 3.94854C206.122 6.75555 205.387 9.56257 204.653 12.3677C204.353 13.4512 203.729 14.385 202.783 15.1691C201.775 15.9364 200.754 16.32 199.72 16.32H199.347L203.113 19.5687H196.735L193.352 16.32L193.356 16.3219ZM184.986 11.7745H199.853L201.749 4.53239H186.882L184.986 11.7745Z"
-                        fill="black"/>
-                    <path d="M176.514 7.73047L175.324 12.2198L151.492 12.2067L152.644 7.73047H176.514Z" fill="black"/>
-                    <path d="M174.471 15.2833L173.281 19.7708L149.449 19.7577L150.601 15.2833H174.471Z" fill="#7212BC"/>
+                        fill="black" />
+                    <path d="M176.514 7.73047L175.324 12.2198L151.492 12.2067L152.644 7.73047H176.514Z"
+                        fill="black" />
+                    <path d="M174.471 15.2833L173.281 19.7708L149.449 19.7577L150.601 15.2833H174.471Z"
+                        fill="#7212BC" />
                     <path d="M178.471 0.121582L177.281 4.60907L153.449 4.59597L154.601 0.121582H178.471Z"
-                          fill="#7212BC"/>
+                        fill="#7212BC" />
                     <path
                         d="M83.7818 28.1937C83.6901 28.5456 83.5985 28.8955 83.505 29.2436C83.4206 29.543 83.2519 29.7937 83.0008 29.9959C82.7496 30.198 82.4819 30.299 82.1959 30.299H77.7918L77.7112 30.619C77.6947 30.6808 77.7002 30.7332 77.7313 30.7743C77.7625 30.8155 77.8065 30.838 77.867 30.838H83.0869L82.7771 32.0188H77.0823C76.8091 32.0188 76.5909 31.9159 76.4314 31.71C76.2884 31.5023 76.2536 31.2534 76.3251 30.9633C76.5671 30.0408 76.8091 29.1163 77.0529 28.1937C77.1336 27.9037 77.2986 27.6567 77.5516 27.4508C77.8175 27.2431 78.0889 27.1383 78.3621 27.1383H83.0246C83.2978 27.1383 83.516 27.2431 83.6755 27.4508C83.8185 27.6567 83.8533 27.9037 83.7818 28.1937ZM78.1035 29.1182H82.2454L82.4525 28.3229H78.3107L78.1035 29.1182Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M84.3841 30.836H89.2391L89.4133 30.1679H85.332C85.0441 30.1604 84.8278 30.0575 84.6848 29.8573C84.5418 29.6589 84.5069 29.41 84.5784 29.1125C84.6591 28.8056 84.7379 28.4987 84.8186 28.1918C84.8993 27.9017 85.0643 27.6547 85.3173 27.4489C85.5832 27.2411 85.8545 27.1364 86.1277 27.1364H91.1148L90.8049 28.3209H86.0764L85.9022 28.9815H89.9835C90.2751 28.9909 90.4914 29.0957 90.6344 29.294C90.7774 29.4924 90.8123 29.7413 90.7408 30.0407C90.6601 30.3476 90.5812 30.6545 90.5006 30.9614C90.4199 31.2514 90.2549 31.5003 90.0019 31.708C89.7342 31.9139 89.4647 32.0168 89.1915 32.0168H84.0742L84.3841 30.836Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M93.7239 27.0765L93.8358 26.6461C93.845 26.6237 93.8596 26.6124 93.8798 26.6124H95.1706C95.1907 26.6124 95.1981 26.6237 95.1962 26.6461L95.0826 27.0765H96.7052C96.7217 27.0765 96.729 27.0859 96.7272 27.1065L96.4173 28.291C96.4082 28.3135 96.3935 28.3247 96.377 28.3247H94.7544L94.1108 30.7706H97.1911C97.2076 30.7706 97.2149 30.7818 97.2131 30.8042L96.9032 31.9851C96.894 32.0075 96.8794 32.0187 96.8629 32.0187H93.4911C93.2069 32.0187 92.9832 31.9121 92.8182 31.6987C92.6734 31.4854 92.6367 31.229 92.7082 30.9296L93.3921 28.3228H91.9656C91.9491 28.3228 91.9418 28.3116 91.9436 28.2892L92.2535 27.1046C92.2627 27.084 92.2773 27.0746 92.2975 27.0746H93.7203L93.7239 27.0765Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M99.1656 30.473C99.2884 30.6433 99.3196 30.8548 99.2591 31.1074C99.1857 31.3601 99.0446 31.5715 98.8319 31.7418C98.6192 31.9121 98.3937 31.9982 98.1535 31.9982C97.9133 31.9982 97.7318 31.9121 97.609 31.7418C97.4861 31.5715 97.4549 31.3601 97.5118 31.1074C97.5851 30.8548 97.7263 30.6433 97.939 30.473C98.1517 30.3028 98.379 30.2167 98.621 30.2167C98.8631 30.2167 99.0427 30.3028 99.1656 30.473Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M106.15 32.0168H100.727C100.454 32.0168 100.235 31.9139 100.076 31.7081C99.9329 31.5004 99.8981 31.2515 99.9696 30.9614C100.08 30.5441 100.188 30.1268 100.298 29.7095C100.378 29.4194 100.543 29.1705 100.796 28.9628C101.066 28.757 101.337 28.654 101.611 28.654H105.996L106.207 27.8568H101.171L101.484 26.676H106.775C107.061 26.676 107.278 26.7771 107.423 26.9792C107.568 27.1813 107.604 27.4321 107.533 27.7315C107.443 28.0814 107.351 28.4313 107.26 28.7813C107.179 29.0713 107.014 29.3202 106.761 29.528C106.491 29.7338 106.22 29.8367 105.947 29.8367H101.561L101.299 30.836H106.46L106.15 32.0168Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M108.71 26.9867C108.976 26.7809 109.247 26.678 109.52 26.678H114.372C114.645 26.678 114.863 26.7809 115.023 26.9867C115.166 27.1945 115.2 27.4434 115.129 27.7334C114.848 28.8094 114.564 29.8873 114.282 30.9634C114.201 31.2534 114.036 31.5023 113.783 31.71C113.515 31.9159 113.246 32.0188 112.973 32.0188H108.121C107.846 32.0188 107.63 31.9159 107.47 31.71C107.327 31.5023 107.293 31.2534 107.364 30.9634C107.648 29.8873 107.931 28.8094 108.211 27.7334C108.292 27.4434 108.457 27.1945 108.71 26.9867ZM113.024 30.8361L113.803 27.8588H109.474L108.692 30.8361H113.024Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M118.228 26.6798H119.468C119.743 26.6798 119.959 26.7827 120.119 26.9886C120.262 27.1963 120.296 27.4452 120.225 27.7352L119.101 32.0188H117.807L118.832 28.1133C118.848 28.0421 118.841 27.9823 118.806 27.9336C118.773 27.885 118.722 27.8606 118.654 27.8606H117.918L118.228 26.6798Z"
-                        fill="black"/>
+                        fill="black" />
                     <path
                         d="M130.783 26.6124C130.796 26.6124 130.804 26.618 130.809 26.6311C130.811 26.6442 130.809 26.6555 130.798 26.6648L125.455 32.0038C125.446 32.0131 125.435 32.0187 125.426 32.0187H123.681C123.668 32.0187 123.66 32.0131 123.659 32C123.657 31.9869 123.659 31.9776 123.67 31.9663L127.725 27.8606H123.536C123.516 27.8606 123.508 27.8494 123.51 27.8269L123.824 26.6461C123.831 26.6237 123.844 26.6124 123.864 26.6124H130.785H130.783Z"
-                        fill="black"/>
+                        fill="black" />
                 </g>
                 <defs>
                     <clipPath id="clip0_755_344">
-                        <rect width="207" height="32" fill="white"/>
+                        <rect width="207" height="32" fill="white" />
                     </clipPath>
                 </defs>
             </svg>
@@ -62,93 +65,91 @@
 
         <div class="header__top-right container">
             <div class="header__menu">
-                <svg width="26" height="17" viewBox="0 0 26 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="26" height="2" rx="1" fill="white"/>
-                    <rect x="6" y="8" width="20" height="2" rx="1" fill="white"/>
-                    <rect x="3" y="15" width="23" height="2" rx="1" fill="white"/>
+                <svg width="26" height="17" viewBox="0 0 26 17" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <rect width="26" height="2" rx="1" fill="white" />
+                    <rect x="6" y="8" width="20" height="2" rx="1" fill="white" />
+                    <rect x="3" y="15" width="23" height="2" rx="1" fill="white" />
                 </svg>
             </div>
 
             <div class="header__search">
                 <div class="header__search-type" :class="{ 'active': searchDropdownOpen }"
-                     @click.away="closeSearchDropdown()">
+                    @click.away="closeSearchDropdown()">
                     <button type="button" class="header__search-dropdown" @click="toggleSearchDropdown()"
-                            :aria-expanded="searchDropdownOpen">
+                        :aria-expanded="searchDropdownOpen">
                         <span x-text="searchTypeLabel">{{ $searchTypes[0]['label'] ?? '' }}</span>
 
                         <svg class="header__search-chevron"
-                             :class="{ 'header__search-chevron--open': searchDropdownOpen }" width="12" height="7"
-                             viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            :class="{ 'header__search-chevron--open': searchDropdownOpen }" width="12"
+                            height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M5.39605 6.04038C5.63036 6.27469 6.01026 6.27469 6.24458 6.04038L10.063 2.222C10.2973 1.98769 10.2973 1.60779 10.063 1.37347C9.82864 1.13916 9.44874 1.13916 9.21443 1.37347L5.82031 4.76759L2.4262 1.37347C2.19189 1.13916 1.81199 1.13916 1.57767 1.37347C1.34336 1.60779 1.34336 1.98769 1.57767 2.222L5.39605 6.04038ZM5.82031 4.85205L5.22031 4.85205L5.22031 5.61611L5.82031 5.61611L6.42031 5.61611L6.42031 4.85205L5.82031 4.85205Z"
-                                fill="white"/>
+                                fill="white" />
                         </svg>
                     </button>
                     <ul class="header__search-list" x-show="searchDropdownOpen" x-transition x-cloak>
-                        @foreach($searchTypes as $type)
+                        @foreach ($searchTypes as $type)
                             <li>
                                 <button type="button" class="header__search-option"
-                                        :class="{ 'is-active': searchType === '{{ $type['value'] }}' }"
-                                        @click="selectSearchType('{{ $type['value'] }}')">{{ $type['label'] }}</button>
+                                    :class="{ 'is-active': searchType === '{{ $type['value'] }}' }"
+                                    @click="selectSearchType('{{ $type['value'] }}')">{{ $type['label'] }}</button>
                             </li>
                         @endforeach
                     </ul>
                 </div>
-                <input
-                    type="text"
-                    class="header__search-input header__search-input--mobile"
-                    placeholder="{{ __('store.search_placeholder_mobile') }}"
-                    x-ref="searchInputMobile"
-                    name="search"
-                >
-                <input
-                    type="text"
-                    class="header__search-input header__search-input--desktop"
-                    placeholder="{{ __('store.search_placeholder_desktop') }}"
-                    x-ref="searchInputDesktop"
-                    name="search"
-                >
+                <input type="text" class="header__search-input header__search-input--mobile"
+                    placeholder="{{ __('store.search_placeholder_mobile') }}" x-ref="searchInputMobile" name="search">
+                <input type="text" class="header__search-input header__search-input--desktop"
+                    placeholder="{{ __('store.search_placeholder_desktop') }}" x-ref="searchInputDesktop"
+                    name="search">
                 <button type="button" class="header__search-btn" aria-label="{{ __('store.search_button') }}">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path d="M20.9999 21L16.6599 16.66" stroke="#BFBFBF" stroke-width="2" stroke-linecap="round"
-                              stroke-linejoin="round"/>
+                            stroke-linejoin="round" />
                         <path
                             d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
-                            stroke="#BFBFBF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            stroke="#BFBFBF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
             </div>
 
             <div class="header__actions">
                 <a href="#" class="header__action header__action--favorites"
-                   aria-label="{{ __('store.header_favorites') }}">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    aria-label="{{ __('store.header_favorites') }}">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M2 9.50004C2.00002 8.38724 2.33759 7.30062 2.96813 6.3837C3.59867 5.46678 4.49252 4.7627 5.53161 4.36444C6.5707 3.96618 7.70616 3.89248 8.78801 4.15308C9.86987 4.41368 10.8472 4.99632 11.591 5.82404C11.6434 5.88005 11.7067 5.92471 11.7771 5.95524C11.8474 5.98577 11.9233 6.00152 12 6.00152C12.0767 6.00152 12.1526 5.98577 12.2229 5.95524C12.2933 5.92471 12.3566 5.88005 12.409 5.82404C13.1504 4.99094 14.128 4.40341 15.2116 4.13964C16.2952 3.87588 17.4335 3.94839 18.4749 4.34752C19.5163 4.74666 20.4114 5.45349 21.0411 6.37394C21.6708 7.29439 22.0053 8.3848 22 9.50004C22 11.79 20.5 13.5 19 15L13.508 20.313C13.3217 20.527 13.0919 20.699 12.834 20.8173C12.5762 20.9357 12.296 20.9979 12.0123 20.9997C11.7285 21.0015 11.4476 20.9429 11.1883 20.8278C10.9289 20.7127 10.697 20.5437 10.508 20.332L5 15C3.5 13.5 2 11.8 2 9.50004Z"
-                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-                <a href="#" class="header__action header__action--user" aria-label="{{ __('store.header_profile') }}">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="#" class="header__action header__action--user"
+                    aria-label="{{ __('store.header_profile') }}">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M12 13C14.7614 13 17 10.7614 17 8C17 5.23858 14.7614 3 12 3C9.23858 3 7 5.23858 7 8C7 10.7614 9.23858 13 12 13Z"
-                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         <path
                             d="M20 21C20 18.8783 19.1571 16.8434 17.6569 15.3431C16.1566 13.8429 14.1217 13 12 13C9.87827 13 7.84344 13.8429 6.34315 15.3431C4.84285 16.8434 4 18.8783 4 21"
-                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-                <a href="{{ route('cart') }}" class="header__action header__action--cart" aria-label="{{ __('store.header_cart') }}">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a href="{{ route('cart') }}" class="header__action header__action--cart"
+                    aria-label="{{ __('store.header_cart') }}">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M8 22C8.55228 22 9 21.5523 9 21C9 20.4477 8.55228 20 8 20C7.44772 20 7 20.4477 7 21C7 21.5523 7.44772 22 8 22Z"
-                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         <path
                             d="M19 22C19.5523 22 20 21.5523 20 21C20 20.4477 19.5523 20 19 20C18.4477 20 18 20.4477 18 21C18 21.5523 18.4477 22 19 22Z"
-                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         <path
                             d="M2.05078 2.05005H4.05078L6.71078 14.47C6.80836 14.9249 7.06145 15.3315 7.42649 15.6199C7.79153 15.9083 8.24569 16.0604 8.71078 16.05H18.4908C18.946 16.0493 19.3873 15.8933 19.7418 15.6079C20.0964 15.3224 20.3429 14.9246 20.4408 14.48L22.0908 7.05005H5.12078"
-                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                     <span class="header__badge">3</span>
                 </a>
@@ -159,23 +160,29 @@
     <nav class="header__nav">
         <div class="header__nav-inner container">
             <div class="header__nav-left">
-                <button type="button" class="header__catalog-btn" aria-label="{{ __('store.header_catalog_btn') }}">
+                <button type="button" class="header__catalog-btn"
+                    aria-label="{{ __('store.header_catalog_btn') }}">
                     <span class="header__catalog-btn-svg">
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="8" height="8" rx="1" fill="#F6F6F6"/>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="8" height="8" rx="1" fill="#F6F6F6" />
                         </svg>
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="8" height="8" rx="1" fill="#F6F6F6"/>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="8" height="8" rx="1" fill="#F6F6F6" />
                         </svg>
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="8" height="8" rx="1" fill="#F6F6F6"/>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="8" height="8" rx="1" fill="#F6F6F6" />
                         </svg>
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <rect width="8" height="8" rx="1" fill="#F6F6F6"/>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <rect width="8" height="8" rx="1" fill="#F6F6F6" />
                         </svg>
                     </span>
 
-                    <a href="#" class="header__nav-link header__nav-link--catalog">{{ __('store.nav_catalog') }}</a>
+                    <a href="#"
+                        class="header__nav-link header__nav-link--catalog">{{ __('store.nav_catalog') }}</a>
                 </button>
             </div>
 

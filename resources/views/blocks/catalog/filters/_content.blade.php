@@ -8,8 +8,11 @@
         <li>
             <div class="catalog-filters__category-item is-active" @click="toggleCategory('brakes')">
                 <span>Тормозная система</span>
-                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.brakes }" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z" fill="#BFBFBF" />
+                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.brakes }"
+                    width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z"
+                        fill="#BFBFBF" />
                 </svg>
             </div>
             <ul class="catalog-filters__subcategory-list" :class="{ 'is-hidden': !openCategories.brakes }">
@@ -33,8 +36,11 @@
             <div class="catalog-filters__category-item" :class="{ 'is-active': activeCategory === 'chiptuning' }"
                 @click="toggleCategory('chiptuning')">
                 <span class="catalog-filters__category-name">Чип-тюнинг</span>
-                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.chiptuning }" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z" fill="#BFBFBF" />
+                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.chiptuning }"
+                    width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z"
+                        fill="#BFBFBF" />
                 </svg>
             </div>
             <ul class="catalog-filters__subcategory-list is-hidden"
@@ -53,8 +59,11 @@
             <div class="catalog-filters__category-item" :class="{ 'is-active': activeCategory === 'discs' }"
                 @click="toggleCategory('discs')">
                 <span class="catalog-filters__category-name">Диски</span>
-                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.discs }" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z" fill="#BFBFBF" />
+                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.discs }"
+                    width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z"
+                        fill="#BFBFBF" />
                 </svg>
             </div>
             <ul class="catalog-filters__subcategory-list is-hidden" :class="{ 'is-hidden': !openCategories.discs }">
@@ -72,8 +81,11 @@
             <div class="catalog-filters__category-item" :class="{ 'is-active': activeCategory === 'optics' }"
                 @click="toggleCategory('optics')">
                 <span class="catalog-filters__category-name">Оптика</span>
-                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.optics }" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z" fill="#BFBFBF" />
+                <svg class="catalog-filters__category-chevron is-open" :class="{ 'is-open': openCategories.optics }"
+                    width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z"
+                        fill="#BFBFBF" />
                 </svg>
             </div>
             <ul class="catalog-filters__subcategory-list is-hidden" :class="{ 'is-hidden': !openCategories.optics }">
@@ -97,8 +109,11 @@
         <div class="catalog-filters__section" :class="{ 'is-open': isSectionOpen('price') }">
             <div class="catalog-filters__section-header" @click="toggleSection('price')">
                 <span class="catalog-filters__section-title">Цена, ₽</span>
-                <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('price') }" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z" fill="#BFBFBF" />
+                <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('price') }"
+                    width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z"
+                        fill="#BFBFBF" />
                 </svg>
             </div>
             <div class="catalog-filters__section-body" :class="{ 'is-hidden': !isSectionOpen('price') }">
@@ -132,8 +147,12 @@
         <div class="catalog-filters__section" :class="{ 'is-open': isSectionOpen('brand') }">
             <div class="catalog-filters__section-header" @click="toggleSection('brand')">
                 <span class="catalog-filters__section-title">Бренд</span>
-                <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('brand') }" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z" fill="#BFBFBF" />
+                <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('brand') }"
+                    width="17" height="15" viewBox="0 0 17 15" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z"
+                        fill="#BFBFBF" />
                 </svg>
             </div>
             <div class="catalog-filters__section-body" :class="{ 'is-hidden': !isSectionOpen('brand') }">
@@ -165,8 +184,7 @@
                 </div>
                 @if (count($allBrands) > $visibleCount)
                     <button type="button" class="catalog-filters__show-more" :class="{ 'is-open': brandShowAll }"
-                        x-show="filteredBrands.length > visibleCount" @click="brandShowAll = !brandShowAll"
-                        >
+                        x-show="filteredBrands.length > visibleCount" @click="brandShowAll = !brandShowAll">
                         <span x-text="brandShowAll ? 'Скрыть' : `Показать еще`">Показать еще</span>
                         <svg width="12" height="7" viewBox="0 0 12 7" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
@@ -184,8 +202,12 @@
             :class="{ 'is-open': isSectionOpen('availability') }">
             <div class="catalog-filters__section-header" @click="toggleSection('availability')">
                 <span class="catalog-filters__section-title">Наличие</span>
-                <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('availability') }" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z" fill="#BFBFBF" />
+                <svg class="catalog-filters__section-chevron is-open"
+                    :class="{ 'is-open': isSectionOpen('availability') }" width="17" height="15"
+                    viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z"
+                        fill="#BFBFBF" />
                 </svg>
             </div>
             <div class="catalog-filters__section-body {{ !$availabilityOpen ? 'is-hidden' : '' }}"
@@ -229,8 +251,12 @@
         <div class="catalog-filters__section" :class="{ 'is-open': isSectionOpen('compatibility') }">
             <div class="catalog-filters__section-header" @click="toggleSection('compatibility')">
                 <span class="catalog-filters__section-title">Совместимость</span>
-                <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('compatibility') }" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z" fill="#BFBFBF" />
+                <svg class="catalog-filters__section-chevron is-open"
+                    :class="{ 'is-open': isSectionOpen('compatibility') }" width="17" height="15"
+                    viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9.53033 3.46967C9.23744 3.17678 8.76256 3.17678 8.46967 3.46967L3.6967 8.24264C3.40381 8.53553 3.40381 9.01041 3.6967 9.3033C3.98959 9.59619 4.46447 9.59619 4.75736 9.3033L9 5.06066L13.2426 9.3033C13.5355 9.59619 14.0104 9.59619 14.3033 9.3033C14.5962 9.01041 14.5962 8.53553 14.3033 8.24264L9.53033 3.46967ZM9 5L9.75 5L9.75 4L9 4L8.25 4L8.25 5L9 5Z"
+                        fill="#BFBFBF" />
                 </svg>
             </div>
             <div class="catalog-filters__section-body" :class="{ 'is-hidden': !isSectionOpen('compatibility') }">

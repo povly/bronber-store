@@ -145,12 +145,12 @@
             </button>
         </div>
         <div class="catalog-filters__mobile-body">
-            @include('catalog.filters._content')
+            @include('blocks.catalog.filters._content')
         </div>
     </div>
 
     {{-- Desktop sidebar --}}
     <aside class="catalog-filters">
-        @include('catalog.filters._content')
+        @include('blocks.catalog.filters._content')
     </aside>
 </div>
