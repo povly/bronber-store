@@ -1,3 +1,101 @@
+# AGENTS.md
+
+> Карта проекта для AI-агентов. Карту генерирует `/aif` (AI Factory), гайдлайны Laravel Boost в секции `<laravel-boost-guidelines>` управляются `php artisan boost:update`. Не удаляйте ни одну из частей.
+
+## Обзор проекта
+
+`bronber-store` — русскоязычный интернет-магазин автозапчастей (топливные насосы, BMW/Audi/VW) на Laravel 13 + MoonShine 4. Стадия pre-MVP: фронтенд-прототип на Blade + Alpine.js с захардкоженными данными, доменные модели и CRUD предстоит реализовать.
+
+## Технологический стек
+
+- **Язык программирования:** PHP 8.5
+- **Фреймворк:** Laravel 13.8
+- **Админ-панель:** MoonShine 4.15 (+ image-editor, media-manager)
+- **БД:** SQLite (default) / MySQL (сконфигурирован)
+- **ORM:** Eloquent (Laravel)
+- **Frontend:** Blade + Alpine.js 3.15 + vanilla-lazyload, PostCSS, Vite 8
+
+## Структура проекта
+
+```
+bronber-store/
+├── app/
+│   ├── Http/
+│   │   ├── Controllers/        # Базовый контроллер (closure-роуты в web.php)
+│   │   └── Middleware/         # SetLocale (i18n)
+│   ├── Models/                 # Eloquent-модели (пока только User)
+│   ├── MoonShine/              # Админ-панель
+│   │   ├── Resources/          # CRUD-ресурсы ({Resource}/{Resource}Resource + Pages/)
+│   │   ├── Layouts/            # MoonShineLayout
+│   │   └── Pages/              # Dashboard, standalone-страницы
+│   ├── Providers/              # AppServiceProvider, MoonShineServiceProvider
+│   └── View/Components/
+├── config/                     # app, database, moonshine, media-manager, image, debugbar
+├── database/
+│   ├── factories/              # UserFactory (доменные — TBD)
+│   ├── migrations/             # Фреймворковые таблицы (доменные — TBD)
+│   └── seeders/                # DatabaseSeeder
+├── resources/
+│   ├── css/                    # app.css + blocks/ (постранично) + common/ + components/
+│   ├── js/                     # app.js (Alpine) + lazyload.js + alpine/ + blocks/
+│   ├── views/                  # layouts/, components/, blocks/, *.blade.php (страницы)
+│   ├── fonts/, images/         # Статика
+├── routes/
+│   └── web.php                 # Все роуты (closure-based, i18n-дублирование)
+├── lang/                       # en/, ru/ + vendor/
+├── tests/                      # Pest 4 (Feature/, Unit/)
+├── postcss/js/functions/       # Кастомные PostCSS-функции (fluidType, pxToVw)
+├── rector.php                  # Rector (PHP 8.5 + Laravel 13 sets)
+├── vite.config.js              # Vite 8 + LightningCSS + Babel (IE11/iOS9 compat)
+└── postcss.config.js           # PostCSS pipeline (mixins, nested, simple-vars)
+```
+
+## Ключевые точки входа
+
+| Файл | Назначение |
+|---------------------------|------------------------------|
+| `routes/web.php` | Все роуты (closure-based, i18n-паттерн с `$register`-замыканием и дублированием по локали) |
+| `app/Providers/MoonShineServiceProvider.php` | Регистрация MoonShine-ресурсов и настройка админки |
+| `config/moonshine.php` | Конфигурация админ-панели (PurplePalette) |
+| `config/app.php` | Локали `['ru','en']`, timezone UTC |
+| `app/Models/User.php` | Единственная модель — эталон PHP 8 attributes (`#[Fillable]`, `#[Hidden]`) |
+| `vite.config.js` | Сборка фронта (LightningCSS + Babel для совместимости с IE11/iOS9) |
+| `postcss.config.js` | PostCSS-pipeline (mixins, nested, simple-vars, autoprefixer, cssnano) |
+
+## Документация
+
+| Документ | Путь | Описание |
+|-------------------------------|-------------------------|--------------------------------|
+| README | README.md | Лендинг проекта (обзор, быстрый старт, стек) |
+| Установка и настройка | docs/getting-started.md | Окружение, зависимости, первый запуск |
+| Архитектура | docs/architecture.md | Structured Modules, слои, правила зависимостей |
+| Разработка | docs/development.md | Pint, Pest, Rector, Vite, конвенции кода |
+| Админ-панель | docs/admin-panel.md | MoonShine v4: ресурсы, поля, namespace split |
+| Фронтенд | docs/frontend.md | Block-based структура, i18n, совместимость браузеров |
+| Деплой | docs/deployment.md | Подготовка к продакшну (pre-MVP placeholder) |
+| Boost гайдлайны | AGENTS.md (внутри `<laravel-boost-guidelines>`) | Управляется `php artisan boost:update` |
+
+## AI Context Files
+
+| Файл | Назначение |
+|---------------------------|------------------------------|
+| AGENTS.md | Карта проекта + Boost гайдлайны (этот файл) |
+| .ai-factory/DESCRIPTION.md | Спецификация проекта (стек, возможности, требования) |
+| .ai-factory/ARCHITECTURE.md | Архитектурные принципы и паттерны (генерируется `/aif-architecture`) |
+| .ai-factory/rules/base.md | Базовые конвенции кода (auto-detected) |
+| .ai-factory/config.yaml | Конфигурация AI Factory (языки, пути, git-воркфлоу) |
+
+## Правила для агентов
+
+- **Декомпозиция shell-команд:** не объединять зависимые git-операции через `&&`. Выполнять последовательно отдельными командами.
+  - Неправильно: `git checkout main && git pull`
+  - Правильно: сначала `git checkout main`, затем `git pull origin main`
+- **Pint после PHP-изменений:** всегда `vendor/bin/pint --dirty --format agent` перед завершением работы с PHP-файлами
+- **search-docs перед изменениями:** использовать Laravel Boost `search-docs` MCP-инструмент перед любыми изменениями кода
+- **Запрет на перезапись `<laravel-boost-guidelines>`:** эта секция управляется Boost, не редактировать вручную
+
+---
+
 <laravel-boost-guidelines>
 === foundation rules ===
 
@@ -7,19 +105,11 @@ The Laravel Boost guidelines are specifically curated by Laravel maintainers for
 
 ## Foundational Context
 
-This application is a Laravel application and its main Laravel ecosystems package & versions are below. You are an expert with them all. Ensure you abide by these specific packages & versions.
+This application is a Laravel application running on PHP 8.5. You are an expert with the Laravel ecosystem. Always use the APIs that match the installed major version of each package — do not assume a version.
 
-- php - 8.5
-- laravel/framework (LARAVEL) - v13
-- laravel/prompts (PROMPTS) - v0
-- laravel/boost (BOOST) - v2
-- laravel/mcp (MCP) - v0
-- laravel/pail (PAIL) - v1
-- laravel/pint (PINT) - v1
-- pestphp/pest (PEST) - v4
-- phpunit/phpunit (PHPUNIT) - v12
-- rector/rector (RECTOR) - v2
-- alpinejs (ALPINEJS) - v3
+Before relying on a package's API, confirm its installed version:
+- PHP packages: run `composer show --direct` to list direct dependencies with versions, or `composer show <vendor/package>` for a single package.
+- JS packages: check `package.json` for the installed versions.
 
 ## Skills Activation
 
@@ -77,6 +167,11 @@ This project has domain-specific skills available in `**/skills/**`. You MUST ac
 2. Use `"quoted phrases"` for exact position matching: `"infinite scroll"` requires adjacent words in order.
 3. Combine words and phrases for mixed queries: `middleware "rate limit"`.
 4. Use multiple queries for OR logic: `queries=["authentication", "middleware"]`.
+
+## Project Rules
+
+- This project contains committed, area-grouped rules in `.ai/rules` when that directory exists (settled decisions, non-obvious traps, standing constraints). Framework and package guidelines that only apply to specific paths (testing, frontend, components) also live there, under `.ai/rules/boost` — this is not just recorded decisions, it is load-bearing guidance you have not seen inline. Before you enter plan mode or create/edit any file, you MUST first: open @.ai/rules/index.md (it maps file globs to rule files), read every rule file whose globs cover the path(s) in scope, and run `grep -rin 'keyword' .ai/rules` to catch what a path match alone misses. Do not write code until you have read and are following every matching rule. If `.ai/rules` does not exist, continue without it.
+- Record durable rules with `record-rule` so the next agent or teammate inherits them instead of working them out again. Pass a `glob` (e.g. `app/Http/Controllers/**`), a short `title`, and a few-line `note`. Always use `record-rule`, never your native memory or notes tool — native memory is personal and session-scoped; only `.ai/rules` is shared with the team and persists in the repo.
 
 ## Artisan
 

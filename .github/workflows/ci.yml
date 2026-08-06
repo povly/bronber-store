@@ -1,0 +1,157 @@
+# CI для bronber-store — непрерывная интеграция Laravel-проекта.
+#
+# Выполняет четыре независимых проверки параллельно:
+#   1. lint             — стиль кода (Laravel Pint, режим проверки)
+#   2. static-analysis  — статический анализ (Rector, dry-run)
+#   3. test             — тесты (Pest) на SQLite in-memory
+#   4. security         — аудит зависимостей (composer audit)
+#
+# Запуск: push в main и pull request в main.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Отмена устаревших запусков той же ветки при новом пуше.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Стиль кода (Pint)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получить исходный код
+        uses: actions/checkout@v4
+
+      - name: Настроить PHP 8.5
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, xml, ctype, json, pdo, pdo_sqlite, bcmath
+          coverage: none
+
+      - name: Кэшировать Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+
+      - name: Установить PHP-зависимости
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Проверить стиль кода (только проверка, без правок)
+        run: vendor/bin/pint --test --format agent
+
+  static-analysis:
+    name: Статический анализ (Rector)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получить исходный код
+        uses: actions/checkout@v4
+
+      - name: Настроить PHP 8.5
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, xml, ctype, json, pdo, pdo_sqlite, bcmath
+          coverage: none
+
+      - name: Кэшировать Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+
+      - name: Установить PHP-зависимости
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Проверить код (dry-run, без правок)
+        run: vendor/bin/rector process --dry-run
+
+  test:
+    name: Тесты (Pest, SQLite in-memory)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получить исходный код
+        uses: actions/checkout@v4
+
+      - name: Настроить PHP 8.5
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, xml, ctype, json, pdo, pdo_sqlite, bcmath
+          coverage: none
+
+      - name: Кэшировать Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+
+      - name: Установить PHP-зависимости
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Настроить Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Установить JS-зависимости
+        run: npm install --ignore-scripts
+
+      - name: Собрать фронтенд (Vite-манифест для feature-тестов)
+        run: npm run build
+
+      - name: Подготовить файл окружения
+        run: cp .env.example .env
+
+      - name: Сгенерировать ключ приложения
+        run: php artisan key:generate
+
+      - name: Очистить кэш конфигурации
+        run: php artisan config:clear
+
+      - name: Запустить тесты (Pest)
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: ':memory:'
+        run: php artisan test --compact
+
+  security:
+    name: Аудит безопасности (composer audit)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Получить исходный код
+        uses: actions/checkout@v4
+
+      - name: Настроить PHP 8.5
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.5'
+          extensions: mbstring, xml, ctype, json, pdo, pdo_sqlite, bcmath
+          coverage: none
+
+      - name: Кэшировать Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache
+          key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-
+
+      - name: Установить PHP-зависимости
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Аудит зависимостей на известные уязвимости
+        run: composer audit

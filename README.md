@@ -1,59 +1,91 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# bronber-store
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+> Русскоязычный интернет-магазин автозапчастей: топливные насосы и компоненты для BMW / Audi / Volkswagen.
 
-## About Laravel
+Проект на Laravel 13 + MoonShine 4. Сейчас находится на стадии **pre-MVP**: фронтенд-витрина реализована как
+прототип на Blade + Alpine.js с захардкоженными данными, MoonShine-админка заскаффолжена. Доменные модели,
+реальная корзина и оформление заказа — в планах развития.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
-
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
-
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+## Быстрый старт
 
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <repo-url> bronber-store
+cd bronber-store
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate
+npm run build          # продакшн-сборка фронта (или npm run dev для HMR)
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+Для запуска полной dev-среды (сервер + очередь + логи + Vite параллельно):
 
-## Contributing
+```bash
+composer run dev
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+> Подробно — в [Getting Started](docs/getting-started.md).
 
-## Code of Conduct
+## Технологический стек
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+| Слой | Технологии |
+|------|------------|
+| Backend | PHP 8.5, Laravel 13.8, Eloquent ORM |
+| Админ-панель | MoonShine 4.15 (+ image-editor, media-manager) |
+| База данных | SQLite (default) / MySQL (сконфигурирован) |
+| Frontend | Blade, Alpine.js 3.15, vanilla-lazyload |
+| Сборка | Vite 8 + LightningCSS + Babel (IE11 / iOS 9 compat) |
+| Стили | PostCSS (mixins, nested, simple-vars, кастомные функции) |
+| Тестирование | Pest 4.7 |
+| Качество кода | Laravel Pint 1.27, Rector Laravel 2.5 |
+| Отладка | Laravel Debugbar, Laravel Pail, Laravel PAO |
+| AI-инструменты | Laravel Boost 2.2 (MCP + гайдлайны + скиллы) |
 
-## Security Vulnerabilities
+## Ключевые команды
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+| Команда | Назначение |
+|---------|------------|
+| `composer run dev` | Dev-сервер + очередь + логи (Pail) + Vite HMR |
+| `composer run test` | Очистка конфига + `php artisan test` |
+| `npm run dev` | Vite в режиме HMR |
+| `npm run build` | Продакшн-сборка фронтенда |
+| `vendor/bin/pint --dirty --format agent` | Форматирование PHP (обязательно после изменений) |
+| `vendor/bin/rector process` | Рефакторинг и апгрейд PHP-кода |
+| `php artisan test --compact` | Запуск тестов (Pest) |
+| `php artisan moonshine:user` | Создание администратора MoonShine |
 
-## License
+## Структура проекта
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-# bronber-store
+- `routes/web.php` — все роуты (closure-based, i18n-дублирование по локали)
+- `resources/views/blocks/{page}/` — Blade-паршлы постранично (block-based паттерн)
+- `resources/{css,js}/blocks/{page}/` — стили и скрипты постранично
+- `app/MoonShine/Resources/{Resource}/` — CRUD-ресурсы админки (каждый со своим `Pages/`)
+- `lang/{ru,en}/` — переводы интерфейса
+- `.ai-factory/` — спецификация, архитектура и правила проекта
+
+## Локализация
+
+Основная локаль — русская (`ru`), дополнительная — английская (`en`).
+Валюта — российский рубль (₽). Роуты для `en` доступны с префиксом `/en/`.
+
+---
+
+## Документация
+
+| Раздел | Описание |
+|--------|----------|
+| [Установка и настройка](docs/getting-started.md) | Окружение, зависимости, первый запуск |
+| [Архитектура](docs/architecture.md) | Structured Modules, слои, правила зависимостей |
+| [Разработка](docs/development.md) | Процесс: Pint, Pest, Rector, Vite, конвенции |
+| [Админ-панель](docs/admin-panel.md) | Работа с MoonShine v4: ресурсы, поля, namespace split |
+| [Фронтенд](docs/frontend.md) | Block-based структура, i18n, совместимость браузеров |
+| [Деплой](docs/deployment.md) | Подготовка к продакшну (pre-MVP placeholder) |
+
+Глубокие материалы: [`.ai-factory/DESCRIPTION.md`](.ai-factory/DESCRIPTION.md) (спецификация),
+[`.ai-factory/ARCHITECTURE.md`](.ai-factory/ARCHITECTURE.md) (архитектурные принципы),
+[`.ai-factory/rules/base.md`](.ai-factory/rules/base.md) (конвенции кода).
+
+## Лицензия
+
+MIT
