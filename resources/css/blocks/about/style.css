@@ -1,0 +1,181 @@
+[x-cloak] { display: none !important; }
+
+.about {
+    padding-top: fluid-type(375px, 768px, 30px, 50px);
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 30px, 30px);
+        line-height: 100%;
+        color: var(--color-black);
+        margin-bottom: fluid-type(375px, 768px, 24px, 30px);
+    }
+
+    &__years {
+        display: none;
+    }
+
+    &__separator {
+        height: 1px;
+        background: var(--color-gray-placeholder);
+        margin-bottom: fluid-type(375px, 768px, 20px, 24px);
+    }
+
+    &__subtitle {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 25px, 25px);
+        line-height: 110%;
+        color: var(--color-black);
+        margin-bottom: fluid-type(375px, 768px, 16px, 20px);
+    }
+
+    &__text {
+        font-family: var(--font-manrope);
+        font-weight: 400;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 130%;
+        color: var(--color-black);
+        margin-bottom: fluid-type(375px, 768px, 20px, 30px);
+    }
+
+    &__image-wrap {
+        border-radius: 5px;
+        overflow: hidden;
+        aspect-ratio: 329 / 200;
+    }
+
+    &__image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    &__more-separator {
+        height: 1px;
+        background: var(--color-gray-placeholder);
+        margin: fluid-type(375px, 768px, 30px, 40px) 0 fluid-type(375px, 768px, 20px, 24px);
+    }
+
+    &__more-list {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 24px, 30px);
+    }
+
+    &__more-year {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 25px, 25px);
+        line-height: 110%;
+        color: var(--color-black);
+        text-align: left;
+        border: none;
+        background: none;
+        cursor: pointer;
+
+        &.is-active {
+            opacity: 0.3;
+        }
+    }
+
+    @media screen and (min-width: 768px) {
+        padding-top: fluid-type(768px, 1200px, 50px, 70px);
+
+        &__title {
+            font-weight: 700;
+            font-size: fluid-type(768px, 1200px, 30px, 60px);
+            margin-bottom: fluid-type(768px, 1200px, 30px, 50px);
+        }
+
+        &__separator {
+            margin-bottom: fluid-type(768px, 1200px, 24px, 30px);
+        }
+
+        &__subtitle {
+            font-size: fluid-type(768px, 1200px, 25px, 40px);
+            margin-bottom: fluid-type(768px, 1200px, 20px, 24px);
+        }
+
+        &__text {
+            font-size: fluid-type(768px, 1200px, 16px, 18px);
+            line-height: 23.4px;
+            margin-bottom: fluid-type(768px, 1200px, 30px, 40px);
+        }
+
+        &__image-wrap {
+            aspect-ratio: auto;
+            height: fluid-type(768px, 1200px, 260px, 380px);
+        }
+
+        &__more-year {
+            font-size: fluid-type(768px, 1200px, 25px, 25px);
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        padding-top: fluid-type(1200px, 1440px, 70px, 90px);
+
+        &__title {
+            font-weight: 700;
+            font-size: fluid-type(1200px, 1440px, 60px, 80px);
+            margin-bottom: fluid-type(1200px, 1440px, 50px, 70px);
+        }
+
+        &__years {
+            display: flex;
+            align-items: center;
+            position: relative;
+            gap: fluid-type(1200px, 1440px, 30px, 50px);
+        }
+
+        &__year {
+            font-family: var(--font-manrope);
+            font-weight: 400;
+            font-size: fluid-type(1200px, 1440px, 70px, 100px);
+            line-height: 1;
+            border: none;
+            background: none;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        &__marker {
+            position: absolute;
+            bottom: fluid-type(1200px, 1440px, -15px, -20px);
+            transform: translateX(-50%);
+            transition: left 0.3s ease;
+            color: var(--color-black);
+            pointer-events: none;
+
+            svg {
+                width: fluid-type(1200px, 1440px, 20px, 31px);
+                height: fluid-type(1200px, 1440px, 20px, 30px);
+            }
+        }
+
+        &__separator {
+            margin-top: fluid-type(1200px, 1440px, 15px, 20px);
+            margin-bottom: fluid-type(1200px, 1440px, 30px, 40px);
+        }
+
+        &__subtitle {
+            font-size: fluid-type(1200px, 1440px, 40px, 50px);
+        }
+
+        &__text {
+            font-size: fluid-type(1200px, 1440px, 18px, 20px);
+        }
+
+        &__image-wrap {
+            height: fluid-type(1200px, 1440px, 380px, 530px);
+            border-radius: fluid-type(1200px, 1440px, 5px, 8px);
+        }
+
+        &__more-separator,
+        &__more-list {
+            display: none;
+        }
+    }
+}
