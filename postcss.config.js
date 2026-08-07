@@ -3,7 +3,9 @@ import pxToVw from "./postcss/js/functions/pxToVw.js";
 
 export default {
     plugins: {
-        'postcss-mixins': {},
+        'postcss-mixins': {
+            mixinsFiles: 'resources/css/mixins/*.css',
+        },
         'postcss-functions': {
             functions: {
                 'fluid-type': fluidType,
@@ -14,6 +16,7 @@ export default {
         'postcss-nested': {},
         'postcss-simple-vars': {},
         autoprefixer: {},
+        'css-declaration-sorter': { order: 'smacss' },
         cssnano: {
             preset: ['default', {calc: false}],
         },

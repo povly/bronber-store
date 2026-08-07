@@ -1,0 +1,49 @@
+{
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-no-unsupported-browser-features"
+    ],
+    "plugins": [
+        "stylelint-no-unsupported-browser-features"
+    ],
+    "rules": {
+        "plugin/no-unsupported-browser-features": [
+            true,
+            {
+                "severity": "warning",
+                "ignore": [
+                    "css-nesting",
+                    "css-when",
+                    "css-cascade-layers"
+                ]
+            }
+        ],
+        "selector-class-pattern": null,
+        "no-descending-specificity": null,
+        "declaration-property-value-no-unknown": null,
+        "media-feature-range-notation": null,
+        "at-rule-no-unknown": [
+            true,
+            {
+                "ignoreAtRules": [
+                    "mixin",
+                    "define-mixin",
+                    "nested-import"
+                ]
+            }
+        ],
+        "import-notation": "string",
+        "custom-property-pattern": null,
+        "keyframes-name-pattern": null,
+        "comment-empty-line-before": null,
+        "comment-whitespace-inside": null,
+        "declaration-block-no-duplicate-properties": null
+    },
+    "ignoreFiles": [
+        "node_modules/**",
+        "public/**",
+        "vendor/**",
+        "resources/css/common/reset.css",
+        "resources/css/mixins/**"
+    ]
+}

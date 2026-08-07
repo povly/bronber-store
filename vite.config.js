@@ -5,6 +5,7 @@ import {browserslistToTargets} from 'lightningcss';
 import {babel} from '@rollup/plugin-babel';
 import {globSync} from 'glob';
 import {createRequire} from 'module';
+import {combineMediaQueries} from './postcss/js/viteCombineMediaQuery.js';
 
 const require = createRequire(import.meta.url);
 const coreJsVersion = require('core-js/package.json').version;
@@ -31,6 +32,11 @@ export default defineConfig({
         },
     },
     plugins: [
+        // Объединяет одинаковые @media запросы в финальном бандле AFTER
+        // lightningcss минификации + сортирует по min-width ascending
+        // (mobile-first cascade correctness). Даёт cleaner gzip.
+        combineMediaQueries(),
+
         laravel({
             input: [
                 'resources/css/app.css',
