@@ -72,7 +72,7 @@
 
             @foreach ($news as $item)
                 <article class="home-news__slide slider__slide">
-                    <a href="#" class="article">
+                    <a href="/blog/sample" class="article">
                         <x-img :path="$item['image']" :alt="$item['title']" class="article__image"
                             width="464" height="650" />
                         <span class="article__shade article__shade--top"></span>
@@ -96,7 +96,7 @@
 
             <x-slot:nav>
                 <div class="home-news__footer">
-                    <x-btn href="/news" variant="primary" class="home-news__all-btn btn btn--primary" text="Все новости" />
+                    <x-btn href="/blog" variant="primary" class="home-news__all-btn btn btn--primary" text="Все новости" />
                     <x-slider-arrows class="home-news__arrows home-news__arrows--bottom" />
                 </div>
             </x-slot:nav>

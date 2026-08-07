@@ -108,12 +108,12 @@
                         </svg>
                     </button>
                     <ul class="footer__column-list" :class="{ 'is-open': open }">
-                        <li><a href="#">{{ __('store.footer_cat_engine') }}</a></li>
-                        <li><a href="#">{{ __('store.footer_cat_brakes') }}</a></li>
-                        <li><a href="#">{{ __('store.footer_cat_filters') }}</a></li>
-                        <li><a href="#">{{ __('store.footer_cat_suspension') }}</a></li>
-                        <li><a href="#">{{ __('store.footer_cat_electric') }}</a></li>
-                        <li><a href="#">{{ __('store.footer_cat_accessories') }}</a></li>
+                        <li><a href="{{ route('catalog') }}">{{ __('store.footer_cat_engine') }}</a></li>
+                        <li><a href="{{ route('catalog') }}">{{ __('store.footer_cat_brakes') }}</a></li>
+                        <li><a href="{{ route('catalog') }}">{{ __('store.footer_cat_filters') }}</a></li>
+                        <li><a href="{{ route('catalog') }}">{{ __('store.footer_cat_suspension') }}</a></li>
+                        <li><a href="{{ route('catalog') }}">{{ __('store.footer_cat_electric') }}</a></li>
+                        <li><a href="{{ route('catalog') }}">{{ __('store.footer_cat_accessories') }}</a></li>
                     </ul>
                 </div>
 
@@ -125,9 +125,9 @@
                         </svg>
                     </button>
                     <ul class="footer__column-list" :class="{ 'is-open': open }">
-                        <li><a href="#">{{ __('store.footer_buy_delivery') }}</a></li>
+                        <li><a href="{{ route('delivery') }}">{{ __('store.footer_buy_delivery') }}</a></li>
                         <li><a href="#">{{ __('store.footer_buy_guarantee') }}</a></li>
-                        <li><a href="#">{{ __('store.footer_buy_loyalty') }}</a></li>
+                        <li><a href="{{ route('loyalty') }}">{{ __('store.footer_buy_loyalty') }}</a></li>
                         <li><a href="{{ route('faq') }}">{{ __('store.top_faq') }}</a></li>
                     </ul>
                 </div>
@@ -140,7 +140,7 @@
                         </svg>
                     </button>
                     <ul class="footer__column-list" :class="{ 'is-open': open }">
-                        <li><a href="#">{{ __('store.footer_com_about') }}</a></li>
+                        <li><a href="{{ route('about') }}">{{ __('store.footer_com_about') }}</a></li>
                         <li><a href="{{ route('blog') }}">{{ __('store.footer_com_blog') }}</a></li>
                         <li><a href="{{ route('blog') }}">{{ __('store.footer_com_news') }}</a></li>
                         <li><a href="#">{{ __('store.footer_com_career') }}</a></li>

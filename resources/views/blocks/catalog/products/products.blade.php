@@ -7,6 +7,7 @@
         @for ($i = 0; $i < 15; $i++)
             @php $p = $i % 4; @endphp
         <x-product-card
+            href="/product"
             :article="'DW-' . $i"
             title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
             :image="'/images/home/products/1/' . ($p + 1)"

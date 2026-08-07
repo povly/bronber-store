@@ -190,8 +190,8 @@
                 <a href="#" class="header__nav-link">{{ __('store.nav_new') }}</a>
                 <a href="#" class="header__nav-link">{{ __('store.nav_promo') }}</a>
                 <a href="{{ route('blog') }}" class="header__nav-link">{{ __('store.nav_blog') }}</a>
-                <a href="#" class="header__nav-link">{{ __('store.nav_bonus') }}</a>
-                <a href="#" class="header__nav-link">{{ __('store.nav_about') }}</a>
+                <a href="{{ route('loyalty') }}" class="header__nav-link">{{ __('store.nav_bonus') }}</a>
+                <a href="{{ route('about') }}" class="header__nav-link">{{ __('store.nav_about') }}</a>
             </div>
         </div>
     </nav>

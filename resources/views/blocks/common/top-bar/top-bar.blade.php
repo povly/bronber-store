@@ -20,7 +20,7 @@
             </a>
 
             <nav class="top-bar__links top-bar__links--left">
-                <a href="#!" class="top-bar__link">{{ __('store.top_delivery') }}</a>
+                <a href="{{ route('delivery') }}" class="top-bar__link">{{ __('store.top_delivery') }}</a>
                 <a href="#!" class="top-bar__link">{{ __('store.top_guarantee') }}</a>
             </nav>
         </div>
