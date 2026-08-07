@@ -72,4 +72,21 @@ return [
     'mobile_cart' => 'Cart',
     'mobile_profile' => 'Profile',
 
+    // Contacts page
+    'contacts_title' => 'Open to<br>business<br>dialogue',
+    'contacts_subtitle' => 'Leave your request and our manager will contact you shortly',
+    'contacts_phone' => '+7 (985) 449-8000',
+    'contacts_email' => 'info@bronber.ru',
+    'contacts_address' => 'Moscow, Presnenskaya Embankment 12',
+    'contacts_form_name' => 'Your name',
+    'contacts_form_name_placeholder' => 'John Johnson',
+    'contacts_form_phone' => 'Your phone number',
+    'contacts_form_phone_placeholder' => '+7 (___) ___-__-__',
+    'contacts_form_email' => 'Your e-mail',
+    'contacts_form_email_placeholder' => 'info@bronber.ru',
+    'contacts_form_subject' => 'Subject',
+    'contacts_form_message_placeholder' => 'I want to rent a car but need your advice on what to choose',
+    'contacts_form_consent' => 'By clicking "Send" you agree to the data processing terms',
+    'contacts_form_submit' => 'Send',
+
 ];
