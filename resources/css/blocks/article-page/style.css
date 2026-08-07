@@ -63,6 +63,19 @@
         margin-bottom: fluid-type(375px, 768px, 30px, 40px);
     }
 
+    &__images {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: fluid-type(375px, 768px, 16px, 24px);
+        margin-bottom: fluid-type(375px, 768px, 30px, 40px);
+    }
+
+    &__image-wrap {
+        border-radius: fluid-type(375px, 768px, 5px, 7px);
+        overflow: hidden;
+        aspect-ratio: 1;
+    }
+
     &__btn {
         text-transform: capitalize;
         margin-top: fluid-type(375px, 768px, 10px, 20px);
@@ -133,30 +146,39 @@
             grid-template-columns: repeat(2, 1fr);
             gap: fluid-type(768px, 1200px, 20px, 24px);
         }
+
+        &__images {
+            grid-template-columns: repeat(2, 1fr);
+            gap: fluid-type(768px, 1200px, 24px, 30px);
+        }
     }
 
     @media screen and (min-width: 1200px) {
-        padding-top: fluid-type(1200px, 1440px, 70px, 90px);
+        padding-top: fluid-type(1200px, 1920px, 70px, 90px);
 
         &__hero {
-            height: fluid-type(1200px, 1440px, 400px, 500px);
+            height: fluid-type(1200px, 1920px, 400px, 500px);
         }
 
         &__title {
-            font-size: fluid-type(1200px, 1440px, 42px, 50px);
+            font-size: fluid-type(1200px, 1920px, 42px, 50px);
         }
 
         &__heading {
-            font-size: fluid-type(1200px, 1440px, 32px, 36px);
+            font-size: fluid-type(1200px, 1920px, 32px, 36px);
         }
 
         &__content {
-            font-size: fluid-type(1200px, 1440px, 18px, 20px);
+            font-size: fluid-type(1200px, 1920px, 18px, 20px);
+        }
+
+        &__images {
+            gap: fluid-type(1200px, 1920px, 30px, 40px);
         }
 
         &__related-list {
             grid-template-columns: repeat(3, 1fr);
-            gap: fluid-type(1200px, 1440px, 24px, 30px);
+            gap: fluid-type(1200px, 1920px, 24px, 30px);
         }
     }
 }
