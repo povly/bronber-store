@@ -1,12 +1,6 @@
 document.addEventListener('alpine:init', () => {
-    Alpine.data('about', (count) => ({
+    Alpine.data('about', () => ({
         active: 0,
-        count: count,
-
-        get markerLeft() {
-            if (this.count <= 1) return 0;
-            return (this.active / (this.count - 1)) * 100;
-        },
 
         yearColor(i) {
             if (i === this.active) return '#000000';
