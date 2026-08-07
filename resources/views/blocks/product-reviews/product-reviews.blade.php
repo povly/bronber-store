@@ -25,7 +25,7 @@
         {{-- Product summary card --}}
         <div class="reviews__product">
             <div class="reviews__product-image">
-                <img src="{{ $product['image'] }}" alt="{{ $product['title'] }}" loading="lazy" />
+                <x-img :path="$product['image']" :alt="$product['title']" />
             </div>
             <div class="reviews__product-text">
                 <div class="reviews__product-info">
@@ -156,7 +156,7 @@
                         <div class="reviews__card-photos">
                             @foreach ($visiblePhotos as $photo)
                                 <div class="reviews__card-photo">
-                                    <img src="{{ $photo }}" alt="" loading="lazy" />
+                                    <x-img :path="$photo" alt="" />
                                 </div>
                             @endforeach
                             @if ($hasMorePhotos)

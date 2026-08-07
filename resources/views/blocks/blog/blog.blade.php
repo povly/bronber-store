@@ -82,7 +82,7 @@
             @foreach($news as $item)
                 <article class="blog__item" data-article>
                     <a href="#" class="article">
-                        <img data-src="{{ $item['image'] }}" alt="{{ $item['title'] }}" class="article__image lazy" width="464" height="650">
+                        <x-img :path="$item['image']" :alt="$item['title']" :lazy="false" class="article__image" width="464" height="650" />
                         <span class="article__shade article__shade--top"></span>
                         <span class="article__shade article__shade--bottom"></span>
                         <div class="article__top">

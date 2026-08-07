@@ -74,75 +74,75 @@
 
                 {{-- Gallery: vertical thumbs slider (linked) + horizontal main slider --}}
                 <div class="product__gallery" x-data="{ active: 0 }">
-                    <div class="product__thumbs slider" x-data="slider({ breakpoints: { 0: { perView: 4 }, 1200: { perView: 4, vertical: true } } })"
-                        @resize.window.debounce.150ms="onResize()" x-init="$watch('active', v => ensureVisible(v))">
-                        <div class="slider__track product__thumbs-track" x-ref="track"
-                            @click.capture="suppressDragClick($event)" @pointerdown.prevent="onPointerDown($event)"
-                            @pointermove.window="onPointerMove($event)" @pointerup.window="onPointerUp()"
-                            @pointercancel.window="onPointerUp()">
-                            @foreach ($product['images'] as $i => $img)
-                                <button type="button"
-                                    class="slider__slide img--full product__thumb{{ $i === 0 ? ' is-active' : '' }}"
-                                    :class="{ 'is-active': active === {{ $i }} }"
-                                    @click="active = {{ $i }}" aria-label="Фото {{ $i + 1 }}">
-                                    <x-img path="/images/product/bosch" :lazy="false" width="75" height="75"
-                                        alt="" />
-                                </button>
-                            @endforeach
-                        </div>
-                    </div>
+                    <x-slider
+                        :config="['breakpoints' => [0 => ['perView' => 4], 1200 => ['perView' => 4, 'vertical' => true]]]"
+                        class="product__thumbs" viewport-class="product__thumbs"
+                        track-class="product__thumbs-track" label="Миниатюры товара">
+                        <x-slot:header>
+                            <div x-init="$watch('active', v => ensureVisible(v))" hidden></div>
+                        </x-slot:header>
+                        @foreach ($product['images'] as $i => $img)
+                            <button type="button"
+                                class="slider__slide img--full product__thumb{{ $i === 0 ? ' is-active' : '' }}"
+                                :class="{ 'is-active': active === {{ $i }} }"
+                                @click="active = {{ $i }}" aria-label="Фото {{ $i + 1 }}">
+                                <x-img path="/images/product/bosch" :lazy="false" width="75" height="75"
+                                    alt="" />
+                            </button>
+                        @endforeach
+                    </x-slider>
 
-                    <div class="product__main slider" x-data="slider({ perView: 1, pagination: true })" @resize.window.debounce.150ms="onResize()"
-                        x-init="$watch('index', v => active = v);
-                        $watch('active', v => {
-                            index = v;
-                            snap();
-                        })">
-                        <div class="slider__track product__track" x-ref="track"
-                            @pointerdown.prevent="onPointerDown($event)" @pointermove.window="onPointerMove($event)"
-                            @pointerup.window="onPointerUp()" @pointercancel.window="onPointerUp()">
-                            @foreach ($product['images'] as $img)
-                                <div class="slider__slide product__slide img--full">
-                                    <x-img path="/images/product/bosch" :lazy="false" width="280" height="280"
-                                        :alt="$product['title']" />
-                                </div>
-                            @endforeach
-                        </div>
-                        @php($galleryFavorite = in_array($product['article'], $favorites ?? []))
-                        <button type="button" class="product__gallery-action{{ $galleryFavorite ? ' is-active' : '' }}"
-                            x-data="favorite('{{ $product['article'] }}')" :class="{ 'is-active': active }" @click="toggle()"
-                            aria-label="В избранное">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M2 9.50001C2.00002 8.38721 2.33759 7.30059 2.96813 6.38367C3.59867 5.46675 4.49252 4.76267 5.53161 4.36441C6.5707 3.96615 7.70616 3.89245 8.78801 4.15305C9.86987 4.41365 10.8472 4.99629 11.591 5.82401C11.6434 5.88002 11.7067 5.92468 11.7771 5.95521C11.8474 5.98574 11.9233 6.00149 12 6.00149C12.0767 6.00149 12.1526 5.98574 12.2229 5.95521C12.2933 5.92468 12.3566 5.88002 12.409 5.82401C13.1504 4.99091 14.128 4.40338 15.2116 4.13961C16.2952 3.87585 17.4335 3.94836 18.4749 4.34749C19.5163 4.74663 20.4114 5.45346 21.0411 6.37391C21.6708 7.29436 22.0053 8.38477 22 9.50001C22 11.79 20.5 13.5 19 15L13.508 20.313C13.3217 20.527 13.0919 20.6989 12.834 20.8173C12.5762 20.9357 12.296 20.9979 12.0123 20.9997C11.7285 21.0015 11.4476 20.9428 11.1883 20.8277C10.9289 20.7126 10.697 20.5436 10.508 20.332L5 15C3.5 13.5 2 11.8 2 9.50001Z"
-                                    fill="{{ $galleryFavorite ? '#7212BC' : 'white' }}"
-                                    :fill="active ? '#7212BC' : 'white'" stroke="#7212BC" stroke-width="2"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                        <button type="button"
-                            class="slider__arrow slider__arrow--prev product__gallery-nav product__gallery-nav--prev"
-                            @click="prev()" :disabled="!canPrev" aria-label="Предыдущее фото">
-                            <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z"
-                                    fill="#030303" />
-                            </svg>
-                        </button>
-                        <button type="button"
-                            class="slider__arrow slider__arrow--next product__gallery-nav product__gallery-nav--next"
-                            @click="next()" :disabled="!canNext" aria-label="Следующее фото">
-                            <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM21.2803 6.05328C21.5732 5.76039 21.5732 5.28551 21.2803 4.99262L16.5074 0.219648C16.2145 -0.073245 15.7396 -0.073245 15.4467 0.219648C15.1538 0.512542 15.1538 0.987415 15.4467 1.28031L19.6893 5.52295L15.4467 9.76559C15.1538 10.0585 15.1538 10.5334 15.4467 10.8263C15.7396 11.1191 16.2145 11.1191 16.5074 10.8263L21.2803 6.05328ZM0.75 5.52295V6.27295H20.75V5.52295V4.77295H0.75V5.52295Z"
-                                    fill="#030303" />
-                            </svg>
-                        </button>
-                        <x-slider-pagination />
-                    </div>
+                    <x-slider
+                        :config="['perView' => 1, 'pagination' => true]"
+                        class="product__main" viewport-class="product__main"
+                        track-class="product__track" label="Фото товара">
+                        <x-slot:header>
+                            <div x-init="$watch('index', v => active = v);
+                                        $watch('active', v => { index = v; snap(); })" hidden></div>
+                        </x-slot:header>
+                        @foreach ($product['images'] as $img)
+                            <div class="slider__slide product__slide img--full">
+                                <x-img path="/images/product/bosch" :lazy="false" width="280" height="280"
+                                    :alt="$product['title']" />
+                            </div>
+                        @endforeach
+                        <x-slot:nav>
+                            @php($galleryFavorite = in_array($product['article'], $favorites ?? []))
+                            <button type="button" class="product__gallery-action{{ $galleryFavorite ? ' is-active' : '' }}"
+                                x-data="favorite('{{ $product['article'] }}')" :class="{ 'is-active': active }" @click="toggle()"
+                                aria-label="В избранное">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M2 9.50001C2.00002 8.38721 2.33759 7.30059 2.96813 6.38367C3.59867 5.46675 4.49252 4.76267 5.53161 4.36441C6.5707 3.96615 7.70616 3.89245 8.78801 4.15305C9.86987 4.41365 10.8472 4.99629 11.591 5.82401C11.6434 5.88002 11.7067 5.92468 11.7771 5.95521C11.8474 5.98574 11.9233 6.00149 12 6.00149C12.0767 6.00149 12.1526 5.98574 12.2229 5.95521C12.2933 5.92468 12.3566 5.88002 12.409 5.82401C13.1504 4.99091 14.128 4.40338 15.2116 4.13961C16.2952 3.87585 17.4335 3.94836 18.4749 4.34749C19.5163 4.74663 20.4114 5.45346 21.0411 6.37391C21.6708 7.29436 22.0053 8.38477 22 9.50001C22 11.79 20.5 13.5 19 15L13.508 20.313C13.3217 20.527 13.0919 20.6989 12.834 20.8173C12.5762 20.9357 12.296 20.9979 12.0123 20.9997C11.7285 21.0015 11.4476 20.9428 11.1883 20.8277C10.9289 20.7126 10.697 20.5436 10.508 20.332L5 15C3.5 13.5 2 11.8 2 9.50001Z"
+                                        fill="{{ $galleryFavorite ? '#7212BC' : 'white' }}"
+                                        :fill="active ? '#7212BC' : 'white'" stroke="#7212BC" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </button>
+                            <button type="button"
+                                class="slider__arrow slider__arrow--prev product__gallery-nav product__gallery-nav--prev"
+                                @click="prev()" :disabled="!canPrev" aria-label="Предыдущее фото">
+                                <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z"
+                                        fill="#030303" />
+                                </svg>
+                            </button>
+                            <button type="button"
+                                class="slider__arrow slider__arrow--next product__gallery-nav product__gallery-nav--next"
+                                @click="next()" :disabled="!canNext" aria-label="Следующее фото">
+                                <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM21.2803 6.05328C21.5732 5.76039 21.5732 5.28551 21.2803 4.99262L16.5074 0.219648C16.2145 -0.073245 15.7396 -0.073245 15.4467 0.219648C15.1538 0.512542 15.1538 0.987415 15.4467 1.28031L19.6893 5.52295L15.4467 9.76559C15.1538 10.0585 15.1538 10.5334 15.4467 10.8263C15.7396 11.1191 16.2145 11.1191 16.5074 10.8263L21.2803 6.05328ZM0.75 5.52295V6.27295H20.75V5.52295V4.77295H0.75V5.52295Z"
+                                        fill="#030303" />
+                                </svg>
+                            </button>
+                            <x-slider-pagination />
+                        </x-slot:nav>
+                    </x-slider>
                 </div>
 
                 <div class="product__hero-side">
@@ -502,100 +502,101 @@
 
     {{-- Reviews (slider) --}}
     <div class="container">
-        <div class="product__reviews-section section" x-data="slider({ breakpoints: { 0: { perView: 1, autoHeight: true }, 1200: { perView: 2 } } })"
-            @resize.window.debounce.150ms="onResize()">
-            <div class="product__reviews-head">
-                <h2 class="product__section-title">Отзывы ({{ $product['reviewCount'] }})</h2>
-                <div class="product__reviews-arrows slider__arrows slider__arrows--pc">
-                    <button class="slider__arrow slider__arrow--prev product__reviews-arrow" type="button"
-                        aria-label="Назад" @click="prev()" :disabled="!canPrev">
-                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z"
-                                fill="#080808" />
-                        </svg>
-                    </button>
-                    <button class="slider__arrow slider__arrow--next product__reviews-arrow" type="button"
-                        aria-label="Вперёд" @click="next()" :disabled="!canNext">
-                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM21.2803 6.05328C21.5732 5.76039 21.5732 5.28551 21.2803 4.99262L16.5074 0.219648C16.2145 -0.073245 15.7396 -0.073245 15.4467 0.219648C15.1538 0.512542 15.1538 0.987415 15.4467 1.28031L19.6893 5.52295L15.4467 9.76559C15.1538 10.0585 15.1538 10.5334 15.4467 10.8263C15.7396 11.1191 16.2145 11.1191 16.5074 10.8263L21.2803 6.05328ZM0.75 5.52295V6.27295H20.75V5.52295V4.77295H0.75V5.52295Z"
-                                fill="#030303" />
-                        </svg>
-                    </button>
+        <x-slider
+            :config="['breakpoints' => [0 => ['perView' => 1, 'autoHeight' => true], 1200 => ['perView' => 2]]]"
+            class="product__reviews-section section"
+            viewport-class="product__reviews-slider"
+            track-class="product__reviews-track" label="Отзывы">
+            <x-slot:header>
+                <div class="product__reviews-head">
+                    <h2 class="product__section-title">Отзывы ({{ $product['reviewCount'] }})</h2>
+                    <div class="product__reviews-arrows slider__arrows slider__arrows--pc">
+                        <button class="slider__arrow slider__arrow--prev product__reviews-arrow" type="button"
+                            aria-label="Назад" @click="prev()" :disabled="!canPrev">
+                            <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z"
+                                    fill="#080808" />
+                            </svg>
+                        </button>
+                        <button class="slider__arrow slider__arrow--next product__reviews-arrow" type="button"
+                            aria-label="Вперёд" @click="next()" :disabled="!canNext">
+                            <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM21.2803 6.05328C21.5732 5.76039 21.5732 5.28551 21.2803 4.99262L16.5074 0.219648C16.2145 -0.073245 15.7396 -0.073245 15.4467 0.219648C15.1538 0.512542 15.1538 0.987415 15.4467 1.28031L19.6893 5.52295L15.4467 9.76559C15.1538 10.0585 15.1538 10.5334 15.4467 10.8263C15.7396 11.1191 16.2145 11.1191 16.5074 10.8263L21.2803 6.05328ZM0.75 5.52295V6.27295H20.75V5.52295V4.77295H0.75V5.52295Z"
+                                    fill="#030303" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </x-slot:header>
 
-            <div class="slider product__reviews-slider">
-                <div class="slider__track product__reviews-track" x-ref="track"
-                    @pointerdown.prevent="onPointerDown($event)" @pointermove.window="onPointerMove($event)"
-                    @pointerup.window="onPointerUp()" @pointercancel.window="onPointerUp()">
-                    @foreach ($product['reviews'] as $review)
-                        <article class="slider__slide product__review">
-                            <div class="product__review-head">
-                                <div class="product__avatar" aria-hidden="true">{{ $review['initial'] }}</div>
-                                <div class="product__review-meta">
-                                    <p class="product__review-name">{{ $review['name'] }}</p>
-                                    <p class="product__review-car">{{ $review['car'] }}</p>
-                                </div>
-                                <p class="product__review-date">{{ $review['date'] }}</p>
-                            </div>
-                            <div class="product__review-stars" aria-hidden="true">
-                                @for ($s = 0; $s < 5; $s++)
-                                    <svg width="24" height="24" viewBox="0 0 22 22" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path
-                                            d="M10.5268 1.29489C10.5706 1.20635 10.6383 1.13183 10.7223 1.07972C10.8062 1.02761 10.903 1 11.0018 1C11.1006 1 11.1974 1.02761 11.2813 1.07972C11.3653 1.13183 11.433 1.20635 11.4768 1.29489L13.7868 5.97389C13.939 6.28186 14.1636 6.5483 14.4414 6.75035C14.7192 6.95239 15.0419 7.08401 15.3818 7.13389L20.5478 7.88989C20.6457 7.90408 20.7376 7.94537 20.8133 8.00909C20.8889 8.07282 20.9452 8.15644 20.9758 8.2505C21.0064 8.34456 21.0101 8.4453 20.9864 8.54133C20.9627 8.63736 20.9126 8.72485 20.8418 8.79389L17.1058 12.4319C16.8594 12.672 16.6751 12.9684 16.5686 13.2955C16.4622 13.6227 16.4369 13.9708 16.4948 14.3099L17.3768 19.4499C17.3941 19.5477 17.3835 19.6485 17.3463 19.7406C17.3091 19.8327 17.2467 19.9125 17.1663 19.9709C17.086 20.0293 16.9908 20.0639 16.8917 20.0708C16.7926 20.0777 16.6935 20.0566 16.6058 20.0099L11.9878 17.5819C11.6835 17.4221 11.345 17.3386 11.0013 17.3386C10.6576 17.3386 10.3191 17.4221 10.0148 17.5819L5.3978 20.0099C5.31013 20.0563 5.2112 20.0772 5.11225 20.0701C5.0133 20.0631 4.91832 20.0285 4.83809 19.9701C4.75787 19.9118 4.69563 19.8321 4.65846 19.7401C4.62128 19.6481 4.61066 19.5476 4.6278 19.4499L5.5088 14.3109C5.567 13.9716 5.54178 13.6233 5.43534 13.2959C5.32889 12.9686 5.14441 12.672 4.8978 12.4319L1.1618 8.79489C1.09039 8.72593 1.03979 8.63829 1.01576 8.54197C0.991731 8.44565 0.995237 8.34451 1.02588 8.25008C1.05652 8.15566 1.11307 8.07174 1.18908 8.00788C1.26509 7.94402 1.3575 7.90279 1.4558 7.88889L6.6208 7.13389C6.96106 7.08439 7.28419 6.95295 7.56238 6.75088C7.84058 6.54881 8.0655 6.28216 8.2178 5.97389L10.5268 1.29489Z"
-                                            fill="#FFA903" stroke="#FFA903" stroke-width="2" stroke-linecap="round"
-                                            stroke-linejoin="round" />
-                                    </svg>
-                                @endfor
-                            </div>
-                            <p class="product__review-text">{{ $review['text'] }}</p>
+            @foreach ($product['reviews'] as $review)
+                <article class="slider__slide product__review">
+                    <div class="product__review-head">
+                        <div class="product__avatar" aria-hidden="true">{{ $review['initial'] }}</div>
+                        <div class="product__review-meta">
+                            <p class="product__review-name">{{ $review['name'] }}</p>
+                            <p class="product__review-car">{{ $review['car'] }}</p>
+                        </div>
+                        <p class="product__review-date">{{ $review['date'] }}</p>
+                    </div>
+                    <div class="product__review-stars" aria-hidden="true">
+                        @for ($s = 0; $s < 5; $s++)
+                            <svg width="24" height="24" viewBox="0 0 22 22" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M10.5268 1.29489C10.5706 1.20635 10.6383 1.13183 10.7223 1.07972C10.8062 1.02761 10.903 1 11.0018 1C11.1006 1 11.1974 1.02761 11.2813 1.07972C11.3653 1.13183 11.433 1.20635 11.4768 1.29489L13.7868 5.97389C13.939 6.28186 14.1636 6.5483 14.4414 6.75035C14.7192 6.95239 15.0419 7.08401 15.3818 7.13389L20.5478 7.88989C20.6457 7.90408 20.7376 7.94537 20.8133 8.00909C20.8889 8.07282 20.9452 8.15644 20.9758 8.2505C21.0064 8.34456 21.0101 8.4453 20.9864 8.54133C20.9627 8.63736 20.9126 8.72485 20.8418 8.79389L17.1058 12.4319C16.8594 12.672 16.6751 12.9684 16.5686 13.2955C16.4622 13.6227 16.4369 13.9708 16.4948 14.3099L17.3768 19.4499C17.3941 19.5477 17.3835 19.6485 17.3463 19.7406C17.3091 19.8327 17.2467 19.9125 17.1663 19.9709C17.086 20.0293 16.9908 20.0639 16.8917 20.0708C16.7926 20.0777 16.6935 20.0566 16.6058 20.0099L11.9878 17.5819C11.6835 17.4221 11.345 17.3386 11.0013 17.3386C10.6576 17.3386 10.3191 17.4221 10.0148 17.5819L5.3978 20.0099C5.31013 20.0563 5.2112 20.0772 5.11225 20.0701C5.0133 20.0631 4.91832 20.0285 4.83809 19.9701C4.75787 19.9118 4.69563 19.8321 4.65846 19.7401C4.62128 19.6481 4.61066 19.5476 4.6278 19.4499L5.5088 14.3109C5.567 13.9716 5.54178 13.6233 5.43534 13.2959C5.32889 12.9686 5.14441 12.672 4.8978 12.4319L1.1618 8.79489C1.09039 8.72593 1.03979 8.63829 1.01576 8.54197C0.991731 8.44565 0.995237 8.34451 1.02588 8.25008C1.05652 8.15566 1.11307 8.07174 1.18908 8.00788C1.26509 7.94402 1.3575 7.90279 1.4558 7.88889L6.6208 7.13389C6.96106 7.08439 7.28419 6.95295 7.56238 6.75088C7.84058 6.54881 8.0655 6.28216 8.2178 5.97389L10.5268 1.29489Z"
+                                    fill="#FFA903" stroke="#FFA903" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
+                        @endfor
+                    </div>
+                    <p class="product__review-text">{{ $review['text'] }}</p>
 
-                            @if (!empty($review['photos']))
-                                <div class="product__review-photos">
-                                    @foreach ($review['photos'] as $photo)
-                                        <x-img path="/images/product/review" class="product__review-photo"
-                                            alt="" />
-                                    @endforeach
-                                </div>
-                            @endif
-                        </article>
-                    @endforeach
+                    @if (!empty($review['photos']))
+                        <div class="product__review-photos">
+                            @foreach ($review['photos'] as $photo)
+                                <x-img path="/images/product/review" class="product__review-photo"
+                                    alt="" />
+                            @endforeach
+                        </div>
+                    @endif
+                </article>
+            @endforeach
+
+            <x-slot:nav>
+                <div class="product__reviews-bottom">
+                    <a href="{{ route('product.reviews') }}" class="product__reviews-all btn btn--primary">
+                        <span class="product__reviews-all-short">Смотреть все</span>
+                        <span class="product__reviews-all-full">Смотреть все отзывы</span>
+                    </a>
+
+                    <div class="product__reviews-arrows slider__arrows slider__arrows--mb">
+                        <button class="slider__arrow slider__arrow--prev product__reviews-arrow" type="button"
+                            aria-label="Назад" @click="prev()" :disabled="!canPrev">
+                            <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z"
+                                    fill="#080808" />
+                            </svg>
+                        </button>
+                        <button class="slider__arrow slider__arrow--next product__reviews-arrow" type="button"
+                            aria-label="Вперёд" @click="next()" :disabled="!canNext">
+                            <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM21.2803 6.05328C21.5732 5.76039 21.5732 5.28551 21.2803 4.99262L16.5074 0.219648C16.2145 -0.073245 15.7396 -0.073245 15.4467 0.219648C15.1538 0.512542 15.1538 0.987415 15.4467 1.28031L19.6893 5.52295L15.4467 9.76559C15.1538 10.0585 15.1538 10.5334 15.4467 10.8263C15.7396 11.1191 16.2145 11.1191 16.5074 10.8263L21.2803 6.05328ZM0.75 5.52295V6.27295H20.75V5.52295V4.77295H0.75V5.52295Z"
+                                    fill="#030303" />
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-            </div>
-
-            <div class="product__reviews-bottom">
-                <a href="{{ route('product.reviews') }}" class="product__reviews-all btn btn--primary">
-                    <span class="product__reviews-all-short">Смотреть все</span>
-                    <span class="product__reviews-all-full">Смотреть все отзывы</span>
-                </a>
-
-                <div class="product__reviews-arrows slider__arrows slider__arrows--mb">
-                    <button class="slider__arrow slider__arrow--prev product__reviews-arrow" type="button"
-                        aria-label="Назад" @click="prev()" :disabled="!canPrev">
-                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M20.75 6.27295C21.1642 6.27295 21.5 5.93716 21.5 5.52295C21.5 5.10874 21.1642 4.77295 20.75 4.77295L20.75 5.52295L20.75 6.27295ZM0.219669 4.99262C-0.0732231 5.28551 -0.0732231 5.76038 0.219669 6.05328L4.99264 10.8262C5.28553 11.1191 5.76041 11.1191 6.0533 10.8262C6.34619 10.5334 6.34619 10.0585 6.0533 9.76559L1.81066 5.52295L6.0533 1.28031C6.34619 0.987414 6.34619 0.512541 6.0533 0.219647C5.76041 -0.0732464 5.28553 -0.0732464 4.99264 0.219647L0.219669 4.99262ZM20.75 5.52295L20.75 4.77295L0.75 4.77295L0.75 5.52295L0.75 6.27295L20.75 6.27295L20.75 5.52295Z"
-                                fill="#080808" />
-                        </svg>
-                    </button>
-                    <button class="slider__arrow slider__arrow--next product__reviews-arrow" type="button"
-                        aria-label="Вперёд" @click="next()" :disabled="!canNext">
-                        <svg width="22" height="12" viewBox="0 0 22 12" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M0.75 4.77295C0.335786 4.77295 0 5.10874 0 5.52295C0 5.93716 0.335786 6.27295 0.75 6.27295V5.52295V4.77295ZM21.2803 6.05328C21.5732 5.76039 21.5732 5.28551 21.2803 4.99262L16.5074 0.219648C16.2145 -0.073245 15.7396 -0.073245 15.4467 0.219648C15.1538 0.512542 15.1538 0.987415 15.4467 1.28031L19.6893 5.52295L15.4467 9.76559C15.1538 10.0585 15.1538 10.5334 15.4467 10.8263C15.7396 11.1191 16.2145 11.1191 16.5074 10.8263L21.2803 6.05328ZM0.75 5.52295V6.27295H20.75V5.52295V4.77295H0.75V5.52295Z"
-                                fill="#030303" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
+            </x-slot:nav>
+        </x-slider>
     </div>
 
     {{-- Related products (reuse home-products block) --}}

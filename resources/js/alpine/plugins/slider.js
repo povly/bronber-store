@@ -100,20 +100,21 @@ export default function (Alpine) {
                 fade: bpOpts.fade ?? opts.fade ?? defaults.fade,
             };
 
-            if (this.$el) {
-                this.$el.style.setProperty(
+            const viewport = this.track?.parentElement;
+            if (viewport) {
+                viewport.style.setProperty(
                     '--per-view',
                     String(this.perView),
                 );
 
                 const sw = this._resolved.slideWidth;
                 if (sw !== null && sw !== undefined) {
-                    this.$el.style.setProperty(
+                    viewport.style.setProperty(
                         '--slide-width',
                         typeof sw === 'number' ? `${sw}px` : sw,
                     );
                 } else {
-                    this.$el.style.removeProperty('--slide-width');
+                    viewport.style.removeProperty('--slide-width');
                 }
             }
         },
@@ -583,11 +584,11 @@ export default function (Alpine) {
             sliderEl.classList.toggle('slider--grid', this.isGrid);
 
             if (this.isGrid) {
-                this.$el.style.setProperty('--grid-cols', this.gridCols);
-                this.$el.style.setProperty('--grid-rows', this.gridRows);
+                sliderEl.style.setProperty('--grid-cols', this.gridCols);
+                sliderEl.style.setProperty('--grid-rows', this.gridRows);
             } else {
-                this.$el.style.removeProperty('--grid-cols');
-                this.$el.style.removeProperty('--grid-rows');
+                sliderEl.style.removeProperty('--grid-cols');
+                sliderEl.style.removeProperty('--grid-rows');
             }
         },
 
