@@ -7,7 +7,7 @@
     $isFavorite = in_array($article, $favorites ?? []);
 @endphp
 
-<{{ $tagEl }} {{ $tagAttrs }} {{ $attributes->merge(['class' => "card {$class}"]) }}>
+<{{ $tagEl }} {!! $tagAttrs !!} {{ $attributes->merge(['class' => "card {$class}"]) }}>
     <div class="card__image-wrap">
         <div class="card__image img--full">
             <x-img :path="$image" :alt="$imageAlt ?? $title" width="155" height="155" />
