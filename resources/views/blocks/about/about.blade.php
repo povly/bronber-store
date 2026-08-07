@@ -47,7 +47,7 @@
 
         <div class="about__years slider"
              x-data="slider({ breakpoints: { 0: { perView: 2 }, 768: { perView: 3 }, 1200: { perView: 5 } } })"
-             x-init="$watch('active', v => ensureVisible(v))"
+             x-init="$watch('active', v => scrollToReveal(v))"
              @resize.window.debounce.150ms="onResize()">
             <div class="about__years-track slider__track" x-ref="track"
                  @pointerdown.prevent="onPointerDown($event)"

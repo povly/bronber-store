@@ -649,6 +649,26 @@ export default function (Alpine) {
             }
         },
 
+        /**
+         * ensureVisible + peek-ahead: advances one step when target is the last visible slide.
+         */
+        scrollToReveal(targetIndex) {
+            const lastVisible = this.index + this.perView - 1;
+
+            if (targetIndex === lastVisible && this.canNext) {
+                this.next();
+            } else if (targetIndex > lastVisible) {
+                this.index = Math.min(
+                    targetIndex - this.perView + 1,
+                    this.maxIndex,
+                );
+                this.snap();
+            } else if (targetIndex < this.index) {
+                this.index = Math.max(0, targetIndex);
+                this.snap();
+            }
+        },
+
         suppressDragClick(e) {
             if (this.dragMoved) {
                 this.dragMoved = false;
