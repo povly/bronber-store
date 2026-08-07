@@ -26,6 +26,9 @@ document.addEventListener('alpine:init', () => {
         showMore() {
             this.visibleCount += 3;
             this.applyVisibility();
+            this.$nextTick(() => {
+                window.dispatchEvent(new Event('article-heights:refresh'));
+            });
         },
     }));
 });

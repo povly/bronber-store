@@ -38,4 +38,5 @@ document.addEventListener('DOMContentLoaded', () => {
     
     setArticleBtnHeight()
     window.addEventListener('resize', setArticleBtnHeight)
+    window.addEventListener('article-heights:refresh', setArticleBtnHeight)
 })
