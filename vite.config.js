@@ -4,9 +4,15 @@ import browserslist from 'browserslist';
 import {browserslistToTargets} from 'lightningcss';
 import {babel} from '@rollup/plugin-babel';
 import {globSync} from 'glob';
+import {createRequire} from 'module';
+
+const require = createRequire(import.meta.url);
+const coreJsVersion = require('core-js/package.json').version;
 
 const blockStyles = globSync('resources/css/blocks/**/style.css');
 const blockScripts = globSync('resources/js/blocks/**/index.js');
+
+const babelTargets = {ie: '11', ios: '9'};
 
 export default defineConfig({
     ss: {
@@ -43,13 +49,18 @@ export default defineConfig({
                 [
                     '@babel/preset-env',
                     {
-                        targets: {
-                            ie: '11',
-                            ios: '9',
-                        },
+                        targets: babelTargets,
                         modules: false,
-                        useBuiltIns: 'entry',
-                        corejs: 3,
+                    },
+                ],
+            ],
+            plugins: [
+                [
+                    'babel-plugin-polyfill-corejs3',
+                    {
+                        method: 'usage-global',
+                        targets: babelTargets,
+                        version: coreJsVersion,
                     },
                 ],
             ],
