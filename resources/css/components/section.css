@@ -10,7 +10,7 @@
 
     &__title {
         font-weight: 800;
-        font-size: 25px;
+        font-size: fluid-type(768px, 1200px, 25px, 32px);
         line-height: 100%;
     }
 
@@ -19,7 +19,6 @@
 
         &__title {
             font-weight: 700;
-            font-size: fluid-type(768px, 1200px, 25px, 32px);
         }
     }
 

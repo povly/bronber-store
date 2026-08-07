@@ -8,11 +8,11 @@
     }
 
     @media (min-width: 1200px) {
-        --slider-gap: fluid-type(1200px, 1440px, 20px, 24px);
-
         &__slider {
-            --slider-slide: calc((100% - 3 * var(--slider-gap)) / 4);
+            --per-view: 4;
         }
+
+        --slider-gap: fluid-type(1200px, 1440px, 20px, 24px);
 
         &__arrows {
             margin-top: 0;

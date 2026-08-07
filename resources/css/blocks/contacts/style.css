@@ -1,5 +1,5 @@
 .contacts {
-    padding-top: fluid-type(1200px, 1440px, 32px, 44px);
+    padding-top: fluid-type(1200px, 1440px, 38px, 50px);
 
     &__top {
         display: flex;
@@ -22,6 +22,7 @@
         text-align: center;
         margin-top: auto;
         margin-bottom: 32px;
+        order: 1;
     }
 
     &__subtitle {
@@ -29,6 +30,8 @@
         font-size: 16px;
         line-height: 130%;
         text-align: center;
+        order: 4;
+        margin-top: 48px;
     }
 
     &__phone {
@@ -37,6 +40,7 @@
         font-size: fluid-type(375px, 768px, 30px, 28px);
         line-height: 130%;
         color: var(--color-black);
+        order: 3;
     }
 
     &__address {
@@ -48,6 +52,8 @@
         font-size: fluid-type(375px, 768px, 16px, 14px);
         line-height: 130%;
         color: var(--color-black);
+        order: 3;
+        margin-top: 5px;
 
         a {
             color: var(--color-black);
@@ -85,7 +91,7 @@
     &__textarea {
         width: 100%;
         border: none;
-        border-bottom: 1px solid #dfdfdf;
+        border-bottom: 1px solid#BFBFBF;
         background: transparent;
         padding: 0 0 fluid-type(375px, 768px, 10px, 14px);
         font-family: var(--font-manrope);
@@ -101,8 +107,12 @@
         }
 
         &:focus {
-            border-bottom-color: var(--color-black);
+            border-bottom-color: #DFDFDF;;
         }
+    }
+
+    &__textarea {
+        height: 100px;
     }
 
     &__bottom {
@@ -113,7 +123,8 @@
     }
 
     &__submit {
-        text-transform: capitalize;
+        min-width: 200px;
+        font-size: 14px;
     }
 
     &__privacy {
@@ -127,18 +138,20 @@
     }
 
     &__map {
-        margin-top: fluid-type(375px, 768px, 40px, 50px);
+        margin-top: fluid-type(375px, 768px, 40px, 78px);
         border-radius: fluid-type(375px, 768px, 7px, 5px);
         overflow: hidden;
         aspect-ratio: 329 / 390;
+
+        iframe {
+            border-radius: 7px;
+        }
     }
 
     @media screen and (min-width: 768px) {
-        padding-top: fluid-type(768px, 1200px, 50px, 70px);
-
         &__top {
             display: grid;
-            grid-template-columns: 1fr fluid-type(768px, 1200px, 340px, 580px);
+            grid-template-columns: 254fr 388fr;
             align-items: start;
             gap: fluid-type(768px, 1200px, 40px, 60px);
         }
@@ -147,25 +160,40 @@
             align-items: flex-start;
             text-align: left;
             gap: fluid-type(768px, 1200px, 18px, 24px);
+            height: 100%;
+        }
+
+        &__submit {
+            min-width: 180px;
+        }
+
+        &__title, &__subtitle, &__phone, &__address {
+            order: inherit;
         }
 
         &__title {
             text-align: left;
+            margin: 0;
+            line-height: 100%;
             font-size: fluid-type(768px, 1200px, 40px, 60px);
         }
 
         &__subtitle {
             font-size: fluid-type(768px, 1200px, 16px, 20px);
             max-width: fluid-type(768px, 1200px, 250px, 400px);
+            margin-top: 0px;
+            text-align: left;
         }
 
         &__phone {
+            margin-top: auto;
             font-size: fluid-type(768px, 1200px, 28px, 40px);
         }
 
         &__address {
             align-items: flex-start;
             font-size: fluid-type(768px, 1200px, 14px, 18px);
+            margin-top: 0;
         }
 
         &__form {
@@ -177,7 +205,6 @@
         }
 
         &__row {
-            flex-direction: row;
             gap: fluid-type(768px, 1200px, 20px, 30px);
         }
 
@@ -205,7 +232,7 @@
         }
 
         &__map {
-            margin-top: fluid-type(768px, 1200px, 40px, 50px);
+            margin-top: fluid-type(1200px, 1440px, 78px, 104px);
             border-radius: fluid-type(768px, 1200px, 5px, 8px);
             aspect-ratio: auto;
             height: fluid-type(768px, 1200px, 326px, 404px);
@@ -213,8 +240,6 @@
     }
 
     @media screen and (min-width: 1200px) {
-        padding-top: fluid-type(1200px, 1920px, 70px, 90px);
-
         &__top {
             gap: fluid-type(1200px, 1920px, 60px, 80px);
         }
@@ -230,14 +255,32 @@
 
         &__address {
             font-size: fluid-type(1200px, 1920px, 18px, 18px);
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+
+            > * {
+                &:not(:last-child){
+                    &::after {
+                        content: '|';
+                        display: inline-block;
+                        margin-left: 5px;
+                    }
+                }
+            }
         }
 
         &__form {
-            gap: fluid-type(1200px, 1920px, 36px, 42px);
+            gap: fluid-type(1200px, 1920px, 40px, 50px);
+        }
+
+        &__field {
+            width: 100%;
         }
 
         &__row {
-            gap: fluid-type(1200px, 1920px, 30px, 40px);
+            flex-direction: row;
+            gap: fluid-type(1200px, 1920px, 40px, 50px);
         }
 
         &__map {

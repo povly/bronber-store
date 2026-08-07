@@ -34,9 +34,10 @@
 
     &__thumbs {
         --slider-gap: 8px;
-        --slider-slide: calc((100% - var(--slider-gap) * 3) / 4);
+        --per-view: 4;
         scrollbar-width: none;
         padding-bottom: 2px;
+        overflow: hidden;
 
         &::-webkit-scrollbar {
             display: none;
@@ -435,10 +436,7 @@
         gap: 12px;
         margin-bottom: 16px;
     }
-
-    &__reviews-arrows {
-        gap: 12px;
-    }
+    
     &__section-title {
         font-family: var(--font-manrope);
         font-weight: 800;
@@ -741,6 +739,10 @@
     /* ══ Desktop ≥1200px ══════════════════════════════════ */
 
     @media (min-width: 1200px) {
+        &__reviews-slider {
+            --per-view: 2;
+        }
+
         padding-top: 36px;
         
         &__hero-grid {
@@ -877,10 +879,6 @@
 
         &__reviews-all {
             font-size: 12px;
-        }
-
-        &__reviews-slider {
-            --slider-slide: calc((100% - var(--slider-gap)) / 2);
         }
 
         &__savings {

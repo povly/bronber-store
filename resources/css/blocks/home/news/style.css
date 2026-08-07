@@ -23,7 +23,7 @@
 
     @media (min-width: 768px) {
         &__slider {
-            --slider-slide: calc((100% - var(--slider-gap)) / 2);
+            --per-view: 2;
         }
 
         &__arrows--bottom {
@@ -34,6 +34,7 @@
     @media (min-width: 1200px) {
         &__slider {
             --slider-gap: fluid-type(1200px, 1440px, 18px, 24px);
+            --per-view: 3;
         }
 
         &__title {
@@ -45,7 +46,6 @@
 
             &--top {
                 display: flex;
-                gap: 10px;
             }
         }
 

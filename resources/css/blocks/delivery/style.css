@@ -2,11 +2,6 @@
     padding-top: fluid-type(375px, 768px, 30px, 50px);
 
     &__title {
-        font-family: var(--font-manrope);
-        font-weight: 800;
-        font-size: fluid-type(375px, 768px, 25px, 25px);
-        line-height: fluid-type(375px, 768px, 32.5px, 32.5px);
-        color: var(--color-black);
         margin-bottom: fluid-type(375px, 768px, 20px, 30px);
     }
 
@@ -90,8 +85,6 @@
         padding-top: fluid-type(768px, 1200px, 50px, 70px);
 
         &__title {
-            font-size: fluid-type(768px, 1200px, 25px, 32px);
-            line-height: fluid-type(768px, 1200px, 32.5px, 41.6px);
             margin-bottom: fluid-type(768px, 1200px, 30px, 50px);
         }
 
@@ -142,9 +135,6 @@
         padding-top: fluid-type(1200px, 1920px, 70px, 90px);
 
         &__title {
-            font-weight: 700;
-            font-size: fluid-type(1200px, 1920px, 32px, 40px);
-            line-height: fluid-type(1200px, 1920px, 41.6px, 48px);
             margin-bottom: fluid-type(1200px, 1920px, 50px, 72px);
         }
 

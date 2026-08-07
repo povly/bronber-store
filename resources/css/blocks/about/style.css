@@ -14,7 +14,7 @@
 
     &__years {
         --slider-gap: 20px;
-        --slider-slide: calc((100% - var(--slider-gap)) / 2);
+        --per-view: 2;
         overflow: hidden;
     }
 
@@ -34,7 +34,6 @@
     }
 
     &__year-slide {
-        flex: 0 0 var(--slider-slide);
         min-width: 0;
         display: flex;
         flex-direction: column;
@@ -103,6 +102,60 @@
         object-fit: cover;
     }
 
+    /* Desktop layout: hidden below 1200px (mobile-first) */
+    &__desktop {
+        display: none;
+    }
+
+    /* Accordion: visible below 1200px */
+    &__accordion {
+        display: block;
+    }
+
+    &__acc-header {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: fluid-type(375px, 768px, 18px, 20px) 0;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: inherit;
+        text-align: left;
+    }
+
+    &__acc-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 25px, 25px);
+        line-height: 110%;
+        color: var(--color-black);
+    }
+
+    &__acc-chevron {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--color-black);
+        transition: transform 0.3s ease;
+    }
+
+    &__acc-item.is-open &__acc-chevron {
+        transform: rotate(180deg);
+    }
+
+    &__acc-content {
+        padding-bottom: fluid-type(375px, 768px, 18px, 24px);
+    }
+
+    &__acc-separator {
+        height: 1px;
+        background: var(--color-gray-placeholder);
+    }
+
     @media screen and (min-width: 768px) {
         padding-top: fluid-type(768px, 1200px, 50px, 70px);
 
@@ -114,7 +167,7 @@
 
         &__years {
             --slider-gap: 30px;
-            --slider-slide: calc((100% - 2 * var(--slider-gap)) / 3);
+            --per-view: 3;
         }
 
         &__year {
@@ -150,9 +203,30 @@
             aspect-ratio: auto;
             height: fluid-type(768px, 1200px, 260px, 380px);
         }
+
+        &__acc-header {
+            padding: fluid-type(768px, 1200px, 20px, 22px) 0;
+        }
+
+        &__acc-title {
+            font-size: fluid-type(768px, 1200px, 25px, 25px);
+        }
+
+        &__acc-content {
+            padding-bottom: fluid-type(768px, 1200px, 24px, 30px);
+        }
     }
 
     @media screen and (min-width: 1200px) {
+        /* Switch: show desktop layout, hide accordion */
+        &__desktop {
+            display: block;
+        }
+
+        &__accordion {
+            display: none;
+        }
+
         padding-top: fluid-type(1200px, 1920px, 70px, 90px);
 
         &__title {
@@ -163,7 +237,7 @@
 
         &__years {
             --slider-gap: 40px;
-            --slider-slide: calc((100% - 4 * var(--slider-gap)) / 5);
+            --per-view: 5;
         }
 
         &__year {
