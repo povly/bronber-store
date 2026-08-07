@@ -47,7 +47,6 @@
 
         <div class="about__years slider"
              x-data="slider({ breakpoints: { 0: { perView: 2 }, 768: { perView: 3 }, 1200: { perView: 5 } } })"
-             x-init="$watch('active', v => scrollToReveal(v))"
              @resize.window.debounce.150ms="onResize()">
             <div class="about__years-track slider__track" x-ref="track"
                  @pointerdown.prevent="onPointerDown($event)"
@@ -61,7 +60,7 @@
                          :class="{ 'is-active': active === {{ $i }} }">
                         <button type="button" class="about__year"
                                 :style="{ color: yearColor({{ $i }}) }"
-                                @click="select({{ $i }})">
+                                @click="select({{ $i }}); $nextTick(() => scrollToReveal({{ $i }}))">
                             {{ $item['year'] }}
                         </button>
                         <span class="about__year-marker">

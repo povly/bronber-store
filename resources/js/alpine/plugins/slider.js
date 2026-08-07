@@ -657,6 +657,8 @@ export default function (Alpine) {
 
             if (targetIndex === lastVisible && this.canNext) {
                 this.next();
+            } else if (targetIndex === this.index && this.canPrev) {
+                this.prev();
             } else if (targetIndex > lastVisible) {
                 this.index = Math.min(
                     targetIndex - this.perView + 1,
