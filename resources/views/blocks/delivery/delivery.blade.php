@@ -29,7 +29,7 @@
 
 <section class="delivery">
     <div class="container">
-        <h1 class="delivery__title">{{ __('delivery.title') }}</h1>
+        <h1 class="delivery__title section__title">{{ __('delivery.title') }}</h1>
 
         <div class="delivery__methods">
             @foreach ($methods as $method)
@@ -41,7 +41,7 @@
             @endforeach
         </div>
 
-        <h2 class="delivery__contact-title">{{ __('delivery.contact_title') }}</h2>
+        <h2 class="delivery__contact-title section__title">{{ __('delivery.contact_title') }}</h2>
 
         <div class="delivery__contacts">
             <a href="tel:{{ preg_replace('/[^+\d]/', '', __('delivery.contact_phone')) }}" class="delivery__contact">

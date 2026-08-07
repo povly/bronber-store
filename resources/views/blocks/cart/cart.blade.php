@@ -13,14 +13,6 @@
         <h1 class="cart__title">Корзина</h1>
     </div>
 
-    {{-- Empty state --}}
-    <div class="container">
-        <div class="cart__empty" x-show="items.length === 0" x-cloak>
-            <p class="cart__empty-text">В корзине нет товаров</p>
-            <a href="{{ route('catalog') }}" class="cart__empty-link">Вернуться в каталог</a>
-        </div>
-    </div>
-
     {{-- Filled state: body lives OUTSIDE container so cards can be full-width on mobile --}}
     <div class="cart__body">
 
