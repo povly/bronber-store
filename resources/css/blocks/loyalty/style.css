@@ -1,0 +1,600 @@
+[x-cloak] { display: none !important; }
+
+/* ===================================================================
+   Loyalty Program page — 4 blocks
+   Breakpoints: 375 (base) → 768 → 1200 → 1920
+   =================================================================== */
+
+.loyalty {
+    --color-purple-soft-bg: #f9f7fc;
+    --color-purple-soft-border: #f6eaff;
+    --color-divider-card: #eeeeee;
+    --color-divider-faq: #bfbfbf;
+
+    padding-top: fluid-type(375px, 768px, 24px, 30px);
+    padding-bottom: fluid-type(375px, 768px, 40px, 60px);
+
+    /* ---- Block 1: Hero ---- */
+
+    &__hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: fluid-type(375px, 768px, 16px, 20px);
+        margin-bottom: fluid-type(375px, 768px, 24px, 30px);
+    }
+
+    &__hero-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: fluid-type(375px, 768px, 16px, 20px);
+    }
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 40px, 45px);
+        line-height: 110%;
+        color: var(--color-black);
+    }
+
+    &__subtitle {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 18px, 18px);
+        line-height: 130%;
+        color: var(--color-black);
+        max-width: 293px;
+    }
+
+    &__hero-image {
+        width: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+        aspect-ratio: 329 / 185;
+    }
+
+    &__hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* ---- Block 2: Benefits bar ---- */
+
+    &__benefits {
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: fluid-type(375px, 768px, 24px, 30px);
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 20px, 24px);
+        margin-bottom: fluid-type(375px, 768px, 30px, 40px);
+    }
+
+    &__benefit {
+        display: flex;
+        align-items: flex-start;
+        gap: fluid-type(375px, 768px, 12px, 16px);
+
+        &--main {
+            padding-bottom: fluid-type(375px, 768px, 20px, 24px);
+            border-bottom: 1px solid var(--color-divider-card);
+        }
+    }
+
+    &__benefit-icon {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fluid-type(375px, 768px, 35px, 40px);
+        height: fluid-type(375px, 768px, 35px, 40px);
+
+        svg {
+            width: fluid-type(375px, 768px, 32px, 35px);
+            height: fluid-type(375px, 768px, 32px, 35px);
+        }
+    }
+
+    &__benefit-body {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 6px, 8px);
+    }
+
+    &__benefit-title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 24px, 24px);
+        line-height: 1;
+        color: var(--color-black);
+    }
+
+    &__benefit-text {
+        font-family: var(--font-manrope);
+        font-weight: 400;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 130%;
+        color: var(--color-black);
+    }
+
+    /* ---- Section heading (shared) ---- */
+
+    &__heading {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 25px, 25px);
+        line-height: 130%;
+        color: var(--color-black);
+        margin-bottom: fluid-type(375px, 768px, 20px, 24px);
+    }
+
+    /* ---- Block 3: How it works ---- */
+
+    &__steps {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 20px, 24px);
+        margin-bottom: fluid-type(375px, 768px, 30px, 40px);
+    }
+
+    &__step {
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: fluid-type(375px, 768px, 24px, 30px);
+    }
+
+    &__step-icon {
+        margin-bottom: fluid-type(375px, 768px, 16px, 20px);
+
+        svg {
+            width: fluid-type(375px, 768px, 40px, 45px);
+            height: fluid-type(375px, 768px, 40px, 45px);
+        }
+    }
+
+    &__step-title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 20px, 22px);
+        line-height: 1;
+        color: var(--color-black);
+        margin-bottom: fluid-type(375px, 768px, 8px, 10px);
+    }
+
+    &__step-text {
+        font-family: var(--font-manrope);
+        font-weight: 400;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 130%;
+        color: var(--color-black);
+    }
+
+    /* ---- Block 4: Bottom (Example + FAQ) ---- */
+
+    &__bottom {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 30px, 40px);
+    }
+
+    /* ---- Example card ---- */
+
+    &__example-card {
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: fluid-type(375px, 768px, 24px, 30px);
+    }
+
+    &__example-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: fluid-type(375px, 768px, 12px, 14px) 0;
+        border-bottom: 1px solid var(--color-divider-card);
+
+        &--accent {
+            border-bottom: none;
+
+            .loyalty__example-label,
+            .loyalty__example-value {
+                color: var(--color-purple);
+            }
+        }
+    }
+
+    &__example-label {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 1;
+        color: var(--color-black);
+    }
+
+    &__example-value {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 1;
+        color: var(--color-black);
+    }
+
+    &__banner {
+        display: flex;
+        align-items: center;
+        gap: fluid-type(375px, 768px, 12px, 16px);
+        background: var(--color-purple-soft-bg);
+        border-radius: 5px;
+        padding: fluid-type(375px, 768px, 16px, 20px);
+        margin-top: fluid-type(375px, 768px, 16px, 20px);
+    }
+
+    &__banner-icon {
+        flex-shrink: 0;
+
+        svg {
+            width: fluid-type(375px, 768px, 32px, 40px);
+            height: fluid-type(375px, 768px, 32px, 40px);
+        }
+    }
+
+    &__banner-body {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 4px, 6px);
+    }
+
+    &__banner-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 18px, 18px);
+        line-height: 120%;
+        color: var(--color-purple);
+    }
+
+    &__banner-text {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 130%;
+        color: var(--color-black);
+    }
+
+    /* ---- FAQ ---- */
+
+    &__faq-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__faq-item {
+        border-bottom: 1px solid var(--color-divider-faq);
+
+        &:first-child {
+            border-top: 1px solid var(--color-divider-faq);
+        }
+    }
+
+    &__faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: fluid-type(375px, 768px, 12px, 16px);
+        width: 100%;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+        padding: fluid-type(375px, 768px, 16px, 18px) 0;
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 18px, 18px);
+        line-height: 130%;
+        color: var(--color-black);
+    }
+
+    &__faq-icon {
+        flex-shrink: 0;
+        margin-top: fluid-type(375px, 768px, 2px, 4px);
+        color: var(--color-purple);
+    }
+
+    &__faq-icon-v {
+        transition: transform 0.25s ease;
+        transform-box: view-box;
+        transform-origin: 7.5px 10px;
+    }
+
+    &__faq-item.is-open &__faq-icon-v {
+        transform: rotate(90deg);
+    }
+
+    &__faq-answer-wrap {
+        overflow: hidden;
+    }
+
+    &__faq-answer {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 140%;
+        color: var(--color-gray);
+        padding-bottom: fluid-type(375px, 768px, 16px, 18px);
+    }
+
+    /* =============================================
+       Tablet — 768px+
+       ============================================= */
+
+    @media screen and (min-width: 768px) {
+        padding-top: fluid-type(768px, 1200px, 30px, 50px);
+        padding-bottom: fluid-type(768px, 1200px, 60px, 80px);
+
+        /* Hero — two columns */
+        &__hero {
+            flex-direction: row;
+            align-items: center;
+            text-align: left;
+            justify-content: space-between;
+            gap: fluid-type(768px, 1200px, 30px, 50px);
+            margin-bottom: fluid-type(768px, 1200px, 40px, 60px);
+        }
+
+        &__hero-content {
+            align-items: flex-start;
+            flex-shrink: 0;
+            max-width: 45%;
+            gap: fluid-type(768px, 1200px, 20px, 24px);
+        }
+
+        &__title {
+            font-size: fluid-type(768px, 1200px, 45px, 60px);
+        }
+
+        &__subtitle {
+            font-size: fluid-type(768px, 1200px, 18px, 20px);
+            max-width: none;
+        }
+
+        &__hero-image {
+            flex: 1;
+            aspect-ratio: 632 / 355;
+        }
+
+        /* Benefits — horizontal row */
+        &__benefits {
+            flex-direction: row;
+            align-items: stretch;
+            gap: 0;
+            padding: fluid-type(768px, 1200px, 30px, 40px);
+            margin-bottom: fluid-type(768px, 1200px, 40px, 50px);
+        }
+
+        &__benefit {
+            flex: 1;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 0 fluid-type(768px, 1200px, 20px, 30px);
+            gap: fluid-type(768px, 1200px, 12px, 16px);
+            border-right: 1px solid var(--color-divider-card);
+
+            &:last-child {
+                border-right: none;
+            }
+
+            &--main {
+                border-bottom: none;
+                padding-bottom: 0;
+            }
+        }
+
+        &__benefit-title {
+            font-size: fluid-type(768px, 1200px, 24px, 24px);
+        }
+
+        &__benefit-text {
+            font-size: fluid-type(768px, 1200px, 16px, 16px);
+        }
+
+        /* Section heading */
+        &__heading {
+            font-size: fluid-type(768px, 1200px, 25px, 32px);
+            margin-bottom: fluid-type(768px, 1200px, 24px, 30px);
+        }
+
+        /* How it works — 3 columns */
+        &__steps {
+            flex-direction: row;
+            gap: fluid-type(768px, 1200px, 20px, 30px);
+            margin-bottom: fluid-type(768px, 1200px, 40px, 60px);
+        }
+
+        &__step {
+            flex: 1;
+            padding: fluid-type(768px, 1200px, 30px, 40px);
+        }
+
+        &__step-icon svg {
+            width: fluid-type(768px, 1200px, 45px, 50px);
+            height: fluid-type(768px, 1200px, 45px, 50px);
+        }
+
+        &__step-title {
+            font-size: fluid-type(768px, 1200px, 22px, 24px);
+        }
+
+        &__step-text {
+            font-size: fluid-type(768px, 1200px, 16px, 16px);
+        }
+
+        /* Bottom — side by side */
+        &__bottom {
+            flex-direction: row;
+            gap: fluid-type(768px, 1200px, 20px, 30px);
+        }
+
+        &__example,
+        &__faq {
+            flex: 1;
+        }
+
+        &__example-card {
+            padding: fluid-type(768px, 1200px, 30px, 40px);
+        }
+
+        &__example-label,
+        &__example-value {
+            font-size: fluid-type(768px, 1200px, 16px, 24px);
+        }
+
+        &__banner {
+            padding: fluid-type(768px, 1200px, 20px, 24px);
+            margin-top: fluid-type(768px, 1200px, 20px, 24px);
+        }
+
+        &__banner-title {
+            font-size: fluid-type(768px, 1200px, 18px, 20px);
+        }
+
+        &__banner-text {
+            font-size: fluid-type(768px, 1200px, 16px, 18px);
+        }
+
+        &__faq-question {
+            font-size: fluid-type(768px, 1200px, 18px, 24px);
+            padding: fluid-type(768px, 1200px, 18px, 20px) 0;
+        }
+
+        &__faq-answer {
+            font-size: fluid-type(768px, 1200px, 16px, 18px);
+            padding-bottom: fluid-type(768px, 1200px, 18px, 20px);
+        }
+    }
+
+    /* =============================================
+       Desktop — 1200px+ (scales to 1920px)
+       ============================================= */
+
+    @media screen and (min-width: 1200px) {
+        padding-top: fluid-type(1200px, 1920px, 50px, 80px);
+        padding-bottom: fluid-type(1200px, 1920px, 80px, 100px);
+
+        &__hero {
+            gap: fluid-type(1200px, 1920px, 50px, 80px);
+            margin-bottom: fluid-type(1200px, 1920px, 60px, 90px);
+        }
+
+        &__hero-content {
+            gap: fluid-type(1200px, 1920px, 24px, 30px);
+        }
+
+        &__title {
+            font-size: fluid-type(1200px, 1920px, 60px, 80px);
+        }
+
+        &__subtitle {
+            font-size: fluid-type(1200px, 1920px, 20px, 24px);
+        }
+
+        &__hero-image {
+            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
+        }
+
+        &__benefits {
+            padding: fluid-type(1200px, 1920px, 40px, 56px);
+            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
+            margin-bottom: fluid-type(1200px, 1920px, 50px, 70px);
+        }
+
+        &__benefit {
+            padding: 0 fluid-type(1200px, 1920px, 30px, 40px);
+        }
+
+        &__benefit-icon svg {
+            width: fluid-type(1200px, 1920px, 50px, 60px);
+            height: fluid-type(1200px, 1920px, 50px, 60px);
+        }
+
+        &__benefit-title {
+            font-size: fluid-type(1200px, 1920px, 24px, 32px);
+        }
+
+        &__benefit-text {
+            font-size: fluid-type(1200px, 1920px, 16px, 18px);
+        }
+
+        &__heading {
+            font-size: fluid-type(1200px, 1920px, 32px, 48px);
+            margin-bottom: fluid-type(1200px, 1920px, 30px, 40px);
+        }
+
+        &__steps {
+            gap: fluid-type(1200px, 1920px, 30px, 40px);
+            margin-bottom: fluid-type(1200px, 1920px, 60px, 80px);
+        }
+
+        &__step {
+            padding: fluid-type(1200px, 1920px, 40px, 50px);
+            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
+        }
+
+        &__step-icon svg {
+            width: fluid-type(1200px, 1920px, 50px, 65px);
+            height: fluid-type(1200px, 1920px, 50px, 65px);
+        }
+
+        &__step-title {
+            font-size: fluid-type(1200px, 1920px, 24px, 32px);
+        }
+
+        &__step-text {
+            font-size: fluid-type(1200px, 1920px, 16px, 20px);
+        }
+
+        &__bottom {
+            gap: fluid-type(1200px, 1920px, 30px, 40px);
+        }
+
+        &__example-card {
+            padding: fluid-type(1200px, 1920px, 40px, 50px);
+            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
+        }
+
+        &__example-label,
+        &__example-value {
+            font-size: fluid-type(1200px, 1920px, 24px, 30px);
+        }
+
+        &__banner {
+            padding: fluid-type(1200px, 1920px, 24px, 32px);
+            margin-top: fluid-type(1200px, 1920px, 24px, 30px);
+            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
+        }
+
+        &__banner-icon svg {
+            width: fluid-type(1200px, 1920px, 55px, 70px);
+            height: fluid-type(1200px, 1920px, 55px, 70px);
+        }
+
+        &__banner-title {
+            font-size: fluid-type(1200px, 1920px, 20px, 26px);
+        }
+
+        &__banner-text {
+            font-size: fluid-type(1200px, 1920px, 18px, 22px);
+        }
+
+        &__faq-question {
+            font-size: fluid-type(1200px, 1920px, 24px, 30px);
+            padding: fluid-type(1200px, 1920px, 20px, 26px) 0;
+        }
+
+        &__faq-answer {
+            font-size: fluid-type(1200px, 1920px, 18px, 22px);
+            padding-bottom: fluid-type(1200px, 1920px, 20px, 26px);
+        }
+    }
+}

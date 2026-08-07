@@ -16,6 +16,7 @@ $register = function () {
     Route::get('/contacts', fn () => view('contacts'))->name('contacts');
     Route::get('/blog', fn () => view('blog'))->name('blog');
     Route::get('/about', fn () => view('about'))->name('about');
+    Route::get('/loyalty', fn () => view('loyalty'))->name('loyalty');
     Route::get('/blog/{slug}', fn () => view('article'))->name('article');
 
     Route::get('/cart', function () {
