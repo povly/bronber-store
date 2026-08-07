@@ -72,4 +72,21 @@ return [
     'mobile_cart' => 'Корзина',
     'mobile_profile' => 'Профиль',
 
+    // Contacts page
+    'contacts_title' => 'Открыты<br>к деловому<br>диалогу',
+    'contacts_subtitle' => 'Оставьте свою заявку и наш менеджер свяжется с вами в ближайшее время',
+    'contacts_phone' => '+7 (985) 449-8000',
+    'contacts_email' => 'info@bronber.ru',
+    'contacts_address' => 'Москва, Пресненская набережная 12',
+    'contacts_form_name' => 'Ваше имя',
+    'contacts_form_name_placeholder' => 'Андрей Андреевич',
+    'contacts_form_phone' => 'Ваш номер телефона',
+    'contacts_form_phone_placeholder' => '+7 (___) ___-__-__',
+    'contacts_form_email' => 'Ваш e-mail',
+    'contacts_form_email_placeholder' => 'info@bronber.ru',
+    'contacts_form_subject' => 'Тема обращения',
+    'contacts_form_message_placeholder' => 'Хочу арендовать авто, но нужен ваш совет что выбрать',
+    'contacts_form_consent' => 'Нажимая кнопку «Отправить» вы соглашаетесь с условиями обработки данных',
+    'contacts_form_submit' => 'Отправить',
+
 ];

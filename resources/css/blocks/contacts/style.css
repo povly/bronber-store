@@ -213,37 +213,37 @@
     }
 
     @media screen and (min-width: 1200px) {
-        padding-top: fluid-type(1200px, 1440px, 70px, 90px);
+        padding-top: fluid-type(1200px, 1920px, 70px, 90px);
 
         &__top {
-            gap: fluid-type(1200px, 1440px, 60px, 80px);
+            gap: fluid-type(1200px, 1920px, 60px, 80px);
         }
 
         &__title {
-            font-size: fluid-type(1200px, 1440px, 60px, 80px);
+            font-size: fluid-type(1200px, 1920px, 60px, 80px);
         }
 
         &__subtitle {
-            font-size: fluid-type(1200px, 1440px, 20px, 24px);
-            max-width: fluid-type(1200px, 1440px, 400px, 460px);
+            font-size: fluid-type(1200px, 1920px, 20px, 24px);
+            max-width: fluid-type(1200px, 1920px, 400px, 460px);
         }
 
         &__address {
-            font-size: fluid-type(1200px, 1440px, 18px, 18px);
+            font-size: fluid-type(1200px, 1920px, 18px, 18px);
         }
 
         &__form {
-            gap: fluid-type(1200px, 1440px, 36px, 42px);
+            gap: fluid-type(1200px, 1920px, 36px, 42px);
         }
 
         &__row {
-            gap: fluid-type(1200px, 1440px, 30px, 40px);
+            gap: fluid-type(1200px, 1920px, 30px, 40px);
         }
 
         &__map {
-            margin-top: fluid-type(1200px, 1440px, 50px, 70px);
-            border-radius: fluid-type(1200px, 1440px, 8px, 10px);
-            height: fluid-type(1200px, 1440px, 404px, 530px);
+            margin-top: fluid-type(1200px, 1920px, 50px, 70px);
+            border-radius: fluid-type(1200px, 1920px, 8px, 10px);
+            height: fluid-type(1200px, 1920px, 404px, 530px);
         }
     }
 }
