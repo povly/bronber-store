@@ -1,0 +1,195 @@
+.delivery {
+    padding-top: fluid-type(375px, 768px, 30px, 50px);
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 25px, 25px);
+        line-height: fluid-type(375px, 768px, 32.5px, 32.5px);
+        color: var(--color-black);
+        margin-bottom: fluid-type(375px, 768px, 20px, 30px);
+    }
+
+    &__methods {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 15px, 20px);
+    }
+
+    &__method {
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: fluid-type(375px, 768px, 32px, 40px);
+        text-align: center;
+    }
+
+    &__icon {
+        display: block;
+        width: fluid-type(375px, 768px, 50px, 50px);
+        height: fluid-type(375px, 768px, 50px, 50px);
+        margin: 0 auto fluid-type(375px, 768px, 20px, 24px);
+        border-radius: 50%;
+        background: linear-gradient(135deg, #7212bc, #470b75);
+    }
+
+    &__method-title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 18px, 18px);
+        line-height: fluid-type(375px, 768px, 18px, 18px);
+        color: var(--color-black);
+        margin-bottom: fluid-type(375px, 768px, 40px, 50px);
+    }
+
+    &__method-text {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: fluid-type(375px, 768px, 20.8px, 20.8px);
+        color: var(--color-black);
+    }
+
+    &__contact-title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 25px, 25px);
+        line-height: fluid-type(375px, 768px, 32.5px, 32.5px);
+        color: var(--color-black);
+        margin-top: fluid-type(375px, 768px, 30px, 40px);
+        margin-bottom: fluid-type(375px, 768px, 20px, 24px);
+    }
+
+    &__contacts {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 16px, 20px);
+    }
+
+    &__contact {
+        display: flex;
+        align-items: center;
+        gap: fluid-type(375px, 768px, 12px, 14px);
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 24px, 24px);
+        line-height: fluid-type(375px, 768px, 52px, 52px);
+        color: var(--color-black);
+        text-decoration: none;
+    }
+
+    &__contact-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: fluid-type(375px, 768px, 26px, 26px);
+        height: fluid-type(375px, 768px, 26px, 26px);
+        color: var(--color-black);
+    }
+
+    @media screen and (min-width: 768px) {
+        padding-top: fluid-type(768px, 1200px, 50px, 70px);
+
+        &__title {
+            font-size: fluid-type(768px, 1200px, 25px, 32px);
+            line-height: fluid-type(768px, 1200px, 32.5px, 41.6px);
+            margin-bottom: fluid-type(768px, 1200px, 30px, 50px);
+        }
+
+        &__methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: fluid-type(768px, 1200px, 20px, 30px);
+        }
+
+        &__method {
+            padding: fluid-type(768px, 1200px, 40px, 50px);
+        }
+
+        &__icon {
+            width: fluid-type(768px, 1200px, 50px, 58px);
+            height: fluid-type(768px, 1200px, 50px, 58px);
+            margin-bottom: fluid-type(768px, 1200px, 24px, 30px);
+        }
+
+        &__method-title {
+            font-size: fluid-type(768px, 1200px, 18px, 22px);
+            line-height: fluid-type(768px, 1200px, 18px, 22px);
+            margin-bottom: fluid-type(768px, 1200px, 50px, 60px);
+        }
+
+        &__method-text {
+            font-size: fluid-type(768px, 1200px, 16px, 18px);
+            line-height: fluid-type(768px, 1200px, 20.8px, 23.4px);
+        }
+
+        &__contact-title {
+            font-size: fluid-type(768px, 1200px, 25px, 32px);
+            line-height: fluid-type(768px, 1200px, 32.5px, 41.6px);
+            margin-top: fluid-type(768px, 1200px, 40px, 60px);
+        }
+
+        &__contact {
+            font-size: fluid-type(768px, 1200px, 24px, 28px);
+        }
+
+        &__contact-icon {
+            width: fluid-type(768px, 1200px, 26px, 30px);
+            height: fluid-type(768px, 1200px, 26px, 30px);
+        }
+    }
+
+    @media screen and (min-width: 1200px) {
+        padding-top: fluid-type(1200px, 1920px, 70px, 90px);
+
+        &__title {
+            font-weight: 700;
+            font-size: fluid-type(1200px, 1920px, 32px, 40px);
+            line-height: fluid-type(1200px, 1920px, 41.6px, 48px);
+            margin-bottom: fluid-type(1200px, 1920px, 50px, 72px);
+        }
+
+        &__methods {
+            grid-template-columns: repeat(4, 1fr);
+            gap: fluid-type(1200px, 1920px, 20px, 30px);
+        }
+
+        &__method {
+            padding: fluid-type(1200px, 1920px, 35px, 40px);
+        }
+
+        &__icon {
+            width: fluid-type(1200px, 1920px, 58px, 65px);
+            height: fluid-type(1200px, 1920px, 58px, 65px);
+            margin-bottom: fluid-type(1200px, 1920px, 30px, 35px);
+        }
+
+        &__method-title {
+            font-weight: 800;
+            font-size: fluid-type(1200px, 1920px, 22px, 24px);
+            line-height: fluid-type(1200px, 1920px, 22px, 24px);
+            margin-bottom: fluid-type(1200px, 1920px, 60px, 70px);
+        }
+
+        &__method-text {
+            font-size: fluid-type(1200px, 1920px, 18px, 18px);
+            line-height: 23.4px;
+        }
+
+        &__contact-title {
+            font-weight: 700;
+            font-size: fluid-type(1200px, 1920px, 32px, 40px);
+            line-height: fluid-type(1200px, 1920px, 41.6px, 40px);
+            margin-top: fluid-type(1200px, 1920px, 60px, 80px);
+            margin-bottom: fluid-type(1200px, 1920px, 24px, 30px);
+        }
+
+        &__contact {
+            font-size: fluid-type(1200px, 1920px, 28px, 30px);
+        }
+
+        &__contact-icon {
+            width: fluid-type(1200px, 1920px, 30px, 30px);
+            height: fluid-type(1200px, 1920px, 30px, 30px);
+        }
+    }
+}
