@@ -13,12 +13,63 @@
     }
 
     &__years {
+        --slider-gap: 20px;
+        --slider-slide: calc((100% - var(--slider-gap)) / 2);
+        overflow: hidden;
+    }
+
+    &__years-track {
+        display: flex;
+        gap: var(--slider-gap);
+        transition: transform var(--slider-duration, 0.35s) var(--slider-ease, cubic-bezier(0.25, 0.46, 0.45, 0.94));
+        will-change: transform;
+        -webkit-user-select: none;
+        user-select: none;
+        touch-action: pan-y;
+        cursor: grab;
+
+        &:active {
+            cursor: grabbing;
+        }
+    }
+
+    &__year-slide {
+        flex: 0 0 var(--slider-slide);
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__year {
+        font-family: var(--font-manrope);
+        font-weight: 400;
+        font-size: fluid-type(375px, 768px, 40px, 50px);
+        line-height: 1;
+        border: none;
+        background: none;
+        cursor: pointer;
+        transition: color 0.2s ease;
+    }
+
+    &__year-marker {
         display: none;
+        margin-top: fluid-type(375px, 768px, 8px, 10px);
+
+        svg {
+            width: fluid-type(375px, 768px, 14px, 18px);
+            height: fluid-type(375px, 768px, 14px, 18px);
+        }
+    }
+
+    &__year-slide.is-active &__year-marker {
+        display: block;
     }
 
     &__separator {
         height: 1px;
         background: var(--color-gray-placeholder);
+        margin-top: fluid-type(375px, 768px, 8px, 10px);
         margin-bottom: fluid-type(375px, 768px, 20px, 24px);
     }
 
@@ -52,34 +103,6 @@
         object-fit: cover;
     }
 
-    &__more-separator {
-        height: 1px;
-        background: var(--color-gray-placeholder);
-        margin: fluid-type(375px, 768px, 30px, 40px) 0 fluid-type(375px, 768px, 20px, 24px);
-    }
-
-    &__more-list {
-        display: flex;
-        flex-direction: column;
-        gap: fluid-type(375px, 768px, 24px, 30px);
-    }
-
-    &__more-year {
-        font-family: var(--font-manrope);
-        font-weight: 700;
-        font-size: fluid-type(375px, 768px, 25px, 25px);
-        line-height: 110%;
-        color: var(--color-black);
-        text-align: left;
-        border: none;
-        background: none;
-        cursor: pointer;
-
-        &.is-active {
-            opacity: 0.3;
-        }
-    }
-
     @media screen and (min-width: 768px) {
         padding-top: fluid-type(768px, 1200px, 50px, 70px);
 
@@ -89,7 +112,26 @@
             margin-bottom: fluid-type(768px, 1200px, 30px, 50px);
         }
 
+        &__years {
+            --slider-gap: 30px;
+            --slider-slide: calc((100% - 2 * var(--slider-gap)) / 3);
+        }
+
+        &__year {
+            font-size: fluid-type(768px, 1200px, 50px, 60px);
+        }
+
+        &__year-marker {
+            margin-top: fluid-type(768px, 1200px, 10px, 12px);
+
+            svg {
+                width: fluid-type(768px, 1200px, 18px, 20px);
+                height: fluid-type(768px, 1200px, 18px, 20px);
+            }
+        }
+
         &__separator {
+            margin-top: fluid-type(768px, 1200px, 10px, 15px);
             margin-bottom: fluid-type(768px, 1200px, 24px, 30px);
         }
 
@@ -108,74 +150,51 @@
             aspect-ratio: auto;
             height: fluid-type(768px, 1200px, 260px, 380px);
         }
-
-        &__more-year {
-            font-size: fluid-type(768px, 1200px, 25px, 25px);
-        }
     }
 
     @media screen and (min-width: 1200px) {
-        padding-top: fluid-type(1200px, 1440px, 70px, 90px);
+        padding-top: fluid-type(1200px, 1920px, 70px, 90px);
 
         &__title {
             font-weight: 700;
-            font-size: fluid-type(1200px, 1440px, 60px, 80px);
-            margin-bottom: fluid-type(1200px, 1440px, 50px, 70px);
+            font-size: fluid-type(1200px, 1920px, 60px, 80px);
+            margin-bottom: fluid-type(1200px, 1920px, 50px, 70px);
         }
 
         &__years {
-            display: flex;
-            align-items: center;
-            position: relative;
-            gap: fluid-type(1200px, 1440px, 30px, 50px);
+            --slider-gap: 40px;
+            --slider-slide: calc((100% - 4 * var(--slider-gap)) / 5);
         }
 
         &__year {
-            font-family: var(--font-manrope);
-            font-weight: 400;
-            font-size: fluid-type(1200px, 1440px, 70px, 100px);
-            line-height: 1;
-            border: none;
-            background: none;
-            cursor: pointer;
-            transition: color 0.2s ease;
+            font-size: fluid-type(1200px, 1920px, 70px, 100px);
         }
 
-        &__marker {
-            position: absolute;
-            bottom: fluid-type(1200px, 1440px, -15px, -20px);
-            transform: translateX(-50%);
-            transition: left 0.3s ease;
-            color: var(--color-black);
-            pointer-events: none;
+        &__year-marker {
+            margin-top: fluid-type(1200px, 1920px, 12px, 20px);
 
             svg {
-                width: fluid-type(1200px, 1440px, 20px, 31px);
-                height: fluid-type(1200px, 1440px, 20px, 30px);
+                width: fluid-type(1200px, 1920px, 20px, 31px);
+                height: fluid-type(1200px, 1920px, 20px, 30px);
             }
         }
 
         &__separator {
-            margin-top: fluid-type(1200px, 1440px, 15px, 20px);
-            margin-bottom: fluid-type(1200px, 1440px, 30px, 40px);
+            margin-top: fluid-type(1200px, 1920px, 15px, 20px);
+            margin-bottom: fluid-type(1200px, 1920px, 30px, 40px);
         }
 
         &__subtitle {
-            font-size: fluid-type(1200px, 1440px, 40px, 50px);
+            font-size: fluid-type(1200px, 1920px, 40px, 50px);
         }
 
         &__text {
-            font-size: fluid-type(1200px, 1440px, 18px, 20px);
+            font-size: fluid-type(1200px, 1920px, 18px, 20px);
         }
 
         &__image-wrap {
-            height: fluid-type(1200px, 1440px, 380px, 530px);
-            border-radius: fluid-type(1200px, 1440px, 5px, 8px);
-        }
-
-        &__more-separator,
-        &__more-list {
-            display: none;
+            height: fluid-type(1200px, 1920px, 380px, 530px);
+            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
         }
     }
 }
