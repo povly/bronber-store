@@ -1,0 +1,284 @@
+[x-cloak] { display: none !important; }
+
+/* ===================================================================
+   Loyalty — Block 4: Bottom (Example card + FAQ)
+   Breakpoints: 375 (base) → 768 → 1200 → 1920
+   =================================================================== */
+
+.loyalty-bottom {
+    --color-purple-soft-bg: #f9f7fc;
+    --color-divider-card: #eeeeee;
+    --color-divider-faq: #bfbfbf;
+
+    padding-bottom: fluid-type(375px, 768px, 40px, 60px);
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 30px, 40px);
+    }
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 25px, 25px);
+        line-height: 130%;
+        color: var(--color-black);
+        margin-bottom: fluid-type(375px, 768px, 20px, 24px);
+    }
+
+    /* ---- Example card ---- */
+
+    &__example-card {
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: fluid-type(375px, 768px, 24px, 30px);
+    }
+
+    &__example-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: fluid-type(375px, 768px, 12px, 14px) 0;
+        border-bottom: 1px solid var(--color-divider-card);
+
+        &--accent {
+            border-bottom: none;
+
+            .loyalty-bottom__example-label,
+            .loyalty-bottom__example-value {
+                color: var(--color-purple);
+            }
+        }
+    }
+
+    &__example-label {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 1;
+        color: var(--color-black);
+    }
+
+    &__example-value {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 1;
+        color: var(--color-black);
+    }
+
+    &__banner {
+        display: flex;
+        align-items: center;
+        gap: fluid-type(375px, 768px, 12px, 16px);
+        background: var(--color-purple-soft-bg);
+        border-radius: 5px;
+        padding: fluid-type(375px, 768px, 16px, 20px);
+        margin-top: fluid-type(375px, 768px, 16px, 20px);
+    }
+
+    &__banner-icon {
+        flex-shrink: 0;
+
+        svg {
+            width: fluid-type(375px, 768px, 32px, 40px);
+            height: fluid-type(375px, 768px, 32px, 40px);
+        }
+    }
+
+    &__banner-body {
+        display: flex;
+        flex-direction: column;
+        gap: fluid-type(375px, 768px, 4px, 6px);
+    }
+
+    &__banner-title {
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 18px, 18px);
+        line-height: 120%;
+        color: var(--color-purple);
+    }
+
+    &__banner-text {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 130%;
+        color: var(--color-black);
+    }
+
+    /* ---- FAQ ---- */
+
+    &__faq-list {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__faq-item {
+        border-bottom: 1px solid var(--color-divider-faq);
+
+        &:first-child {
+            border-top: 1px solid var(--color-divider-faq);
+        }
+    }
+
+    &__faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: fluid-type(375px, 768px, 12px, 16px);
+        width: 100%;
+        border: none;
+        background: none;
+        text-align: left;
+        cursor: pointer;
+        padding: fluid-type(375px, 768px, 16px, 18px) 0;
+        font-family: var(--font-manrope);
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 18px, 18px);
+        line-height: 130%;
+        color: var(--color-black);
+    }
+
+    &__faq-icon {
+        flex-shrink: 0;
+        margin-top: fluid-type(375px, 768px, 2px, 4px);
+        color: var(--color-purple);
+    }
+
+    &__faq-icon-v {
+        transition: transform 0.25s ease;
+        transform-box: view-box;
+        transform-origin: 7.5px 10px;
+    }
+
+    &__faq-item.is-open &__faq-icon-v {
+        transform: rotate(90deg);
+    }
+
+    &__faq-answer-wrap {
+        overflow: hidden;
+    }
+
+    &__faq-answer {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 16px, 16px);
+        line-height: 140%;
+        color: var(--color-gray);
+        padding-bottom: fluid-type(375px, 768px, 16px, 18px);
+    }
+
+    /* =============================================
+       Tablet — 768px+
+       ============================================= */
+
+    @media screen and (min-width: 768px) {
+        padding-bottom: fluid-type(768px, 1200px, 60px, 80px);
+
+        .container {
+            flex-direction: row;
+            gap: fluid-type(768px, 1200px, 20px, 30px);
+        }
+
+        &__example,
+        &__faq {
+            flex: 1;
+        }
+
+        &__title {
+            font-size: fluid-type(768px, 1200px, 25px, 32px);
+            margin-bottom: fluid-type(768px, 1200px, 24px, 30px);
+        }
+
+        &__example-card {
+            padding: fluid-type(768px, 1200px, 30px, 40px);
+        }
+
+        &__example-label,
+        &__example-value {
+            font-size: fluid-type(768px, 1200px, 16px, 24px);
+        }
+
+        &__banner {
+            padding: fluid-type(768px, 1200px, 20px, 24px);
+            margin-top: fluid-type(768px, 1200px, 20px, 24px);
+        }
+
+        &__banner-title {
+            font-size: fluid-type(768px, 1200px, 18px, 20px);
+        }
+
+        &__banner-text {
+            font-size: fluid-type(768px, 1200px, 16px, 18px);
+        }
+
+        &__faq-question {
+            font-size: fluid-type(768px, 1200px, 18px, 24px);
+            padding: fluid-type(768px, 1200px, 18px, 20px) 0;
+        }
+
+        &__faq-answer {
+            font-size: fluid-type(768px, 1200px, 16px, 18px);
+            padding-bottom: fluid-type(768px, 1200px, 18px, 20px);
+        }
+    }
+
+    /* =============================================
+       Desktop — 1200px+ (scales to 1920px)
+       ============================================= */
+
+    @media screen and (min-width: 1200px) {
+        padding-bottom: fluid-type(1200px, 1920px, 80px, 100px);
+
+        .container {
+            gap: fluid-type(1200px, 1920px, 30px, 40px);
+        }
+
+        &__title {
+            font-size: fluid-type(1200px, 1920px, 32px, 48px);
+            margin-bottom: fluid-type(1200px, 1920px, 30px, 40px);
+        }
+
+        &__example-card {
+            padding: fluid-type(1200px, 1920px, 40px, 50px);
+            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
+        }
+
+        &__example-label,
+        &__example-value {
+            font-size: fluid-type(1200px, 1920px, 24px, 30px);
+        }
+
+        &__banner {
+            padding: fluid-type(1200px, 1920px, 24px, 32px);
+            margin-top: fluid-type(1200px, 1920px, 24px, 30px);
+            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
+        }
+
+        &__banner-icon svg {
+            width: fluid-type(1200px, 1920px, 55px, 70px);
+            height: fluid-type(1200px, 1920px, 55px, 70px);
+        }
+
+        &__banner-title {
+            font-size: fluid-type(1200px, 1920px, 20px, 26px);
+        }
+
+        &__banner-text {
+            font-size: fluid-type(1200px, 1920px, 18px, 22px);
+        }
+
+        &__faq-question {
+            font-size: fluid-type(1200px, 1920px, 24px, 30px);
+            padding: fluid-type(1200px, 1920px, 20px, 26px) 0;
+        }
+
+        &__faq-answer {
+            font-size: fluid-type(1200px, 1920px, 18px, 22px);
+            padding-bottom: fluid-type(1200px, 1920px, 20px, 26px);
+        }
+    }
+}

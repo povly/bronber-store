@@ -1,0 +1,121 @@
+/* ===================================================================
+   Loyalty — Block 1: Hero
+   Breakpoints: 375 (base) → 768 → 1200 → 1920
+   =================================================================== */
+
+.loyalty-hero {
+    padding-top: fluid-type(375px, 768px, 24px, 30px);
+    margin-bottom: fluid-type(375px, 768px, 24px, 30px);
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: fluid-type(375px, 768px, 16px, 20px);
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: fluid-type(375px, 768px, 16px, 20px);
+    }
+
+    &__title {
+        font-family: var(--font-manrope);
+        font-weight: 800;
+        font-size: fluid-type(375px, 768px, 40px, 45px);
+        line-height: 110%;
+        color: var(--color-black);
+    }
+
+    &__subtitle {
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: fluid-type(375px, 768px, 18px, 18px);
+        line-height: 130%;
+        color: var(--color-black);
+        max-width: 293px;
+    }
+
+    &__image {
+        width: 100%;
+        border-radius: 5px;
+        overflow: hidden;
+        aspect-ratio: 329 / 185;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* =============================================
+       Tablet — 768px+
+       ============================================= */
+
+    @media screen and (min-width: 768px) {
+        padding-top: fluid-type(768px, 1200px, 30px, 50px);
+        margin-bottom: fluid-type(768px, 1200px, 40px, 60px);
+
+        .container {
+            flex-direction: row;
+            align-items: center;
+            text-align: left;
+            justify-content: space-between;
+            gap: fluid-type(768px, 1200px, 30px, 50px);
+        }
+
+        &__content {
+            align-items: flex-start;
+            flex-shrink: 0;
+            max-width: 45%;
+            gap: fluid-type(768px, 1200px, 20px, 24px);
+        }
+
+        &__title {
+            font-size: fluid-type(768px, 1200px, 45px, 60px);
+        }
+
+        &__subtitle {
+            font-size: fluid-type(768px, 1200px, 18px, 20px);
+            max-width: none;
+        }
+
+        &__image {
+            flex: 1;
+            aspect-ratio: 632 / 355;
+        }
+    }
+
+    /* =============================================
+       Desktop — 1200px+ (scales to 1920px)
+       ============================================= */
+
+    @media screen and (min-width: 1200px) {
+        padding-top: fluid-type(1200px, 1920px, 50px, 80px);
+        margin-bottom: fluid-type(1200px, 1920px, 60px, 90px);
+
+        .container {
+            gap: fluid-type(1200px, 1920px, 50px, 80px);
+        }
+
+        &__content {
+            gap: fluid-type(1200px, 1920px, 24px, 30px);
+        }
+
+        &__title {
+            font-size: fluid-type(1200px, 1920px, 60px, 80px);
+        }
+
+        &__subtitle {
+            font-size: fluid-type(1200px, 1920px, 20px, 24px);
+        }
+
+        &__image {
+            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
+        }
+    }
+}
