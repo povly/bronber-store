@@ -17,6 +17,31 @@ $register = function () {
     Route::get('/blog', fn () => view('blog'))->name('blog');
     Route::get('/about', fn () => view('about'))->name('about');
     Route::get('/loyalty', fn () => view('loyalty'))->name('loyalty');
+
+    Route::get('/profile', function () {
+        $user = [
+            'name' => 'Игорь Валерьевич',
+            'email' => 'igor@example.com',
+        ];
+
+        $stats = [
+            ['icon' => 'bonuses', 'key' => 'bonuses', 'title' => __('profile.stat_bonuses'), 'value' => '1250 ₽', 'subtitle' => __('profile.stat_bonuses_sub')],
+            ['icon' => 'orders', 'key' => 'orders', 'title' => __('profile.stat_orders'), 'value' => '32', 'subtitle' => __('profile.stat_orders_sub')],
+            ['icon' => 'favorites', 'key' => 'favorites', 'title' => __('profile.stat_favorites'), 'value' => '24', 'subtitle' => __('profile.stat_favorites_sub')],
+        ];
+
+        $orders = [
+            ['number' => '№32843', 'status' => 'expected', 'date' => '20.08.2026', 'total' => '40 000 ₽', 'image' => '/images/home/products/1/1.png'],
+            ['number' => '№32842', 'status' => 'done', 'date' => '25.12.2025', 'total' => '35 000 ₽', 'image' => '/images/home/products/1/2.png'],
+        ];
+
+        return view('profile', [
+            'user' => $user,
+            'stats' => $stats,
+            'orders' => $orders,
+        ]);
+    })->name('profile');
+
     Route::get('/delivery', fn () => view('delivery'))->name('delivery');
     Route::get('/returns', fn () => view('returns'))->name('returns');
     Route::get('/blog/{slug}', fn () => view('article'))->name('article');

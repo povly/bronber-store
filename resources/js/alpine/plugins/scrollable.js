@@ -16,10 +16,11 @@
  * (the directive never imposes dimensions — only the visual scrollbar).
  *
  * Config (via expression object, all optional):
+ *   - orientation  (string, default 'vertical') — 'vertical' | 'horizontal'
  *   - thumbColor   (string, default '#bfbfbf')
- *   - thumbWidth   (number, default 4)
+ *   - thumbWidth   (number, default 4) — track thickness on the scroll axis
  *   - thumbRadius  (number, default 4)
- *   - trackOffset  (number, default 2) — gap from the right edge
+ *   - trackOffset  (number, default 2) — gap from the right/bottom edge
  *   - minThumbSize (number, default 24) — keeps thumb grabbable on long content
  *   - autoHide     (bool,   default false) — fade thumb when idle
  *   - fadeDelay    (number, default 800) — ms before autoHide fades
@@ -36,6 +37,7 @@
  */
 
 const DEFAULTS = {
+    orientation: 'vertical',
     thumbColor: '#bfbfbf',
     thumbWidth: 4,
     thumbRadius: 4,
@@ -58,16 +60,33 @@ export default function (Alpine) {
             wrapper.style.setProperty('--x-scroll-track-offset', `${opts.trackOffset}px`);
         };
 
+        // --- Peek expression once up front: orientation must be known before
+        //     forcing overflow axis and tagging the wrapper (do not remove).
+        if (expression) {
+            try {
+                const userOpts = evaluate(expression);
+                if (userOpts && typeof userOpts === 'object') {
+                    opts = { ...opts, ...userOpts };
+                }
+            } catch (e) {
+                // ignore — element may not have Alpine scope yet
+            }
+        }
+
         // --- Ensure scrollable & positioned context for track ---
         const computedStyle = getComputedStyle(el);
-        if (computedStyle.overflowY !== 'auto' && computedStyle.overflowY !== 'scroll') {
-            el.style.overflowY = 'auto';
+        const axis = opts.orientation === 'horizontal' ? 'overflowX' : 'overflowY';
+        if (computedStyle[axis] !== 'auto' && computedStyle[axis] !== 'scroll') {
+            el.style[axis] = 'auto';
         }
         el.classList.add('x-scrollable');
 
         // --- Wrap element so track can sit as an absolute sibling ---
         const wrapper = document.createElement('div');
         wrapper.className = 'x-scrollable__wrapper';
+        if (opts.orientation === 'horizontal') {
+            wrapper.classList.add('is-horizontal');
+        }
         el.parentNode.insertBefore(wrapper, el);
         wrapper.appendChild(el);
 
@@ -99,29 +118,43 @@ export default function (Alpine) {
 
         // --- State ---
         let isDragging = false;
-        let dragStartY = 0;
-        let dragStartScrollTop = 0;
+        let dragStartPointer = 0;
+        let dragStartScroll = 0;
         let fadeTimer = null;
 
         const computeMetrics = () => {
+            if (opts.orientation === 'horizontal') {
+                const { clientWidth, scrollWidth, scrollLeft } = el;
+                const contentSize = Math.max(scrollWidth, 1);
+                const visibleRatio = Math.min(1, clientWidth / contentSize);
+                const thumbSize = Math.max(opts.minThumbSize, clientWidth * visibleRatio);
+                const maxThumbPos = Math.max(0, clientWidth - thumbSize);
+                const maxScroll = Math.max(0, scrollWidth - clientWidth);
+                return { clientSize: clientWidth, scrollSize: scrollWidth, scrollPos: scrollLeft, thumbSize, maxThumbPos, maxScroll };
+            }
             const { clientHeight, scrollHeight, scrollTop } = el;
             const contentHeight = Math.max(scrollHeight, 1);
             const visibleRatio = Math.min(1, clientHeight / contentHeight);
             const thumbHeight = Math.max(opts.minThumbSize, clientHeight * visibleRatio);
             const maxThumbTop = Math.max(0, clientHeight - thumbHeight);
             const maxScrollTop = Math.max(0, scrollHeight - clientHeight);
-            return { clientHeight, scrollHeight, scrollTop, thumbHeight, maxThumbTop, maxScrollTop };
+            return { clientSize: clientHeight, scrollSize: scrollHeight, scrollPos: scrollTop, thumbSize: thumbHeight, maxThumbPos: maxThumbTop, maxScroll: maxScrollTop };
         };
 
         const update = () => {
             const m = computeMetrics();
-            const needsScroll = m.maxScrollTop > 1;
+            const needsScroll = m.maxScroll > 1;
             track.classList.toggle('is-hidden', !needsScroll);
             if (!needsScroll) return;
-            const scrollRatio = m.maxScrollTop > 0 ? m.scrollTop / m.maxScrollTop : 0;
-            const thumbTop = m.maxThumbTop * Math.min(1, Math.max(0, scrollRatio));
-            thumb.style.height = `${m.thumbHeight}px`;
-            thumb.style.transform = `translateY(${thumbTop}px)`;
+            const scrollRatio = m.maxScroll > 0 ? m.scrollPos / m.maxScroll : 0;
+            const thumbPos = m.maxThumbPos * Math.min(1, Math.max(0, scrollRatio));
+            if (opts.orientation === 'horizontal') {
+                thumb.style.width = `${m.thumbSize}px`;
+                thumb.style.transform = `translateX(${thumbPos}px)`;
+            } else {
+                thumb.style.height = `${m.thumbSize}px`;
+                thumb.style.transform = `translateY(${thumbPos}px)`;
+            }
         };
 
         const show = () => {
@@ -182,10 +215,15 @@ export default function (Alpine) {
         const onPointerMove = (e) => {
             if (!isDragging) return;
             const m = computeMetrics();
-            if (m.maxThumbTop === 0) return;
-            const dy = e.clientY - dragStartY;
-            const scrollDelta = (dy / m.maxThumbTop) * m.maxScrollTop;
-            el.scrollTop = dragStartScrollTop + scrollDelta;
+            if (m.maxThumbPos === 0) return;
+            const client = opts.orientation === 'horizontal' ? e.clientX : e.clientY;
+            const d = client - dragStartPointer;
+            const scrollDelta = (d / m.maxThumbPos) * m.maxScroll;
+            if (opts.orientation === 'horizontal') {
+                el.scrollLeft = dragStartScroll + scrollDelta;
+            } else {
+                el.scrollTop = dragStartScroll + scrollDelta;
+            }
         };
 
         const onPointerUp = () => {
@@ -203,8 +241,8 @@ export default function (Alpine) {
             e.preventDefault();
             e.stopPropagation();
             isDragging = true;
-            dragStartY = e.clientY;
-            dragStartScrollTop = el.scrollTop;
+            dragStartPointer = opts.orientation === 'horizontal' ? e.clientX : e.clientY;
+            dragStartScroll = opts.orientation === 'horizontal' ? el.scrollLeft : el.scrollTop;
             thumb.classList.add('is-dragging');
             document.body.style.userSelect = 'none';
             document.addEventListener('pointermove', onPointerMove);
@@ -218,12 +256,18 @@ export default function (Alpine) {
             if (e.target === thumb) return;
             e.preventDefault();
             const rect = track.getBoundingClientRect();
-            const clickY = e.clientY - rect.top;
             const m = computeMetrics();
-            const targetThumbTop = clickY - m.thumbHeight / 2;
-            const clamped = Math.max(0, Math.min(targetThumbTop, m.maxThumbTop));
-            const scrollRatio = m.maxThumbTop > 0 ? clamped / m.maxThumbTop : 0;
-            el.scrollTop = scrollRatio * m.maxScrollTop;
+            const clickPos = opts.orientation === 'horizontal'
+                ? e.clientX - rect.left
+                : e.clientY - rect.top;
+            const targetThumbPos = clickPos - m.thumbSize / 2;
+            const clamped = Math.max(0, Math.min(targetThumbPos, m.maxThumbPos));
+            const scrollRatio = m.maxThumbPos > 0 ? clamped / m.maxThumbPos : 0;
+            if (opts.orientation === 'horizontal') {
+                el.scrollLeft = scrollRatio * m.maxScroll;
+            } else {
+                el.scrollTop = scrollRatio * m.maxScroll;
+            }
         };
         track.addEventListener('pointerdown', onTrackPointerDown);
 
@@ -262,7 +306,7 @@ export default function (Alpine) {
                 wrapper.remove();
             }
             el.classList.remove('x-scrollable');
-            el.style.removeProperty('overflow-y');
+            el.style.removeProperty(opts.orientation === 'horizontal' ? 'overflow-x' : 'overflow-y');
         });
     });
 }
