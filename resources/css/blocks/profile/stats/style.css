@@ -1,0 +1,90 @@
+.profile-stats {
+    padding-top: fluid-type(375px, 768px, 20px, 28px);
+
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: fluid-type(375px, 768px, 12px, 16px);
+
+        @media screen and (min-width: 768px) {
+            grid-template-columns: repeat(3, 1fr);
+            gap: fluid-type(768px, 1200px, 16px, 24px);
+        }
+    }
+
+    &__item {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        background: var(--color-white);
+        border-radius: 5px;
+        padding: fluid-type(375px, 768px, 20px, 24px);
+        box-shadow: var(--shadow-card);
+    }
+
+    &__icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: fluid-type(375px, 768px, 40px, 48px);
+        height: fluid-type(375px, 768px, 40px, 48px);
+        border-radius: 50%;
+        background: rgba(114, 18, 188, 0.1);
+        margin-bottom: fluid-type(375px, 768px, 10px, 14px);
+    }
+
+    &__value {
+        font-weight: 700;
+        font-size: fluid-type(375px, 768px, 22px, 24px);
+        line-height: 120%;
+        color: var(--color-black);
+        margin-bottom: 4px;
+    }
+
+    &__title {
+        font-weight: 600;
+        font-size: fluid-type(375px, 768px, 26px, 29px);
+        line-height: 120%;
+        color: var(--color-black);
+        margin-bottom: fluid-type(375px, 768px, 4px, 6px);
+    }
+
+    &__subtitle {
+        font-size: fluid-type(375px, 768px, 13px, 14px);
+        line-height: 130%;
+        color: var(--color-gray);
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .profile-stats {
+        padding-top: fluid-type(1200px, 1440px, 4px, 8px);
+
+        &__list {
+            gap: fluid-type(1200px, 1440px, 18px, 24px);
+        }
+
+        &__item {
+            min-height: fluid-type(1200px, 1440px, 140px, 156px);
+            padding: fluid-type(1200px, 1440px, 22px, 28px);
+        }
+
+        &__icon {
+            width: fluid-type(1200px, 1440px, 46px, 52px);
+            height: fluid-type(1200px, 1440px, 46px, 52px);
+            margin-bottom: fluid-type(1200px, 1440px, 14px, 16px);
+        }
+
+        &__value {
+            font-size: fluid-type(1200px, 1440px, 22px, 26px);
+        }
+
+        &__title {
+            font-size: fluid-type(1200px, 1440px, 28px, 32px);
+        }
+
+        &__subtitle {
+            font-size: fluid-type(1200px, 1440px, 14px, 15px);
+        }
+    }
+}

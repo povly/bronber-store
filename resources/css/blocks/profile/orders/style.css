@@ -1,0 +1,33 @@
+.profile-orders {
+    padding-top: fluid-type(375px, 768px, 28px, 36px);
+
+    &__title {
+        margin: 0 0 fluid-type(375px, 768px, 16px, 22px);
+    }
+
+    &__list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: fluid-type(375px, 768px, 12px, 16px);
+
+        @media screen and (min-width: 768px) {
+            grid-template-columns: repeat(2, 1fr);
+            gap: fluid-type(768px, 1200px, 15px, 30px);
+        }
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .profile-orders {
+        padding-top: fluid-type(1200px, 1440px, 28px, 36px);
+
+        &__title {
+            font-size: fluid-type(1200px, 1440px, 24px, 28px);
+            margin-bottom: fluid-type(1200px, 1440px, 20px, 26px);
+        }
+
+        &__list {
+            gap: fluid-type(1200px, 1440px, 18px, 24px);
+        }
+    }
+}

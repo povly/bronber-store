@@ -1,0 +1,202 @@
+.profile-tabs {
+    padding-top: fluid-type(375px, 768px, 30px, 40px);
+
+    &__title {
+        margin: 0 0 fluid-type(375px, 768px, 16px, 22px);
+    }
+
+    &__nav {
+        display: flex;
+        gap: fluid-type(375px, 768px, 18px, 28px);
+        border-bottom: 1px solid var(--color-gray-divider);
+    }
+
+    &__btn {
+        position: relative;
+        padding: 0 0 fluid-type(375px, 768px, 10px, 14px);
+        font-family: var(--font-manrope);
+        font-weight: 600;
+        font-size: fluid-type(375px, 768px, 14px, 16px);
+        line-height: 120%;
+        color: var(--color-gray);
+        background: transparent;
+        border: 0;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: color 0.2s ease;
+
+        @media screen and (min-width: 768px) {
+            font-size: fluid-type(768px, 1200px, 16px, 18px);
+        }
+
+        &:hover {
+            color: var(--color-black-soft);
+        }
+
+        &.is-active {
+            color: var(--color-black);
+
+            &::after {
+                content: '';
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: -1px;
+                height: 2px;
+                background: var(--color-purple);
+            }
+        }
+    }
+
+    /*
+     * Desktop-only sidebar elements (icons, extra nav items, user mini-card,
+     * divider, logout). All hidden on mobile/tablet — mobile layout is
+     * unchanged. Shown only inside the >=1200px vertical sidebar.
+     */
+    &__btn-icon,
+    &__btn--desktop,
+    &__user,
+    &__divider,
+    &__logout {
+        display: none;
+    }
+
+    &__btn-text {
+        display: inline;
+    }
+}
+
+/* ==========================================================================
+   Desktop sidebar (>=1200px): the tabs section transforms into a vertical
+   sidebar card with a profile mini-card on top, vertical nav menu (purple
+   active pill), divider and logout at the bottom.
+   ========================================================================== */
+@media screen and (min-width: 1200px) {
+    .profile-tabs {
+        background: var(--color-white);
+        border-radius: 5px;
+        box-shadow: var(--shadow-card);
+        padding: fluid-type(1200px, 1440px, 20px, 24px);
+        padding-top: fluid-type(1200px, 1440px, 20px, 24px);
+
+        &__title {
+            display: none;
+        }
+
+        &__user {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding-bottom: fluid-type(1200px, 1440px, 16px, 20px);
+            border-bottom: 1px solid #f3f3f3;
+            margin-bottom: fluid-type(1200px, 1440px, 16px, 20px);
+        }
+
+        &__user-name {
+            font-family: var(--font-manrope);
+            font-weight: 800;
+            font-size: fluid-type(1200px, 1440px, 15px, 16px);
+            line-height: 120%;
+            color: var(--color-black);
+            word-break: break-word;
+        }
+
+        &__user-email {
+            font-family: var(--font-manrope);
+            font-weight: 400;
+            font-size: fluid-type(1200px, 1440px, 13px, 14px);
+            line-height: 130%;
+            color: var(--color-gray);
+            word-break: break-all;
+        }
+
+        &__nav {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            border: 0;
+            overflow: visible;
+        }
+
+        &__btn {
+            display: flex;
+            align-items: center;
+            gap: fluid-type(1200px, 1440px, 10px, 12px);
+            width: 100%;
+            min-height: fluid-type(1200px, 1440px, 40px, 43px);
+            padding: 0 fluid-type(1200px, 1440px, 12px, 14px);
+            border-radius: 7px;
+            font-size: fluid-type(1200px, 1440px, 14px, 15px);
+            color: var(--color-gray);
+            white-space: normal;
+            transition: background 0.2s ease, color 0.2s ease;
+
+            &:hover {
+                color: var(--color-black);
+                background: var(--color-off-white);
+            }
+
+            &.is-active {
+                color: var(--color-white);
+                background: var(--color-purple);
+
+                &::after {
+                    display: none;
+                }
+            }
+
+            /* Desktop-only nav items become visible. */
+            &--desktop {
+                display: flex;
+            }
+        }
+
+        &__btn-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+
+            svg {
+                width: 20px;
+                height: 20px;
+                display: block;
+            }
+        }
+
+        &__btn-text {
+            display: inline;
+        }
+
+        &__divider {
+            display: block;
+            height: 1px;
+            background: #f3f3f3;
+            margin: fluid-type(1200px, 1440px, 14px, 18px) 0;
+        }
+
+        &__logout {
+            display: flex;
+            align-items: center;
+            gap: fluid-type(1200px, 1440px, 10px, 12px);
+            width: 100%;
+            min-height: fluid-type(1200px, 1440px, 40px, 43px);
+            padding: 0 fluid-type(1200px, 1440px, 12px, 14px);
+            border-radius: 7px;
+            font-family: var(--font-manrope);
+            font-weight: 600;
+            font-size: fluid-type(1200px, 1440px, 14px, 15px);
+            line-height: 120%;
+            color: var(--color-gray);
+            text-decoration: none;
+            transition: background 0.2s ease, color 0.2s ease;
+
+            &:hover {
+                color: var(--color-black);
+                background: var(--color-off-white);
+            }
+        }
+    }
+}
