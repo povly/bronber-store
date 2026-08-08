@@ -77,3 +77,27 @@
         transition: none;
     }
 }
+
+/* ========================================
+   Horizontal orientation (opt-in via wrapper.is-horizontal)
+   — overrides vertical track/thumb rules above.
+   --x-scroll-thumb-width becomes track HEIGHT on this axis.
+   ======================================== */
+.x-scrollable__wrapper.is-horizontal .x-scrollable__track {
+    top: auto;
+    right: 0;
+    bottom: var(--x-scroll-track-offset, 2px);
+    left: 0;
+    width: auto;
+    height: var(--x-scroll-thumb-width, 4px);
+}
+
+.x-scrollable__wrapper.is-horizontal .x-scrollable__thumb {
+    top: 0;
+    right: auto;
+    width: 0;
+    height: 100%;
+    transform: translateX(0);
+    will-change: transform, width;
+    transition: width 0.15s ease, background-color 0.15s ease;
+}
