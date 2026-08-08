@@ -1,121 +1,125 @@
-/* ===================================================================
-   Loyalty — Block 1: Hero
-   Breakpoints: 375 (base) → 768 → 1200 → 1920
-   =================================================================== */
-
 .loyalty-hero {
-    padding-top: fluid-type(375px, 768px, 24px, 30px);
-    margin-bottom: fluid-type(375px, 768px, 24px, 30px);
+    padding-top: fluid-type(375px, 768px, 40px, 45px);
 
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        gap: fluid-type(375px, 768px, 16px, 20px);
+    @media screen and (min-width: 1200px) {
+        font-size: fluid-type(1200px, 1440px, 33px, 43px);
+    }
+
+    &__container {
+        @media screen and (min-width: 768px){
+            display: grid;
+            align-items: flex-end;
+            grid-template-columns: 293fr 398fr;
+            gap: fluid-type(768px, 1200px, 28px, 78px);
+        }
+
+        @media screen and (min-width: 1200px) {
+            grid-template-columns: 375fr 632fr;
+        }
+
+        @media screen and (min-width: 1440px) {
+            grid-template-columns: 491fr 874fr;
+        }
     }
 
     &__content {
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: fluid-type(375px, 768px, 16px, 20px);
+        gap: fluid-type(768px, 1200px, 13px, 22px);
+
+        @media screen and (min-width: 768px){
+            align-items: flex-start;
+            padding-bottom: fluid-type(768px, 1200px, 0px, 35px);
+        }
+
+        @media screen and (min-width: 1200px) {
+            font-size: fluid-type(1200px, 1440px, 22px, 26px);
+            padding-bottom: fluid-type(1200px, 1440px, 35px, 56px);
+        }
     }
 
     &__title {
-        font-family: var(--font-manrope);
-        font-weight: 800;
-        font-size: fluid-type(375px, 768px, 40px, 45px);
-        line-height: 110%;
-        color: var(--color-black);
+        line-height: fluid-type(768px, 1200px, 130%, 110%);
+        font-size: fluid-type(768px, 1200px, 40px, 60px);
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 0;
+
+        @media screen and (min-width: 768px){
+            text-align: left;
+        }
+
+        @media screen and (min-width: 1200px){
+            font-size: fluid-type(1200px, 1440px, 60px, 80px);
+                        line-height: fluid-type(1200px, 1440px, 110%, 100%);
+        }
+    }
+    
+    &__subtitle {
+        font-weight: 500;
+        font-size: fluid-type(768px, 1200px, 18px, 20px);
+        line-height: 130%;
+        max-width: fluid-type(768px, 1200px, 293px, 354px);
+        text-align: center;
+        margin-bottom: fluid-type(768px, 1200px, 5px, 13px);
+
+        @media screen and (min-width: 768px){
+            text-align: left;
+            margin-bottom: 0;
+        }
+
+        @media screen and (min-width: 1200px) {
+            font-size: fluid-type(1200px, 1440px, 20px, 24px);
+            max-width: fluid-type(1200px, 1440px, 354px, 394px);
+        }
     }
 
-    &__subtitle {
-        font-family: var(--font-manrope);
-        font-weight: 500;
-        font-size: fluid-type(375px, 768px, 18px, 18px);
-        line-height: 130%;
-        color: var(--color-black);
-        max-width: 293px;
+    &__btn {
+        padding: fluid-type(1200px, 1440px, 17px, 19px) fluid-type(1200px, 1440px, 27px, 32px);
+        gap: 10px;
+        margin-top: fluid-type(768px, 1200px, 28px, 47px);
+
+        @media screen and (min-width: 768px){
+            margin-top: 13px;
+            margin-top: fluid-type(768px, 1200px, 13px, 20px);
+        }
+
+        @media screen and (min-width: 1200px){
+            margin-top: fluid-type(1200px, 1440px, 20px, 30px);
+        }
     }
 
     &__image {
-        width: 100%;
-        border-radius: 5px;
-        overflow: hidden;
-        aspect-ratio: 329 / 185;
-    }
-
-    &__img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    /* =============================================
-       Tablet — 768px+
-       ============================================= */
-
-    @media screen and (min-width: 768px) {
-        padding-top: fluid-type(768px, 1200px, 30px, 50px);
-        margin-bottom: fluid-type(768px, 1200px, 40px, 60px);
-
-        .container {
-            flex-direction: row;
-            align-items: center;
-            text-align: left;
-            justify-content: space-between;
-            gap: fluid-type(768px, 1200px, 30px, 50px);
+        img {
+            height: fluid-type(375px, 768px, 185px, 224px);
+            object-fit: contain;
         }
 
-        &__content {
-            align-items: flex-start;
-            flex-shrink: 0;
-            max-width: 45%;
-            gap: fluid-type(768px, 1200px, 20px, 24px);
+        &--pc {
+            display: none;
+
+            @media screen and (min-width: 768px){
+                display: block;
+            }
         }
 
-        &__title {
-            font-size: fluid-type(768px, 1200px, 45px, 60px);
+        &--mb {
+            @media screen and (min-width: 768px){
+                display: none;
+            }
         }
 
-        &__subtitle {
-            font-size: fluid-type(768px, 1200px, 18px, 20px);
-            max-width: none;
+        @media screen and (min-width: 768px) {
+            img {
+                height: fluid-type(768px, 1200px, 224px, 355px);
+            }
         }
 
-        &__image {
-            flex: 1;
-            aspect-ratio: 632 / 355;
-        }
-    }
-
-    /* =============================================
-       Desktop — 1200px+ (scales to 1920px)
-       ============================================= */
-
-    @media screen and (min-width: 1200px) {
-        padding-top: fluid-type(1200px, 1920px, 50px, 80px);
-        margin-bottom: fluid-type(1200px, 1920px, 60px, 90px);
-
-        .container {
-            gap: fluid-type(1200px, 1920px, 50px, 80px);
-        }
-
-        &__content {
-            gap: fluid-type(1200px, 1920px, 24px, 30px);
-        }
-
-        &__title {
-            font-size: fluid-type(1200px, 1920px, 60px, 80px);
-        }
-
-        &__subtitle {
-            font-size: fluid-type(1200px, 1920px, 20px, 24px);
-        }
-
-        &__image {
-            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
+        @media screen and (min-width: 1200px) {
+            img {
+                height: fluid-type(1200px, 1440px, 355px, 491px);
+            }
         }
     }
 }
