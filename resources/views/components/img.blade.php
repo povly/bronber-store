@@ -19,7 +19,6 @@
             @if($width) width="{{ $width }}" @endif
             @if($height) height="{{ $height }}" @endif
             {{ $attributes->merge(['class' => trim(($isLazy ? 'lazy' : '') . ' ' . $class)]) }}
-            decoding="async"
         />
     @endif
 @endif
