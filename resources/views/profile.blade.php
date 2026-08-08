@@ -7,8 +7,10 @@
 @section('content')
     <main class="profile-page">
         @include('blocks.profile.tabs.tabs')
-        @include('blocks.profile.summary.summary')
-        @include('blocks.profile.stats.stats')
-        @include('blocks.profile.orders.orders')
+        <div class="profile-page__right">
+            @include('blocks.profile.summary.summary')
+            @include('blocks.profile.stats.stats')
+            @include('blocks.profile.orders.orders')
+        </div>
     </main>
 @endsection

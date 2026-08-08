@@ -116,7 +116,7 @@
             </div>
 
             <div class="header__actions">
-                <a href="#" class="header__action header__action--favorites"
+                <a href="{{ route('favorites') }}" class="header__action header__action--favorites"
                     aria-label="{{ __('store.header_favorites') }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -125,7 +125,7 @@
                             stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-                <a href="#" class="header__action header__action--user"
+                <a href="{{ route('profile') }}" class="header__action header__action--user"
                     aria-label="{{ __('store.header_profile') }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -187,7 +187,7 @@
             </div>
 
             <div class="header__nav-right">
-                <a href="#" class="header__nav-link">{{ __('store.nav_new') }}</a>
+                <a href="{{ route('blog') }}" class="header__nav-link">{{ __('store.nav_new') }}</a>
                 <a href="#" class="header__nav-link">{{ __('store.nav_promo') }}</a>
                 <a href="{{ route('blog') }}" class="header__nav-link">{{ __('store.nav_blog') }}</a>
                 <a href="{{ route('loyalty') }}" class="header__nav-link">{{ __('store.nav_bonus') }}</a>

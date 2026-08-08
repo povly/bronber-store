@@ -18,8 +18,11 @@ resources/
 │   │   ├── catalog/            # hero, filters/, products/, pagination/
 │   │   ├── product/            # product.blade.php
 │   │   ├── cart/, checkout/
+│   │   ├── error-404/          # Контентный блок страницы 404
+│   │   ├── favorites/          # Страница Избранное (4-col grid, без фильтров)
 │   │   └── common/             # header, footer, top-bar, mobile-nav (cross-page)
 │   ├── components/             # Переиспользуемые: btn, img, breadcrumbs, product-card, qty, slider/
+│   ├── errors/404.blade.php    # Laravel error view (авто-рендер при NotFoundHttpException)
 │   ├── layouts/app.blade.php   # Базовый layout
 │   └── {page}.blade.php        # Корневые шаблоны страниц
 ├── css/
@@ -88,6 +91,16 @@ const blockScripts = globSync('resources/js/blocks/**/index.js');
 |---------|------------|
 | `fluidType()` | Адаптивная типографика (fluid typography) |
 | `pxToVw()` | Конвертация px → vw для responsive-вёрстки |
+
+## Страницы ошибок
+
+Laravel авто-рендерит `resources/views/errors/404.blade.php` при `NotFoundHttpException`.
+`Route::fallback()` не нужен — достаточно создать view по convention.
+
+Страница 404 расширяет `layouts.app` (header с поиском + footer автоматически) и подключает
+контентный блок `blocks/error-404/error-404.blade.php`. Поскольку `SetLocale` middleware
+route-level и не срабатывает на unmatched-роутах, локаль для error-страниц определяется
+по URL-сегменту через `@php`-блок в начале `errors/404.blade.php`.
 
 ## Совместимость браузеров
 

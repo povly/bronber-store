@@ -100,4 +100,14 @@ return [
     'article_cta' => 'Go to division',
     'article_related_title' => 'Other news',
 
+    // 404 page
+    'error_404_title' => 'Page not found',
+    'error_404_desc' => 'Unfortunately, the page you requested does not exist or has been moved.<br>Please check the address or go to the home page.',
+    'error_404_home_btn' => 'Go home',
+    'error_404_catalog_btn' => 'Go to catalog',
+
+    // Favorites page
+    'favorites_title' => 'Favorites',
+    'favorites_count' => '43 items in favorites',
+
 ];

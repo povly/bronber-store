@@ -1,17 +1,4 @@
-/* ==========================================================================
-   Profile page layout — desktop 2-column grid (sidebar + content).
-   Mobile/tablet (<=1199px): default block flow, untouched by this file.
-   ========================================================================== */
-
 @media screen and (min-width: 1200px) {
-    /*
-     * The wrapper becomes the layout container: it takes over the role of
-     * `.container` (max-width + horizontal padding + centering) and lays its
-     * direct <section> children out as a 2-column grid.
-     *
-     * Sidebar (first section = .profile-tabs) spans all rows on the left.
-     * Summary / stats / orders stack in the right column.
-     */
     .profile-page {
         max-width: calc(1440px + calc(fluid-type(768px, 1200px, 24px, 50px) * 2));
         margin: 0 auto;
@@ -20,31 +7,5 @@
         grid-template-columns: fluid-type(1200px, 1440px, 249px, 280px) 1fr;
         gap: fluid-type(1200px, 1440px, 20px, 40px);
         align-items: start;
-    }
-
-    /*
-     * Neutralize the inner `.container` inside every block: the grid IS the
-     * layout now, so each section's container must not re-apply max-width /
-     * padding / centering (otherwise it breaks the grid cells).
-     */
-    .profile-page .container {
-        max-width: none;
-        padding: 0;
-        margin: 0;
-    }
-
-    /* Sidebar = first section (tabs). Spans full grid height, sticks on scroll. */
-    .profile-page > .profile-tabs {
-        grid-column: 1;
-        grid-row: 1 / -1;
-        position: sticky;
-        top: 20px;
-    }
-
-    /* Content column = the remaining sections. */
-    .profile-page > .profile-summary,
-    .profile-page > .profile-stats,
-    .profile-page > .profile-orders {
-        grid-column: 2;
     }
 }

@@ -81,7 +81,7 @@
         <div class="blog__list" x-ref="list">
             @foreach($news as $item)
                 <article class="blog__item" data-article>
-                    <a href="#" class="article">
+                    <a href="/blog/sample" class="article">
                         <x-img :path="$item['image']" :alt="$item['title']" :lazy="false" class="article__image" width="464" height="650" />
                         <span class="article__shade article__shade--top"></span>
                         <span class="article__shade article__shade--bottom"></span>

@@ -178,12 +178,15 @@
     }
 
     &__related-title {
-        font-weight: 800;
-        font-size: fluid-type(375px, 768px, 25px, 25px);
-        line-height: 100%;
-        margin-bottom: fluid-type(375px, 768px, 20px, 30px);
+        margin-bottom: 0;
     }
 
+    &__related {
+        &-header {
+            margin-bottom: fluid-type(375px, 768px, 20px, 30px);
+        }
+    }
+    
     &__related-slider {
         --slider-gap: fluid-type(768px, 1200px, 14px, 18px);
     }

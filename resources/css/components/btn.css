@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: none;
+    border: 1px solid;
     border-radius: 5px;
     font-weight: 600;
     line-height: 100%;
@@ -16,6 +16,7 @@
     &--primary {
         background: var(--gradient-black);
         color: var(--color-white);
+        border-color: var(--gradient-black);
 
         &:hover {
             color: var(--color-white);
@@ -29,10 +30,16 @@
 
     &--white {
         background: var(--color-white);
+        border-color: var(--color-white);
         color: var(--color-black);
 
         &:hover {
             color: var(--color-black);
+        }
+
+        &--border {
+            border-color: var(--color-black);
+            background: transparent;
         }
     }
     

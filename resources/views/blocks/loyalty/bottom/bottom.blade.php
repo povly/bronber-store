@@ -21,7 +21,7 @@
 @endphp
 
 <section class="loyalty-bottom section">
-    <div class="container">
+    <div class="container loyalty-bottom__container">
         <div class="loyalty-bottom__example">
             <h2 class="loyalty-bottom__title section__title">{{ __('loyalty.example_title') }}</h2>
             <div class="loyalty-bottom__example-card">
@@ -34,7 +34,14 @@
                     <span class="loyalty-bottom__example-value">100 ₽</span>
                 </div>
                 <div class="loyalty-bottom__banner">
-                    <span class="loyalty-bottom__banner-icon">{!! $icons['star'] !!}</span>
+                    <div class="loyalty-bottom__banner-left">
+                        <span class="loyalty-bottom__banner-icon">{!! $icons['star'] !!}</span>
+                        <div class="loyalty-bottom__banner-title loyalty-bottom__banner-title--mb">
+                            {{ __('loyalty.banner_title') }}
+                        </div>
+                    </div>
+                    <div class="loyalty-bottom__banner-text loyalty-bottom__banner-text--mb">{{ __('loyalty.banner_text') }}</div>
+
                     <div class="loyalty-bottom__banner-body">
                         <div class="loyalty-bottom__banner-title">{{ __('loyalty.banner_title') }}</div>
                         <div class="loyalty-bottom__banner-text">{{ __('loyalty.banner_text') }}</div>
@@ -48,14 +55,19 @@
             <div class="loyalty-bottom__faq-list" x-data="{ open: 0 }">
                 @foreach ($faqs as $i => $faq)
                     <div class="loyalty-bottom__faq-item" :class="{ 'is-open': open === {{ $i }} }">
-                        <button type="button" class="loyalty-bottom__faq-question" @click="open = open === {{ $i }} ? null : {{ $i }}">
+                        <button type="button" class="loyalty-bottom__faq-question"
+                            @click="open = open === {{ $i }} ? null : {{ $i }}">
                             <span>{{ $faq['question'] }}</span>
-                            <svg class="loyalty-bottom__faq-icon" width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path class="loyalty-bottom__faq-icon-h" d="M2 10H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                                <path class="loyalty-bottom__faq-icon-v" d="M7.5 4V16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <svg class="loyalty-bottom__faq-icon" width="15" height="20" viewBox="0 0 15 20"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="loyalty-bottom__faq-icon-h" d="M2 10H13" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" />
+                                <path class="loyalty-bottom__faq-icon-v" d="M7.5 4V16" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" />
                             </svg>
                         </button>
-                        <div class="loyalty-bottom__faq-answer-wrap" x-show="open === {{ $i }}" x-collapse x-cloak>
+                        <div class="loyalty-bottom__faq-answer-wrap" x-show="open === {{ $i }}" x-collapse
+                            {{ $i !== 0 ? 'x-cloak' : '' }}>
                             <p class="loyalty-bottom__faq-answer">{{ $faq['answer'] }}</p>
                         </div>
                     </div>
