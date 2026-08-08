@@ -137,17 +137,4 @@
         }
     }
 
-    &--expected {
-        .order-card__status {
-            background: #fff9ca;
-            color: var(--color-black);
-        }
-    }
-
-    &--done {
-        .order-card__status {
-            background: var(--color-gray-pale);
-            color: var(--color-gray);
-        }
-    }
 }

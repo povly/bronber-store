@@ -11,7 +11,13 @@
 @php
     $tagEl = $href ? 'a' : 'article';
     $tagAttrs = $tagEl === 'a' ? 'href="' . e($href) . '"' : '';
-    $statusText = $status === 'expected' ? __('profile.status_expected') : __('profile.status_done');
+    $statusMap = [
+        'expected' => __('profile.status_expected'),
+        'done' => __('profile.status_done'),
+        'cancel' => __('profile.status_cancel'),
+        'progress' => __('profile.status_progress'),
+    ];
+    $statusText = $statusMap[$status] ?? $statusMap['expected'];
 @endphp
 
 <{{ $tagEl }} {!! $tagAttrs !!} {{ $attributes->merge(['class' => "order-card {$class}"]) }}>

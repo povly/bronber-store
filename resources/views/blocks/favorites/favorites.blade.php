@@ -6,14 +6,14 @@
     <div class="container">
         <x-breadcrumbs
             class="favorites__breadcrumbs"
-            :items="[['label' => __('store.favorites_title')]]"
+            :items="[['label' => 'Главная', 'url' => '/'], ['label' => __('store.favorites_title')]]"
         />
         <div class="favorites__header">
             <h1 class="favorites__title section__title">{{ __('store.favorites_title') }}</h1>
             <p class="favorites__count">{{ __('store.favorites_count') }}</p>
         </div>
         <div class="favorites__grid">
-            @for ($i = 0; $i < 8; $i++)
+            @for ($i = 0; $i < 16; $i++)
                 @php $p = $i % 4; @endphp
                 <x-product-card
                     href="/product"

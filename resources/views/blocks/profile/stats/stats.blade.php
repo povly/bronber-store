@@ -25,7 +25,7 @@
                 @php
                     $tag = $stat['icon'] !== 'bonuses' ? 'a' : 'div';
                 @endphp
-                <{!! $tag !!} class="profile-stats__item">
+                <{!! $tag !!} href="{{ $stat['href'] }}" class="profile-stats__item">
                     <div class="profile-stats__item-top">
                         <span class="profile-stats__icon">{!! $icons[$stat['icon']] !!}</span>
                         <div class="profile-stats__title">{{ $stat['title'] }}</div>

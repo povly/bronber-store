@@ -58,7 +58,7 @@
             <span class="profile-tabs__btn-icon">{!! $icons['cabinet'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.tab_cabinet') }}</span>
         </a>
-        <a href="{{ route('profile') }}#orders" class="profile-tabs__btn" @click="tab = 'orders'"
+        <a href="{{ route('profile.orders') }}" class="profile-tabs__btn" @click="tab = 'orders'"
             :class="{ 'is-active': tab === 'orders' }">
             <span class="profile-tabs__btn-icon">{!! $icons['orders'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.tab_orders') }}</span>
@@ -68,12 +68,12 @@
             <span class="profile-tabs__btn-icon">{!! $icons['favorites'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.tab_favorites') }}</span>
         </a>
-        <a href="{{ route('profile') }}#data" class="profile-tabs__btn" @click="tab = 'data'"
+        <a href="{{ route('profile.data') }}" class="profile-tabs__btn" @click="tab = 'data'"
             :class="{ 'is-active': tab === 'data' }">
             <span class="profile-tabs__btn-icon">{!! $icons['data'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.nav_data') }}</span>
         </a>
-        <a href="{{ route('profile') }}#password" class="profile-tabs__btn" @click="tab = 'password'"
+        <a href="{{ route('profile.password') }}" class="profile-tabs__btn" @click="tab = 'password'"
             :class="{ 'is-active': tab === 'password' }">
             <span class="profile-tabs__btn-icon">{!! $icons['password'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.nav_password') }}</span>

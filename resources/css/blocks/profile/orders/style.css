@@ -1,34 +1,156 @@
 .profile-orders {
-    padding-top: fluid-type(375px, 768px, 50px, 36px);
+    padding-top: 19px;
+
+    &__header {
+        flex-direction: column;
+        margin-bottom: fluid-type(375px, 768px, 16px, 20px);
+        display: none;
+    }
 
     &__title {
-        margin: 0 0 fluid-type(375px, 768px, 24px, 12px);
-        font-size: fluid-type(1200px, 1440px, 24px, 32px);
+        font-weight: 800;
+        font-size: fluid-type(375px, 1920px, 16px, 32px);
+        line-height: 110%;
+        margin-bottom: 4px;
+
+        &--simple {
+            font-size: fluid-type(1200px, 1440px, 24px, 32px);
+            margin-bottom: fluid-type(375px, 768px, 24px, 12px);
+        }
+    }
+
+    &__subtitle {
+        display: none;
+    }
+
+    &__sort {
+        display: none;
     }
 
     &__list {
         display: grid;
         grid-template-columns: minmax(0, 1fr);
-        gap: fluid-type(1200px, 1440px, 10px, 24px);
+        gap: fluid-type(375px, 768px, 10px, 16px);
 
         @media screen and (min-width: 768px) {
             grid-template-columns: repeat(2, 1fr);
         }
     }
-}
 
-@media screen and (min-width: 1200px) {
-    .profile-orders {
+    &__more {
+        margin: fluid-type(1200px, 1440px, 32px, 40px) auto 0;
+        min-width: 200px;
+    }
 
+    @media screen and (min-width: 1200px) {
+        &--full {
+            padding-top: 0;
+
+            .profile-orders__title {
+                margin-bottom: 0;
+            }
+        }
+        
         .container {
             padding: 0;
         }
-        
-        padding-top: fluid-type(1200px, 1440px, 32px, 40px);
 
-        &__title {
-            font-size: fluid-type(1200px, 1440px, 24px, 28px);
-            margin-bottom: fluid-type(1200px, 1440px, 20px, 24px);
+        &__header {
+            display: flex;
+            margin-bottom: 10px;
         }
+        
+        &__nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: fluid-type(1200px, 1920px, 16px, 24px);
+        }
+
+        &__subtitle {
+            display: block;
+            font-family: var(--font-manrope);
+            font-weight: 500;
+            font-size: fluid-type(1200px, 1920px, 16px, 18px);
+            color: var(--color-black);
+        }
+
+        &__sort {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        &__sort-label {
+            font-family: var(--font-manrope);
+            font-weight: 500;
+            font-size: fluid-type(1200px, 1920px, 14px, 16px);
+            color: var(--color-black);
+        }
+
+        &__sort-select {
+            position: relative;
+        }
+
+        &__sort-trigger {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 12px;
+            height: fluid-type(1200px, 1920px, 32px, 34px);
+            min-width: 173px;
+            background: var(--color-white);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-family: var(--font-manrope);
+            font-weight: 500;
+            font-size: 14px;
+            color: var(--color-black);
+            border: 1px solid rgb(191, 191, 191);
+        }
+
+        &__sort-chevron {
+            transition: transform 0.2s ease;
+            margin-left: auto;
+
+            &.is-open {
+                transform: rotate(180deg);
+            }
+        }
+
+        &__sort-dropdown {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: var(--color-white);
+            border-radius: 5px;
+            box-shadow: var(--shadow-card);
+            z-index: 10;
+        }
+
+        &__sort-option {
+            display: block;
+            width: 100%;
+            padding: 10px 12px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-family: var(--font-manrope);
+            font-weight: 500;
+            font-size: 14px;
+            text-align: left;
+            color: var(--color-black);
+
+            &.is-active {
+                color: var(--color-purple);
+            }
+        }
+
+        &__list {
+            gap: fluid-type(1200px, 1920px, 10px, 24px);
+        }
+
     }
 }

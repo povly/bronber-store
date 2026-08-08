@@ -26,9 +26,9 @@ $register = function () {
         ];
 
         $stats = [
-            ['icon' => 'bonuses', 'key' => 'bonuses', 'title' => __('profile.stat_bonuses'), 'value' => '1250 ₽', 'subtitle' => __('profile.stat_bonuses_sub')],
-            ['icon' => 'orders', 'key' => 'orders', 'title' => __('profile.stat_orders'), 'value' => '32', 'subtitle' => __('profile.stat_orders_sub')],
-            ['icon' => 'favorites', 'key' => 'favorites', 'title' => __('profile.stat_favorites'), 'value' => '24', 'subtitle' => __('profile.stat_favorites_sub')],
+            ['icon' => 'bonuses', 'href' => '#!', 'key' => 'bonuses', 'title' => __('profile.stat_bonuses'), 'value' => '1250 ₽', 'subtitle' => __('profile.stat_bonuses_sub')],
+            ['icon' => 'orders', 'href' => route('profile.orders'), 'key' => 'orders', 'title' => __('profile.stat_orders'), 'value' => '32', 'subtitle' => __('profile.stat_orders_sub')],
+            ['icon' => 'favorites', 'href' => route('favorites'), 'key' => 'favorites', 'title' => __('profile.stat_favorites'), 'value' => '24', 'subtitle' => __('profile.stat_favorites_sub')],
         ];
 
         $orders = [
@@ -42,6 +42,76 @@ $register = function () {
             'orders' => $orders,
         ]);
     })->name('profile');
+
+    Route::get('/profile/orders', function () {
+        $user = [
+            'name' => 'Игорь Валерьевич',
+            'email' => 'bronber@gmail.com',
+        ];
+
+        $orders = [
+            ['number' => '№32843', 'status' => 'expected', 'date' => '20.08.2026', 'total' => '40 000 ₽', 'image' => '/images/home/products/1/1.png'],
+            ['number' => '№32842', 'status' => 'done', 'date' => '25.12.2025', 'total' => '35 000 ₽', 'image' => '/images/home/products/1/2.png'],
+            ['number' => '№32841', 'status' => 'cancel', 'date' => '15.07.2026', 'total' => '12 500 ₽', 'image' => '/images/home/products/1/3.png'],
+            ['number' => '№32840', 'status' => 'progress', 'date' => '10.08.2026', 'total' => '28 000 ₽', 'image' => '/images/home/products/1/4.png'],
+            ['number' => '№32839', 'status' => 'expected', 'date' => '05.08.2026', 'total' => '55 000 ₽', 'image' => '/images/home/products/1/1.png'],
+            ['number' => '№32838', 'status' => 'done', 'date' => '20.06.2026', 'total' => '8 000 ₽', 'image' => '/images/home/products/1/2.png'],
+            ['number' => '№32837', 'status' => 'cancel', 'date' => '18.05.2026', 'total' => '19 000 ₽', 'image' => '/images/home/products/1/3.png'],
+            ['number' => '№32836', 'status' => 'progress', 'date' => '02.08.2026', 'total' => '44 000 ₽', 'image' => '/images/home/products/1/4.png'],
+        ];
+
+        return view('profile-orders', [
+            'user' => $user,
+            'orders' => $orders,
+        ]);
+    })->name('profile.orders');
+
+    Route::get('/profile/data', function () {
+        $user = [
+            'name' => 'Игорь Валерьевич',
+            'email' => 'bronber@gmail.com',
+            'phone' => '+7 (943) 34-423-23',
+            'city' => 'Москва',
+            'address' => 'ул. Лобачевского, 92, кв. 15',
+            'zip' => '119232',
+        ];
+
+        return view('profile-data', ['user' => $user]);
+    })->name('profile.data');
+
+    Route::get('/profile/password', fn () => view('profile-password', [
+        'user' => ['name' => 'Игорь Валерьевич', 'email' => 'example@gmail.com'],
+    ]))->name('profile.password');
+
+    Route::get('/profile/orders/{id}', function ($id) {
+        $user = ['name' => 'Игорь Валерьевич', 'email' => 'bronber@gmail.com'];
+
+        $order = [
+            'number' => '32843',
+            'status' => 'expected',
+            'statusText' => __('profile.status_expected'),
+            'created' => '20.08.2026 в 14:43',
+            'date' => '20.08.2026',
+            'payment' => 'Банковская карта онлайн',
+            'phone' => '+7 (943) 34-423-23',
+            'delivery' => 'СДЭК',
+            'address' => 'г. Москва',
+            'recipient' => 'Николай Архипов',
+            'email' => '--',
+            'items_count' => 5,
+            'sum' => '6600 ₽',
+            'delivery_cost' => 'Уточняется',
+            'total' => '6600 ₽',
+        ];
+
+        $items = [
+            ['image' => '/images/home/products/1/1.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => '1100 ₽', 'qty' => 1, 'sum' => '1100 ₽'],
+            ['image' => '/images/home/products/1/2.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => '1100 ₽', 'qty' => 2, 'sum' => '2200 ₽'],
+            ['image' => '/images/home/products/1/3.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => '1100 ₽', 'qty' => 2, 'sum' => '2200 ₽'],
+        ];
+
+        return view('profile-order', ['user' => $user, 'order' => $order, 'items' => $items]);
+    })->name('profile.order');
 
     Route::get('/delivery', fn () => view('delivery'))->name('delivery');
     Route::get('/returns', fn () => view('returns'))->name('returns');
