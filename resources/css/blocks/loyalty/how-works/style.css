@@ -1,126 +1,88 @@
-/* ===================================================================
-   Loyalty — Block 3: How it works
-   Breakpoints: 375 (base) → 768 → 1200 → 1920
-   =================================================================== */
-
 .loyalty-how {
-    margin-bottom: fluid-type(375px, 768px, 30px, 40px);
-
     &__title {
-        font-family: var(--font-manrope);
-        font-weight: 800;
-        font-size: fluid-type(375px, 768px, 25px, 25px);
         line-height: 130%;
-        color: var(--color-black);
-        margin-bottom: fluid-type(375px, 768px, 20px, 24px);
+        margin-bottom: fluid-type(375px, 768px, 18px, 24px);
+
+        @media screen and (min-width: 1200px) {
+            margin-bottom: fluid-type(1200px, 1440px, 24px, 40px);
+        }
     }
 
     &__steps {
-        display: flex;
-        flex-direction: column;
-        gap: fluid-type(375px, 768px, 20px, 24px);
+        display: grid;
+        gap: fluid-type(1200px, 1440px, 10px, 23px);
+
+        @media screen and (min-width: 768px) {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        @media screen and (min-width: 1200px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
     }
 
     &__step {
         background: var(--color-white);
         border-radius: 5px;
-        padding: fluid-type(375px, 768px, 24px, 30px);
+        box-shadow: 2px 2px 10px 0px rgba(0, 0, 0, 0.1);
+        display: grid;
+        gap: 16px;
+        padding: fluid-type(375px, 768px, 24px, 30px) fluid-type(375px, 768px, 24px, 30px) 30px;
+
+        @media screen and (min-width: 768px) {
+            &:nth-child(odd) {
+                &:last-child {
+                    grid-column: span 2;
+                }
+            }
+
+            &:not(:last-child){
+                --loyalty-how-step-width: 261px;
+            }
+        }
+        @media screen and (min-width: 1200px) {
+            &:nth-child(odd) {
+                &:last-child {
+                    grid-column: auto;
+                }
+            }
+
+            --loyalty-how-step-width: fluid-type(1200px, 1440px, 261px, 302px);
+        }
     }
 
     &__step-icon {
-        margin-bottom: fluid-type(375px, 768px, 16px, 20px);
-
+        display: flex;
+        align-items: center;
+        margin-bottom: fluid-type(375px, 768px, 0px, 8px);
+        
         svg {
-            width: fluid-type(375px, 768px, 40px, 45px);
-            height: fluid-type(375px, 768px, 40px, 45px);
+            width: fluid-type(375px, 768px, 40px, 50px);
+        }
+
+
+        @media screen and (min-width: 1200px) {
+            margin-bottom: fluid-type(1200px, 1440px, 8px, 19px);
+            
+            svg {
+                width: fluid-type(1200px, 1440px, 50px, 80px);
+            }
         }
     }
 
     &__step-title {
-        font-family: var(--font-manrope);
         font-weight: 800;
-        font-size: fluid-type(375px, 768px, 20px, 22px);
+        font-size: fluid-type(375px, 768px, 20px, 24px);
         line-height: 1;
-        color: var(--color-black);
-        margin-bottom: fluid-type(375px, 768px, 8px, 10px);
+
+        @media screen and (min-width: 1200px) {
+            font-size: fluid-type(1200px, 1440px, 24px, 32px);
+        }
     }
 
     &__step-text {
-        font-family: var(--font-manrope);
-        font-weight: 400;
-        font-size: fluid-type(375px, 768px, 16px, 16px);
+        font-size: fluid-type(1200px, 1440px, 16px, 18px);
         line-height: 130%;
-        color: var(--color-black);
-    }
-
-    /* =============================================
-       Tablet — 768px+
-       ============================================= */
-
-    @media screen and (min-width: 768px) {
-        margin-bottom: fluid-type(768px, 1200px, 40px, 60px);
-
-        &__title {
-            font-size: fluid-type(768px, 1200px, 25px, 32px);
-            margin-bottom: fluid-type(768px, 1200px, 24px, 30px);
-        }
-
-        &__steps {
-            flex-direction: row;
-            gap: fluid-type(768px, 1200px, 20px, 30px);
-        }
-
-        &__step {
-            flex: 1;
-            padding: fluid-type(768px, 1200px, 30px, 40px);
-        }
-
-        &__step-icon svg {
-            width: fluid-type(768px, 1200px, 45px, 50px);
-            height: fluid-type(768px, 1200px, 45px, 50px);
-        }
-
-        &__step-title {
-            font-size: fluid-type(768px, 1200px, 22px, 24px);
-        }
-
-        &__step-text {
-            font-size: fluid-type(768px, 1200px, 16px, 16px);
-        }
-    }
-
-    /* =============================================
-       Desktop — 1200px+ (scales to 1920px)
-       ============================================= */
-
-    @media screen and (min-width: 1200px) {
-        margin-bottom: fluid-type(1200px, 1920px, 60px, 80px);
-
-        &__title {
-            font-size: fluid-type(1200px, 1920px, 32px, 48px);
-            margin-bottom: fluid-type(1200px, 1920px, 30px, 40px);
-        }
-
-        &__steps {
-            gap: fluid-type(1200px, 1920px, 30px, 40px);
-        }
-
-        &__step {
-            padding: fluid-type(1200px, 1920px, 40px, 50px);
-            border-radius: fluid-type(1200px, 1920px, 5px, 8px);
-        }
-
-        &__step-icon svg {
-            width: fluid-type(1200px, 1920px, 50px, 65px);
-            height: fluid-type(1200px, 1920px, 50px, 65px);
-        }
-
-        &__step-title {
-            font-size: fluid-type(1200px, 1920px, 24px, 32px);
-        }
-
-        &__step-text {
-            font-size: fluid-type(1200px, 1920px, 16px, 20px);
-        }
+        max-width: var(--loyalty-how-step-width, 100%);
     }
 }
