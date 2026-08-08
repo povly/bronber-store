@@ -1,5 +1,5 @@
 .profile-summary {
-    padding-top: fluid-type(375px, 768px, 20px, 28px);
+    padding-top: fluid-type(375px, 768px, 14px, 17px);
 
     &__greeting {
         display: none;
@@ -8,61 +8,49 @@
     &__card {
         background: var(--color-white);
         border-radius: 5px;
-        padding: fluid-type(375px, 768px, 24px, 30px);
-        box-shadow: var(--shadow-card);
+        padding: 20px;
+        box-shadow: 1.53px 1.53px 7.64px 0px rgba(0, 0, 0, 0.1);
     }
 
     &__name {
         font-weight: 800;
-        font-size: fluid-type(375px, 768px, 18px, 22px);
-        line-height: 120%;
-        color: var(--color-black);
-        margin-bottom: fluid-type(375px, 768px, 10px, 14px);
-    }
-
-    &__email-row {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-bottom: fluid-type(375px, 768px, 14px, 18px);
-    }
-
-    &__email-icon {
-        display: inline-flex;
-        flex-shrink: 0;
+        font-size: 20px;
+        line-height: 100%;
+        margin-bottom: 6px;
     }
 
     &__email {
-        font-size: fluid-type(375px, 768px, 14px, 15px);
-        line-height: 130%;
-        color: var(--color-gray);
+        font-size: 16px;
+        margin-bottom: 20px;
+        display: inline-block;
         word-break: break-all;
     }
 
     &__edit {
-        display: inline-block;
-        font-weight: 600;
-        font-size: fluid-type(375px, 768px, 13px, 14px);
-        line-height: 130%;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 700;
         color: var(--color-purple);
-        text-decoration: none;
-        border-bottom: 1px solid currentColor;
-        padding-bottom: 2px;
-        transition: opacity 0.2s ease;
 
-        &:hover {
-            opacity: 0.7;
+        svg {
+            transform: translateY(1px);
         }
     }
 }
 
 @media screen and (min-width: 1200px) {
     .profile-summary {
-        padding-top: fluid-type(1200px, 1440px, 0px, 4px);
+        padding-top: 0;
+
+        .container {
+            padding: 0;
+        }
 
         &__greeting {
             display: block;
-            margin-bottom: fluid-type(1200px, 1440px, 20px, 28px);
+            margin-bottom: fluid-type(1200px, 1440px, 20px, 24px);
         }
 
         &__card {
@@ -70,20 +58,17 @@
         }
 
         &__hello {
-            font-family: var(--font-manrope);
             font-weight: 800;
-            font-size: fluid-type(1200px, 1440px, 22px, 26px);
-            line-height: 120%;
-            color: var(--color-black);
-            margin: 0 0 6px;
+            font-size: fluid-type(1200px, 1440px, 24px, 32px);
+            line-height: 100%;
+            margin-bottom: 6px;
+            margin-top: 0;
         }
 
         &__welcome {
-            font-family: var(--font-manrope);
             font-weight: 500;
-            font-size: fluid-type(1200px, 1440px, 15px, 16px);
+            font-size: fluid-type(1200px, 1440px, 16px, 18px);
             line-height: 130%;
-            color: var(--color-gray);
             margin: 0;
         }
     }

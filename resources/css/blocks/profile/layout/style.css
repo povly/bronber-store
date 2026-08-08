@@ -2,10 +2,10 @@
     .profile-page {
         max-width: calc(1440px + calc(fluid-type(768px, 1200px, 24px, 50px) * 2));
         margin: 0 auto;
-        padding: 0 fluid-type(768px, 1200px, 24px, 50px);
+        padding: 32px fluid-type(768px, 1200px, 24px, 50px) 0;
         display: grid;
-        grid-template-columns: fluid-type(1200px, 1440px, 249px, 280px) 1fr;
-        gap: fluid-type(1200px, 1440px, 20px, 40px);
+        grid-template-columns: 249px 1fr;
+        gap: fluid-type(1200px, 1440px, 22px, 25px);
         align-items: start;
     }
 }

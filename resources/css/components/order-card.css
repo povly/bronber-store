@@ -1,26 +1,38 @@
 .order-card {
     display: flex;
-    align-items: stretch;
-    gap: fluid-type(320px, 768px, 12px, 20px);
+    gap: fluid-type(1200px, 1440px, 17px, 22px);
     background: var(--color-white);
     border-radius: 5px;
-    padding: fluid-type(320px, 768px, 10px, 15px);
+    padding: fluid-type(768px, 1200px, 10px, 15px);
     box-shadow: var(--shadow-card);
-    text-decoration: none;
-    color: inherit;
+
+    @media screen and (min-width: 1200px) {
+        padding: fluid-type(1200px, 1440px, 15px, 30px);
+    }
 
     &__image {
         flex-shrink: 0;
-        width: fluid-type(320px, 768px, 86px, 110px);
-        height: fluid-type(320px, 768px, 86px, 110px);
+        width: fluid-type(1200px, 1440px, 86px, 110px);
+        height: fluid-type(1200px, 1440px, 86px, 110px);
+        background: #d9d9d9;
         border-radius: 5px;
         overflow: hidden;
-        background: var(--color-gray-divider);
 
-        img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        @media screen and (min-width: 1200px) {
+            width: fluid-type(1200px, 1440px, 110px, 220px);
+            height: fluid-type(1200px, 1440px, 110px, 220px);
+        }
+    }
+
+    &__btn {
+        display: none;
+
+        @media screen and (min-width: 1200px) {
+            display: flex;
+            margin-top: auto;
+            padding: fluid-type(1200px, 1440px, 16px, 18px);
+            min-width: 200px;
+            font-size: 12px;
         }
     }
 
@@ -28,52 +40,101 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        gap: fluid-type(320px, 768px, 4px, 8px);
-        padding-top: fluid-type(320px, 768px, 2px, 4px);
+        gap: 7px;
+        padding: 5px 0;
         min-width: 0;
+
+        &-top {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        @media screen and (min-width: 1200px) {
+            padding-bottom: 0;
+            padding-top: fluid-type(1200px, 1440px, 6px, 15px);
+            gap: 12px;
+
+            &-top {
+                gap: 12px;
+                margin-bottom: fluid-type(1200px, 1440px, 0px, 8px);
+            }
+        }
     }
 
     &__status {
-        align-self: flex-start;
         display: inline-flex;
         align-items: center;
-        padding: fluid-type(320px, 768px, 2px, 4px) fluid-type(320px, 768px, 8px, 12px);
+        padding: 3px 7px 4px;
         border-radius: 20px;
-        font-family: var(--font-manrope);
-        font-weight: 500;
-        font-size: fluid-type(320px, 768px, 11px, 14px);
-        line-height: 1.4;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 100%;
         white-space: nowrap;
+
+        @media screen and (min-width: 1200px) {
+            padding: 5px 16px 6px;
+        }
+
+        &--expected {
+            color: rgb(179, 135, 1);
+            background: #fff9ca;
+        }
+
+        &--done {
+            background: #e3ffca;
+            color: rgb(77, 165, 0);
+        }
+
+        &--cancel {
+            background: #d4d4d4;
+            color: rgb(67, 67, 67);
+        }
+
+        &--progress {
+            background: #f4e6ff;
+            color: rgb(114, 18, 188);
+        }
     }
 
     &__number {
-        font-family: var(--font-manrope);
-        font-weight: 600;
-        font-size: fluid-type(320px, 768px, 16px, 20px);
-        line-height: 120%;
-        color: var(--color-black);
-        margin: 0;
+        font-weight: 800;
+        font-size: 16px;
+        line-height: 100%;
+
+        @media screen and (min-width: 1200px) {
+            font-size: fluid-type(1200px, 1440px, 18px, 24px);
+        }
     }
 
     &__meta {
         display: flex;
         flex-direction: column;
-        gap: fluid-type(320px, 768px, 2px, 4px);
-        margin-top: auto;
+        gap: 5px;
+
+        @media screen and (min-width: 1200px) {
+            gap: 12px;
+        }
     }
 
     &__date,
     &__total {
-        font-family: var(--font-manrope);
-        font-weight: 400;
         font-size: fluid-type(320px, 768px, 13px, 16px);
         line-height: 130%;
-        color: var(--color-gray);
-    }
+        font-weight: 500;
 
-    &__total {
-        font-weight: 600;
-        color: var(--color-black);
+        strong {
+            font-size: 16px;
+        }
+
+        @media screen and (min-width: 1200px) {
+            font-size: fluid-type(1200px, 1440px, 16px, 18px);
+        }
+
+        strong {
+            font-size: fluid-type(1200px, 1440px, 18px, 24px);
+        }
     }
 
     &--expected {
@@ -87,31 +148,6 @@
         .order-card__status {
             background: var(--color-gray-pale);
             color: var(--color-gray);
-        }
-    }
-
-    @media screen and (min-width: 768px) {
-        gap: fluid-type(768px, 1200px, 20px, 24px);
-        padding: fluid-type(768px, 1200px, 15px, 20px);
-    }
-
-    @media screen and (min-width: 1200px) {
-        &__image {
-            width: fluid-type(1200px, 1920px, 110px, 130px);
-            height: fluid-type(1200px, 1920px, 110px, 130px);
-        }
-
-        &__number {
-            font-size: fluid-type(1200px, 1920px, 20px, 24px);
-        }
-
-        &__date,
-        &__total {
-            font-size: fluid-type(1200px, 1920px, 16px, 18px);
-        }
-
-        &__status {
-            font-size: fluid-type(1200px, 1920px, 14px, 16px);
         }
     }
 }
