@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\MoonShineUserRole\Pages;
 
+use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Models\MoonshineUserRole;
 use MoonShine\Laravel\Pages\Crud\FormPage;
-use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
 use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
@@ -22,6 +22,7 @@ final class MoonShineUserRoleFormPage extends FormPage
     /**
      * @return list<ComponentContract|FieldContract>
      */
+    #[\Override]
     protected function fields(): iterable
     {
         return [
@@ -33,6 +34,7 @@ final class MoonShineUserRoleFormPage extends FormPage
         ];
     }
 
+    #[\Override]
     protected function rules(DataWrapperContract $item): array
     {
         return [

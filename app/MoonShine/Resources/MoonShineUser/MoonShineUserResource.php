@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\MoonShineUser;
 
-use MoonShine\Laravel\Models\MoonshineUser;
-use MoonShine\Laravel\Resources\ModelResource;
 use App\MoonShine\Resources\MoonShineUser\Pages\MoonShineUserFormPage;
 use App\MoonShine\Resources\MoonShineUser\Pages\MoonShineUserIndexPage;
+use MoonShine\Laravel\Models\MoonshineUser;
+use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\Icon;
@@ -30,16 +30,19 @@ class MoonShineUserResource extends ModelResource
 
     protected bool $simplePaginate = true;
 
+    #[\Override]
     public function getTitle(): string
     {
         return __('moonshine::ui.resource.admins_title');
     }
 
+    #[\Override]
     protected function activeActions(): ListOf
     {
         return parent::activeActions()->except(Action::VIEW);
     }
 
+    #[\Override]
     protected function pages(): array
     {
         return [
@@ -48,6 +51,7 @@ class MoonShineUserResource extends ModelResource
         ];
     }
 
+    #[\Override]
     protected function search(): array
     {
         return [

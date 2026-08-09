@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Resources\MoonShineUserRole;
 
-use MoonShine\Laravel\Models\MoonshineUserRole;
-use MoonShine\Laravel\Resources\ModelResource;
 use App\MoonShine\Resources\MoonShineUserRole\Pages\MoonShineUserRoleFormPage;
 use App\MoonShine\Resources\MoonShineUserRole\Pages\MoonShineUserRoleIndexPage;
+use MoonShine\Laravel\Models\MoonshineUserRole;
+use MoonShine\Laravel\Resources\ModelResource;
 use MoonShine\MenuManager\Attributes\Group;
 use MoonShine\MenuManager\Attributes\Order;
 use MoonShine\Support\Attributes\Icon;
@@ -34,16 +34,19 @@ class MoonShineUserRoleResource extends ModelResource
 
     protected bool $cursorPaginate = true;
 
+    #[\Override]
     public function getTitle(): string
     {
         return __('moonshine::ui.resource.role');
     }
 
+    #[\Override]
     protected function activeActions(): ListOf
     {
         return parent::activeActions()->except(Action::VIEW);
     }
 
+    #[\Override]
     protected function pages(): array
     {
         return [
@@ -52,6 +55,7 @@ class MoonShineUserRoleResource extends ModelResource
         ];
     }
 
+    #[\Override]
     protected function search(): array
     {
         return [

@@ -11,6 +11,7 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Register any application services.
      */
+    #[\Override]
     public function register(): void
     {
         //
@@ -21,14 +22,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Vite::usePreloadTagAttributes(fn () => false);
+        Vite::usePreloadTagAttributes(fn (): false => false);
 
         $this->app['view']->addLocation(resource_path('views/blocks'));
 
         View::share('favorites', json_decode($_COOKIE['favorites'] ?? '[]', true) ?? []);
 
-        View::composer(['blocks.common.header.header', 'layouts.app'], function (\Illuminate\View\View $view) {
-            $searchTypes = collect(config('search.types'))->map(fn (array $type) => [
+        View::composer(['blocks.common.header.header', 'layouts.app'], function (\Illuminate\View\View $view): void {
+            $searchTypes = collect(config('search.types'))->map(fn (array $type): array => [
                 'value' => $type['value'],
                 'label' => __($type['label']),
             ])->all();
@@ -127,7 +128,7 @@ class AppServiceProvider extends ServiceProvider
             ['name' => 'Масла и жидкости', 'slug' => 'oils'],
         ];
 
-        return collect($slugs)->map(fn (array $cat) => [
+        return collect($slugs)->map(fn (array $cat): array => [
             'name' => $cat['name'],
             'slug' => $cat['slug'],
             'href' => route('catalog', ['category' => $cat['slug']]),

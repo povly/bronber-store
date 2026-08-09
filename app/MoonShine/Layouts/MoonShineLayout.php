@@ -6,11 +6,11 @@ namespace App\MoonShine\Layouts;
 
 use MoonShine\AssetManager\Css;
 use MoonShine\AssetManager\Js;
-use MoonShine\Laravel\Layouts\AppLayout;
-use MoonShine\ColorManager\Palettes\PurplePalette;
 use MoonShine\ColorManager\ColorManager;
+use MoonShine\ColorManager\Palettes\PurplePalette;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
+use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\UI\Components\FlexibleRender;
 use Povly\MoonShineImageEditor\Support\ImageEditorRenderer;
 use YuriZoom\MoonShineMediaManager\Components\MediaManagerOffCanvas;
@@ -22,6 +22,7 @@ final class MoonShineLayout extends AppLayout
      */
     protected ?string $palette = PurplePalette::class;
 
+    #[\Override]
     protected function assets(): array
     {
         return [
@@ -32,6 +33,7 @@ final class MoonShineLayout extends AppLayout
         ];
     }
 
+    #[\Override]
     protected function menu(): array
     {
         return [
@@ -40,8 +42,9 @@ final class MoonShineLayout extends AppLayout
     }
 
     /**
-     * @param ColorManager $colorManager
+     * @param  ColorManager  $colorManager
      */
+    #[\Override]
     protected function colors(ColorManagerContract $colorManager): void
     {
         parent::colors($colorManager);
@@ -49,13 +52,14 @@ final class MoonShineLayout extends AppLayout
         // $colorManager->primary('#00000');
     }
 
+    #[\Override]
     protected function getContentComponents(): array
     {
         return [
             ...parent::getContentComponents(),
             MediaManagerOffCanvas::make(),
             FlexibleRender::make(
-                app(ImageEditorRenderer::class)->renderModal(),
+                resolve(ImageEditorRenderer::class)->renderModal(),
             ),
         ];
     }
