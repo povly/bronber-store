@@ -42,6 +42,10 @@
         @media screen and (min-width: 1200px){
             padding: 32px 25px;
             min-height: fluid-type(1200px, 1440px, 263px, 334px);
+
+            &:hover {
+                box-shadow: 4px 4px 15px 0 rgba(0, 0, 0, 0.2);
+            }
         }
 
         @media screen and (min-width: 1440px){
