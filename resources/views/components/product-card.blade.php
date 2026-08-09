@@ -12,7 +12,7 @@
         <div class="card__image img--full">
             <x-img :path="$image" :alt="$imageAlt ?? $title" width="155" height="155" />
         </div> 
-        <button class="card__fav{{ $isFavorite ? ' active' : '' }}" x-data="favorite('{{ $article }}')" :class="{ 'active': active }" @click="toggle()" type="button" aria-label="В избранное">
+        <button class="card__fav{{ $isFavorite ? ' active' : '' }}" x-data="favorite('{{ $article }}')" :class="{ 'active': active }" @click.stop.prevent="toggle()" type="button" aria-label="В избранное">
             <svg width="29" height="28" viewBox="0 0 29 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_755_2494{{$index}})">
                 <g filter="url(#filter0_d_755_2494{{$index}})">
@@ -103,6 +103,7 @@
                 @endif
             </div>
             <button class="card__cart {!! $index == 0 ? 'active' : '' !!}" data-active="В корзине" data-hover="В корзину" type="button"
+                @click.stop.prevent
                 aria-label="В корзину" {{ $inStock === false ? 'disabled' : '' }}>
                 <span class="card__cart-text">В корзину</span>
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
