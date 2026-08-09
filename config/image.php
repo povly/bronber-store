@@ -1,5 +1,7 @@
 <?php
 
+use Intervention\Image\Drivers\Imagick\Driver;
+
 return [
 
     /*
@@ -17,8 +19,8 @@ return [
     */
 
     'driver' => extension_loaded('imagick')
-        ? \Intervention\Image\Drivers\Imagick\Driver::class
-        : \Intervention\Image\Drivers\Gd\Driver::class,
+        ? Driver::class
+        : Intervention\Image\Drivers\Gd\Driver::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -44,5 +46,5 @@ return [
         'decodeAnimation' => true,
         'blendingColor' => 'ffffff',
         'strip' => false,
-    ]
+    ],
 ];
