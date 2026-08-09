@@ -17,3 +17,5 @@
 @import 'blocks/common/header/style.css';
 @import 'blocks/common/footer/style.css';
 @import 'blocks/common/mobile-nav/style.css';
+@import 'blocks/common/mobile-menu/style.css';
+@import 'blocks/common/catalog-menu/style.css';

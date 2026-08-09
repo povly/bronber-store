@@ -34,11 +34,13 @@ document.addEventListener('alpine:init', () => {
         toggleMenu() {
             this.menuOpen = !this.menuOpen;
             document.body.style.overflow = this.menuOpen ? 'hidden' : '';
+            console.debug('[storeHeader] menu ' + (this.menuOpen ? 'opened' : 'closed'));
         },
 
         closeMenu() {
             this.menuOpen = false;
             document.body.style.overflow = '';
+            console.debug('[storeHeader] menu closed');
         },
     }));
 });

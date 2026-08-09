@@ -119,13 +119,9 @@
             }
 
             &:hover {
-                color: var(--color-white);
-                background: var(--color-purple);
-
-                path {
-                    stroke: var(--color-white);
-                }
+                background: #f6eaff;
             }
+            
 
             &.is-active {
                 color: var(--color-white);

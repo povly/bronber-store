@@ -3,6 +3,7 @@ import.meta.glob(['../images/**', '../fonts/**']);
 import Alpine from 'alpinejs'
 
 import '../js/blocks/common/header/index.js'
+import '../js/blocks/common/catalog-menu/index.js'
 
 import collapse from '@alpinejs/collapse'
 import modal from './alpine/plugins/modal'

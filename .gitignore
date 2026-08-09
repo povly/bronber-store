@@ -29,3 +29,6 @@ Thumbs.db
 # Dev tools
 .omo/
 claude-talk-to-figma-mcp/
+# Dev artifacts
+.playwright-mcp/
+*.png

@@ -4,16 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>@yield('title', 'Мой сайт')</title>
+    <title>@yield('title', 'Bronber Store')</title>
     @vite(['resources/css/app.css'])
     @stack('block-styles')
     @stack('head-scripts')
     @yield('head')
 </head>
-<body :class="{ 'overflow-hidden': $store.modal.stack.length }">
+<body x-data="storeHeader(@js($searchTypes))"
+      :class="{ 'overflow-hidden': $store.modal.stack.length }">
 
 @include('blocks.common.header.header')
+@include('blocks.common.mobile-menu.mobile-menu')
 @include('blocks.common.mobile-nav.mobile-nav')
+
+<div class="catalog-menu__overlay"
+     x-show="$store.catalogMenu.isOpen"
+     x-cloak
+     @click="$store.catalogMenu.close()"
+     x-transition:enter="catalog-menu__overlay--transition"
+     x-transition:enter-start="catalog-menu__overlay--hidden"
+     x-transition:leave="catalog-menu__overlay--transition"
+     x-transition:leave-end="catalog-menu__overlay--hidden"></div>
+
+@include('blocks.common.catalog-menu.catalog-menu')
 
 @yield('content')
 

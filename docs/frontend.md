@@ -52,6 +52,82 @@ const blockScripts = globSync('resources/js/blocks/**/index.js');
 > При добавлении новой страницы создавайте `style.css` в `css/blocks/{page}/` и `index.js` в
 > `js/blocks/{page}/` — Vite подхватит их автоматически.
 
+### Блок `common/mobile-menu` — выезжающее меню
+
+Slide-out drawer для мобильных/планшетов (viewport ≤1199px), ортогональный к нижней панели
+`common/mobile-nav`. Скрывается на ≥1200px через `@media screen and (min-width: 1200px)`.
+
+**Файлы:**
+
+| Файл | Назначение |
+|------|------------|
+| `resources/views/blocks/common/mobile-menu/mobile-menu.blade.php` | Blade-разметка drawer'а |
+| `resources/css/blocks/common/mobile-menu/style.css` | BEM + PostCSS-nested стили |
+
+CSS подключается в `resources/css/app.css` (общий бандл), Blade-паршл — через `@include`
+в `resources/views/layouts/app.blade.php`.
+
+**Интеграция с `$modal`-плагином**
+
+Состояние drawer'а управляется модальным плагином (`resources/js/alpine/plugins/modal.js`),
+НЕ через `storeHeader`:
+
+| Действие | Вызов |
+|----------|-------|
+| Открыть | `$modal.show('mobile-menu')` |
+| Закрыть (current) | `$modal.hide('mobile-menu')` или `$modal.hide()` |
+| Проверить открыт ли | `$modal.isOpen('mobile-menu')` |
+| Z-index в стеке | `1000 + $modal.depth('mobile-menu')` |
+
+Бургер-кнопка в `blocks/common/header/header.blade.php` (`.header__menu`) вызывает
+`$modal.show('mobile-menu')` по клику и по Enter.
+
+**Поведение:**
+
+- Панель выезжает слева (`transform: translateX(-100%) → translateX(0)`, 0.3s ease)
+- Overlay затемняет экран (`var(--color-overlay)`, opacity 0↔1, 0.3s)
+- Закрытие: ✕ в панели, клик по overlay, или Escape (`@keydown.escape.window`)
+- Скролл body блокируется автоматически через `<body :class="{ 'overflow-hidden': $store.modal.stack.length }">` в `layouts/app.blade.php` — никаких отдельных обработчиков не требуется
+- При клике по любой nav-ссылке drawer закрывается (`@click="$modal.hide('mobile-menu')"`)
+
+Z-index паттерн зеркалирует `blocks/catalog/filters` (overlay = 1000, panel выше overlay внутри
+враппера). CSS использует кастомные properties из `common/base.css` (`--color-overlay`,
+`--color-white`, `--color-purple`, `--color-black-soft`, `--color-gray-divider`, `--font-manrope`)
+и `fluid-type()` для всех адаптивных размеров.
+
+### Блок `common/catalog-menu` — каталог-меню (mega-menu)
+
+Mega-menu категорий, открывающийся по кнопке «Каталог» в `header__nav`. **Отдельный компонент**
+от `common/mobile-menu` (который — burger drawer навигации). Не использует `$modal`-плагин:
+состоянием управляет локальный Alpine-компонент `catalogMenu` (`isOpen` + `@click.away` /
+`@mouseleave`), т.к. hover-поведение несовместимо с modal-стеком.
+
+**Файлы:**
+
+| Файл | Назначение |
+|------|------------|
+| `resources/views/blocks/common/catalog-menu/catalog-menu.blade.php` | Blade-разметка (триггер + десктоп панель + мобильный аккордеон) |
+| `resources/css/blocks/common/catalog-menu/style.css` | BEM + PostCSS-nested стили (mobile-first, `fluid-type()`) |
+| `resources/js/blocks/common/catalog-menu/index.js` | Alpine-компонент `catalogMenu` |
+
+CSS подключается в `resources/css/app.css` (общий бандл, как и другие common-блоки), JS — в
+`resources/js/app.js`. Blade-паршл — через `@include` из
+`blocks/common/header/header.blade.php` (заменил мёртвую кнопку `.header__catalog-btn`).
+
+**Источник данных:** View composer в `AppServiceProvider::boot()` шарит `$catalogCategories`
+(массив `[['name', 'slug', 'href', 'children']]`) на все views. В Blade передаётся в Alpine через
+`x-data="catalogMenu(@js($catalogCategories))"`. Этот же массив переиспользуется `home/categories`.
+
+**Поведение:**
+
+- **Десктоп (≥1200px):** mega-menu dropdown — 2 колонки (категории слева, подкатегории активной
+  категории справа). Открытие по `@mouseenter` на триггере, переключение правой панели по
+  `@mouseenter` на категории (getter `activeChildren`). Закрытие: `@mouseleave` на враппере или
+  `@click.away`.
+- **Мобильный/планшет (≤1199px):** полноэкранный оверлей с аккордеоном категорий. Клик по категории
+  раскрывает подкатегории (`x-collapse`). Явный ✕ для закрытия.
+- Z-index panel = `101` (выше хедера 100, ниже модалок 1000+).
+
 ## Alpine.js
 
 Единственный JS-фреймворк. Директивы прямо в Blade: `x-data`, `x-show`, `x-on:`, `x-collapse`.

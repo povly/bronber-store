@@ -1,6 +1,5 @@
 .header {
     position: relative;
-    z-index: 100;
 
     &__top {
         display: flex;
@@ -42,6 +41,12 @@
 
         &-type {
             display: none;
+
+            &.active {
+                .header__search-dropdown {
+                    background: var(--color-purple);
+                }
+            }
         }
 
         &-input {
@@ -128,7 +133,12 @@
 
         &__nav {
             display: flex;
+            position: relative;
             padding: fluid-type(1200px, 1440px, 10px, 14px) 0;
+
+            &--catalog-open {
+                z-index: 105;
+            }
 
             &-inner {
                 display: flex;
@@ -183,7 +193,7 @@
 
             &-input {
                 border-color: var(--color-gray-border);
-                padding: 8px calc(30px + fluid-type(1200px, 1440px, 10px, 16px)) 8px fluid-type(1200px, 1440px, 16px, 23px);
+                padding: fluid-type(1200px, 1440px, 8px, 12px) calc(30px + fluid-type(1200px, 1440px, 10px, 16px)) fluid-type(1200px, 1440px, 8px, 12px) fluid-type(1200px, 1440px, 16px, 23px);
 
                 &--mobile {
                     display: none;
@@ -235,7 +245,7 @@
             }
 
             &-dropdown {
-                padding: 12px 15px;
+                padding: fluid-type(1200px, 1440px, 12px, 16px) fluid-type(1200px, 1440px, 15px, 25px);
                 border-radius: 5px;
                 display: flex;
                 align-items: center;
@@ -256,15 +266,22 @@
                 z-index: -1;
                 opacity: 0;
                 border-radius: 0 0 8px 8px;
-                background: linear-gradient(90deg, var(--color-black-soft) 0%, var(--color-black) 100%);
+                background: var(--color-white);
+                padding: 5px;
+                box-shadow: 0 4px 25px 4px rgba(0, 0, 0, 0.05);
+
             }
 
             &-option {
                 padding: 10px 5px;
                 text-align: center;
-                color: var(--color-white);
                 cursor: pointer;
                 width: 100%;
+
+                &.is-active {
+                    background: #F6EAFF;
+                    border-radius: 5px;
+                }
             }
         }
 
@@ -276,8 +293,36 @@
         &__action {
             display: flex;
 
+            &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 42px;
+                height: 42px;
+                border-radius: 100%;
+            }
+
+            svg {
+                position: relative;
+                z-index: 3;
+            }
+
             path {
                 stroke: var(--color-purple);
+            }
+
+            &:hover, &.is-active {
+                &::before {
+                    background: #f2e9ff;
+                }
+            }
+
+            &:active {
+                &::before {
+                    background: #f2e9ff;
+                }
             }
         }
 

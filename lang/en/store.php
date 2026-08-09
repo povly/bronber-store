@@ -3,9 +3,9 @@
 return [
 
     // Search
-    'search_placeholder' => 'Search by name, SKU or VIN',
+    'search_placeholder' => 'Search by name or VIN',
     'search_placeholder_mobile' => 'Search...',
-    'search_placeholder_desktop' => 'Search by name, SKU or VIN',
+    'search_placeholder_desktop' => 'Search by name or VIN',
     'search_type_name' => 'By name',
     'search_type_sku' => 'By SKU',
     'search_type_vin' => 'By VIN',
@@ -19,6 +19,9 @@ return [
     'header_cart' => 'Cart',
     'header_catalog_btn' => 'Product catalog',
     'nav_catalog' => 'Catalog',
+    'catalog_menu_title' => 'Catalog',
+    'catalog_all_in_category' => 'All products in category',
+    'catalog_menu_close' => 'Close',
     'nav_new' => 'New',
     'nav_promo' => 'Promo',
     'nav_blog' => 'Blog',
@@ -71,6 +74,11 @@ return [
     'mobile_catalog' => 'Catalog',
     'mobile_cart' => 'Cart',
     'mobile_profile' => 'Profile',
+
+    // Mobile menu (slide-out drawer)
+    'mobile_menu_title' => 'Menu',
+    'mobile_menu_open' => 'Open menu',
+    'mobile_menu_close' => 'Close menu',
 
     // Contacts page
     'contacts_title' => 'Open to<br>business<br>dialogue',

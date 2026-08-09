@@ -1,6 +1,6 @@
 .footer {
     margin-top: fluid-type(1200px, 1440px, 70px, 100px);
-    padding-bottom: 20px;
+    padding-bottom: 118px;
 
     &__inner {
         background: linear-gradient(135deg, var(--color-black-soft) 0%, var(--color-black) 100%);
@@ -166,10 +166,6 @@
     &__legal {
         font-weight: 500;
         font-size: fluid-type(375px, 768px, 14px, 16px);
-    }
-
-    @media (min-width: 768px) {
-        padding-bottom: 118px;
     }
 
     @media (min-width: 1200px) {

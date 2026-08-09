@@ -1,0 +1,268 @@
+.catalog-menu {
+    position: relative;
+
+    &__overlay {
+        backdrop-filter: blur(5px);
+        background: rgba(0, 0, 0, 0.1);
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 99;
+    }
+
+    &__header {
+        padding: 25px 22px;
+        border-bottom: 1px solid #f7f7f7;
+    }
+
+    &__content {
+        padding: 20px 25px 30px;
+    }
+}
+
+/* --- Panel: mobile base (full-screen overlay, ≤1199px) --- */
+.catalog-menu__panel {
+    position: fixed;
+    inset: 0;
+    z-index: 101;
+    background: var(--color-white);
+    overflow-y: auto;
+    width: fluid-type(375px, 1200px, 331px, 580px);
+    height: calc(100% - 82px);
+}
+
+/* Mobile close button (top-right of overlay) */
+.catalog-menu__close {
+    position: absolute;
+    top: 20px;
+    right: fluid-type(375px, 768px, 15px, 23px);
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+/* Desktop-only columns are hidden on mobile */
+.catalog-menu__categories,
+.catalog-menu__subcategories {
+    display: none;
+}
+
+/* --- Mobile accordion (≤1199px) --- */
+.catalog-menu__mobile {
+    display: flex;
+    flex-direction: column;
+    gap: fluid-type(375px, 768px, 4px, 6px);
+}
+
+.catalog-menu__acc-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+    padding: 5px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-manrope);
+    font-weight: 700;
+    font-size: fluid-type(320px, 1200px, 16px, 18px);
+    line-height: 100%;
+    color: var(--color-black-soft);
+    text-align: left;
+
+    &.is-open {
+        color: var(--color-purple);
+    }
+}
+
+.catalog-menu__acc-label {
+    display: flex;
+    align-items: center;
+    gap: fluid-type(375px, 768px, 10px, 14px);
+    min-width: 0;
+}
+
+.catalog-menu__cat-icon {
+    width: 60px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+
+    img {
+        width: 100%;
+        object-fit: contain;
+        max-height: 51px;
+    }
+}
+
+.catalog-menu__chevron {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.catalog-menu__acc-trigger.is-open .catalog-menu__chevron {
+    transform: rotate(90deg);
+}
+
+.catalog-menu__acc-content {
+    ul {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        list-style: disc;
+        padding: 10px 0 24px 30px;
+    }
+
+    li {
+        line-height: 130%;
+    }
+}
+
+.catalog-menu__subcategory {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 130%;
+}
+
+.catalog-menu__all {
+    font-family: var(--font-manrope);
+    font-weight: 600;
+    font-size: fluid-type(320px, 1200px, 14px, 16px);
+    line-height: 130%;
+    color: var(--color-purple);
+    text-decoration: none;
+    margin-top: fluid-type(375px, 768px, 4px, 6px);
+}
+
+/* --- Transition helpers (x-transition classes) --- */
+.catalog-menu__panel--transition {
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
+}
+
+.catalog-menu__panel--hidden {
+    opacity: 0;
+    transform: translateY(-8px);
+}
+
+.catalog-menu__overlay--transition {
+    transition: opacity 0.2s ease;
+}
+
+.catalog-menu__overlay--hidden {
+    opacity: 0;
+}
+
+/* --- Desktop mega-menu (≥1200px): panel becomes 2-column grid, fixed under header --- */
+@media screen and (min-width: 1200px) {
+    .catalog-menu__panel {
+        position: absolute;
+        top: 10px;
+        left: calc(fluid-type(768px, 1200px, 24px, 50px));
+        margin: 0;
+        width: 895px;
+        height: max-content;
+        overflow: hidden;
+        padding: 0;
+        background: var(--color-white);
+        box-shadow: var(--shadow-dropdown);
+        border-radius: 5px;
+        display: grid;
+        grid-template-columns: 1fr 1.4fr;
+    }
+
+    .catalog-menu__close,
+    .catalog-menu__mobile {
+        display: none;
+    }
+
+    .catalog-menu {
+        &__header {
+            display: none;
+        }
+    }
+
+    .catalog-menu {
+        &__content {
+            display: none;
+        }
+    }
+
+    .catalog-menu__categories {
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid var(--color-gray-divider);
+        padding: 15px;
+        margin: 10px 0;
+        align-self: start;
+        overflow-y: auto;
+        max-height: 70vh;
+    }
+
+    .catalog-menu__category {
+        display: flex;
+        align-items: center;
+        gap: fluid-type(1200px, 1440px, 10px, 14px);
+        font-weight: 700;
+        font-size: fluid-type(1200px, 1440px, 14px, 16px);
+        line-height: 100%;
+        color: var(--color-black-soft);
+        text-decoration: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition:
+            color 0.15s ease,
+            background 0.15s ease;
+
+        &:hover,
+        &--active {
+            background: #f6eaff;
+        }
+    }
+
+    .catalog-menu__cat-icon {
+        width: 60px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+    }
+
+    .catalog-menu__subcategories {
+        display: block;
+        padding: 25px 15px;
+        align-self: start;
+        overflow-y: auto;
+        max-height: 70vh;
+    }
+
+    .catalog-menu__sub-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .catalog-menu__sub-title {
+        font-weight: 800;
+        font-size: 18px;
+        line-height: 100%;
+    }
+
+    .catalog-menu__subcategory {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 100%;
+        
+        &:hover {
+            color: var(--color-purple);
+        }
+    }
+}

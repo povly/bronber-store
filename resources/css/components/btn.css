@@ -16,10 +16,12 @@
     &--primary {
         background: var(--gradient-black);
         color: var(--color-white);
-        border-color: var(--gradient-black);
+        border-color: var(--color-black);
 
         &:hover {
             color: var(--color-white);
+            background: var(--color-purple);
+            border-color: var(--color-purple);
         }
     }
 
@@ -34,7 +36,9 @@
         color: var(--color-black);
 
         &:hover {
-            color: var(--color-black);
+            color: var(--color-white);
+            background: var(--color-purple);
+            border-color: var(--color-purple);
         }
 
         &--border {

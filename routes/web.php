@@ -105,9 +105,9 @@ $register = function () {
         ];
 
         $items = [
-            ['image' => '/images/home/products/1/1.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => '1100 ₽', 'qty' => 1, 'sum' => '1100 ₽'],
-            ['image' => '/images/home/products/1/2.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => '1100 ₽', 'qty' => 2, 'sum' => '2200 ₽'],
-            ['image' => '/images/home/products/1/3.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => 'DeatschWerks', 'price' => '1100 ₽', 'qty' => 2, 'sum' => '2200 ₽'],
+            ['image' => '/images/home/products/1/1.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => '<a href="#!">DeatschWerks</a>', 'price' => '1100 ₽', 'qty' => 1, 'sum' => '1100 ₽'],
+            ['image' => '/images/home/products/1/2.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => '<a href="#!">DeatschWerks</a>', 'price' => '1100 ₽', 'qty' => 2, 'sum' => '2200 ₽'],
+            ['image' => '/images/home/products/1/3.png', 'title' => 'DeatschWerks 9-651-1008', 'article' => '0 580 464 070', 'brand' => '<a href="#!">DeatschWerks</a>', 'price' => '1100 ₽', 'qty' => 2, 'sum' => '2200 ₽'],
         ];
 
         return view('profile-order', ['user' => $user, 'order' => $order, 'items' => $items]);

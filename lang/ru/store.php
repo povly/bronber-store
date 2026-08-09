@@ -3,9 +3,9 @@
 return [
 
     // Search
-    'search_placeholder' => 'Поиск по названию, артикулу или VIN',
+    'search_placeholder' => 'Поиск по названию или VIN',
     'search_placeholder_mobile' => 'Поиск...',
-    'search_placeholder_desktop' => 'Поиск по названию, артикулу или VIN',
+    'search_placeholder_desktop' => 'Поиск по названию или VIN',
     'search_type_name' => 'По названию',
     'search_type_sku' => 'По артикулу',
     'search_type_vin' => 'По VIN',
@@ -19,6 +19,9 @@ return [
     'header_cart' => 'Корзина',
     'header_catalog_btn' => 'Каталог товаров',
     'nav_catalog' => 'Каталог',
+    'catalog_menu_title' => 'Каталог',
+    'catalog_all_in_category' => 'Все товары в категории',
+    'catalog_menu_close' => 'Закрыть',
     'nav_new' => 'Новинки',
     'nav_promo' => 'Акции',
     'nav_blog' => 'Блог',
@@ -71,6 +74,11 @@ return [
     'mobile_catalog' => 'Каталог',
     'mobile_cart' => 'Корзина',
     'mobile_profile' => 'Профиль',
+
+    // Mobile menu (slide-out drawer)
+    'mobile_menu_title' => 'Меню',
+    'mobile_menu_open' => 'Открыть меню',
+    'mobile_menu_close' => 'Закрыть меню',
 
     // Contacts page
     'contacts_title' => 'Открыты<br>к деловому<br>диалогу',

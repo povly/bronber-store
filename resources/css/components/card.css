@@ -15,6 +15,12 @@
         }
     }
 
+    &:hover {
+        .card__image-wrap {
+            box-shadow: 4px 4px 15px 0 rgba(0, 0, 0, 0.2);
+        }
+    }
+
     &--out-of-stock {
         .card {
             &__price {

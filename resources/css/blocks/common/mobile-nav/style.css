@@ -1,13 +1,13 @@
 .mobile-nav {
     position: fixed;
     bottom: 0;
+    display: flex;
     left: 0;
     width: 100vw;
-    display: none;
     align-items: center;
     justify-content: center;
-    gap: 82px;
-    z-index: 100;
+    gap: fluid-type(375px, 768px, 35px, 82px);
+    z-index: 1002;
     box-shadow: 0 -9px 9px 0 rgba(0, 0, 0, 0.15);
     background: var(--gradient-black);
     padding: 13px 22px 22px;
@@ -36,8 +36,8 @@
     }
 }
 
-@media (min-width: 768px) and (max-width: 1199.98px) {
+@media (min-width: 1200px) {
     .mobile-nav {
-        display: flex;
+        display: none;
     }
 }

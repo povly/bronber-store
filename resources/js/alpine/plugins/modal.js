@@ -3,6 +3,9 @@ export default function (Alpine) {
         stack: [],
 
         show(id, options = {}) {
+            if (id) {
+                console.debug('[modal] show: ' + id)
+            }
             if (options.replace) {
                 this.stack = [id]
             } else if (!this.stack.includes(id)) {
@@ -11,6 +14,7 @@ export default function (Alpine) {
         },
 
         hide(id) {
+            console.debug('[modal] hide: ' + (id || 'top'))
             if (id) {
                 this.stack = this.stack.filter(i => i !== id)
             } else {

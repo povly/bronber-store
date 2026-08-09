@@ -42,7 +42,7 @@
     ];
 @endphp
 
-<section class="profile-tabs" x-data="{ tab: 'cabinet' }">
+<section class="profile-tabs" x-data="{}">
 
     <h1 class="profile-tabs__title section__title">{{ __('profile.title') }}</h1>
 
@@ -53,28 +53,28 @@
 
     <div class="profile-tabs__nav"
         x-scrollable="{ orientation: 'horizontal', thumbColor: '#7212bc', thumbWidth: 4, thumbRadius: 4, trackOffset: 2 }">
-        <a href="{{ route('profile') }}" class="profile-tabs__btn is-active" @click="tab = 'cabinet'"
-            :class="{ 'is-active': tab === 'cabinet' }">
+        <a href="{{ route('profile') }}"
+            class="profile-tabs__btn {{ request()->routeIs('profile') ? 'is-active' : '' }}">
             <span class="profile-tabs__btn-icon">{!! $icons['cabinet'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.tab_cabinet') }}</span>
         </a>
-        <a href="{{ route('profile.orders') }}" class="profile-tabs__btn" @click="tab = 'orders'"
-            :class="{ 'is-active': tab === 'orders' }">
+        <a href="{{ route('profile.orders') }}"
+            class="profile-tabs__btn {{ request()->routeIs('profile.orders', 'profile.order') ? 'is-active' : '' }}">
             <span class="profile-tabs__btn-icon">{!! $icons['orders'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.tab_orders') }}</span>
         </a>
-        <a href="{{ route('favorites') }}" class="profile-tabs__btn" @click="tab = 'favorites'"
-            :class="{ 'is-active': tab === 'favorites' }">
+        <a href="{{ route('favorites') }}"
+            class="profile-tabs__btn {{ request()->routeIs('favorites') ? 'is-active' : '' }}">
             <span class="profile-tabs__btn-icon">{!! $icons['favorites'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.tab_favorites') }}</span>
         </a>
-        <a href="{{ route('profile.data') }}" class="profile-tabs__btn" @click="tab = 'data'"
-            :class="{ 'is-active': tab === 'data' }">
+        <a href="{{ route('profile.data') }}"
+            class="profile-tabs__btn {{ request()->routeIs('profile.data') ? 'is-active' : '' }}">
             <span class="profile-tabs__btn-icon">{!! $icons['data'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.nav_data') }}</span>
         </a>
-        <a href="{{ route('profile.password') }}" class="profile-tabs__btn" @click="tab = 'password'"
-            :class="{ 'is-active': tab === 'password' }">
+        <a href="{{ route('profile.password') }}"
+            class="profile-tabs__btn {{ request()->routeIs('profile.password') ? 'is-active' : '' }}">
             <span class="profile-tabs__btn-icon">{!! $icons['password'] !!}</span>
             <span class="profile-tabs__btn-text">{{ __('profile.nav_password') }}</span>
         </a>

@@ -1,4 +1,4 @@
-<header class="header" x-data="storeHeader(@js($searchTypes))">
+<header class="header">
     @include('blocks.common.top-bar.top-bar')
 
 
@@ -64,14 +64,17 @@
         </a>
 
         <div class="header__top-right container">
-            <div class="header__menu">
+            <button type="button" class="header__menu" @click="$modal.show('mobile-menu')"
+                aria-label="{{ __('store.mobile_menu_open') }}"
+                :aria-expanded="$modal.isOpen('mobile-menu') ? 'true' : 'false'" role="button" tabindex="0"
+            >
                 <svg width="26" height="17" viewBox="0 0 26 17" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <rect width="26" height="2" rx="1" fill="white" />
                     <rect x="6" y="8" width="20" height="2" rx="1" fill="white" />
                     <rect x="3" y="15" width="23" height="2" rx="1" fill="white" />
                 </svg>
-            </div>
+            </button>
 
             <div class="header__search">
                 <div class="header__search-type" :class="{ 'active': searchDropdownOpen }"
@@ -137,7 +140,7 @@
                             stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </a>
-                <a href="{{ route('cart') }}" class="header__action header__action--cart"
+                <a href="{{ route('cart') }}" class="header__action header__action--cart is-active"
                     aria-label="{{ __('store.header_cart') }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -151,38 +154,30 @@
                             d="M2.05078 2.05005H4.05078L6.71078 14.47C6.80836 14.9249 7.06145 15.3315 7.42649 15.6199C7.79153 15.9083 8.24569 16.0604 8.71078 16.05H18.4908C18.946 16.0493 19.3873 15.8933 19.7418 15.6079C20.0964 15.3224 20.3429 14.9246 20.4408 14.48L22.0908 7.05005H5.12078"
                             stroke="#7212BC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    <span class="header__badge">3</span>
                 </a>
             </div>
         </div>
     </div>
 
-    <nav class="header__nav">
+    <nav class="header__nav" :class="{ 'header__nav--catalog-open': $store.catalogMenu.isOpen }">
         <div class="header__nav-inner container">
             <div class="header__nav-left">
-                <button type="button" class="header__catalog-btn"
-                    aria-label="{{ __('store.header_catalog_btn') }}">
+                <button type="button"
+                        class="header__catalog-btn"
+                        aria-haspopup="true"
+                        :aria-expanded="$store.catalogMenu.isOpen ? 'true' : 'false'"
+                        aria-label="{{ __('store.nav_catalog') }}"
+                        @mouseenter="$store.catalogMenu.open()"
+                        @mouseleave="$store.catalogMenu.scheduleClose()"
+                        @click.prevent="$store.catalogMenu.toggle()"
+                        @keydown.enter.prevent="$store.catalogMenu.toggle()">
                     <span class="header__catalog-btn-svg">
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect width="8" height="8" rx="1" fill="#F6F6F6" />
-                        </svg>
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect width="8" height="8" rx="1" fill="#F6F6F6" />
-                        </svg>
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect width="8" height="8" rx="1" fill="#F6F6F6" />
-                        </svg>
-                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <rect width="8" height="8" rx="1" fill="#F6F6F6" />
-                        </svg>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="8" height="8" rx="1" fill="#F6F6F6" /></svg>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="8" height="8" rx="1" fill="#F6F6F6" /></svg>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="8" height="8" rx="1" fill="#F6F6F6" /></svg>
+                        <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="8" height="8" rx="1" fill="#F6F6F6" /></svg>
                     </span>
-
-                    <a href="#"
-                        class="header__nav-link header__nav-link--catalog">{{ __('store.nav_catalog') }}</a>
+                    <span class="header__nav-link header__nav-link--catalog">{{ __('store.nav_catalog') }}</span>
                 </button>
             </div>
 

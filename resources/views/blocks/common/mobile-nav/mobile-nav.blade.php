@@ -6,7 +6,7 @@
         </svg>
         <span class="mobile-nav__label">{{ __('store.mobile_home') }}</span>
     </a>
-    <a href="/catalog" class="mobile-nav__item">
+    <button type="button" class="mobile-nav__item" @click="$store.catalogMenu.openMobile()" aria-label="{{ __('store.mobile_catalog') }}">
         <svg class="mobile-nav__icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <rect x="1" y="1" width="9" height="9" rx="1" stroke="white" stroke-width="2" />
             <rect x="14" y="1" width="9" height="9" rx="1" stroke="white" stroke-width="2" />
@@ -14,7 +14,7 @@
             <rect x="1" y="14" width="9" height="9" rx="1" stroke="white" stroke-width="2" />
         </svg>
         <span class="mobile-nav__label">{{ __('store.mobile_catalog') }}</span>
-    </a>
+    </button>
     <a href="/cart" class="mobile-nav__item">
         <svg class="mobile-nav__icon" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M8.33268 22.9163C8.90798 22.9163 9.37435 22.45 9.37435 21.8747C9.37435 21.2994 8.90798 20.833 8.33268 20.833C7.75739 20.833 7.29102 21.2994 7.29102 21.8747C7.29102 22.45 7.75739 22.9163 8.33268 22.9163Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
