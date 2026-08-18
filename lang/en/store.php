@@ -3,12 +3,12 @@
 return [
 
     // Search
-    'search_placeholder' => 'Search by name or VIN',
+    'search_placeholder' => 'Search by name or article',
     'search_placeholder_mobile' => 'Search...',
-    'search_placeholder_desktop' => 'Search by name or VIN',
+    'search_placeholder_desktop' => 'Search by name or article',
     'search_type_name' => 'By name',
     'search_type_sku' => 'By SKU',
-    'search_type_vin' => 'By VIN',
+    'search_type_vin' => 'By article',
     'search_button' => 'Search',
 
     // Header

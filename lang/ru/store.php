@@ -3,9 +3,9 @@
 return [
 
     // Search
-    'search_placeholder' => 'Поиск по названию или VIN',
+    'search_placeholder' => 'Поиск по названию или артикулу',
     'search_placeholder_mobile' => 'Поиск...',
-    'search_placeholder_desktop' => 'Поиск по названию или VIN',
+    'search_placeholder_desktop' => 'Поиск по названию или артикулу',
     'search_type_name' => 'По названию',
     'search_type_sku' => 'По артикулу',
     'search_type_vin' => 'По VIN',
