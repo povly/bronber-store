@@ -3,7 +3,7 @@
 <section class="home-products section">
     <div class="container">
         <x-slider
-            :config="['breakpoints' => [0 => ['grid' => ['cols' => 2, 'rows' => 2]], 1200 => ['perView' => 4]]]"
+            :config="['loop' => true, 'freeMode' => true, 'breakpoints' => [0 => ['grid' => ['cols' => 2, 'rows' => 2]], 1200 => ['perView' => 4]]]"
             class="home-products__root"
             viewport-class="home-products__slider"
             track-class="home-products__track"

@@ -8,6 +8,7 @@ export default function (Alpine) {
         freeMode: false,
         slideWidth: null,
         fade: false,
+        loop: false,
     };
 
     Alpine.data('slider', (opts = {}) => ({
@@ -29,6 +30,8 @@ export default function (Alpine) {
         viewport: window.innerWidth,
         breakpointsConfig: opts.breakpoints ?? null,
         resolvedBp: null,
+        _cloneBefore: 0,
+        rebaseTimer: 0,
         _resolved: {
             perView: 1,
             autoHeight: false,
@@ -38,6 +41,7 @@ export default function (Alpine) {
             freeMode: false,
             slideWidth: null,
             fade: false,
+            loop: false,
         },
 
         /**
@@ -98,6 +102,7 @@ export default function (Alpine) {
                         ? bpOpts.slideWidth
                         : (opts.slideWidth ?? defaults.slideWidth),
                 fade: bpOpts.fade ?? opts.fade ?? defaults.fade,
+                loop: bpOpts.loop ?? opts.loop ?? defaults.loop,
             };
 
             const viewport = this.track?.parentElement;
@@ -153,6 +158,32 @@ export default function (Alpine) {
             return this.resolved.fade;
         },
 
+        get loopActive() {
+            return (
+                this.resolved.loop &&
+                !this.isGrid &&
+                this.realCount > (this.isFade ? 1 : this.perView)
+            );
+        },
+
+        get isLoop() {
+            return this.loopActive && !this.isFade;
+        },
+
+        get realCount() {
+            if (!this.track) return 0;
+            let n = 0;
+            for (let i = 0; i < this.track.children.length; i++) {
+                if (!this.track.children[i].dataset.sliderClone) n++;
+            }
+            return n;
+        },
+
+        childAt(i) {
+            if (!this.track) return null;
+            return this.track.children[i + (this._cloneBefore || 0)];
+        },
+
         get gridCols() {
             return this.resolved.grid?.cols ?? 2;
         },
@@ -179,6 +210,85 @@ export default function (Alpine) {
             e.preventDefault();
         },
 
+        buildClones() {
+            this.removeClones();
+            if (!this.isLoop || !this.track) return;
+
+            const slides = Array.from(this.track.children).filter(
+                (el) => !el.dataset.sliderClone,
+            );
+            const n = slides.length;
+            const count = Math.min(Math.max(1, this.perView), n);
+
+            const head = document.createDocumentFragment();
+            const tail = document.createDocumentFragment();
+            for (let i = count - 1; i >= 0; i--) {
+                tail.append(this.makeClone(slides[n - 1 - i]));
+            }
+            for (let i = 0; i < count; i++) {
+                head.append(this.makeClone(slides[i]));
+            }
+            this.track.prepend(tail);
+            this.track.append(head);
+            this._cloneBefore = count;
+        },
+
+        removeClones() {
+            if (!this.track) return;
+            this.track
+                .querySelectorAll('[data-slider-clone]')
+                .forEach((el) => el.remove());
+            this._cloneBefore = 0;
+        },
+
+        makeClone(slide) {
+            const clone = slide.cloneNode(true);
+            clone.dataset.sliderClone = 'true';
+            clone.setAttribute('aria-hidden', 'true');
+            // vanilla-lazyload знает только исходные <img data-src>;
+            // картинки клонов грузим сразу, иначе wrap-зона покажет заглушки
+            clone.querySelectorAll('img[data-src]').forEach((img) => {
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                img.classList.remove('lazy');
+            });
+            return clone;
+        },
+
+        transitionDurationMs() {
+            const raw = getComputedStyle(this.track).transitionDuration;
+            const val = parseFloat(raw) || 0;
+            return raw.includes('ms') ? val : val * 1000;
+        },
+
+        cancelLoopRebase() {
+            if (this.rebaseTimer) {
+                clearTimeout(this.rebaseTimer);
+                this.rebaseTimer = 0;
+            }
+        },
+
+        scheduleLoopRebase() {
+            this.cancelLoopRebase();
+            if (!this.isLoop || !this.track) return;
+            if (this.index >= 0 && this.index < this.realCount) return;
+            this.rebaseTimer = setTimeout(() => {
+                this.rebaseTimer = 0;
+                this.rebaseNow();
+            }, this.transitionDurationMs() + 50);
+        },
+
+        rebaseNow() {
+            if (!this.isLoop || !this.track) return;
+            const n = this.realCount;
+            if (this.index >= 0 && this.index < n) return;
+            this.index = ((this.index % n) + n) % n;
+            this.track.style.transition = 'none';
+            this.applyTransform(this.offset);
+            void this.track.offsetWidth;
+            this.track.style.transition = '';
+        },
+
         init() {
             this.track = this.$refs.track;
             this.resolvedBp = this.resolveBreakpoint(this.breakpointsConfig);
@@ -188,6 +298,7 @@ export default function (Alpine) {
             this.updateAutoHeightMode();
             this.updateFreeMode();
             this.updateFadeMode();
+            this.buildClones();
             this.snap();
             this.setupResizeObserver();
             this.setupDragGuard();
@@ -236,6 +347,7 @@ export default function (Alpine) {
         destroy() {
             if (this.rafId) cancelAnimationFrame(this.rafId);
             if (this.resizeTimer) clearTimeout(this.resizeTimer);
+            this.cancelLoopRebase();
             if (this.resizeObserver) this.resizeObserver.disconnect();
             if (this.resizeHandler)
                 window.removeEventListener('resize', this.resizeHandler);
@@ -257,7 +369,7 @@ export default function (Alpine) {
                 );
                 return Math.max(0, totalCols - this.gridCols);
             }
-            return Math.max(0, this.track.children.length - this.perView);
+            return Math.max(0, this.realCount - this.perView);
         },
 
         get slideWidth() {
@@ -282,19 +394,41 @@ export default function (Alpine) {
             return parseFloat(raw) || 0;
         },
 
+        /*
+         * Вьюпорт .slider имеет padding (вынос линии обрезки за пределы
+         * ховер-теней), поэтому offsetWidth/offsetHeight непригодны для
+         * расчёта зоны прокрутки: они включают padding. Считаем content-box.
+         */
+        get viewportContentSize() {
+            const vp = this.track?.parentElement;
+            if (!vp) return { width: 0, height: 0 };
+            const cs = getComputedStyle(vp);
+            return {
+                width:
+                    vp.clientWidth -
+                    parseFloat(cs.paddingLeft) -
+                    parseFloat(cs.paddingRight),
+                height:
+                    vp.clientHeight -
+                    parseFloat(cs.paddingTop) -
+                    parseFloat(cs.paddingBottom),
+            };
+        },
+
         get offset() {
             if (!this.track || !this.track.children.length) return 0;
             if (this.isGrid) {
                 const item = this.track.children[this.index * this.gridRows];
                 return item ? item.offsetLeft : 0;
             }
-            const slide = this.track.children[this.index];
+            const slide = this.childAt(this.index);
             if (!slide) return 0;
             return this.isVertical ? slide.offsetTop : slide.offsetLeft;
         },
 
         get maxOffset() {
             if (!this.track || !this.track.children.length) return 0;
+            const content = this.viewportContentSize;
             if (this.isGrid) {
                 const totalCols = Math.ceil(
                     this.track.children.length / this.gridRows,
@@ -304,9 +438,7 @@ export default function (Alpine) {
                 if (!item) return 0;
                 return Math.max(
                     0,
-                    item.offsetLeft +
-                        item.offsetWidth -
-                        this.track.parentElement.offsetWidth,
+                    item.offsetLeft + item.offsetWidth - content.width,
                 );
             }
             const last = this.track.children[this.track.children.length - 1];
@@ -314,24 +446,20 @@ export default function (Alpine) {
             if (this.isVertical) {
                 return Math.max(
                     0,
-                    last.offsetTop +
-                        last.offsetHeight -
-                        this.track.parentElement.offsetHeight,
+                    last.offsetTop + last.offsetHeight - content.height,
                 );
             }
             return Math.max(
                 0,
-                last.offsetLeft +
-                    last.offsetWidth -
-                    this.track.parentElement.offsetWidth,
+                last.offsetLeft + last.offsetWidth - content.width,
             );
         },
 
         get canPrev() {
-            return this.index > 0;
+            return this.loopActive ? this.canScroll : this.index > 0;
         },
         get canNext() {
-            return this.index < this.maxIndex;
+            return this.loopActive ? this.canScroll : this.index < this.maxIndex;
         },
 
         get totalPages() {
@@ -342,10 +470,7 @@ export default function (Alpine) {
                 );
                 return Math.max(1, Math.ceil(totalCols / this.gridCols));
             }
-            return Math.max(
-                1,
-                Math.ceil(this.track.children.length / this.perView),
-            );
+            return Math.max(1, Math.ceil(this.realCount / this.perView));
         },
 
         get currentPage() {
@@ -364,6 +489,19 @@ export default function (Alpine) {
         },
 
         prev() {
+            if (this.loopActive) {
+                if (!this.canScroll) return;
+                if (this.isFade) {
+                    this.index =
+                        (this.index - 1 + this.realCount) % this.realCount;
+                    this.applyFade();
+                    return;
+                }
+                this.rebaseNow();
+                this.index--;
+                this.snap();
+                return;
+            }
             if (this.canPrev) {
                 this.index--;
                 this.snap();
@@ -371,6 +509,18 @@ export default function (Alpine) {
         },
 
         next() {
+            if (this.loopActive) {
+                if (!this.canScroll) return;
+                if (this.isFade) {
+                    this.index = (this.index + 1) % this.realCount;
+                    this.applyFade();
+                    return;
+                }
+                this.rebaseNow();
+                this.index++;
+                this.snap();
+                return;
+            }
             if (this.canNext) {
                 this.index++;
                 this.snap();
@@ -381,6 +531,12 @@ export default function (Alpine) {
             if (this.isDragging) return;
             if (this.isFade) {
                 this.applyFade();
+                return;
+            }
+            if (this.isLoop) {
+                this.applyTransform(this.offset);
+                this.scheduleLoopRebase();
+                this.updateHeight();
                 return;
             }
             this.applyTransform(Math.min(this.offset, this.maxOffset));
@@ -407,6 +563,8 @@ export default function (Alpine) {
         onPointerDown(e) {
             if (e.button && e.button !== 0) return;
             if (this.maxIndex === 0 && this.maxOffset === 0) return;
+            this.cancelLoopRebase();
+            this.rebaseNow();
             this.isDragging = true;
             this.dragMoved = false;
             const coord = this.isVertical
@@ -455,9 +613,13 @@ export default function (Alpine) {
         findNearestIndex(offset) {
             let closest = 0;
             let closestDist = Infinity;
-            for (let i = 0; i <= this.maxIndex; i++) {
+            const lo = this.isLoop ? -1 : 0;
+            const hi = this.isLoop ? this.realCount : this.maxIndex;
+            for (let i = lo; i <= hi; i++) {
                 const itemIndex = this.isGrid ? i * this.gridRows : i;
-                const child = this.track.children[itemIndex];
+                const child = this.isGrid
+                    ? this.track.children[itemIndex]
+                    : this.childAt(i);
                 if (!child) continue;
                 const itemPos = this.isVertical
                     ? child.offsetTop
@@ -468,7 +630,7 @@ export default function (Alpine) {
                     closest = i;
                 }
             }
-            return closest;
+            return Math.min(Math.max(closest, lo), hi);
         },
 
         onPointerUp() {
@@ -513,6 +675,11 @@ export default function (Alpine) {
                 this.track.style.transition = '';
                 if (this.isFade) {
                     this.applyFade();
+                } else if (this.isLoop) {
+                    // в loop нельзя оставаться в клон-зоне после release:
+                    // дотягиваем до ближайшего слайда и ребейзим
+                    this.applyTransform(this.offset);
+                    this.scheduleLoopRebase();
                 } else {
                     this.applyTransform(finalOffset);
                 }
@@ -539,6 +706,7 @@ export default function (Alpine) {
                 this.applyFade();
             } else {
                 this.applyTransform(this.offset);
+                this.scheduleLoopRebase();
             }
             this.updateHeight();
         },
@@ -567,7 +735,17 @@ export default function (Alpine) {
                 if (sliderEl) sliderEl.style.height = '';
             }
 
-            if (this.index > this.maxIndex) this.index = this.maxIndex;
+            this.cancelLoopRebase();
+            this.rebaseNow();
+            this.removeClones();
+            this.buildClones();
+
+            if (this.loopActive) {
+                if (this.index > this.realCount - 1)
+                    this.index = this.realCount - 1;
+            } else if (this.index > this.maxIndex) {
+                this.index = this.maxIndex;
+            }
             this.snap();
         },
 
@@ -623,10 +801,11 @@ export default function (Alpine) {
             const count = this.isGrid
                 ? this.gridCols * this.gridRows
                 : this.perView;
-            const end = Math.min(start + count, this.track.children.length);
+            const end = Math.min(start + count, this.realCount);
             let max = 0;
             for (let i = start; i < end; i++) {
-                max = Math.max(max, this.track.children[i].offsetHeight);
+                const el = this.childAt(i);
+                if (el) max = Math.max(max, el.offsetHeight);
             }
             sliderEl.style.height = max + 'px';
         },
@@ -636,6 +815,15 @@ export default function (Alpine) {
         },
 
         ensureVisible(targetIndex) {
+            if (this.loopActive) {
+                this.index = Math.min(
+                    Math.max(0, targetIndex),
+                    this.realCount - 1,
+                );
+                this.snap();
+                return;
+            }
+
             const lastVisible = this.index + this.perView - 1;
 
             if (targetIndex > lastVisible) {
@@ -654,6 +842,15 @@ export default function (Alpine) {
          * ensureVisible + peek-ahead: advances one step when target is the last visible slide.
          */
         scrollToReveal(targetIndex) {
+            if (this.loopActive) {
+                this.index = Math.min(
+                    Math.max(0, targetIndex),
+                    this.realCount - 1,
+                );
+                this.snap();
+                return;
+            }
+
             const lastVisible = this.index + this.perView - 1;
 
             if (targetIndex === lastVisible && this.canNext) {

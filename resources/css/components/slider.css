@@ -1,14 +1,32 @@
+/*
+ * Dot variables должны резолвиться и для пагинации вне вьюпорта:
+ * x-slider-pagination рендерится в nav-слоте, снаружи .slider,
+ * наследование переменных от .slider туда не доходит.
+ */
+.slider,
+.slider__pagination {
+    --slider-dot-size: 10px;
+    --slider-dot-color: transparent;
+    --slider-dot-border-color: var(--color-black);
+    --slider-dot-border-active-color: var(--color-black);
+    --slider-dot-active-color: var(--color-black);
+}
+
 .slider {
     --slider-gap: 10px;
     --slider-duration: 0.35s;
     --slider-ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     --slider-offset: 0px;
     --slider-transition: transform var(--slider-duration) var(--slider-ease);
-    --slider-dot-size: 10px;
-    --slider-dot-color: transparent;
-    --slider-dot-border-color: var(--color-black);
-    --slider-dot-border-active-color: var(--color-black);
-    --slider-dot-active-color: var(--color-black);
+
+    /*
+     * Ховер-тени карточек (4px 4px 15px) обрезались overflow: hidden по всем
+     * сторонам. Расширяем box вьюпорта на 20px наружу паддингом и компенсируем
+     * отрицательными маржинами: layout не меняется (content box тот же),
+     * а линия обрезки (padding edge) уходит за пределы тени.
+     */
+    margin: -20px;
+    padding: 20px;
     overflow: hidden;
 
 
