@@ -114,26 +114,21 @@
     }
 }
 
-.mobile-menu__overlay--enter,
-.mobile-menu__overlay--leave-end {
-    opacity: 0;
-}
-
-.mobile-menu__overlay--enter-end,
-.mobile-menu__overlay--leave {
-    opacity: 1;
+/* --- Transition helpers (x-transition classes) --- */
+.mobile-menu__overlay--transition {
     transition: opacity 0.3s ease;
 }
 
-.mobile-menu__panel--enter,
-.mobile-menu__panel--leave-end {
-    transform: translateX(-100%);
+.mobile-menu__overlay--hidden {
+    opacity: 0;
 }
 
-.mobile-menu__panel--enter-end,
-.mobile-menu__panel--leave {
-    transform: translateX(0);
+.mobile-menu__panel--transition {
     transition: transform 0.3s ease;
+}
+
+.mobile-menu__panel--hidden {
+    transform: translateX(-100%);
 }
 
 @media screen and (min-width: 1200px) {

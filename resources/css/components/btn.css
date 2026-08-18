@@ -12,16 +12,38 @@
     padding: 18px;
     width: max-content;
     font-size: fluid-type(320px, 768px, 12px, 14px);
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
 
     &--primary {
+        position: relative;
+        isolation: isolate;
         background: var(--gradient-black);
         color: var(--color-white);
         border-color: var(--color-black);
 
+        /*
+         * Градиент (background-image) и сплошной цвет (background-color)
+         * не интерполируются между собой, поэтому ховер-цвет кладём
+         * отдельным слоем и кроссфейдим через opacity.
+         */
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            border-radius: inherit;
+            background: var(--color-purple);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
         &:hover {
             color: var(--color-white);
-            background: var(--color-purple);
             border-color: var(--color-purple);
+
+            &::before {
+                opacity: 1;
+            }
         }
     }
 

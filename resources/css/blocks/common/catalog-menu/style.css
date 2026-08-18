@@ -76,6 +76,7 @@
     line-height: 100%;
     color: var(--color-black-soft);
     text-align: left;
+    transition: color 0.2s ease;
 
     &.is-open {
         color: var(--color-purple);
@@ -130,6 +131,7 @@
     font-weight: 500;
     font-size: 14px;
     line-height: 130%;
+    transition: color 0.15s ease;
 }
 
 .catalog-menu__all {
@@ -143,19 +145,20 @@
 }
 
 /* --- Transition helpers (x-transition classes) --- */
+/* Mobile drawer: slides in from the left edge (same pattern as .mobile-menu) */
 .catalog-menu__panel--transition {
     transition:
-        opacity 0.2s ease,
-        transform 0.2s ease;
+        transform 0.3s ease,
+        opacity 0.3s ease;
 }
 
 .catalog-menu__panel--hidden {
     opacity: 0;
-    transform: translateY(-8px);
+    transform: translateX(-100%);
 }
 
 .catalog-menu__overlay--transition {
-    transition: opacity 0.2s ease;
+    transition: opacity 0.3s ease;
 }
 
 .catalog-menu__overlay--hidden {
@@ -178,6 +181,10 @@
         border-radius: 5px;
         display: grid;
         grid-template-columns: 1fr 1.4fr;
+    }
+
+    .catalog-menu__panel--hidden {
+        transform: translateY(-8px);
     }
 
     .catalog-menu__close,

@@ -2,15 +2,15 @@
     :style="{ zIndex: 1000 + $modal.depth('mobile-menu') }">
 
     <div class="mobile-menu__overlay" x-show="$modal.isOpen('mobile-menu')"
-        x-transition:enter="mobile-menu__overlay--enter" x-transition:enter-end="mobile-menu__overlay--enter-end"
-        x-transition:leave="mobile-menu__overlay--leave" x-transition:leave-end="mobile-menu__overlay--leave-end"
+        x-transition:enter="mobile-menu__overlay--transition" x-transition:enter-start="mobile-menu__overlay--hidden"
+        x-transition:leave="mobile-menu__overlay--transition" x-transition:leave-end="mobile-menu__overlay--hidden"
         @click="$modal.hide()">
     </div>
 
     <aside class="mobile-menu__panel" role="dialog" aria-modal="true" aria-label="{{ __('store.mobile_menu_title') }}"
-        x-show="$modal.isOpen('mobile-menu')" x-transition:enter="mobile-menu__panel--enter"
-        x-transition:enter-end="mobile-menu__panel--enter-end" x-transition:leave="mobile-menu__panel--leave"
-        x-transition:leave-end="mobile-menu__panel--leave-end">
+        x-show="$modal.isOpen('mobile-menu')" x-transition:enter="mobile-menu__panel--transition"
+        x-transition:enter-start="mobile-menu__panel--hidden" x-transition:leave="mobile-menu__panel--transition"
+        x-transition:leave-end="mobile-menu__panel--hidden">
 
         <button type="button" class="mobile-menu__close" @click="$modal.hide('mobile-menu')"
             aria-label="{{ __('store.mobile_menu_close') }}">
