@@ -1,7 +1,9 @@
 {{-- Card 1: Каталог товаров --}}
 <div class="catalog-filters__card catalog-filters__card--first">
-    <h2 class="catalog-filters__heading">Каталог товаров</h2>
-
+    <div class="catalog-filters__heading-block">
+        <h2 class="catalog-filters__heading">Каталог товаров</h2>
+    </div>
+    
     <ul class="catalog-filters__category-list"
         x-scrollable="{ thumbColor: '#bfbfbf', thumbWidth: 4, thumbRadius: 4, trackOffset: 3 }">
         {{-- Active category: Тормозная система (expanded) --}}
@@ -106,7 +108,7 @@
 
     <div class="catalog-filters__sections">
         {{-- Section: Цена --}}
-        <div class="catalog-filters__section" :class="{ 'is-open': isSectionOpen('price') }">
+        <div class="catalog-filters__section--price" :class="{ 'is-open': isSectionOpen('price') }">
             <div class="catalog-filters__section-header" @click="toggleSection('price')">
                 <span class="catalog-filters__section-title">Цена, ₽</span>
                 <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('price') }"
@@ -118,6 +120,15 @@
             </div>
             <div class="catalog-filters__section-body" :class="{ 'is-hidden': !isSectionOpen('price') }">
                 <div class="catalog-filters__range">
+                    <div class="catalog-filters__range-inputs">
+                        <input type="text" class="catalog-filters__range-input" value="{{ $priceMin ?? $rangeMin }}"
+                            x-model="priceMin" @change="onPriceChange('min')" @keydown.enter.prevent="$el.blur()"
+                            inputmode="numeric">
+                        <span class="catalog-filters__range-separator">—</span>
+                        <input type="text" class="catalog-filters__range-input"
+                            value="{{ $priceMax ?? $rangeMax }}" x-model="priceMax" @change="onPriceChange('max')"
+                            @keydown.enter.prevent="$el.blur()" inputmode="numeric">
+                    </div>
                     <div class="catalog-filters__range-track" x-ref="track"
                         style="--range-left: {{ $initLeftPercent }}%; --range-right: {{ $initRightPercent }}%;"
                         :style="`--range-left: ${leftPercent}%; --range-right: ${rightPercent}%`"
@@ -130,21 +141,12 @@
                             @mousedown="startDrag('right', $event)" @touchstart="startDrag('right', $event)"
                             @click.stop></div>
                     </div>
-                    <div class="catalog-filters__range-inputs">
-                        <input type="text" class="catalog-filters__range-input" value="{{ $priceMin ?? $rangeMin }}"
-                            x-model="priceMin" @change="onPriceChange('min')" @keydown.enter.prevent="$el.blur()"
-                            inputmode="numeric">
-                        <span class="catalog-filters__range-separator">—</span>
-                        <input type="text" class="catalog-filters__range-input"
-                            value="{{ $priceMax ?? $rangeMax }}" x-model="priceMax" @change="onPriceChange('max')"
-                            @keydown.enter.prevent="$el.blur()" inputmode="numeric">
-                    </div>
                 </div>
             </div>
         </div>
 
         {{-- Section: Бренд --}}
-        <div class="catalog-filters__section" :class="{ 'is-open': isSectionOpen('brand') }">
+        <div class="catalog-filters__section--brands" :class="{ 'is-open': isSectionOpen('brand') }">
             <div class="catalog-filters__section-header" @click="toggleSection('brand')">
                 <span class="catalog-filters__section-title">Бренд</span>
                 <svg class="catalog-filters__section-chevron is-open" :class="{ 'is-open': isSectionOpen('brand') }"
@@ -198,7 +200,7 @@
         </div>
 
         {{-- Section: Наличие --}}
-        <div class="catalog-filters__section{{ $availabilityOpen ? ' is-open' : '' }}"
+        <div class="catalog-filters__section catalog-filters__section--availability {{ $availabilityOpen ? ' is-open' : '' }}"
             :class="{ 'is-open': isSectionOpen('availability') }">
             <div class="catalog-filters__section-header" @click="toggleSection('availability')">
                 <span class="catalog-filters__section-title">Наличие</span>

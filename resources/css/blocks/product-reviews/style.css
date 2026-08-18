@@ -10,7 +10,6 @@
         margin: 0 0 fluid-type(1200px, 1440px, 24px, 32px);
     }
 
-
     /* ══ Product summary card ══════════════════════════════ */
     &__product {
         background: var(--color-white);
@@ -146,6 +145,7 @@
         box-shadow: 2px 2px 10px 0 rgba(0, 0, 0, 0.1);
         border-radius: 5px;
         padding: 13px;
+        flex: 1 1 auto;
         cursor: pointer;
     }
 
@@ -471,7 +471,7 @@
         &__card {
             padding: 30px;
         }
-        
+
         &__avatar {
             width: 80px;
             height: 80px;
@@ -527,6 +527,10 @@
         &__more-btn {
             min-width: 227px;
         }
+
+        &__filter {
+            flex: 0 0 auto;
+        }
     }
 
     /* ══════════════════════════════════════════════════════
@@ -540,12 +544,9 @@
         /* Product card: image | info | side (3 columns) */
         &__product {
             padding: fluid-type(1200px, 1440px, 24px, 30px);
-            grid-template-columns: fluid-type(
-                    1200px,
-                    1440px,
-                    140px,
-                    170px
-                ) 1fr auto;
+            grid-template-columns:
+                fluid-type(1200px, 1440px, 140px, 170px)
+                1fr auto;
             gap: fluid-type(1200px, 1440px, 30px, 40px);
             align-items: center;
         }
@@ -585,7 +586,7 @@
         &__product {
             gap: 20px;
             grid-template-columns: 97px auto;
-            
+
             &-image {
                 width: 97px;
                 height: 97px;

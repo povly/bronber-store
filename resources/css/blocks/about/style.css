@@ -160,6 +160,7 @@
         gap: 16px;
         padding: 24px 0;
         cursor: pointer;
+        color: var(--color-black);
         text-align: left;
     }
 

@@ -211,55 +211,19 @@
         top: calc(100% + 6px);
         right: 0;
         min-width: 200px;
+        width: 100%;
         background: var(--color-white);
-        border: 1px solid var(--color-gray-placeholder);
         border-radius: 5px;
-        box-shadow: var(--shadow-card);
+        box-shadow: 0px 4px 25px 4px rgba(0, 0, 0, 0.05);
         z-index: 100;
-        padding: 4px 0;
+        padding: 7px;
     }
 
     &__mobile-sort-option {
         display: block;
         width: 100%;
         text-align: left;
-        padding: 10px 14px;
-        background: none;
-        border: none;
-        font-family: var(--font-manrope);
-        font-weight: 500;
-        font-size: 14px;
-        color: var(--color-black);
-        cursor: pointer;
-
-        &:hover {
-            background: var(--color-off-white);
-        }
-
-        &.is-active {
-            color: var(--color-purple);
-            font-weight: 600;
-        }
-    }
-
-    &__sort-dropdown {
-        position: absolute;
-        top: calc(100% + 6px);
-        right: 0;
-        min-width: 200px;
-        background: var(--color-white);
-        border: 1px solid var(--color-gray-placeholder);
-        border-radius: 5px;
-        box-shadow: var(--shadow-card);
-        z-index: 100;
-        padding: 4px 0;
-    }
-
-    &__sort-option {
-        display: block;
-        width: 100%;
-        text-align: left;
-        padding: 10px 14px;
+        padding: 6px 9px;
         background: none;
         border: none;
         font-family: var(--font-manrope);
@@ -268,14 +232,43 @@
         color: var(--color-black);
         cursor: pointer;
         transition: background 0.1s ease;
+        border-radius: 5px;
 
-        &:hover {
-            background: var(--color-off-white);
+        &:hover, &.is-active {
+            background: #F6EAFF;
         }
+    }
 
-        &.is-active {
-            color: var(--color-purple);
-            font-weight: 600;
+    &__sort-dropdown {
+        position: absolute;
+        top: calc(100% + 6px);
+        right: 0;
+        min-width: 173px;
+        width: 100%;
+        background: var(--color-white);
+        border-radius: 5px;
+        box-shadow: 0px 4px 25px 4px rgba(0, 0, 0, 0.05);
+        z-index: 100;
+        padding: 7px;
+    }
+
+    &__sort-option {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 6px 9px;
+        background: none;
+        border: none;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--color-black);
+        cursor: pointer;
+        transition: background 0.1s ease;
+        border-radius: 5px;
+
+        &:hover, &.is-active {
+            background: #F6EAFF;
         }
     }
 

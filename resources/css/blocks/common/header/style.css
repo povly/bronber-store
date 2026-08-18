@@ -302,6 +302,7 @@
                 width: 42px;
                 height: 42px;
                 border-radius: 100%;
+                transition: .3s;
             }
 
             svg {
@@ -313,7 +314,7 @@
                 stroke: var(--color-purple);
             }
 
-            &:hover, &.is-active {
+            &:hover {
                 &::before {
                     background: #f2e9ff;
                 }

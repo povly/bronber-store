@@ -29,6 +29,7 @@
         font-size: fluid-type(375px, 768px, 22px, 25px);
         line-height: 100%;
         text-align: left;
+        color: var(--color-black);
     }
 
     &__icon {

@@ -12,6 +12,7 @@
             border-radius: 5px;
             overflow: hidden;
             margin-bottom: fluid-type(320px, 768px, 15.5px, 24px);
+            transition: .3s;
         }
     }
 

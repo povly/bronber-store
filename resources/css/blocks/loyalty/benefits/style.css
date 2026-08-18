@@ -8,7 +8,7 @@
         flex-direction: column;
         gap: 40px;
 
-        @media screen and (min-width: 768px){
+        @media screen and (min-width: 768px) {
             gap: 55px 133px;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -30,13 +30,19 @@
         position: relative;
 
         &--main {
-            --loyalty-benefits-icon-svg: fluid-type(1200px, 1440px, 68px, 111px);
+            --loyalty-benefits-icon-svg: fluid-type(
+                1200px,
+                1440px,
+                68px,
+                111px
+            );
             flex-direction: column;
             gap: 12px;
+            align-items: flex-start;
         }
 
-        @media screen and (min-width: 768px){
-            &:nth-child(odd){
+        @media screen and (min-width: 768px) {
+            &:nth-child(odd) {
                 &::before {
                     content: '';
                     position: absolute;
@@ -45,7 +51,7 @@
                     top: 50%;
                     height: 50px;
                     width: 1px;
-                    background: #EEEEEE;
+                    background: #eeeeee;
                 }
             }
 
@@ -55,14 +61,14 @@
             }
         }
 
-        @media screen and (min-width: 1200px){
-            &:nth-child(odd){
+        @media screen and (min-width: 1200px) {
+            &:nth-child(odd) {
                 &::before {
                     left: calc(100% + 55px / 2);
                 }
             }
 
-            &:not(:last-child){
+            &:not(:last-child) {
                 &::before {
                     content: '';
                     position: absolute;
@@ -71,7 +77,7 @@
                     top: 50%;
                     height: 50px;
                     width: 1px;
-                    background: #EEEEEE;
+                    background: #eeeeee;
                 }
             }
 
@@ -88,7 +94,7 @@
         justify-content: center;
 
         svg {
-            width: var(--loyalty-benefits-icon-svg, 35px)
+            width: var(--loyalty-benefits-icon-svg, 35px);
         }
     }
 

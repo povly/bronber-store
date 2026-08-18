@@ -14,6 +14,7 @@
         border-radius: 7px;
         padding: 20px 20px 20px fluid-type(320px, 768px, 81px, 162px);
         position: relative;
+        transition: .3s;
 
         &:hover {
             box-shadow: 4px 4px 15px 0 rgba(0, 0, 0, 0.2);
@@ -62,6 +63,16 @@
         &__card {
             padding: fluid-type(768px, 1200px, 150px, 232px) 10px fluid-type(768px, 1200px, 8px, 16px);
 
+            &:hover {
+                .home-categories {
+                    &__card {
+                        &-tag {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+
             &-arrow {
                 display: none;
             }
@@ -86,6 +97,8 @@
                 top: fluid-type(768px, 1200px, 7px, 11px);
                 right: fluid-type(768px, 1200px, 7px, 11px);
                 position: absolute;
+                opacity: 0;
+                transition: .2s;
             }
         }
     }

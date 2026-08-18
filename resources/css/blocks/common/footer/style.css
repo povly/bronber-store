@@ -43,7 +43,7 @@
         align-items: center;
         gap: 10px;
         font-weight: 500;
-        font-size: 14px;
+        font-size: fluid-type(375px, 768px, 15px, 16px);
 
         svg {
             flex-shrink: 0;
@@ -136,7 +136,7 @@
 
             a {
                 font-weight: 500;
-                font-size: fluid-type(375px, 768px, 14px, 16px);
+                font-size: fluid-type(375px, 768px, 15px, 16px);
                 line-height: 100%;
             }
         }
@@ -165,7 +165,7 @@
 
     &__legal {
         font-weight: 500;
-        font-size: fluid-type(375px, 768px, 14px, 16px);
+        font-size: fluid-type(375px, 768px, 15px, 16px);
     }
 
     @media (min-width: 1200px) {
@@ -228,7 +228,7 @@
         }
 
         &__contact {
-            font-size: 14px;
+            font-size: 15px;
         }
 
         &__social {
