@@ -91,7 +91,9 @@ export default function (Alpine) {
         wrapper.appendChild(el);
 
         const track = document.createElement('div');
-        track.className = 'x-scrollable__track';
+        // is-pending держит трек невидимым до первого update():
+        // иначе между созданием и первым расчётом метрик виден флеш тумба
+        track.className = 'x-scrollable__track is-pending';
         const thumb = document.createElement('div');
         thumb.className = 'x-scrollable__thumb';
         track.appendChild(thumb);
@@ -142,6 +144,7 @@ export default function (Alpine) {
         };
 
         const update = () => {
+            track.classList.remove('is-pending');
             const m = computeMetrics();
             const needsScroll = m.maxScroll > 1;
             track.classList.toggle('is-hidden', !needsScroll);
