@@ -25,13 +25,13 @@
 
         h1 {
             margin-bottom: fluid-type(768px, 1200px, 16px, 24px);
-    
+
             @media screen and (min-width: 1200px){
                 margin-bottom: fluid-type(1200px, 1440px, 24px, 32px);
             }
         }
 
-        
+
         :is(h2, h3, h4, h5, h6) {
             margin-top: fluid-type(375px, 768px, 36px, 42px);
             line-height: fluid-type(375px, 768px, 110%, 100%);
@@ -76,6 +76,18 @@
             @media screen and (min-width: 1200px) {
                 font-size: fluid-type(1200px, 1440px, 28px, 36px);
             }
+        }
+
+        :is(ol, ul){
+            padding-left: 20px;
+        }
+
+        ol {
+            list-style: decimal;
+        }
+
+        ul {
+            list-style: disc;
         }
     }
 }

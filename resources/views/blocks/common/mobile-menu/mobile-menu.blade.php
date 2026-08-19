@@ -51,7 +51,7 @@
                 </svg>
             </div>
         </div>
-        
+
         <div class="mobile-menu__content">
             <nav class="mobile-menu__nav">
                 <a href="{{ route('blog') }}" class="mobile-menu__link"
@@ -74,7 +74,7 @@
                 <div class="mobile-menu__link-divider"></div>
                 <a href="{{ route('delivery') }}" class="mobile-menu__link"
                     @click="$modal.hide('mobile-menu')">{{ __('store.top_delivery') }}</a>
-                <a href="#!" class="mobile-menu__link"
+                <a href="{{route('returns')}}" class="mobile-menu__link"
                     @click="$modal.hide('mobile-menu')">{{ __('store.top_guarantee') }}</a>
             </nav>
         </div>

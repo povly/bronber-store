@@ -126,7 +126,7 @@
                     </button>
                     <ul class="footer__column-list" :class="{ 'is-open': open }">
                         <li><a href="{{ route('delivery') }}">{{ __('store.footer_buy_delivery') }}</a></li>
-                        <li><a href="#">{{ __('store.footer_buy_guarantee') }}</a></li>
+                        <li><a href="{{route('returns')}}">{{ __('store.footer_buy_guarantee') }}</a></li>
                         <li><a href="{{ route('loyalty') }}">{{ __('store.footer_buy_loyalty') }}</a></li>
                         <li><a href="{{ route('faq') }}">{{ __('store.top_faq') }}</a></li>
                     </ul>
@@ -173,7 +173,7 @@
                 <span>{{ __('store.footer_auth') }}</span>
             </a>
 
-            <div class="footer__bottom">                
+            <div class="footer__bottom">
                 <div class="footer__links footer__legal">
                     <p><a href="#">{{ __('store.footer_privacy') }}</a></p>
                     <p><a href="#">{{ __('store.footer_terms') }}</a></p>
