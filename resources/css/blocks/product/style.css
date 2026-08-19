@@ -413,6 +413,7 @@
         font-weight: 600;
         font-size: 18px;
         line-height: 100%;
+        color: var(--color-black);
 
         &.is-active {
             font-weight: 800;
@@ -446,7 +447,7 @@
         gap: 12px;
         margin-bottom: 16px;
     }
-    
+
     &__section-title {
         font-family: var(--font-manrope);
         font-weight: 800;
@@ -490,7 +491,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 24px;
+            margin-top: 44px;
         }
 
         &-arrows {
@@ -770,7 +771,7 @@
         }
 
         padding-top: 36px;
-        
+
         &__hero-grid {
             gap: 34px;
             grid-template-columns: minmax(0, 578fr) minmax(0, 488fr);
@@ -942,7 +943,7 @@
             justify-content: flex-start;
             margin-top: 26px;
         }
-        
+
         &__buy {
             &-row {
                 grid-template-columns: 140px fluid-type(1200px, 1440px, 182px, 220px) fluid-type(1200px, 1440px, 54px, 60px);
@@ -964,7 +965,7 @@
             }
         }
 
-        
+
         &__feature {
             &-info {
                 padding-top: 10px;
