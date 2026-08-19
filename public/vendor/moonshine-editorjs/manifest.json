@@ -1,0 +1,13 @@
+{
+  "resources/css/field.css": {
+    "file": "assets/field-DqMN0suY.css",
+    "src": "resources/css/field.css",
+    "isEntry": true
+  },
+  "resources/js/field.js": {
+    "file": "assets/field-CnXnTaZK.js",
+    "name": "field",
+    "src": "resources/js/field.js",
+    "isEntry": true
+  }
+}
