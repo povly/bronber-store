@@ -69,7 +69,7 @@ erDiagram
 
 ### Phase 1: Данные
 
-- [ ] Task 1: Миграции pages, page_translations, settings
+- [x] Task 1: Миграции pages, page_translations, settings
   Три миграции по схеме выше (snake_case, `create_{table}_table`): unique-ограничения (pages.slug; page_translations (page_id, locale); settings (key, locale)), индексы locale, FK cascadeOnDelete. Проверка: `php artisan migrate` + `php artisan db:table page_translations`.
   LOGGING: n/a (миграции).
   Files: `database/migrations/*_create_pages_table.php`, `*_create_page_translations_table.php`, `*_create_settings_table.php`.
