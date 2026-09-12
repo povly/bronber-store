@@ -39,7 +39,7 @@ final class LanguageIndexPage extends IndexPage
             Text::make(
                 'По умолчанию',
                 'is_default',
-                formatted: static fn (bool $isDefault): string => $isDefault ? 'Да' : 'Нет',
+                formatted: static fn (Language $language): string => $language->is_default ? 'Да' : 'Нет',
             )->badge(static fn (bool $isDefault): Color => $isDefault ? Color::SUCCESS : Color::GRAY),
 
             Number::make('Сортировка', 'sort_order')->sortable(),

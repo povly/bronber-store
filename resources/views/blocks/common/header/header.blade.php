@@ -1,3 +1,8 @@
+@if(!empty($headerBlocksHtml))
+    <header class="header header--custom">
+        {!! $headerBlocksHtml !!}
+    </header>
+@else
 <header class="header">
     @include('blocks.common.top-bar.top-bar')
 
@@ -191,3 +196,4 @@
         </div>
     </nav>
 </header>
+@endif

@@ -41,7 +41,7 @@ final class PageIndexPage extends IndexPage
             Text::make(
                 'Статус',
                 'is_published',
-                formatted: static fn (bool $isPublished): string => $isPublished ? 'Опубликована' : 'Черновик',
+                formatted: static fn (Page $page): string => $page->is_published ? 'Опубликована' : 'Черновик',
             )->badge(static fn (bool $isPublished): Color => $isPublished ? Color::SUCCESS : Color::GRAY),
 
             Number::make('Сортировка', 'sort_order')->sortable(),

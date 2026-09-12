@@ -34,10 +34,10 @@ final class SettingIndexPage extends IndexPage
             Text::make(
                 'Ключ',
                 'key',
-                formatted: static fn (string $key): string => match ($key) {
+                formatted: static fn (Setting $setting): string => match ($setting->key) {
                     'header' => 'Шапка',
                     'footer' => 'Подвал',
-                    default => $key,
+                    default => $setting->key,
                 },
             )->badge(Color::PURPLE),
 

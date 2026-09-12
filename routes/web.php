@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use App\Services\Languages\LanguageService;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -228,6 +229,10 @@ $register = function () {
             'oldPriceFormatted' => $format($product['oldPrice']),
         ]);
     })->name('product.reviews');
+
+    // DB-driven pages (catch-all) — MUST stay last inside this closure:
+    // fixed routes above (catalog, cart, checkout, profile, ...) win over /{slug}.
+    Route::get('/{slug}', [PageController::class, 'show'])->name('page');
 };
 
 Route::get('/clear-cache', function () {

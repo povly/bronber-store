@@ -6,6 +6,7 @@ namespace App\Services\Settings;
 
 use App\Models\Setting;
 use App\Services\Languages\LanguageService;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Log;
 
 /**
@@ -52,6 +53,7 @@ class SettingService
 
     /**
      * Resolve a setting from the database: requested locale first, default language as fallback.
+     * Missing table (pre-migration) degrades to an empty value — layout falls back to static markup.
      *
      * @return array<array-key, mixed>
      */
@@ -59,11 +61,15 @@ class SettingService
     {
         $default = app(LanguageService::class)->defaultCode();
 
-        $settings = Setting::query()
-            ->where('key', $key)
-            ->whereIn('locale', [$locale, $default])
-            ->get()
-            ->keyBy('locale');
+        try {
+            $settings = Setting::query()
+                ->where('key', $key)
+                ->whereIn('locale', [$locale, $default])
+                ->get()
+                ->keyBy('locale');
+        } catch (QueryException) {
+            return [];
+        }
 
         return ($settings->get($locale) ?? $settings->get($default))?->value ?? [];
     }

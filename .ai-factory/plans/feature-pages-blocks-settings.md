@@ -128,12 +128,12 @@ erDiagram
 
 ### Phase 4: Витрина (минимум)
 
-- [ ] Task 9: Публичный рендеринг страниц + SEO (depends: 3, 5)
+- [x] Task 9: Публичный рендеринг страниц + SEO (depends: 3, 5)
   `app/Http/Controllers/PageController.php`: `show(string $slug)` — published-страница по slug, перевод текущей локали (fallback дефолтный язык), 404 если нет. Рендер через BlockRenderer; meta через `view()->share`/section: `@yield('meta_title')`, `@yield('meta_description')` в layout. Роуты catch-all `/{slug}` и `/{locale}/{slug}` для всех недефолтных языков — добавить В КОНЦЕ `routes/web.php` внутри существующего i18n-паттерна (после всех фиксированных роутов — каталог/заказы/кабинет не перекрываются). Демо-сидер: 1–2 страницы (например «О компании» для всех активных языков, пара блоков) для проверки конвейера. Feature-тесты: страница рендерится, роут недефолтной локали даёт её перевод, fallback на дефолтный язык, 404 для черновика/несуществующей, фиксированные роуты не перекрыты.
   LOGGING: `Log::debug('[PageController.show] slug={slug} locale={locale} found={bool}')`.
   Files: `app/Http/Controllers/PageController.php`, `routes/web.php` (только добавление в конец), `database/seeders/DemoPageSeeder.php`, `tests/Feature/*`.
 
-- [ ] Task 10: Шапка/подвал из настроек с fallback (depends: 5, 8)
+- [x] Task 10: Шапка/подвал из настроек с fallback (depends: 5, 8)
   Layout-паршлы шапки/подвала читают `SettingService::get('header'|'footer')` → BlockRenderer(context: header/footer); если настроек нет/пусто — текущая статическая вёрстка не меняется (условие @if вокруг). Compose через view composer или в `AppServiceProvider::boot()` — чтобы данные были во всех views. Feature-тест: настройка задана → блок рендерится; не задана → статика.
   LOGGING: `Log::debug('[Layout] settings header/footer resolved, source={settings|fallback}')`.
   Files: `app/Providers/AppServiceProvider.php`, `resources/views/blocks/layout/**` (шапка/подвал), `tests/Feature/*`.

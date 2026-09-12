@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Services\Settings\SettingService;
+use App\Support\PageBlocks\BlockRenderer;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View as IlluminateView;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,7 +32,23 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('favorites', json_decode($_COOKIE['favorites'] ?? '[]', true) ?? []);
 
-        View::composer(['blocks.common.header.header', 'layouts.app'], function (\Illuminate\View\View $view): void {
+        View::composer(['blocks.common.header.header', 'blocks.common.footer.footer'], function (IlluminateView $view): void {
+            $context = str_contains($view->getName(), 'header') ? 'header' : 'footer';
+
+            $blocks = app(SettingService::class)->get($context);
+
+            $view->with(
+                "{$context}BlocksHtml",
+                $blocks === [] ? null : app(BlockRenderer::class)->render($blocks, $context),
+            );
+
+            Log::debug('[Layout] settings header/footer resolved, source={source}', [
+                'context' => $context,
+                'source' => $blocks === [] ? 'fallback' : 'settings',
+            ]);
+        });
+
+        View::composer(['blocks.common.header.header', 'layouts.app'], function (IlluminateView $view): void {
             $searchTypes = collect(config('search.types'))->map(fn (array $type): array => [
                 'value' => $type['value'],
                 'label' => __($type['label']),
@@ -38,7 +58,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with('availableLocales', config('app.available_locales'));
         });
 
-        View::composer('*', fn (\Illuminate\View\View $view) => $view->with('catalogCategories', $this->catalogCategories()));
+        View::composer('*', fn (IlluminateView $view) => $view->with('catalogCategories', $this->catalogCategories()));
     }
 
     /**
