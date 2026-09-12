@@ -245,10 +245,10 @@ Route::get('/clear-cache', function () {
 $languages = app(LanguageService::class);
 $defaultLocale = $languages->defaultCode();
 
-// Default locale (no prefix)
-Route::middleware("locale:{$defaultLocale}")->group($register);
-
-// Non-default locales (/{locale} prefix)
+// Non-default locales (/{locale} prefix) — registered BEFORE the default
+// group: route matching follows registration order, so the bare "/en"
+// static route must win over the default group's "/{slug}" catch-all
+// (otherwise "/en" would 404 as a missing page slug).
 // NOTE: with route:cache enabled the locale list is frozen — run
 // `php artisan optimize:clear` after adding a language in the admin panel.
 foreach (array_diff($languages->codes(), [$defaultLocale]) as $locale) {
@@ -257,3 +257,6 @@ foreach (array_diff($languages->codes(), [$defaultLocale]) as $locale) {
         ->middleware("locale:{$locale}")
         ->group($register);
 }
+
+// Default locale (no prefix)
+Route::middleware("locale:{$defaultLocale}")->group($register);
