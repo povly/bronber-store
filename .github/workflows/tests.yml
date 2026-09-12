@@ -20,7 +20,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-version: ['8.3', '8.4', '8.5']
+        # 8.3 excluded: composer.lock resolves symfony 8.1.x (requires
+        # PHP >=8.4.1). To re-add 8.3, pin "composer config platform.php
+        # 8.3.33" and regenerate the lock.
+        php-version: ['8.4', '8.5']
     steps:
       - uses: actions/checkout@v4
       - uses: shivammathur/setup-php@v2
