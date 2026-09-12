@@ -61,14 +61,14 @@ Supersedes: частично Task 8 плана feature-pages-blocks-settings (н
   LOGGING: WARN на невалидную ссылку, DEBUG `[PageOptions] loaded n={count}`.
   Files: `app/Support/PageBlocks/LinkResolver.php`, `app/Support/PageBlocks/Concerns/BuildsLinkFields.php`, `app/Support/PageBlocks/PageOptions.php`, `tests/Feature/LinkResolverTest.php`.
 
-- [ ] Task 2: HeaderBlockLibrary + FooterBlockLibrary (depends: 1)
+- [x] Task 2: HeaderBlockLibrary + FooterBlockLibrary (depends: 1)
   `HeaderBlockLibrary::header(): FlexibleLayouts` → блоки `top-bar` (phone, links Json через linkFields, limit 1, category «Шапка») и `nav` (links, limit 1). `FooterBlockLibrary::footer(): FlexibleLayouts` → `contacts` (phone, email; limit 1), `socials` (список {platform, url}; limit 1), `links-column` (title, links; многократно, limit 3), `bottom` (privacy label+url, terms label+url, copyright, developer label+url; limit 1). Обновить `SettingFormPage` → новые классы. Удалить `header()/footer()` из `PageBlockLibrary` (page() остаётся). Тесты: состав блоков каждой библиотеки, форма настроек рендерится (header/footer ключи), сохранение ссылок через форму.
   LOGGING: n/a (конфигурация полей).
   Files: `app/Support/PageBlocks/HeaderBlockLibrary.php`, `app/Support/PageBlocks/FooterBlockLibrary.php`, `app/MoonShine/Resources/Setting/Pages/SettingFormPage.php`, `app/Support/PageBlocks/PageBlockLibrary.php`, `tests/Feature/SettingResourceTest.php` (дополнить).
 
 ### Phase 2: Резолвинг и вёрстка
 
-- [ ] Task 3: SettingsResolver (depends: 2)
+- [x] Task 3: SettingsResolver (depends: 2)
   `SettingsResolver::header(): array{topBar: ?array, nav: ?array}` и `::footer(): array{contacts, socials, columns: list, bottom}` — читают `SettingService::get`, прогоняют ссылки через `LinkResolver` (локаль текущая), пропускают пустые, отдают плоские структуры для вьюх: `topBar = ['phone' => ..., 'links' => [['label','href'],...]]`, `columns[] = ['title', 'links']` и т.д. Пусто/нет настроек → все ключи null/[] (вьюхи показывают статику). Тесты: полный резолв, fallback, пропуск битых ссылок, page-ссылка локализуется.
   LOGGING: `Log::debug('[SettingsResolver] context={header|footer} blocks={n} links={m}')`.
   Files: `app/Support/PageBlocks/SettingsResolver.php`, `tests/Feature/SettingsResolverTest.php`.

@@ -102,6 +102,18 @@
         gap: 13px;
     }
 
+    &__social-abbr {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 27px;
+        color: var(--color-white);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+    }
+
     &__columns {
         order: 4;
         display: flex;

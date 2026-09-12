@@ -25,7 +25,12 @@ it('passes block data to the view', function (): void {
         ->and($html)->toContain('Подбор по VIN');
 });
 
-it('renders header and footer contexts with their own views', function (): void {
+it('skips header and footer contexts without dedicated views', function (): void {
+    // Header/footer settings are resolved by SettingsResolver into the static
+    // markup (top-bar, nav, footer partials) — BlockRenderer has no pb-views
+    // for these contexts anymore and must degrade to an empty string.
+    Log::spy();
+
     $blockRenderer = resolve(BlockRenderer::class);
 
     $header = $blockRenderer->render([['_type' => 'nav', 'links' => [
@@ -34,9 +39,10 @@ it('renders header and footer contexts with their own views', function (): void 
 
     $footer = $blockRenderer->render([['_type' => 'copyright', 'text' => '© 2026 Bronber']], 'footer');
 
-    expect($header)->toContain('pb-nav')
-        ->and($header)->toContain('Каталог')
-        ->and($footer)->toContain('© 2026 Bronber');
+    expect($header)->toBe('')
+        ->and($footer)->toBe('');
+
+    Log::shouldHaveReceived('warning')->twice();
 });
 
 it('skips unknown block types without failing and logs a warning', function (): void {

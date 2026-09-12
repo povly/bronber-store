@@ -2,8 +2,7 @@
 
 namespace App\Providers;
 
-use App\Services\Settings\SettingService;
-use App\Support\PageBlocks\BlockRenderer;
+use App\Support\PageBlocks\SettingsResolver;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Vite;
@@ -32,19 +31,26 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('favorites', json_decode($_COOKIE['favorites'] ?? '[]', true) ?? []);
 
-        View::composer(['blocks.common.header.header', 'blocks.common.footer.footer'], function (IlluminateView $illuminateView): void {
-            $context = str_contains($illuminateView->getName(), 'header') ? 'header' : 'footer';
+        View::composer(['blocks.common.header.header', 'blocks.common.footer.footer'], static function (IlluminateView $illuminateView): void {
+            $isHeader = str_contains($illuminateView->getName(), 'header');
 
-            $blocks = resolve(SettingService::class)->get($context);
+            $settings = $isHeader
+                ? SettingsResolver::header()
+                : SettingsResolver::footer();
+
+            $hasSettings = in_array(true, array_map(
+                static fn ($value): bool => ! empty($value),
+                $settings,
+            ), true);
 
             $illuminateView->with(
-                "{$context}BlocksHtml",
-                $blocks === [] ? null : resolve(BlockRenderer::class)->render($blocks, $context),
+                $isHeader ? 'headerSettings' : 'footerSettings',
+                $settings,
             );
 
             Log::debug('[Layout] settings header/footer resolved, source={source}', [
-                'context' => $context,
-                'source' => $blocks === [] ? 'fallback' : 'settings',
+                'context' => $isHeader ? 'header' : 'footer',
+                'source' => $hasSettings ? 'settings' : 'fallback',
             ]);
         });
 

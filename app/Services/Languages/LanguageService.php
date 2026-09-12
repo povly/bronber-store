@@ -7,7 +7,6 @@ namespace App\Services\Languages;
 use App\Models\Language;
 use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Single source of truth for active languages (admin-editable).
@@ -51,11 +50,6 @@ class LanguageService
         } catch (QueryException) {
             $codes = config('app.available_locales');
         }
-
-        Log::debug('[LanguageService] codes resolved, count={n} default={code}', [
-            'count' => count($codes),
-            'default' => $this->defaultCode(),
-        ]);
 
         return $codes;
     }

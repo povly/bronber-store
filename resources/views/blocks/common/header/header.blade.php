@@ -1,8 +1,3 @@
-@if(!empty($headerBlocksHtml))
-    <header class="header header--custom">
-        {!! $headerBlocksHtml !!}
-    </header>
-@else
 <header class="header">
     @include('blocks.common.top-bar.top-bar')
 
@@ -187,13 +182,18 @@
             </div>
 
             <div class="header__nav-right">
-                <a href="{{ route('blog') }}" class="header__nav-link">{{ __('store.nav_new') }}</a>
-                <a href="#" class="header__nav-link">{{ __('store.nav_promo') }}</a>
-                <a href="{{ route('blog') }}" class="header__nav-link">{{ __('store.nav_blog') }}</a>
-                <a href="{{ route('loyalty') }}" class="header__nav-link">{{ __('store.nav_bonus') }}</a>
-                <a href="{{ route('about') }}" class="header__nav-link">{{ __('store.nav_about') }}</a>
+                @if(($headerSettings['nav'] ?? null) !== null)
+                    @foreach($headerSettings['nav']['links'] as $link)
+                        <a href="{{ $link['href'] }}" class="header__nav-link">{{ $link['label'] }}</a>
+                    @endforeach
+                @else
+                    <a href="{{ route('blog') }}" class="header__nav-link">{{ __('store.nav_new') }}</a>
+                    <a href="#" class="header__nav-link">{{ __('store.nav_promo') }}</a>
+                    <a href="{{ route('blog') }}" class="header__nav-link">{{ __('store.nav_blog') }}</a>
+                    <a href="{{ route('loyalty') }}" class="header__nav-link">{{ __('store.nav_bonus') }}</a>
+                    <a href="{{ route('about') }}" class="header__nav-link">{{ __('store.nav_about') }}</a>
+                @endif
             </div>
         </div>
     </nav>
 </header>
-@endif

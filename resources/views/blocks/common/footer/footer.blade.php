@@ -1,10 +1,9 @@
-@if(!empty($footerBlocksHtml))
-    <footer class="footer footer--custom">
-        <div class="container">
-            {!! $footerBlocksHtml !!}
-        </div>
-    </footer>
-@else
+@php
+    $contacts = $footerSettings['contacts'] ?? null;
+    $phone = $contacts['phone'] ?? '+7 (985) 449-8000';
+    $phoneHref = 'tel:'.preg_replace('/[^0-9+]/', '', (string) $phone);
+    $email = $contacts['email'] ?? 'info@bronber.ru';
+@endphp
 <footer class="footer">
     <div class="container">
         <div class="footer__inner">
@@ -66,7 +65,7 @@
             <div class="footer__contacts-block">
                 <div class="footer__contacts">
                     <span class="footer__contacts-title">{{ __('store.footer_col_contacts') }}</span>
-                    <a href="tel:+79854498000" class="footer__contact">
+                    <a href="{{ $phoneHref }}" class="footer__contact">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <g clip-path="url(#clip0_755_1577)">
                             <path d="M9.22198 11.045C9.35967 11.1082 9.51478 11.1227 9.66178 11.086C9.80877 11.0492 9.93887 10.9636 10.0307 10.843L10.2673 10.533C10.3915 10.3674 10.5526 10.233 10.7377 10.1404C10.9228 10.0479 11.127 9.99967 11.334 9.99967H13.334C13.6876 9.99967 14.0267 10.1402 14.2768 10.3902C14.5268 10.6402 14.6673 10.9794 14.6673 11.333V13.333C14.6673 13.6866 14.5268 14.0258 14.2768 14.2758C14.0267 14.5259 13.6876 14.6663 13.334 14.6663C10.1514 14.6663 7.09914 13.4021 4.8487 11.1516C2.59827 8.90119 1.33398 5.84894 1.33398 2.66634C1.33398 2.31272 1.47446 1.97358 1.72451 1.72353C1.97456 1.47348 2.3137 1.33301 2.66732 1.33301H4.66732C5.02094 1.33301 5.36008 1.47348 5.61013 1.72353C5.86017 1.97358 6.00065 2.31272 6.00065 2.66634V4.66634C6.00065 4.87333 5.95246 5.07749 5.85989 5.26263C5.76732 5.44777 5.63291 5.60881 5.46732 5.73301L5.15532 5.96701C5.03293 6.06046 4.94666 6.1934 4.91118 6.34324C4.87569 6.49308 4.89317 6.65059 4.96065 6.78901C5.87177 8.63958 7.37027 10.1362 9.22198 11.045Z" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
@@ -77,20 +76,27 @@
                             </clipPath>
                           </defs>
                         </svg>
-                        <span>+7 (985) 449-8000</span>
+                        <span>{{ $phone }}</span>
                     </a>
-                    <a href="mailto:info@bronber.com" class="footer__contact">
+                    <a href="mailto:{{ $email }}" class="footer__contact">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M14.6673 4.66699L8.67332 8.48499C8.46991 8.60313 8.23888 8.66536 8.00365 8.66536C7.76843 8.66536 7.53739 8.60313 7.33398 8.48499L1.33398 4.66699" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
                           <path d="M13.334 2.66699H2.66732C1.93094 2.66699 1.33398 3.26395 1.33398 4.00033V12.0003C1.33398 12.7367 1.93094 13.3337 2.66732 13.3337H13.334C14.0704 13.3337 14.6673 12.7367 14.6673 12.0003V4.00033C14.6673 3.26395 14.0704 2.66699 13.334 2.66699Z" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
-                        <span>info@bronber.com</span>
+                        <span>{{ $email }}</span>
                     </a>
                 </div>
 
                 <div class="footer__social">
                     <span class="footer__social-label">{{ __('store.footer_social') }}</span>
                     <div class="footer__social-icons">
+                        @if(($footerSettings['socials'] ?? null) !== null)
+                            @foreach($footerSettings['socials'] as $social)
+                                <a href="{{ $social['url'] }}" class="footer__social-link" aria-label="{{ $social['platform'] }}" target="_blank" rel="noopener noreferrer">
+                                    <span class="footer__social-abbr">{{ mb_strtoupper(mb_substr($social['platform'], 0, 2)) }}</span>
+                                </a>
+                            @endforeach
+                        @else
                         <a href="#" class="footer__social-link" aria-label="Instagram">
                             <svg width="27" height="27" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg">
                               <path d="M13.2876 9.68849C11.3001 9.68849 9.68892 11.2997 9.68892 13.2871C9.68892 15.2746 11.3001 16.8858 13.2876 16.8858C15.2751 16.8858 16.8862 15.2746 16.8862 13.2871C16.8862 11.2997 15.2751 9.68849 13.2876 9.68849Z" fill="white" />
@@ -102,11 +108,29 @@
                               <path d="M28.4749 3.42345C28.3225 2.86434 28.0245 2.35444 27.6106 1.94452C27.1968 1.53459 26.6815 1.23893 26.1161 1.08697C24.0197 0.51806 15.6326 0.508799 15.6326 0.508799C15.6326 0.508799 7.24678 0.499538 5.149 1.04331C4.58396 1.20226 4.06975 1.5021 3.65574 1.91404C3.24173 2.32598 2.94183 2.83618 2.78481 3.39567C2.23192 5.46754 2.22656 9.76476 2.22656 9.76476C2.22656 9.76476 2.22121 14.0832 2.77009 16.1339C3.07799 17.2677 3.98163 18.1634 5.13026 18.469C7.24812 19.0379 15.6125 19.0472 15.6125 19.0472C15.6125 19.0472 23.9996 19.0564 26.096 18.514C26.6616 18.3623 27.1774 18.0673 27.5922 17.6582C28.0071 17.2491 28.3068 16.7401 28.4615 16.1815C29.0158 14.1109 29.0198 9.81504 29.0198 9.81504C29.0198 9.81504 29.0466 5.49532 28.4749 3.42345ZM12.9497 13.7458L12.9564 5.80756L19.9272 9.78329L12.9497 13.7458Z" fill="white" />
                             </svg>
                         </a>
+                        @endif
                     </div>
                 </div>
             </div>
 
             <nav class="footer__columns">
+                @if(($footerSettings['columns'] ?? []) !== [])
+                    @foreach($footerSettings['columns'] as $column)
+                        <div class="footer__column" x-data="{ open: false }">
+                            <button class="footer__column-header" type="button" @click="open = !open">
+                                <span>{{ $column['title'] ?? '' }}</span>
+                                <svg class="footer__chevron" :class="{ 'footer__chevron--open': open }" width="17" height="15" viewBox="0 0 17 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M7.29289 11.7071C7.68342 12.0976 8.31658 12.0976 8.70711 11.7071L15.0711 5.34315C15.4616 4.95262 15.4616 4.31946 15.0711 3.92893C14.6805 3.53841 14.0474 3.53841 13.6569 3.92893L8 9.58579L2.34315 3.92893C1.95262 3.53841 1.31946 3.53841 0.928932 3.92893C0.538408 4.31946 0.538408 4.95262 0.928932 5.34315L7.29289 11.7071ZM8 10L7 10L7 11L8 11L9 11L9 10L8 10Z" fill="white" />
+                        </svg>
+                            </button>
+                            <ul class="footer__column-list" :class="{ 'is-open': open }">
+                                @foreach($column['links'] as $link)
+                                    <li><a href="{{ $link['href'] }}">{{ $link['label'] }}</a></li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endforeach
+                @else
                 <div class="footer__column" x-data="{ open: false }">
                     <button class="footer__column-header" type="button" @click="open = !open">
                         <span>{{ __('store.footer_col_catalog') }}</span>
@@ -154,6 +178,7 @@
                         <li><a href="{{ route('contacts') }}">{{ __('store.footer_com_contacts') }}</a></li>
                     </ul>
                 </div>
+                @endif
             </nav>
             </div>
 
@@ -181,14 +206,31 @@
             </a>
 
             <div class="footer__bottom">
-                <div class="footer__links footer__legal">
-                    <p><a href="#">{{ __('store.footer_privacy') }}</a></p>
-                    <p><a href="#">{{ __('store.footer_terms') }}</a></p>
-                </div>
-                <p class="footer__copyright footer__legal">{{ __('store.footer_copyright') }}</p>
-                <a href="#!" class="footer__developer footer__legal">{!! __('store.footer_developer') !!}</a>
+                @php $bottom = $footerSettings['bottom'] ?? null; @endphp
+                @if($bottom !== null)
+                    <div class="footer__links footer__legal">
+                        @if(!empty($bottom['privacy_label']))
+                            <p><a href="{{ $bottom['privacy_url'] ?? '#' }}">{{ $bottom['privacy_label'] }}</a></p>
+                        @endif
+                        @if(!empty($bottom['terms_label']))
+                            <p><a href="{{ $bottom['terms_url'] ?? '#' }}">{{ $bottom['terms_label'] }}</a></p>
+                        @endif
+                    </div>
+                    @if(!empty($bottom['copyright']))
+                        <p class="footer__copyright footer__legal">{{ $bottom['copyright'] }}</p>
+                    @endif
+                    @if(!empty($bottom['developer_label']))
+                        <a href="{{ $bottom['developer_url'] ?? '#!' }}" class="footer__developer footer__legal">{{ $bottom['developer_label'] }}</a>
+                    @endif
+                @else
+                    <div class="footer__links footer__legal">
+                        <p><a href="#">{{ __('store.footer_privacy') }}</a></p>
+                        <p><a href="#">{{ __('store.footer_terms') }}</a></p>
+                    </div>
+                    <p class="footer__copyright footer__legal">{{ __('store.footer_copyright') }}</p>
+                    <a href="#!" class="footer__developer footer__legal">{!! __('store.footer_developer') !!}</a>
+                @endif
             </div>
         </div>
     </div>
 </footer>
-@endif
