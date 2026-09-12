@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 $register = function () {
-    Route::get('/', fn () => view('home'))->name('home');
+    Route::get('', [PageController::class, 'index'])->name('home');
     Route::get('/catalog', fn () => view('main'))->name('catalog');
     Route::get('/favorites', fn () => view('favorites'))->name('favorites');
     Route::get('/faq', fn () => view('faq'))->name('faq');
