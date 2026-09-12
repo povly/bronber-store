@@ -13,11 +13,12 @@ use Sckatik\MoonshineEditorJs\Fields\EditorJs;
 use YuriZoom\MoonShineMediaManager\Fields\MediaManagerPicker;
 
 /**
- * Central catalogue of flexible-layouts block definitions.
+ * Flexible-layouts block definitions for page content
+ * (page_translations.content).
  *
- * One place that describes every editable block for pages, header and footer.
- * Block field values are stored as JSON `[{_type: 'hero', ...fields}]` and
- * rendered on the storefront by {@see BlockRenderer}.
+ * Header and footer block sets live in their own libraries
+ * ({@see HeaderBlockLibrary}, {@see FooterBlockLibrary}) — SOLID split by
+ * context instead of one god-class.
  */
 class PageBlockLibrary
 {
@@ -61,50 +62,5 @@ class PageBlockLibrary
                     ->max(12)
                     ->default(4),
             ], category: 'Динамические', description: 'Данные берутся из каталога (сейчас mock, позже CRM-склад)', icon: 'cube');
-    }
-
-    /**
-     * Block set for the header setting (settings.value, key=header).
-     */
-    public static function header(): FlexibleLayouts
-    {
-        return FlexibleLayouts::make('Значение', 'value')
-            ->block('nav', 'Навигация', [
-                Json::make('Ссылки меню', 'links')
-                    ->fields([
-                        Text::make('Название', 'label'),
-                        Text::make('URL', 'url'),
-                    ]),
-            ], limit: 1, category: 'Шапка', description: 'Основное меню шапки', icon: 'bars-3')
-            ->block('contacts', 'Контакты в шапке', [
-                Text::make('Телефон', 'phone'),
-                Text::make('E-mail', 'email'),
-            ], limit: 1, category: 'Шапка', description: 'Телефон и почта в шапке', icon: 'phone');
-    }
-
-    /**
-     * Block set for the footer setting (settings.value, key=footer).
-     */
-    public static function footer(): FlexibleLayouts
-    {
-        return FlexibleLayouts::make('Значение', 'value')
-            ->block('links', 'Колонка ссылок', [
-                Text::make('Заголовок колонки', 'title'),
-                Json::make('Ссылки', 'links')
-                    ->fields([
-                        Text::make('Название', 'label'),
-                        Text::make('URL', 'url'),
-                    ]),
-            ], category: 'Подвал', description: 'Колонка ссылок в подвале', icon: 'link')
-            ->block('socials', 'Соцсети', [
-                Json::make('Ссылки', 'links')
-                    ->fields([
-                        Text::make('Платформа', 'platform'),
-                        Text::make('URL', 'url'),
-                    ]),
-            ], limit: 1, category: 'Подвал', description: 'Иконки соцсетей', icon: 'globe-alt')
-            ->block('copyright', 'Копирайт', [
-                Text::make('Текст', 'text'),
-            ], limit: 1, category: 'Подвал', description: 'Строка копирайта', icon: 'cog-6-tooth');
     }
 }

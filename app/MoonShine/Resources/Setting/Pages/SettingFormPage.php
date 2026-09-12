@@ -6,7 +6,8 @@ namespace App\MoonShine\Resources\Setting\Pages;
 
 use App\Models\Setting;
 use App\MoonShine\Resources\Setting\SettingResource;
-use App\Support\PageBlocks\PageBlockLibrary;
+use App\Support\PageBlocks\FooterBlockLibrary;
+use App\Support\PageBlocks\HeaderBlockLibrary;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
@@ -29,8 +30,8 @@ final class SettingFormPage extends FormPage
         $setting = $this->getResource()->getItem();
 
         $value = match ($setting?->key) {
-            'footer' => PageBlockLibrary::footer(),
-            default => PageBlockLibrary::header(),
+            'footer' => FooterBlockLibrary::footer(),
+            default => HeaderBlockLibrary::header(),
         };
 
         return [

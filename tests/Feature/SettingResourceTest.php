@@ -48,13 +48,23 @@ it('saves flexible-layouts blocks through the form', function (): void {
             'key' => 'header',
             'locale' => 'ru',
             'value' => [
-                ['_type' => 'nav', 'links' => [['label' => 'Каталог', 'url' => '/catalog']]],
+                ['_type' => 'top-bar', 'phone' => '+7 (985) 449-80-00', 'links' => [
+                    ['label' => 'Доставка', 'type' => 'custom', 'page' => null, 'url' => '/delivery'],
+                ]],
+                ['_type' => 'nav', 'links' => [
+                    ['label' => 'О нас', 'type' => 'page', 'page' => 'o-kompanii', 'url' => null],
+                ]],
             ],
         ])
         ->assertRedirect();
 
     expect($item->refresh()->value)->toBe([
-        ['_type' => 'nav', 'links' => [['label' => 'Каталог', 'url' => '/catalog']]],
+        ['_type' => 'top-bar', 'phone' => '+7 (985) 449-80-00', 'links' => [
+            ['label' => 'Доставка', 'type' => 'custom', 'page' => null, 'url' => '/delivery'],
+        ]],
+        ['_type' => 'nav', 'links' => [
+            ['label' => 'О нас', 'type' => 'page', 'page' => 'o-kompanii', 'url' => null],
+        ]],
     ]);
 });
 
