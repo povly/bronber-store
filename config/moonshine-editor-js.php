@@ -102,7 +102,7 @@ return [
             'inlineToolbar' => true,
         ],
         'raw' => [
-            'activated' => true
+            'activated' => true,
         ],
         'vkVideo' => [
             'activated' => true,
@@ -111,7 +111,7 @@ return [
         'youtube' => [
             'activated' => true,
             'shortcut' => 'CMD+SHIFT+N',
-        ]
+        ],
     ],
     'renderSettings' => [
         'tools' => [
@@ -119,7 +119,7 @@ return [
                 'text' => [
                     'type' => 'string',
                     'allowedTags' => 'i,b,a[href],code[class],mark[class]',
-                ]
+                ],
             ],
             'header' => [
                 'text' => [
@@ -153,7 +153,7 @@ return [
                         ],
                         'description' => [
                             'type' => 'string',
-                            'required' => false
+                            'required' => false,
                         ],
                         'imageUrl' => [
                             'type' => 'string',
@@ -254,23 +254,23 @@ return [
             ],
             'youtube' => [
                 'service' => [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 'source' => [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 'embed' => [
-                    'type' => 'string'
+                    'type' => 'string',
                 ],
                 'width' => [
-                    'type' => 'integer'
+                    'type' => 'integer',
                 ],
                 'height' => [
-                    'type' => 'integer'
+                    'type' => 'integer',
                 ],
                 'caption' => [
-                    'type' => 'string'
-                ]
+                    'type' => 'string',
+                ],
             ],
             'vkVideo' => [
                 'url' => [
@@ -309,5 +309,5 @@ return [
             //     'title' => 'string',
             // ]
         ],
-    ]
+    ],
 ];
