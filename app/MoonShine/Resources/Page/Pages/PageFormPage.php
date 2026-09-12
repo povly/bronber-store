@@ -15,9 +15,10 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Fields\Relationships\HasMany;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\UI\Components\Collapse;
-use MoonShine\UI\Components\Layout\Box;
 use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Flex;
+use MoonShine\UI\Components\Tabs;
+use MoonShine\UI\Components\Tabs\Tab;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Select;
@@ -38,52 +39,55 @@ final class PageFormPage extends FormPage
     protected function fields(): iterable
     {
         return [
-            Box::make('Страница', [
-                ID::make(),
+            ID::make(),
 
-                Flex::make([
-                    Column::make([
-                        Text::make('Slug', 'slug')
-                            ->required()
-                            ->hint('Часть URL, например: o-kompanii'),
-                    ])->columnSpan(6),
+            Tabs::make([
+                Tab::make('Страница', [
+                    Flex::make([
+                        Column::make([
+                            Text::make('Slug', 'slug')
+                                ->required()
+                                ->hint('Часть URL, например: o-kompanii'),
+                        ])->columnSpan(6),
 
-                    Column::make([
-                        Flex::make([
-                            Number::make('Сортировка', 'sort_order')->min(0)->default(0),
-                            Switcher::make('Опубликована', 'is_published')->default(true),
-                        ]),
-                    ])->columnSpan(6),
-                ]),
-            ]),
-
-            Box::make('Переводы', [
-                HasMany::make('Переводы', 'translations', resource: PageTranslationResource::class)
-                    ->fields([
-                        Text::make('Язык', 'locale')->readonly(),
-
-                        Text::make('Заголовок', 'title')->required(),
-
-                        Collapse::make('SEO', [
-                            Text::make('Meta title', 'meta_title'),
-                            Textarea::make('Meta description', 'meta_description'),
-                            Textarea::make('Meta keywords', 'meta_keywords')
-                                ->hint('Через запятую'),
-                            Select::make('Robots', 'meta_robots')->options([
-                                'index, follow' => 'Index, Follow (по умолчанию)',
-                                'noindex, follow' => 'Noindex, Follow',
-                                'index, nofollow' => 'Index, Nofollow',
-                                'noindex, nofollow' => 'Noindex, Nofollow',
+                        Column::make([
+                            Flex::make([
+                                Number::make('Сортировка', 'sort_order')->min(0)->default(0),
+                                Switcher::make('Опубликована', 'is_published')->default(true),
                             ]),
-                            Text::make('Canonical URL', 'canonical_url')
-                                ->hint('Оставьте пустым — каноническим станет текущий URL'),
-                            MediaManagerPicker::make('OG-изображение', 'og_image')
-                                ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp'])
-                                ->hint('Для соцсетей (Open Graph / Twitter), 1200×630'),                        ]),
+                        ])->columnSpan(6),
+                    ]),
+                ])->icon('document-text'),
 
-                        PageBlockLibrary::page(),
-                    ])
-                    ->tabMode(),
+                Tab::make('Переводы', [
+                    HasMany::make('Переводы', 'translations', resource: PageTranslationResource::class)
+                        ->fields([
+                            Text::make('Язык', 'locale')->readonly(),
+
+                            Text::make('Заголовок', 'title')->required(),
+
+                            Collapse::make('SEO', [
+                                Text::make('Meta title', 'meta_title'),
+                                Textarea::make('Meta description', 'meta_description'),
+                                Textarea::make('Meta keywords', 'meta_keywords')
+                                    ->hint('Через запятую'),
+                                Select::make('Robots', 'meta_robots')->options([
+                                    'index, follow' => 'Index, Follow (по умолчанию)',
+                                    'noindex, follow' => 'Noindex, Follow',
+                                    'index, nofollow' => 'Index, Nofollow',
+                                    'noindex, nofollow' => 'Noindex, Nofollow',
+                                ]),
+                                Text::make('Canonical URL', 'canonical_url')
+                                    ->hint('Оставьте пустым — каноническим станет текущий URL'),
+                                MediaManagerPicker::make('OG-изображение', 'og_image')
+                                    ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp'])
+                                    ->hint('Для соцсетей (Open Graph / Twitter), 1200×630'),
+                            ]),
+
+                            PageBlockLibrary::page(),
+                        ])
+                        ->tabMode(),
+                ])->icon('language'),
             ]),
         ];
     }
