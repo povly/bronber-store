@@ -140,7 +140,7 @@ erDiagram
 
 ### Phase 5: Финализация
 
-- [ ] Task 11: Docs-чекпоинт + финальные проверки (depends: all)
+- [x] Task 11: Docs-чекпоинт + финальные проверки (depends: all)
   Обязательный чекпоинт через `/aif-docs`: обновить `docs/admin-panel.md` (PageResource/SettingResource/LanguageResource, блоки flexible-layouts, управление языками), `docs/architecture.md` (раздел «Страницы и блоки»: схема таблиц включая languages, BlockRenderer, паттерн переводов, динамические языки + кавеат `route:cache`/`optimize:clear` после добавления языка, стратегия будущей CRM-каталога и динамических блоков). Финальный прогон: `vendor/bin/pint --dirty --format agent`, `php artisan test --compact`, `php artisan moonshine:resources`.
   LOGGING: n/a.
   Files: `docs/admin-panel.md`, `docs/architecture.md`.

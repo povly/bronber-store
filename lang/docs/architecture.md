@@ -18,25 +18,74 @@ Laravel. Layered быстро деградирует в «толстые» се�
 
 ## Текущее состояние (pre-MVP)
 
-Сейчас проект реализован как **frontend-first MVC прототип**:
+Витрина остаётся **frontend-first прототипом** (closure-роуты, mock-данные), но первый
+MVC-модуль уже реален — **Content: страницы, блоки, языки, настройки**:
 
-- Все роуты — closure-based в `routes/web.php` (без классов-контроллеров)
-- Данные захардкожены в замыканиях (mock-массивы товаров, отзывов, корзины)
-- Единственная Eloquent-модель — `app/Models/User.php`
-- Доменные модели и сервисы **предстоит реализовать** по мере добавления фич
+- `PageController` + catch-all `/{slug}` и `/{locale}/{slug}` (в конце `routes/web.php`,
+  фиксированные роуты не перекрываются)
+- Модели `Page`, `PageTranslation`, `Setting`, `Language` + сервисы `LanguageService`,
+  `SettingService`
+- Остальное (каталог, корзина, заказы, кабинет) — по-прежнему mock в closure-роутах,
+  ждёт CRM-склад
 
-> Архитектура ниже описывает **целевое состояние**. Миграция прототипа → полноценного MVC
-> происходит постепенно: каждый роут переносится в Controller → Service → Model только когда
-> заменяется реальной функциональностью.
+> Миграция прототипа → полноценного MVC происходит постепенно: каждый роут переносится
+> в Controller → Service → Model только когда заменяется реальной функциональностью.
+
+## Модуль Content: страницы и блоки
+
+### Схема данных
+
+| Таблица | Назначение |
+|---------|-----------|
+| `languages` | Активные языки: `code` (unique), `name`, `sort_order`, `is_default` |
+| `pages` | Страница: `slug` (unique), `is_published`, `sort_order` |
+| `page_translations` | Перевод per-locale: `title`, SEO-поля (`meta_title/description/keywords`, `meta_robots`, `canonical_url`, `og_image`), `content` (JSON блоков, `_type`-ключи), **unique(page_id, locale)** |
+| `settings` | Шапка/подвал: `key` (header/footer) × `locale`, `value` (JSON блоков), **unique(key, locale)** |
+
+### Конвейер рендеринга
+
+```
+БД (JSON блоки) → BlockRenderer::render($blocks, context)
+                → view components.page-blocks.{page|header|footer}.{type}
+                → вёрстка pb-* (BEM, PostCSS)
+```
+
+Неизвестный или падающий блок — WARN в лог и пропуск: страница не ломается.
+Динамический блок `featured-products` берёт данные из `App\Support\CatalogMock`;
+при появлении CRM-склада (поддомен + API) источник подменяется без изменения блоков.
+
+### Переводы и языки
+
+- Локаль — **строка в отдельной строке таблицы** (не JSON в колонке): у каждой локали свой
+  набор блоков, состав и порядок могут отличаться.
+- Список активных языков — `LanguageService` (кэш `Cache::rememberForever`, сброс на
+  `saved`/`deleted` модели `Language`). Fallback перевода: запрошенная локаль →
+  **дефолтный язык** → первый доступный. `config('app.available_locales')` — bootstrap-фолбэк,
+  пока в БД пусто.
+- Языки редактируются в админке (`LanguageResource`); система всегда держит один дефолт.
+- ⚠️ Кавеат: с `route:cache` префиксы локалей заморожены — после добавления языка нужен
+  `php artisan optimize:clear`.
+
+### SEO
+
+Полный набор пер-локали (partial `resources/views/partials/seo.blade.php`): title/description/
+keywords/robots/canonical, Open Graph и Twitter Card с fallback-цепочками
+(og:title ← meta_title ← title; canonical ← текущий URL), hreflang-альтернативы для всех
+локалей с переводом + `x-default`.
+
+### Шапка/подвал из настроек
+
+View composer в `AppServiceProvider` рендерит блоки из `SettingService::get('header'|'footer')`;
+если настройки пусты/отсутствуют — показывается статическая вёрстка прототипа (ничего не ломается).
 
 ## Модули
 
 | Модуль | Ответственность | Сущности |
 |--------|----------------|----------|
-| **Catalog** | Витрина товаров, категории, бренды, поиск/фильтры | Product, Category, Brand |
+| **Catalog** | Витрина товаров, категории, бренды, поиск/фильтры | Product, Category, Brand *(ждёт CRM-склад)* |
 | **Orders** | Корзина, оформление заказа, оплата, статусы | Order, OrderItem |
 | **Reviews** | Отзывы на товары, рейтинги, модерация | Review |
-| **Content** | Блог, статьи, статичные страницы (FAQ, контакты, о нас) | Article, Page |
+| **Content** | Блог, статьи, статичные страницы (FAQ, контакты, о нас) | Article, **Page, PageTranslation, Setting, Language** ✅ |
 
 ## Целевая структура каталогов
 
@@ -69,6 +118,10 @@ app/
 ├── MoonShine/                # Админ-панель (отдельный delivery-mechanism)
 │   ├── Resources/{Resource}/
 │   ├── Layouts/, Pages/
+│
+├── Support/                  # Инфраструктура витрины (без бизнес-логики)
+│   ├── PageBlocks/           # PageBlockLibrary (конфиг блоков), BlockRenderer
+│   └── CatalogMock.php       # Mock-источник товаров (в будущем → API CRM)
 │
 └── Providers/
     └── MoonShineServiceProvider.php

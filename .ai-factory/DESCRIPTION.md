@@ -14,6 +14,18 @@
 - i18n через кастомный `SetLocale` middleware + дублирование роутов по локали
 - Ленивая загрузка изображений (vanilla-lazyload)
 
+## Реализованный модуль Content (MVC)
+
+- **DB-страницы**: slug + публикации + переводы per-locale (таблицы `pages`, `page_translations`),
+  контент — блоки flexible-layouts (JSON, `_type`), рендер `BlockRenderer` → blade `pb-*`
+- **Полный SEO-набор** пер-локали: meta title/description/keywords, robots, canonical,
+  OG/Twitter, hreflang-альтернативы + x-default
+- **Редактируемые языки** (`languages`): `LanguageService` (кэш) — источник локалей для
+  middleware, роутов, автосоздания переводов и fallback (дефолтный язык, не хардкод ru)
+- **Шапка/подвал из настроек** (`settings` key × locale): блоки редактируются в MoonShine,
+  пусто → статическая вёрстка прототипа
+- Catch-all `/{slug}` / `/{locale}/{slug}` в конце `routes/web.php` (фиксированные роуты не перекрыты)
+
 ## Запланированные возможности
 
 - Доменные модели: Product, Category, Brand, Order, Review
@@ -26,7 +38,7 @@
 
 - **Язык:** PHP 8.5
 - **Фреймворк:** Laravel 13.8
-- **Админ-панель:** MoonShine 4.15 (+ `povly/moonshine-image-editor`, `yurizoom/moonshine-media-manager`)
+- **Админ-панель:** MoonShine 4.15 (+ `povly/moonshine-flexible-layouts` — блоки контента страниц, `sckatik/moonshine-editorjs` — текстовый редактор, `povly/moonshine-image-editor`, `yurizoom/moonshine-media-manager`)
 - **БД:** SQLite (default) / MySQL (сконфигурирован)
 - **Frontend JS:** Alpine.js 3.15 + vanilla-lazyload
 - **CSS:** PostCSS (mixins, nested, simple-vars, кастомные функции `fluidType`, `pxToVw`)
