@@ -54,4 +54,44 @@ class CatalogMock
             ['title' => 'Форсунки', 'image' => '/images/home/categories/4.png', 'href' => '/catalog'],
         ];
     }
+
+    /**
+     * Home page category grid — 12 items mirroring the static prototype
+     * (blocks/home/categories.blade.php). Images are numbered by position
+     * (/images/home/categories/{n}), links point to the catalog filtered
+     * by the category slug. Kept separate from the header menu tree
+     * (AppServiceProvider::catalogCategories): different shape and purpose.
+     *
+     * @return list<array{name: string, slug: string, image: string, href: string}>
+     */
+    public static function homeCategories(): array
+    {
+        $categories = [
+            ['name' => 'Тормозная система', 'slug' => 'brake-system'],
+            ['name' => 'Чип тюнинг', 'slug' => 'chip-tuning'],
+            ['name' => 'Диски', 'slug' => 'wheels'],
+            ['name' => 'Оптика', 'slug' => 'optics'],
+            ['name' => 'Подвеска', 'slug' => 'suspension'],
+            ['name' => 'Впускная система', 'slug' => 'intake'],
+            ['name' => 'Приемные трубы и даунпайпы', 'slug' => 'downpipes'],
+            ['name' => 'Выхлопные системы', 'slug' => 'exhaust'],
+            ['name' => 'Карбоновые элементы', 'slug' => 'carbon'],
+            ['name' => 'Масла и жидкости', 'slug' => 'oils'],
+            ['name' => 'Топливная система', 'slug' => 'fuel-system'],
+            ['name' => 'Охлаждение', 'slug' => 'cooling'],
+        ];
+
+        $result = [];
+
+        foreach ($categories as $index => $category) {
+            $result[] = [
+                'name' => $category['name'],
+                'slug' => $category['slug'],
+                'image' => '/images/home/categories/'.($index + 1),
+                'href' => route('catalog', ['category' => $category['slug']]),
+            ];
+        }
+
+        return $result;
+    }
 }

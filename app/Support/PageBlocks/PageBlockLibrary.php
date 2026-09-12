@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace App\Support\PageBlocks;
 
-use MoonShine\UI\Fields\Json;
-use MoonShine\UI\Fields\Number;
-use MoonShine\UI\Fields\Text;
-use MoonShine\UI\Fields\Textarea;
+use App\Support\PageBlocks\Blocks\Home\HomeAdvsBlock;
+use App\Support\PageBlocks\Blocks\Home\HomeCategoriesBlock;
+use App\Support\PageBlocks\Blocks\Home\HomeHeroBlock;
+use App\Support\PageBlocks\Blocks\Home\HomeNewsBlock;
+use App\Support\PageBlocks\Blocks\Home\HomePartnersBlock;
+use App\Support\PageBlocks\Blocks\Home\HomeProductsBlock;
+use App\Support\PageBlocks\Blocks\PageBlock;
 use Povly\FlexibleLayouts\Fields\FlexibleLayouts;
-use Sckatik\MoonshineEditorJs\Fields\EditorJs;
-use YuriZoom\MoonShineMediaManager\Fields\MediaManagerPicker;
 
 /**
  * Flexible-layouts block definitions for page content
@@ -18,49 +19,46 @@ use YuriZoom\MoonShineMediaManager\Fields\MediaManagerPicker;
  *
  * Header and footer block sets live in their own libraries
  * ({@see HeaderBlockLibrary}, {@see FooterBlockLibrary}) — SOLID split by
- * context instead of one god-class.
+ * context instead of one god-class. Page content blocks are split the
+ * same way: one class per block type under Blocks/, aggregated here.
+ *
+ * The picker offers page-prefixed prototype blocks only («home-*» ↔
+ * blocks/home/*; other pages will follow with «category-*»,
+ * «contact-*», …). Legacy generic types (hero, text, gallery, faq,
+ * contacts, featured-products) are no longer registered here, but
+ * their views stay — BlockRenderer still renders them for already
+ * stored/demo content.
  */
 class PageBlockLibrary
 {
+    /**
+     * Block classes registered on the page content field.
+     *
+     * @return list<class-string<PageBlock>>
+     */
+    private static function blocks(): array
+    {
+        return [
+            HomeHeroBlock::class,
+            HomeCategoriesBlock::class,
+            HomeAdvsBlock::class,
+            HomeProductsBlock::class,
+            HomePartnersBlock::class,
+            HomeNewsBlock::class,
+        ];
+    }
+
     /**
      * Block set for the page content field (page_translations.content).
      */
     public static function page(): FlexibleLayouts
     {
-        return FlexibleLayouts::make('Контент', 'content')
-            ->block('hero', 'Герой (баннер)', [
-                Text::make('Заголовок', 'title'),
-                Textarea::make('Подзаголовок', 'subtitle'),
-                MediaManagerPicker::make('Фоновое изображение', 'image')
-                    ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
-            ], limit: 1, category: 'Контент', description: 'Крупный баннер с заголовком и картинкой', icon: 'photo')
-            ->block('text', 'Текст (Editor.js)', [
-                EditorJs::make('Тело блока', 'body'),
-            ], category: 'Контент', description: 'Форматированный текстовый блок', icon: 'document-text')
-            ->block('gallery', 'Галерея', [
-                MediaManagerPicker::make('Изображения', 'images')
-                    ->multiple()
-                    ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
-            ], category: 'Медиа', description: 'Сетка изображений', icon: 'rectangle-stack')
-            ->block('faq', 'Вопросы и ответы', [
-                Json::make('Пункты', 'items')
-                    ->fields([
-                        Text::make('Вопрос', 'question'),
-                        Textarea::make('Ответ', 'answer'),
-                    ]),
-            ], category: 'Контент', description: 'Список вопрос-ответ', icon: 'chat-bubble-left-right')
-            ->block('contacts', 'Контакты', [
-                Text::make('Адрес', 'address'),
-                Text::make('Телефон', 'phone'),
-                Text::make('E-mail', 'email'),
-                Text::make('Ссылка на карту', 'map_url'),
-            ], limit: 1, category: 'Контент', description: 'Адрес, телефон, ссылка на карту', icon: 'map-pin')
-            ->block('featured-products', 'Товары (динамический)', [
-                Text::make('Заголовок секции', 'title'),
-                Number::make('Количество товаров', 'count')
-                    ->min(1)
-                    ->max(12)
-                    ->default(4),
-            ], category: 'Динамические', description: 'Данные берутся из каталога (сейчас mock, позже CRM-склад)', icon: 'cube');
+        $layouts = FlexibleLayouts::make('Контент', 'content');
+
+        foreach (self::blocks() as $block) {
+            $block::register($layouts);
+        }
+
+        return $layouts;
     }
 }
