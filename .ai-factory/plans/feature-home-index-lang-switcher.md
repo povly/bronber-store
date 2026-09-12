@@ -89,7 +89,7 @@ Created: 2026-09-13
 
 ### Phase 5: Финализация
 
-- [ ] Task 8: Docs-чекпоинт + финальные проверки (depends: all)
+- [x] Task 8: Docs-чекпоинт + финальные проверки (depends: all)
   Обязательный чекпоинт через `/aif-docs`: `docs/admin-panel.md` — блоки главной в PageBlockLibrary, страница «index» как главная, сид; `docs/frontend.md` — переключатель языков сохраняет путь, список локалей из LanguageService. Финальный прогон: `vendor/bin/pint --dirty --format agent`, `php artisan test --compact` (регрессия существующего suite), `php artisan route:list` (home/en.home на месте), визуальная проверка `/` vs статика и переключение языков в шапке + `.mobile-menu`.
   LOGGING: n/a.
   Files: `docs/admin-panel.md`, `docs/frontend.md`.
