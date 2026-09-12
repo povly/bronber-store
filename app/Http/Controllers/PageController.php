@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\PageTranslation;
 use App\Services\Languages\LanguageService;
 use App\Support\PageBlocks\BlockRenderer;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -22,11 +23,17 @@ class PageController extends Controller
     /**
      * Render the site root from the DB page with slug «index»
      * (fallback: the static prototype view when the page or its
-     * translation is missing — same pattern as header/footer settings).
+     * translation is missing — same pattern as header/footer settings;
+     * a missing table (pre-migration) also degrades to the prototype).
      */
     public function index(): Response
     {
-        $page = $this->findPublishedPage(self::HOME_SLUG);
+        try {
+            $page = $this->findPublishedPage(self::HOME_SLUG);
+        } catch (QueryException) {
+            $page = null;
+        }
+
         $translation = $page?->translation();
 
         if ($translation === null) {
