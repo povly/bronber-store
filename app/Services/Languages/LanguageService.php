@@ -25,23 +25,32 @@ class LanguageService
     /**
      * Active language codes ordered by sort_order.
      *
+     * Fully boot-safe: a missing/unmigrated database or an unavailable cache
+     * store (e.g. sqlite file absent during `composer install` →
+     * `package:discover` on CI) degrades to the config fallback instead of
+     * breaking `artisan`/composer boot.
+     *
      * @return list<string>
      */
     public function codes(): array
     {
-        $codes = Cache::rememberForever(self::CACHE_CODES, function (): array {
-            try {
-                $codes = Language::query()
-                    ->orderBy('sort_order')
-                    ->orderBy('id')
-                    ->pluck('code')
-                    ->all();
-            } catch (QueryException) {
-                return config('app.available_locales');
-            }
+        try {
+            $codes = Cache::rememberForever(self::CACHE_CODES, function (): array {
+                try {
+                    $codes = Language::query()
+                        ->orderBy('sort_order')
+                        ->orderBy('id')
+                        ->pluck('code')
+                        ->all();
+                } catch (QueryException) {
+                    return config('app.available_locales');
+                }
 
-            return $codes === [] ? config('app.available_locales') : $codes;
-        });
+                return $codes === [] ? config('app.available_locales') : $codes;
+            });
+        } catch (QueryException) {
+            $codes = config('app.available_locales');
+        }
 
         Log::debug('[LanguageService] codes resolved, count={n} default={code}', [
             'count' => count($codes),
@@ -56,13 +65,17 @@ class LanguageService
      */
     public function defaultCode(): string
     {
-        $default = Cache::rememberForever(self::CACHE_DEFAULT, function (): ?string {
-            try {
-                return Language::query()->where('is_default', true)->value('code');
-            } catch (QueryException) {
-                return null;
-            }
-        });
+        try {
+            $default = Cache::rememberForever(self::CACHE_DEFAULT, function (): ?string {
+                try {
+                    return Language::query()->where('is_default', true)->value('code');
+                } catch (QueryException) {
+                    return null;
+                }
+            });
+        } catch (QueryException) {
+            $default = null;
+        }
 
         return $default ?? config('app.available_locales.0');
     }
