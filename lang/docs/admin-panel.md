@@ -96,10 +96,31 @@ HasMany на ресурс `PageTranslationResource` (таблица + модал
 
 ### Настройки шапки/подвала (SettingResource)
 
-Записи `key × locale` (сидируются `SettingsSeeder` по активным языкам, создание отключено —
+Записи `key × locale` (сидируются `SettingsSeeder` контентом прототипа, создание отключено —
 только редактирование). Ключ и локаль залочены (`readonly` + `canApply(false)` — не меняются
-и при подмене запроса). Значение — блоки `FlexibleLayouts`: для `header` → навигация и
-контакты, для `footer` → колонки ссылок, соцсети, копирайт.
+и при подмене запроса). Значение — блоки `FlexibleLayouts`, конфигурация по ключу:
+`header` → `HeaderBlockLibrary::header()` (top-bar: телефон + сервисные ссылки; nav: основное
+меню), `footer` → `FooterBlockLibrary::footer()` (contacts, socials, links-column ×3, bottom).
+
+**Ссылки двух типов** (переиспользуемый trait `BuildsLinkFields`): у каждой ссылки `label`,
+`type` («Страница сайта» | «Кастомная ссылка»), `page` (Select только из опубликованных
+страниц — `PageOptions::published()`) и `url`. Page-ссылка автоматически локализуется
+(`/{slug}` ↔ `/{locale}/{slug}`), custom-URL выводится как есть. Битые ссылки (страница
+удалена/снята с публикации, пустой URL) пропускаются с WARN — меню не ломается.
+
+**SOLID-структура библиотек блоков** — по классу на контекст вместо одного файла:
+
+```
+app/Support/PageBlocks/
+├── PageBlockLibrary.php        # только page-блоки (hero, text, gallery, faq...)
+├── HeaderBlockLibrary.php      # блоки шапки (top-bar, nav)
+├── FooterBlockLibrary.php      # блоки подвала (contacts, socials, links-column, bottom)
+├── Concerns/BuildsLinkFields.php  # переиспользуемые поля двухтипной ссылки
+├── LinkResolver.php            # JSON-ссылка → href (page|custom, локаль)
+├── SettingsResolver.php        # settings JSON → структуры для вьюх
+├── PageOptions.php             # опции опубликованных страниц (кэш per-request)
+└── BlockRenderer.php           # рендер страничных блоков
+```
 
 ### Блоки flexible-layouts
 

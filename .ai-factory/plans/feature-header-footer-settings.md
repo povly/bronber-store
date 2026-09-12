@@ -80,7 +80,7 @@ Supersedes: частично Task 8 плана feature-pages-blocks-settings (н
 
 ### Phase 3: Данные и финализация
 
-- [ ] Task 5: SettingsSeeder с дефолтами из статики (depends: 4)
+- [x] Task 5: SettingsSeeder с дефолтами из статики (depends: 4)
   Наполнить `value` для header/footer × активные языки контентом, эквивалентным текущей статике: top-bar (телефон + доставка/гаранция/FAQ/контакты как custom `/delivery` и т.д., вакансии `#!`), nav (новинки/блог → custom `/blog`, акции `#`, бонусы `/loyalty`, о нас `/about`), footer: контакты (телефон, email), соцсети (Instagram/YouTube `#`), 3 колонки (Каталог — custom-ссылки `/catalog`; Покупателям; Компания), bottom (privacy/terms `#`, копирайт, разработчик). EN-варианты — те же структуры с английскими label. Re-runnable (upsert не перезатирает непустые value — upsert только update updated_at, как сейчас). Тесты: сидер наполняет значения, повторный запуск не дублирует/не затирает.
   LOGGING: n/a.
   Files: `database/seeders/SettingsSeeder.php`, `tests/Feature/SettingResourceTest.php` (дополнить).
