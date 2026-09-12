@@ -95,9 +95,9 @@
             </a>
 
             <div class="mobile-menu__lang">
-                @foreach (config('app.available_locales') as $locale)
-                    @php $isDefault = $locale === config('app.available_locales.0'); @endphp
-                    <a href="{{ $isDefault ? '/' : '/' . $locale }}"
+                @php $locales = app(\App\Services\Languages\LanguageService::class)->codes(); @endphp
+                @foreach ($locales as $locale)
+                    <a href="{{ \App\Support\Locales\LocaleSwitcher::href($locale) }}"
                         class="mobile-menu__lang-link {{ app()->getLocale() === $locale ? 'mobile-menu__lang-link--active' : '' }}">{{ strtoupper($locale) }}</a>
                     @unless ($loop->last)
                         <div class="mobile-menu__lang-divider"></div>

@@ -6,6 +6,7 @@
     $topBar = $headerSettings['topBar'] ?? null;
     $phone = $topBar['phone'] ?? '+7 (985) 449-8000';
     $phoneHref = 'tel:'.preg_replace('/[^0-9+]/', '', (string) $phone);
+    $locales = app(\App\Services\Languages\LanguageService::class)->codes();
 @endphp
 
 <div class="top-bar">
@@ -49,9 +50,8 @@
             @endif
 
             <div class="top-bar__lang">
-                @foreach(config('app.available_locales') as $locale)
-                    @php $isDefault = $locale === config('app.available_locales.0'); @endphp
-                    <a href="{{ $isDefault ? '/' : '/' . $locale }}" class="top-bar__lang-btn {{ app()->getLocale() === $locale ? 'is-active' : '' }}">{{ strtoupper($locale) }}</a>
+                @foreach($locales as $locale)
+                    <a href="{{ \App\Support\Locales\LocaleSwitcher::href($locale) }}" class="top-bar__lang-btn {{ app()->getLocale() === $locale ? 'is-active' : '' }}">{{ strtoupper($locale) }}</a>
                     @if(!$loop->last)
                         <span class="top-bar__lang-divider"></span>
                     @endif
