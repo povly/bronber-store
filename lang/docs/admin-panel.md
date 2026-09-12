@@ -73,9 +73,13 @@ HasMany на ресурс `PageTranslationResource` (таблица + модал
   (хук `afterSave`); новые языки, добавленные позже, добавляются при следующем сохранении.
 - Форма перевода (модалка): заголовок, полный набор SEO-полей (meta title/description/keywords,
   robots, canonical URL, OG-изображение через media-manager) и **контент** — блоки
-  `FlexibleLayouts` из `PageBlockLibrary::page()` (hero, текст Editor.js, галерея, FAQ,
-  контакты, динамический «Товары»).
+  `FlexibleLayouts` из `PageBlockLibrary::page()` (блоки главной `home-*`, см. ниже).
 - Форма страницы разбита на табы «Страница» / «Переводы».
+
+**Главная страница = страница со slug `index`** (сидируется `HomePageSeeder`): роут `/`
+рендерит её блоки; если страница/перевод отсутствуют — витрина падает обратно на статический
+прототип `home.blade.php` (паттерн шапки/подвала). `/index` и `/en/index` — 301-редирект на
+`/` и `/en`; canonical/hreflang главной указывают на корень, а не на `/index`.
 
 > ⚠️ Не вкладывайте `FlexibleLayouts` в inline-поля `HasMany` (`->fields([...])`) —
 > возникает бесконечная рекурсия генерации имён полей (OOM). Поле должно жить на верхнем
@@ -112,7 +116,16 @@ HasMany на ресурс `PageTranslationResource` (таблица + модал
 
 ```
 app/Support/PageBlocks/
-├── PageBlockLibrary.php        # только page-блоки (hero, text, gallery, faq...)
+├── PageBlockLibrary.php        # агрегатор page-блоков (список классов Blocks/*)
+├── Blocks/
+│   ├── PageBlock.php           # интерфейс: static register(FlexibleLayouts)
+│   └── Home/                   # блоки главной (типы home-*)
+│       ├── HomeHeroBlock.php         # home-hero — промо-слайдер
+│       ├── HomeCategoriesBlock.php   # home-categories — динамическая сетка категорий
+│       ├── HomeAdvsBlock.php         # home-advs — преимущества
+│       ├── HomeProductsBlock.php     # home-products — слайдер товаров (динамический)
+│       ├── HomePartnersBlock.php     # home-partners — логотипы партнёров
+│       └── HomeNewsBlock.php         # home-news — карточки новостей
 ├── HeaderBlockLibrary.php      # блоки шапки (top-bar, nav)
 ├── FooterBlockLibrary.php      # блоки подвала (contacts, socials, links-column, bottom)
 ├── Concerns/BuildsLinkFields.php  # переиспользуемые поля двухтипной ссылки
@@ -124,12 +137,27 @@ app/Support/PageBlocks/
 
 ### Блоки flexible-layouts
 
-Конфигурация всех блоков централизована в `App\Support\PageBlocks\PageBlockLibrary`.
-Блоки объявляются через `->block($name, $title, $fields, limit:, category:, icon:)`,
-хранятся в JSON как `[{_type: 'hero', ...поля}]` — порядок drag-n-drop, добавление через
-пикер с поиском и категориями. Изображения выбираются полем
-`MediaManagerPicker` (yurizoom/moonshine-media-manager, public-диск).
-Витрина рендерит их через `BlockRenderer` (см. [архитектуру](architecture.md)).
+Определения блоков живут **по одному классу на тип** в `App\Support\PageBlocks\Blocks\`
+(интерфейс `PageBlock::register(FlexibleLayouts)`), `PageBlockLibrary::page()` — тонкий
+агрегатор по списку классов: новый блок = новый класс + строка в списке.
+
+- **Именование с префиксом страницы**: тип блока зеркалит прототип-паршл —
+  `home-hero` ↔ `blocks/home/hero.blade.php`. Блоки будущих страниц следуют правилу:
+  `category-*`, `contact-*` и т.д. — так типы разных страниц не конфликтуют.
+- **Повторяющиеся структуры** (слайды, пункты, новости) — вложенные `FlexibleLayouts`
+  из `povly/moonshine-flexible-layouts`, **не** `Json`-поля: единый UX добавления,
+  drag-n-drop и формат данных `[{_type: 'item', ...}]`.
+- Блоки объявляются через `->block($name, $title, $fields, limit:, category:, icon:)`,
+  хранятся в JSON как `[{_type: 'home-hero', ...}]`. Изображения — `MediaManagerPicker`
+  (public-диск). Витрина рендерит их через `BlockRenderer` (см. [архитектуру](architecture.md)).
+- **Динамические блоки** (`home-categories`, `home-products`) не хранят данные в JSON —
+  тянут их из `CatalogMock` (позже CRM-склад); в админке редактируется только заголовок
+  и количество.
+- Старые универсальные блоки (`hero`, `text`, `gallery`, `faq`, `contacts`,
+  `featured-products`) **удалены из пикера** — их pb-вьюхи остаются, `BlockRenderer`
+  всё ещё рендерит их для ранее сохранённого/demo-контента.
+- Состав главной для свежих установок задаёт `HomePageSeeder` (страница `index`,
+  ru+en, зеркалит статический прототип).
 
 ## Анатомия ресурса
 

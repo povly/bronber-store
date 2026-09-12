@@ -52,6 +52,17 @@ const blockScripts = globSync('resources/js/blocks/**/index.js');
 > При добавлении новой страницы создавайте `style.css` в `css/blocks/{page}/` и `index.js` в
 > `js/blocks/{page}/` — Vite подхватит их автоматически.
 
+### Стили/скрипты DB-блоков (page-blocks)
+
+Вьюхи контентных блоков (`resources/views/components/page-blocks/page/{type}.blade.php`)
+пушат CSS прототипа через `@push('block-styles')` + `@vite` c `@once` (блок одного типа
+может повторяться — `@once` убирает дубли тега). **Важно:** блоки должны рендериться
+внутри view-цикла (`page.blade.php` вызывает `BlockRenderer` в `@section`), а не в
+контроллере через `->render()` — иначе `View::render()` верхнего уровня вызывает
+`flushStacks()` и пуши не доезжают до `@stack('block-styles')` в layout (проявлялось как
+«DB-страница без стилей»). Скрипты слайдера глобальные (`resources/js/app.js` →
+Alpine-плагин `slider`) — per-block JS блокам главной не нужен.
+
 ### Блок `common/mobile-menu` — выезжающее меню
 
 Slide-out drawer для мобильных/планшетов (viewport ≤1199px), ортогональный к нижней панели
@@ -213,7 +224,19 @@ babel({
 | `ru` | Основная (дефолтная) | без префикса (`/catalog`) |
 | `en` | Дополнительная | с префиксом (`/en/catalog`) |
 
-Список доступных локалей — в `config/app.php`: `'available_locales' => ['ru', 'en']`.
+Источник локалей — `LanguageService` (DB, кэш; редактируется в админке;
+`config/app.php` `available_locales` — только fallback). **Порядок групп важен**:
+группы с префиксом `/{locale}` регистрируются **до** дефолтной группы, иначе голый `/en`
+матчится catch-all'ом `/{slug}` дефолтной группы и отдаёт 404 (матчинг — в порядке
+регистрации).
+
+### Переключатель языков
+
+`App\Support\Locales\LocaleSwitcher::href($target)` строит ссылку смены языка с
+**сохранением текущего пути**: срезает префикс текущей недефолтной локали и подставляет
+целевую — `/contacts` → `/en/contacts`, `/en/catalog` → `/catalog`, `/` ↔ `/en`.
+Query-string намеренно отбрасывается. Используется в `blocks/common/top-bar` и
+`blocks/common/mobile-menu` (список языков — из `LanguageService::codes()`, не из config).
 
 ### Паттерн роутов
 
@@ -222,20 +245,24 @@ babel({
 ```php
 // routes/web.php
 $register = function () {
+    Route::get('', [PageController::class, 'index'])->name('home');
     Route::get('/catalog', fn () => view('main'))->name('catalog');
-    // ... остальные роуты
+    // ... остальные роуты (catch-all /{slug} — последним)
 };
 
-// Дефолтная локаль (ru) — без префикса
-Route::middleware('locale:ru')->group($register);
-
-// Остальные локали — с /{locale} префиксом
-foreach (['en'] as $locale) {
+// Сначала НЕ-дефолтные локали (/{locale} префикс) — важно для голого /en
+foreach (array_diff($languages->codes(), [$defaultLocale]) as $locale) {
     Route::prefix($locale)->name("{$locale}.")
         ->middleware("locale:{$locale}")
         ->group($register);
 }
+
+// Затем дефолтная локаль (ru) — без префикса
+Route::middleware("locale:{$defaultLocale}")->group($register);
 ```
+
+Главная (`/` и `/en`) рендерится `PageController::index()` из DB-страницы со slug `index`
+(fallback — статический `home.blade.php`).
 
 ### SetLocale middleware
 
