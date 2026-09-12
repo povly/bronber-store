@@ -42,7 +42,7 @@ class LinkResolver
                 return null;
             }
 
-            $default = app(LanguageService::class)->defaultCode();
+            $default = resolve(LanguageService::class)->defaultCode();
 
             return $locale === $default
                 ? url("/{$slug}")

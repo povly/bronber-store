@@ -86,7 +86,7 @@ it('keeps key and locale unchanged on save', function (): void {
         ->and($item->refresh()->locale)->toBe('en');
 });
 
-it('seeds header and footer for every active language', function (): void {
+it('seeds header and footer with prototype content for every active language', function (): void {
     $this->seed(SettingsSeeder::class);
 
     $rows = Setting::query()->get()
@@ -94,6 +94,22 @@ it('seeds header and footer for every active language', function (): void {
         ->all();
 
     expect($rows)->toEqualCanonicalizing(['header.ru', 'header.en', 'footer.ru', 'footer.en']);
+
+    $headerRu = Setting::query()->where('key', 'header')->where('locale', 'ru')->first();
+
+    expect($headerRu->value)->not->toBeNull()
+        ->and(collect($headerRu->value)->pluck('_type')->all())->toEqual(['top-bar', 'nav'])
+        ->and($headerRu->value[0]['links'][0])->toBe([
+            'label' => 'Доставка',
+            'type' => 'custom',
+            'page' => null,
+            'url' => '/delivery',
+        ]);
+
+    $footerEn = Setting::query()->where('key', 'footer')->where('locale', 'en')->first();
+
+    expect(collect($footerEn->value)->pluck('_type')->all())->toEqual(['contacts', 'socials', 'links-column', 'links-column', 'links-column', 'bottom'])
+        ->and($footerEn->value[2]['links'][0]['url'])->toBe('/en/catalog');
 });
 
 it('seeder is re-runnable and does not duplicate rows', function (): void {
@@ -101,4 +117,29 @@ it('seeder is re-runnable and does not duplicate rows', function (): void {
     $this->seed(SettingsSeeder::class);
 
     expect(Setting::query()->count())->toBe(4);
+});
+
+it('seeder does not overwrite admin-edited values', function (): void {
+    Setting::query()->create([
+        'key' => 'header',
+        'locale' => 'ru',
+        'value' => [['_type' => 'nav', 'links' => [['label' => 'Админская ссылка', 'type' => 'custom', 'url' => '/custom']]]],
+    ]);
+
+    $this->seed(SettingsSeeder::class);
+
+    $header = Setting::query()->where('key', 'header')->where('locale', 'ru')->first();
+
+    expect($header->value)->toBe([['_type' => 'nav', 'links' => [['label' => 'Админская ссылка', 'type' => 'custom', 'url' => '/custom']]]]);
+});
+
+it('seeder fills previously empty values', function (): void {
+    Setting::query()->create(['key' => 'footer', 'locale' => 'ru', 'value' => null]);
+
+    $this->seed(SettingsSeeder::class);
+
+    $footer = Setting::query()->where('key', 'footer')->where('locale', 'ru')->first();
+
+    expect($footer->value)->not->toBeNull()
+        ->and(collect($footer->value)->pluck('_type')->first())->toBe('contacts');
 });

@@ -73,7 +73,7 @@ Supersedes: частично Task 8 плана feature-pages-blocks-settings (н
   LOGGING: `Log::debug('[SettingsResolver] context={header|footer} blocks={n} links={m}')`.
   Files: `app/Support/PageBlocks/SettingsResolver.php`, `tests/Feature/SettingsResolverTest.php`.
 
-- [ ] Task 4: Подстановка в статику + демонтаж старого механизма (depends: 3)
+- [x] Task 4: Подстановка в статику + демонтаж старого механизма (depends: 3)
   `AppServiceProvider` composer: вместо `headerBlocksHtml/footerBlocksHtml` отдавать `SettingsResolver` структуры (`$headerSettings`, `$footerSettings`). `top-bar.blade.php`: телефон + цикл ссылок из `topBar`, `@else` статика. `header.blade.php` nav: цикл из `nav` (ссылка «Каталог» остаётся статической перед циклом), `@else` статика. `footer.blade.php`: контакты, соцсети, колонки (аккордеон-разметка сохраняется, цикл по `columns`), низ (privacy/terms/copyright/developer) — аналогично с `@else` статикой. Удалить: `header--custom`/`footer--custom` ветки, вьюхи `components/page-blocks/header/**`, `footer/**`, соответствующие pb-классы из `page-blocks/style.css` (страничные pb-* не трогать). Обновить `LayoutSettingsTest`: настройка задана → данные из БД в статической вёрстке; не задана → статика; page-ссылка → локализованный href.
   LOGGING: composer логирует source=settings|fallback (как раньше).
   Files: `app/Providers/AppServiceProvider.php`, `resources/views/blocks/common/top-bar/top-bar.blade.php`, `resources/views/blocks/common/header/header.blade.php`, `resources/views/blocks/common/footer/footer.blade.php`, `resources/views/components/page-blocks/header/**` (удалить), `.../footer/**` (удалить), `resources/css/blocks/page-blocks/style.css`, `tests/Feature/LayoutSettingsTest.php`.
