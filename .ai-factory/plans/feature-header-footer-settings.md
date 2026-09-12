@@ -85,7 +85,7 @@ Supersedes: частично Task 8 плана feature-pages-blocks-settings (н
   LOGGING: n/a.
   Files: `database/seeders/SettingsSeeder.php`, `tests/Feature/SettingResourceTest.php` (дополнить).
 
-- [ ] Task 6: Docs-чекпоинт + финальные проверки (depends: all)
+- [x] Task 6: Docs-чекпоинт + финальные проверки (depends: all)
   `/aif-docs`: обновить `lang/docs/admin-panel.md` (новые блоки шапки/подвала, поле ссылки двух типов, SOLID-структура библиотек) и `lang/docs/architecture.md` (SettingsResolver-конвейер, подстановка в статику вместо полной замены). Финальный прогон: `vendor/bin/pint --dirty --format agent`, `vendor/bin/pest`, **`vendor/bin/rector process --dry-run` → 0 изменений** (CI-требование!), `php artisan moonshine:resources`.
   LOGGING: n/a.
   Files: `lang/docs/admin-panel.md`, `lang/docs/architecture.md`.
