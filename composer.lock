@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5376fc2a451ba87cd6b4727c22026058",
+    "content-hash": "900984570a7739bec7a174e7d0e912bf",
     "packages": [
         {
             "name": "brick/math",
@@ -3244,6 +3244,48 @@
                 }
             ],
             "time": "2026-08-24T00:54:40+00:00"
+        },
+        {
+            "name": "povly/moonshine-flexible-layouts",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/povly/moonshine-flexible-layouts.git",
+                "reference": "023359d78ec2e320c8cfa8e3075288e226d166e2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/povly/moonshine-flexible-layouts/zipball/023359d78ec2e320c8cfa8e3075288e226d166e2",
+                "reference": "023359d78ec2e320c8cfa8e3075288e226d166e2",
+                "shasum": ""
+            },
+            "require": {
+                "moonshine/moonshine": "^4.0",
+                "php": "^8.2"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Povly\\FlexibleLayouts\\Providers\\FlexibleLayoutsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Povly\\FlexibleLayouts\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Flexible content blocks with unlimited nesting for MoonShine",
+            "support": {
+                "issues": "https://github.com/povly/moonshine-flexible-layouts/issues",
+                "source": "https://github.com/povly/moonshine-flexible-layouts/tree/1.0.2"
+            },
+            "time": "2026-08-06T19:08:08+00:00"
         },
         {
             "name": "povly/moonshine-image-editor",
