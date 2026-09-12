@@ -98,12 +98,12 @@ erDiagram
 
 ### Phase 2: Блоки
 
-- [ ] Task 4: Каталог блоков FlexibleLayouts + MockCatalog (depends: 2)
+- [x] Task 4: Каталог блоков FlexibleLayouts + MockCatalog (depends: 2)
   `app/Support/PageBlocks/PageBlockLibrary.php`: методы `page(): FlexibleLayouts` (hero/text/gallery/faq/contacts + динамический featured-products с полями только заголовок и кол-во), `header(): FlexibleLayouts` (nav-ссылки, контакты), `footer(): FlexibleLayouts` (колонка ссылок, соцсети, копирайт). Блоки объявляются через `->block($name, $title, $fields, $limit, $category)` с иконками/категориями в пикере; внутри — Flex/Column для многоколоночных полей, EditorJS-поле для text, Json+image-editor для gallery. `App\Support\CatalogMock` — перенос (копия) mock-массивов товаров/категорий из `routes/web.php` в класс (роуты НЕ трогаем) для динамических блоков.
   LOGGING: n/a (конфигурация полей).
   Files: `app/Support/PageBlocks/PageBlockLibrary.php`, `app/Support/CatalogMock.php`.
 
-- [ ] Task 5: BlockRenderer + blade-вьюхи блоков (depends: 4)
+- [x] Task 5: BlockRenderer + blade-вьюхи блоков (depends: 4)
   `app/Support/PageBlocks/BlockRenderer.php`: `render(array $blocks, string $context = 'page'): string` — каждый блок `{_type, ...поля}` → view `components.page-blocks.{context}.{type}` c данными; неизвестный тип → лог WARN + пропуск (страница не падает). Вьюхи: `resources/views/components/page-blocks/page/{hero,text,gallery,faq,contacts,featured-products}.blade.php` (featured-products берёт данные из `CatalogMock`), `.../header/{nav,contacts}.blade.php`, `.../footer/{links,socials,copyright}.blade.php`. Вёрстка — по образцу существующих block-паршлов (`resources/views/blocks/...`). Тесты рендерера: тип→view, данные передаются, неизвестный тип не падает.
   LOGGING: `Log::warning('[BlockRenderer] unknown block type={type}, skipped')`.
   Files: `app/Support/PageBlocks/BlockRenderer.php`, `resources/views/components/page-blocks/**`, `tests/Feature/*`.
