@@ -6,13 +6,13 @@ namespace App\Support\PageBlocks;
 
 use MoonShine\UI\Components\Layout\Column;
 use MoonShine\UI\Components\Layout\Flex;
-use MoonShine\UI\Fields\Image;
 use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
 use MoonShine\UI\Fields\Textarea;
 use Povly\FlexibleLayouts\Fields\FlexibleLayouts;
 use Sckatik\MoonshineEditorJs\Fields\EditorJs;
+use YuriZoom\MoonShineMediaManager\Fields\MediaManagerPicker;
 
 /**
  * Central catalogue of flexible-layouts block definitions.
@@ -36,7 +36,8 @@ class PageBlockLibrary
                         Textarea::make('Подзаголовок', 'subtitle'),
                     ])->columnSpan(6),
                     Column::make([
-                        Image::make('Фоновое изображение', 'image'),
+                        MediaManagerPicker::make('Фоновое изображение', 'image')
+                            ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
                     ])->columnSpan(6),
                 ]),
             ], limit: 1, category: 'Контент', description: 'Крупный баннер с заголовком и картинкой', icon: 'photo')
@@ -44,10 +45,9 @@ class PageBlockLibrary
                 EditorJs::make('Тело блока', 'body'),
             ], category: 'Контент', description: 'Форматированный текстовый блок', icon: 'document-text')
             ->block('gallery', 'Галерея', [
-                Json::make('Изображения', 'images')
-                    ->fields([
-                        Image::make('Изображение', 'src'),
-                    ]),
+                MediaManagerPicker::make('Изображения', 'images')
+                    ->multiple()
+                    ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
             ], category: 'Медиа', description: 'Сетка изображений', icon: 'rectangle-stack')
             ->block('faq', 'Вопросы и ответы', [
                 Json::make('Пункты', 'items')

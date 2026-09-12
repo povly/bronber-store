@@ -16,7 +16,7 @@
         "povly/moonshine-flexible-layouts": "^1.0",
         "povly/moonshine-image-editor": "^1.3",
         "sckatik/moonshine-editorjs": "^2.0",
-        "yurizoom/moonshine-media-manager": "^4.4"
+        "yurizoom/moonshine-media-manager": "^4.6"
     },
     "require-dev": {
         "driftingly/rector-laravel": "^2.5",

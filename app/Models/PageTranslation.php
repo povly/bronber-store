@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-#[Fillable(['page_id', 'locale', 'title', 'meta_title', 'meta_description', 'content'])]
+#[Fillable(['page_id', 'locale', 'title', 'meta_title', 'meta_description', 'meta_keywords', 'meta_robots', 'canonical_url', 'og_image', 'content'])]
 class PageTranslation extends Model
 {
     /**
@@ -24,6 +24,14 @@ class PageTranslation extends Model
     public function page(): BelongsTo
     {
         return $this->belongsTo(Page::class);
+    }
+
+    /**
+     * Effective robots directive (defaults to "index, follow").
+     */
+    public function metaRobots(): string
+    {
+        return $this->meta_robots ?: 'index, follow';
     }
 
     /**

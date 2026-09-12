@@ -28,6 +28,7 @@ http://bronber_store.test/ тут будет Moonshine админка + povly/mo
 2. **Страница = заголовок + slug + SEO + список блоков.** Контент страницы — поле `FlexibleLayouts` (пакет `povly/moonshine-flexible-layouts`): блоки хранятся в JSON-колонке `content` с `_type`-ключами, порядок — drag-n-drop, добавление — AJAX-пикер.
 3. **Переводы — отдельными строками (locale = строка), не JSON-в-колонке.** У каждой локали свой набор блоков — состав и порядок могут отличаться; в админке переводы редактируются табами (HasMany translations) **по числу активных языков из БД**. SEO-поля (`meta_title`, `meta_description`) тоже пер-локали. Fallback на публичной части: нет перевода для текущей локали → показываем перевод дефолтного языка.
 3a. **Языки редактируются в админке (добавлено по ходу, 2026-09-12).** Таблица `languages` (code unique, name, sort_order, is_default): сидируется ru (default) + en; новые языки добавляются через `LanguageResource` в MoonShine. `App\Services\Languages\LanguageService` (кэш через Cache, сброс при сохранении Language) — единый источник списка активных языков: middleware `SetLocale`, регистрация i18n-роутов, автосоздание переводов страницы, сидеры настроек, fallback локали = дефолтный язык (НЕ хардкод ru). `config('app.available_locales')` остаётся bootstrap-фолбэком до появления записей в БД. Кавеат: `route:cache` замораживает список локалей — после добавления языка нужен `php artisan optimize:clear` (задокументировать в Task 9).
+3b. **Полный набор SEO-тегов (добавлено по ходу, 2026-09-12).** Помимо `meta_title`/`meta_description` пер-локали: колонки `meta_keywords`, `meta_robots` (Select: index/nofollow-варианты, дефолт «index, follow»), `canonical_url`, `og_image` (Image). Рендер в layout с fallback-цепочками: og:title ← meta_title ← title; og:description ← meta_description; canonical ← текущий URL; og:url ← canonical; twitter:card = summary_large_image при наличии og_image. hreflang-alternates генерируются автоматически для всех локалей, у которых есть перевод страницы.
 4. **Два типа блоков.**
    - **Статические**: hero (заголовок+подзаголовок+картинка), text (тело — EditorJS `sckatik/moonshine-editorjs` или Textarea), gallery (Json-массив картинок, image-editor), faq (список вопрос-ответ), contacts (адрес/телефон/карта) — всё содержимое редактируется в блоке.
    - **Динамические**: например `featured-products` — в блоке редактируется ТОЛЬКО заголовок (и минимум параметров), данные рендерер берёт из источника: сейчас `App\Support\CatalogMock` (копия mock-массивов из роутов, сами роуты не трогаем), в будущем — API склада-CRM. Это паттерн «поменял заголовок, остальное само».
@@ -62,7 +63,7 @@ erDiagram
 |---|---|
 | **languages** | id, code varchar(12) unique, name varchar(255), sort_order int default 0, is_default bool default false, timestamps |
 | **pages** | id, slug varchar unique, is_published bool default false, sort_order int default 0, timestamps |
-| **page_translations** | id, page_id FK cascadeOnDelete, locale varchar(12) index, title varchar(255), meta_title varchar(255) nullable, meta_description text nullable, content JSON nullable (блоки flexible-layouts, `_type`-ключи), timestamps, **unique(page_id, locale)** |
+| **page_translations** | id, page_id FK cascadeOnDelete, locale varchar(12) index, title varchar(255), meta_title varchar(255) nullable, meta_description text nullable, meta_keywords varchar(255) nullable, meta_robots varchar(60) nullable default "index, follow", canonical_url varchar(255) nullable, og_image varchar(255) nullable, content JSON nullable (блоки flexible-layouts, `_type`-ключи), timestamps, **unique(page_id, locale)** |
 | **settings** | id, key varchar(100) index, locale varchar(12) index, value JSON nullable (блоки flexible-layouts), timestamps, **unique(key, locale)** |
 
 Денормализаций и денег тут нет — контентный модуль. JSON-колонки работают и в SQLite, и в MySQL.
@@ -110,17 +111,17 @@ erDiagram
 
 ### Phase 3: MoonShine-админка
 
-- [ ] Task 6: PageResource — список страниц с переводами (depends: 3, 4)
+- [x] Task 6: PageResource — список страниц с переводами (depends: 3, 4)
   По скиллу `moonshine-v4` (`php artisan moonshine:resource Page --pest`, разложить в `app/MoonShine/Resources/Page/Pages/`). Index: slug, title текущей локали, is_published badge, sort_order. Form: slug (+автогенерация), is_published Switcher, sort_order, **HasMany translations** (табы по АКТИВНЫМ ЯЗЫКАМ из `LanguageService`: title, meta_title, meta_description — SEO-блок во вкладке, `FlexibleLayouts::make('Контент','content')` из `PageBlockLibrary::page()`); при создании страницы автосоздавать переводы для всех активных языков (onBeforeSave/observer). Правила валидации: slug unique + kebab, title required, locale in: активные языки. Whitelist полей, `activeActions()->except(Action::VIEW)`. Регистрация в `MoonShineServiceProvider`, меню `#[Group('content')]`. Feature-тесты: CRUD, JSON-структура блоков (`_type` сохраняется), переводы создаются под все активные языки.
   LOGGING: `Log::info('[PageResource] page_id={id} saved by moonshine_user_id={uid}')`.
   Files: `app/MoonShine/Resources/Page/**`, `app/Providers/MoonShineServiceProvider.php`, `tests/Feature/*`.
 
-- [ ] Task 7: LanguageResource — управление языками в админке (depends: 3)
+- [x] Task 7: LanguageResource — управление языками в админке (depends: 3)
   ModelResource на Language по скиллу `moonshine-v4`: Index — code (badge), name, sort_order, is_default badge. Form: code (alpha-dash, lower, unique; залочен на редактировании — код это ключ связей), name, sort_order, is_default Switcher (снятие флага у единственного дефолтного языка — запрещаем валидацией; переключение дефолта переносит флаг и сбрасывает кэш LanguageService). Регистрация в `MoonShineServiceProvider`, меню `#[Group('settings')]`. Feature-тесты: CRUD, смена дефолта сбрасывает кэш и меняет `defaultCode()`, нельзя оставить систему без дефолтного языка.
   LOGGING: `Log::info('[LanguageResource] language code={code} saved, default_changed={bool}')`.
   Files: `app/MoonShine/Resources/Language/**`, `app/Providers/MoonShineServiceProvider.php`, `tests/Feature/*`.
 
-- [ ] Task 8: SettingResource — шапка/подвал с переводами (depends: 3, 4)
+- [x] Task 8: SettingResource — шапка/подвал с переводами (depends: 3, 4)
   ModelResource на Setting: Index — key (badge), locale (badge), value-превью; фильтр по key. Form: key и locale залочены на редактировании (title-подсказки «Шапка / RU»), `FlexibleLayouts::make('Значение','value')` — конфигурация блоков по ключу (header → `PageBlockLibrary::header()`, footer → `footer()`). Сидер: header/footer × ВСЕ активные языки из `LanguageService` — при первом входе можно править. Feature-тесты: CRUD, уникальность (key, locale), блоки сохраняются.
   LOGGING: `Log::info('[SettingResource] key={key} locale={locale} saved')`.
   Files: `app/MoonShine/Resources/Setting/**`, `database/seeders/SettingsSeeder.php`, `tests/Feature/*`.

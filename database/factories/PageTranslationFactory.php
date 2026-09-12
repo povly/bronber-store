@@ -24,6 +24,10 @@ class PageTranslationFactory extends Factory
             'title' => fake()->sentence(3),
             'meta_title' => fake()->optional()->sentence(4),
             'meta_description' => fake()->optional()->paragraph(),
+            'meta_keywords' => fake()->optional()->words(4, true),
+            'meta_robots' => 'index, follow',
+            'canonical_url' => null,
+            'og_image' => null,
             'content' => null,
         ];
     }

@@ -10,7 +10,7 @@ it('renders each block type to its matching view', function (array $block, strin
 })->with([
     'hero' => [['_type' => 'hero'], 'pb-hero'],
     'text' => [['_type' => 'text'], 'pb-text'],
-    'gallery' => [['_type' => 'gallery', 'images' => [['src' => '/images/x.png']]], 'pb-gallery'],
+    'gallery' => [['_type' => 'gallery', 'images' => ['/images/x.png', 'media/y.jpg']], 'pb-gallery'],
     'faq' => [['_type' => 'faq', 'items' => [['question' => 'Q', 'answer' => 'A']]], 'pb-faq'],
     'contacts' => [['_type' => 'contacts', 'address' => 'Москва'], 'pb-contacts'],
     'featured-products' => [['_type' => 'featured-products'], 'pb-featured'],

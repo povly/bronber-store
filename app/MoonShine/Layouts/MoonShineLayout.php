@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use App\MoonShine\Resources\Language\LanguageResource;
+use App\MoonShine\Resources\Page\PageResource;
+use App\MoonShine\Resources\PageTranslation\PageTranslationResource;
+use App\MoonShine\Resources\Setting\SettingResource;
 use MoonShine\AssetManager\Css;
 use MoonShine\AssetManager\Js;
 use MoonShine\ColorManager\ColorManager;
@@ -11,6 +15,7 @@ use MoonShine\ColorManager\Palettes\PurplePalette;
 use MoonShine\Contracts\ColorManager\ColorManagerContract;
 use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\Laravel\Layouts\AppLayout;
+use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\FlexibleRender;
 use Povly\MoonShineImageEditor\Support\ImageEditorRenderer;
 use YuriZoom\MoonShineMediaManager\Components\MediaManagerOffCanvas;
@@ -38,6 +43,10 @@ final class MoonShineLayout extends AppLayout
     {
         return [
             ...parent::menu(),
+            MenuItem::make(PageResource::class, 'Страницы'),
+            MenuItem::make(LanguageResource::class, 'Языки'),
+            MenuItem::make(PageTranslationResource::class, 'Переводы страниц'),
+            MenuItem::make(SettingResource::class, 'Настройки'),
         ];
     }
 
