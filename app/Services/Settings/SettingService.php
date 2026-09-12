@@ -5,13 +5,14 @@ declare(strict_types=1);
 namespace App\Services\Settings;
 
 use App\Models\Setting;
+use App\Services\Languages\LanguageService;
 use Illuminate\Support\Facades\Log;
 
 /**
  * Reads settings (key × locale) with a per-request runtime cache.
  *
- * Locale fallback: requested locale → ru → empty array (callers fall back
- * to their static defaults when nothing is returned).
+ * Locale fallback: requested locale → default language → empty array
+ * (callers fall back to their static defaults when nothing is returned).
  */
 class SettingService
 {
@@ -50,18 +51,20 @@ class SettingService
     }
 
     /**
-     * Resolve a setting from the database: requested locale first, ru as fallback.
+     * Resolve a setting from the database: requested locale first, default language as fallback.
      *
      * @return array<array-key, mixed>
      */
     private function resolve(string $key, string $locale): array
     {
+        $default = app(LanguageService::class)->defaultCode();
+
         $settings = Setting::query()
             ->where('key', $key)
-            ->whereIn('locale', [$locale, 'ru'])
+            ->whereIn('locale', [$locale, $default])
             ->get()
             ->keyBy('locale');
 
-        return ($settings->get($locale) ?? $settings->get('ru'))?->value ?? [];
+        return ($settings->get($locale) ?? $settings->get($default))?->value ?? [];
     }
 }

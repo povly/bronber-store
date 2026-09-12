@@ -1,12 +1,17 @@
 <?php
 
 use App\Models\Setting;
+use App\Services\Languages\LanguageService;
 use App\Services\Settings\SettingService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 uses(RefreshDatabase::class);
+
+beforeEach(function () {
+    app(LanguageService::class)->clearCache();
+});
 
 it('returns the setting for the requested locale', function () {
     Setting::factory()->header()->ru()->withBlocks([['_type' => 'nav']])->create();
@@ -36,6 +41,18 @@ it('uses the current application locale when none is passed', function () {
     expect(app(SettingService::class)->get('header'))->toBe([['_type' => 'nav']]);
 });
 
+/**
+ * Count queries that read the settings table, quote-style agnostic
+ * (SQLite uses double quotes, MySQL/MariaDB uses backticks).
+ */
+function settingsTableQueries(array $queryLog): int
+{
+    return collect($queryLog)
+        ->filter(fn (array $q): bool => str_contains($q['query'], 'from "settings"')
+            || str_contains($q['query'], 'from `settings`'))
+        ->count();
+}
+
 it('caches resolved values within a single request', function () {
     Setting::factory()->header()->ru()->withBlocks([['_type' => 'nav']])->create();
 
@@ -44,10 +61,10 @@ it('caches resolved values within a single request', function () {
     DB::enableQueryLog();
     $service->get('header', 'ru');
     $service->get('header', 'ru');
-    $queries = count(DB::getQueryLog());
+    $settingsQueries = settingsTableQueries(DB::getQueryLog());
     DB::disableQueryLog();
 
-    expect($queries)->toBe(1);
+    expect($settingsQueries)->toBe(1);
 });
 
 it('queries the database again for a different locale or key', function () {
@@ -60,10 +77,10 @@ it('queries the database again for a different locale or key', function () {
     $service->get('header', 'ru');
     $service->get('footer', 'ru');
     $service->get('header', 'en');
-    $queries = count(DB::getQueryLog());
+    $settingsQueries = settingsTableQueries(DB::getQueryLog());
     DB::disableQueryLog();
 
-    expect($queries)->toBe(3);
+    expect($settingsQueries)->toBe(3);
 });
 
 it('exposes the static model accessor with the same behaviour', function () {

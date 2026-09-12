@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use App\Services\Languages\LanguageService;
 use Database\Factories\PageFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
@@ -38,14 +39,14 @@ class Page extends Model
     }
 
     /**
-     * Translation for the given locale with fallback: requested → ru → first available.
+     * Translation for the given locale with fallback: requested → default language → first available.
      */
     public function translation(?string $locale = null): ?PageTranslation
     {
         $locale ??= app()->getLocale();
 
         return $this->translations->firstWhere('locale', $locale)
-            ?? $this->translations->firstWhere('locale', 'ru')
+            ?? $this->translations->firstWhere('locale', app(LanguageService::class)->defaultCode())
             ?? $this->translations->first();
     }
 

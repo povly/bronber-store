@@ -1,5 +1,6 @@
 <?php
 
+use App\Services\Languages\LanguageService;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
@@ -235,11 +236,17 @@ Route::get('/clear-cache', function () {
     return response()->json(['status' => 'ok']);
 });
 
+// Admin-editable languages (DB-driven, cached; falls back to config when empty)
+$languages = app(LanguageService::class);
+$defaultLocale = $languages->defaultCode();
+
 // Default locale (no prefix)
-Route::middleware('locale:'.config('app.available_locales.0'))->group($register);
+Route::middleware("locale:{$defaultLocale}")->group($register);
 
 // Non-default locales (/{locale} prefix)
-foreach (array_slice(config('app.available_locales'), 1) as $locale) {
+// NOTE: with route:cache enabled the locale list is frozen — run
+// `php artisan optimize:clear` after adding a language in the admin panel.
+foreach (array_diff($languages->codes(), [$defaultLocale]) as $locale) {
     Route::prefix($locale)
         ->name("{$locale}.")
         ->middleware("locale:{$locale}")

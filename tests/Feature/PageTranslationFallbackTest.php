@@ -2,9 +2,14 @@
 
 use App\Models\Page;
 use App\Models\PageTranslation;
+use App\Services\Languages\LanguageService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
+
+beforeEach(function () {
+    app(LanguageService::class)->clearCache();
+});
 
 it('returns the translation for the requested locale', function () {
     $page = Page::factory()
