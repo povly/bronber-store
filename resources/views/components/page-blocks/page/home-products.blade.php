@@ -1,5 +1,7 @@
 @push('block-styles')
-    @vite(['resources/css/blocks/home/products/style.css'])
+    @once
+        @vite(['resources/css/blocks/home/products/style.css'])
+    @endonce
 @endpush
 
 @php

@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Models\PageTranslation;
 use App\Services\Languages\LanguageService;
-use App\Support\PageBlocks\BlockRenderer;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -117,15 +116,16 @@ class PageController extends Controller
     /**
      * Render the flexible-layout blocks and share the SEO payload
      * with the layout.
+     *
+     * Block HTML is rendered by the page view itself (not here): block
+     * views @push their assets onto layout stacks, which only works for
+     * views rendered nested inside the page view render cycle.
      */
     private function renderPage(Page $page, PageTranslation $translation): Response
     {
-        $html = resolve(BlockRenderer::class)->render($translation->content ?? [], 'page');
-
         view()->share('seo', $this->seo($page, $translation));
 
         return response()->view('page', [
-            'html' => $html,
             'translation' => $translation,
         ]);
     }
