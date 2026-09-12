@@ -16,15 +16,15 @@ class SettingsSeeder extends Seeder
      */
     public function run(): void
     {
-        $languages = app(LanguageService::class)->codes();
+        $languages = resolve(LanguageService::class)->codes();
 
         $rows = [];
 
         foreach (['header', 'footer'] as $key) {
-            foreach ($languages as $locale) {
+            foreach ($languages as $language) {
                 $rows[] = [
                     'key' => $key,
-                    'locale' => $locale,
+                    'locale' => $language,
                     'value' => null,
                     'created_at' => now(),
                     'updated_at' => now(),

@@ -7,11 +7,11 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 uses(RefreshDatabase::class);
 
-beforeEach(function () {
-    app(LanguageService::class)->clearCache();
+beforeEach(function (): void {
+    resolve(LanguageService::class)->clearCache();
 });
 
-it('returns the translation for the requested locale', function () {
+it('returns the translation for the requested locale', function (): void {
     $page = Page::factory()
         ->has(PageTranslation::factory()->ru(), 'translations')
         ->has(PageTranslation::factory()->en(), 'translations')
@@ -21,7 +21,7 @@ it('returns the translation for the requested locale', function () {
         ->and($page->translation('en')->locale)->toBe('en');
 });
 
-it('falls back to ru when the requested locale is missing', function () {
+it('falls back to ru when the requested locale is missing', function (): void {
     $page = Page::factory()
         ->has(PageTranslation::factory()->ru(), 'translations')
         ->create();
@@ -29,7 +29,7 @@ it('falls back to ru when the requested locale is missing', function () {
     expect($page->translation('en')->locale)->toBe('ru');
 });
 
-it('falls back to the first translation when ru is missing too', function () {
+it('falls back to the first translation when ru is missing too', function (): void {
     $page = Page::factory()
         ->has(PageTranslation::factory()->en(), 'translations')
         ->create();
@@ -38,13 +38,13 @@ it('falls back to the first translation when ru is missing too', function () {
         ->and($page->translation()->locale)->toBe('en');
 });
 
-it('returns null when the page has no translations at all', function () {
+it('returns null when the page has no translations at all', function (): void {
     $page = Page::factory()->create();
 
     expect($page->translation('en'))->toBeNull();
 });
 
-it('uses the current application locale when none is passed', function () {
+it('uses the current application locale when none is passed', function (): void {
     $page = Page::factory()
         ->has(PageTranslation::factory()->ru(), 'translations')
         ->has(PageTranslation::factory()->en(), 'translations')
@@ -55,14 +55,14 @@ it('uses the current application locale when none is passed', function () {
     expect($page->translation()->locale)->toBe('en');
 });
 
-it('scopes to published pages only', function () {
+it('scopes to published pages only', function (): void {
     Page::factory()->count(2)->create();
     Page::factory()->draft()->create();
 
     expect(Page::query()->published()->count())->toBe(2);
 });
 
-it('casts page translation content to an array', function () {
+it('casts page translation content to an array', function (): void {
     $translation = PageTranslation::factory()
         ->withBlocks([['_type' => 'hero', 'title' => 'Привет']])
         ->for(Page::factory(), 'page')

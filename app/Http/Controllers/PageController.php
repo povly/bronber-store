@@ -36,11 +36,9 @@ class PageController extends Controller
 
         $translation = $page->translation();
 
-        if ($translation === null) {
-            abort(404);
-        }
+        abort_if($translation === null, 404);
 
-        $html = app(BlockRenderer::class)->render($translation->content ?? [], 'page');
+        $html = resolve(BlockRenderer::class)->render($translation->content ?? [], 'page');
 
         view()->share('seo', $this->seo($page, $translation));
 
@@ -61,9 +59,9 @@ class PageController extends Controller
      *
      * @return array<string, mixed>
      */
-    private function seo(Page $page, PageTranslation $translation): array
+    private function seo(Page $page, PageTranslation $pageTranslation): array
     {
-        $default = app(LanguageService::class)->defaultCode();
+        $default = resolve(LanguageService::class)->defaultCode();
 
         $alternates = [];
 
@@ -79,13 +77,13 @@ class PageController extends Controller
         }
 
         return [
-            'title' => $translation->title,
-            'meta_title' => $translation->meta_title,
-            'meta_description' => $translation->meta_description,
-            'meta_keywords' => $translation->meta_keywords,
-            'meta_robots' => $translation->metaRobots(),
-            'canonical_url' => $translation->canonical_url,
-            'og_image' => $translation->og_image,
+            'title' => $pageTranslation->title,
+            'meta_title' => $pageTranslation->meta_title,
+            'meta_description' => $pageTranslation->meta_description,
+            'meta_keywords' => $pageTranslation->meta_keywords,
+            'meta_robots' => $pageTranslation->metaRobots(),
+            'canonical_url' => $pageTranslation->canonical_url,
+            'og_image' => $pageTranslation->og_image,
             'alternates' => $alternates,
         ];
     }

@@ -56,7 +56,7 @@ final class PageFormPage extends FormPage
     #[\Override]
     protected function rules(DataWrapperContract $item): array
     {
-        $page = $item->getOriginal();
+        $model = $item->getOriginal();
 
         return [
             'slug' => [
@@ -64,10 +64,10 @@ final class PageFormPage extends FormPage
                 'string',
                 'max:255',
                 'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
-                Rule::unique('pages', 'slug')->ignore($page?->getKey()),
+                Rule::unique('pages', 'slug')->ignore($model?->getKey()),
             ],
             'sort_order' => ['integer', 'min:0'],
-            'translations.*.locale' => [Rule::in(app(LanguageService::class)->codes())],
+            'translations.*.locale' => [Rule::in(resolve(LanguageService::class)->codes())],
             'translations.*.title' => ['required', 'string', 'max:255'],
         ];
     }

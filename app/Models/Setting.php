@@ -25,7 +25,7 @@ class Setting extends Model
      */
     public static function get(string $key, ?string $locale = null): array
     {
-        return app(SettingService::class)->get($key, $locale);
+        return resolve(SettingService::class)->get($key, $locale);
     }
 
     /**

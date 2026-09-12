@@ -13,12 +13,12 @@ uses(RefreshDatabase::class);
 uses()->group('moonshine');
 
 beforeEach(function (): void {
-    app(LanguageService::class)->clearCache();
+    resolve(LanguageService::class)->clearCache();
 
     Language::factory()->default()->create(['code' => 'ru', 'sort_order' => 0]);
     Language::factory()->create(['code' => 'en', 'sort_order' => 1]);
 
-    $this->resource = app(PageResource::class);
+    $this->resource = resolve(PageResource::class);
     $this->user = MoonshineUser::factory()->create();
 });
 

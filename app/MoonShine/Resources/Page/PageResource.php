@@ -71,7 +71,7 @@ class PageResource extends ModelResource
         /** @var Page $page */
         $page = $item->getOriginal();
 
-        $codes = app(LanguageService::class)->codes();
+        $codes = resolve(LanguageService::class)->codes();
         $existing = $page->translations()->pluck('locale')->all();
 
         foreach (array_diff($codes, $existing) as $locale) {

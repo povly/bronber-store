@@ -32,7 +32,7 @@ final class LanguageFormPage extends FormPage
             Text::make('Код', 'code')
                 ->required()
                 ->hint('Двухбуквенный код, например: de. Ключ связей — после создания не меняется.')
-                ->readonly(static fn (Text $field): bool => $field->getData()?->getOriginal()?->exists ?? false),
+                ->readonly(static fn (Text $text): bool => $text->getData()?->getOriginal()?->exists ?? false),
 
             Text::make('Название', 'name')->required(),
 
@@ -45,7 +45,7 @@ final class LanguageFormPage extends FormPage
     #[\Override]
     protected function rules(DataWrapperContract $item): array
     {
-        $language = $item->getOriginal();
+        $model = $item->getOriginal();
 
         return [
             'code' => [
@@ -53,7 +53,7 @@ final class LanguageFormPage extends FormPage
                 'string',
                 'max:12',
                 'regex:/^[a-z]{2}(?:[-_][a-z]{2})?$/i',
-                Rule::unique('languages', 'code')->ignore($language?->getKey()),
+                Rule::unique('languages', 'code')->ignore($model?->getKey()),
             ],
             'name' => ['required', 'string', 'max:255'],
             'sort_order' => ['integer', 'min:0'],

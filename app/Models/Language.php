@@ -24,8 +24,8 @@ class Language extends Model
      */
     protected static function booted(): void
     {
-        static::saved(fn () => app(LanguageService::class)->clearCache());
-        static::deleted(fn () => app(LanguageService::class)->clearCache());
+        static::saved(fn () => resolve(LanguageService::class)->clearCache());
+        static::deleted(fn () => resolve(LanguageService::class)->clearCache());
     }
 
     /**

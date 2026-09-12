@@ -31,11 +31,11 @@ class Page extends Model
     /**
      * Scope only published pages.
      *
-     * @param  Builder<Page>  $query
+     * @param  Builder<Page>  $builder
      */
-    public function scopePublished(Builder $query): Builder
+    protected function scopePublished(Builder $builder): Builder
     {
-        return $query->where('is_published', true);
+        return $builder->where('is_published', true);
     }
 
     /**
@@ -46,7 +46,7 @@ class Page extends Model
         $locale ??= app()->getLocale();
 
         return $this->translations->firstWhere('locale', $locale)
-            ?? $this->translations->firstWhere('locale', app(LanguageService::class)->defaultCode())
+            ?? $this->translations->firstWhere('locale', resolve(LanguageService::class)->defaultCode())
             ?? $this->translations->first();
     }
 

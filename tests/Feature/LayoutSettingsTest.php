@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 uses(RefreshDatabase::class);
 
 beforeEach(function (): void {
-    app(LanguageService::class)->clearCache();
+    resolve(LanguageService::class)->clearCache();
 
     Language::factory()->default()->create(['code' => 'ru', 'sort_order' => 0]);
     Language::factory()->create(['code' => 'en', 'sort_order' => 1]);

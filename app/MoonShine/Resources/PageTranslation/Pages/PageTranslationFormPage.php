@@ -40,7 +40,7 @@ final class PageTranslationFormPage extends FormPage
                 )
                 ->required()
                 ->hint('Перевод для выбранного языка; у страницы может быть только один перевод на язык')
-                ->readonly(static fn (Select $field): bool => $field->getData()?->getOriginal()?->exists ?? false),
+                ->readonly(static fn (Select $select): bool => $select->getData()?->getOriginal()?->exists ?? false),
 
             Text::make('Заголовок', 'title')->required(),
             Text::make('Meta title', 'meta_title'),
@@ -57,22 +57,22 @@ final class PageTranslationFormPage extends FormPage
     #[\Override]
     protected function rules(DataWrapperContract $item): array
     {
-        $translation = $item->getOriginal();
+        $model = $item->getOriginal();
 
         return [
             'title' => ['required', 'string', 'max:255'],
             'locale' => [
                 'required',
                 'string',
-                Rule::in(app(LanguageService::class)->codes()),
+                Rule::in(resolve(LanguageService::class)->codes()),
                 Rule::unique('page_translations', 'locale')
                     ->where(
-                        static fn (QueryBuilder $query): QueryBuilder => $query->where(
+                        static fn (QueryBuilder $queryBuilder): QueryBuilder => $queryBuilder->where(
                             'page_id',
                             (int) request()->input('page_id', 0),
                         ),
                     )
-                    ->ignore($translation?->getKey()),
+                    ->ignore($model?->getKey()),
             ],
         ];
     }

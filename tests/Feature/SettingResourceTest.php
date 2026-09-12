@@ -14,12 +14,12 @@ uses(RefreshDatabase::class);
 uses()->group('moonshine');
 
 beforeEach(function (): void {
-    app(LanguageService::class)->clearCache();
+    resolve(LanguageService::class)->clearCache();
 
     Language::factory()->default()->create(['code' => 'ru', 'sort_order' => 0]);
     Language::factory()->create(['code' => 'en', 'sort_order' => 1]);
 
-    $this->resource = app(SettingResource::class);
+    $this->resource = resolve(SettingResource::class);
     $this->user = MoonshineUser::factory()->create();
 });
 
@@ -80,7 +80,7 @@ it('seeds header and footer for every active language', function (): void {
     $this->seed(SettingsSeeder::class);
 
     $rows = Setting::query()->get()
-        ->map(fn (Setting $s): string => $s->key.'.'.$s->locale)
+        ->map(fn (Setting $setting): string => $setting->key.'.'.$setting->locale)
         ->all();
 
     expect($rows)->toEqualCanonicalizing(['header.ru', 'header.en', 'footer.ru', 'footer.en']);

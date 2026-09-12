@@ -12,12 +12,12 @@ uses(RefreshDatabase::class);
 uses()->group('moonshine');
 
 beforeEach(function (): void {
-    app(LanguageService::class)->clearCache();
+    resolve(LanguageService::class)->clearCache();
 
     Language::factory()->default()->create(['code' => 'ru', 'sort_order' => 0]);
     Language::factory()->create(['code' => 'en', 'sort_order' => 1]);
 
-    $this->resource = app(LanguageResource::class);
+    $this->resource = resolve(LanguageResource::class);
     $this->user = MoonshineUser::factory()->create();
 });
 
@@ -34,10 +34,10 @@ it('create page', function (): void {
 });
 
 it('edit page', function (): void {
-    $item = Language::query()->where('code', 'en')->firstOrFail();
+    $language = Language::query()->where('code', 'en')->firstOrFail();
 
     actingAs($this->user, 'moonshine')
-        ->get($this->resource->getFormPageUrl($item->getKey()))
+        ->get($this->resource->getFormPageUrl($language->getKey()))
         ->assertOk();
 });
 
@@ -66,12 +66,12 @@ it('rejects an invalid language code', function (): void {
 });
 
 it('switching the default language demotes others and refreshes the cache', function (): void {
-    $en = Language::query()->where('code', 'en')->firstOrFail();
+    $language = Language::query()->where('code', 'en')->firstOrFail();
 
     actingAs($this->user, 'moonshine')
         ->patch(route('moonshine.crud.update', [
             'resourceUri' => $this->resource->getUriKey(),
-            'resourceItem' => $en->getKey(),
+            'resourceItem' => $language->getKey(),
         ]), [
             'code' => 'en',
             'name' => 'English',
@@ -80,18 +80,18 @@ it('switching the default language demotes others and refreshes the cache', func
         ])
         ->assertRedirect();
 
-    expect($en->refresh()->is_default)->toBeTrue()
+    expect($language->refresh()->is_default)->toBeTrue()
         ->and(Language::query()->where('code', 'ru')->first()->is_default)->toBeFalse()
-        ->and(app(LanguageService::class)->defaultCode())->toBe('en');
+        ->and(resolve(LanguageService::class)->defaultCode())->toBe('en');
 });
 
 it('cannot leave the system without a default language', function (): void {
-    $ru = Language::query()->where('code', 'ru')->firstOrFail();
+    $language = Language::query()->where('code', 'ru')->firstOrFail();
 
     actingAs($this->user, 'moonshine')
         ->patch(route('moonshine.crud.update', [
             'resourceUri' => $this->resource->getUriKey(),
-            'resourceItem' => $ru->getKey(),
+            'resourceItem' => $language->getKey(),
         ]), [
             'code' => 'ru',
             'name' => 'Русский',
@@ -100,6 +100,6 @@ it('cannot leave the system without a default language', function (): void {
         ])
         ->assertRedirect();
 
-    expect($ru->refresh()->is_default)->toBeTrue()
-        ->and(app(LanguageService::class)->defaultCode())->toBe('ru');
+    expect($language->refresh()->is_default)->toBeTrue()
+        ->and(resolve(LanguageService::class)->defaultCode())->toBe('ru');
 });

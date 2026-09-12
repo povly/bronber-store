@@ -16,10 +16,10 @@ class SetLocale
      */
     public function handle(Request $request, Closure $next, ?string $locale = null): Response
     {
-        $languages = app(LanguageService::class);
-        $locale ??= $languages->defaultCode();
+        $languageService = resolve(LanguageService::class);
+        $locale ??= $languageService->defaultCode();
 
-        if (in_array($locale, $languages->codes(), true)) {
+        if (in_array($locale, $languageService->codes(), true)) {
             app()->setLocale($locale);
         }
 

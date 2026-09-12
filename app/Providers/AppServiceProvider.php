@@ -32,14 +32,14 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('favorites', json_decode($_COOKIE['favorites'] ?? '[]', true) ?? []);
 
-        View::composer(['blocks.common.header.header', 'blocks.common.footer.footer'], function (IlluminateView $view): void {
-            $context = str_contains($view->getName(), 'header') ? 'header' : 'footer';
+        View::composer(['blocks.common.header.header', 'blocks.common.footer.footer'], function (IlluminateView $illuminateView): void {
+            $context = str_contains($illuminateView->getName(), 'header') ? 'header' : 'footer';
 
-            $blocks = app(SettingService::class)->get($context);
+            $blocks = resolve(SettingService::class)->get($context);
 
-            $view->with(
+            $illuminateView->with(
                 "{$context}BlocksHtml",
-                $blocks === [] ? null : app(BlockRenderer::class)->render($blocks, $context),
+                $blocks === [] ? null : resolve(BlockRenderer::class)->render($blocks, $context),
             );
 
             Log::debug('[Layout] settings header/footer resolved, source={source}', [
@@ -48,17 +48,17 @@ class AppServiceProvider extends ServiceProvider
             ]);
         });
 
-        View::composer(['blocks.common.header.header', 'layouts.app'], function (IlluminateView $view): void {
+        View::composer(['blocks.common.header.header', 'layouts.app'], function (IlluminateView $illuminateView): void {
             $searchTypes = collect(config('search.types'))->map(fn (array $type): array => [
                 'value' => $type['value'],
                 'label' => __($type['label']),
             ])->all();
 
-            $view->with('searchTypes', $searchTypes);
-            $view->with('availableLocales', config('app.available_locales'));
+            $illuminateView->with('searchTypes', $searchTypes);
+            $illuminateView->with('availableLocales', config('app.available_locales'));
         });
 
-        View::composer('*', fn (IlluminateView $view) => $view->with('catalogCategories', $this->catalogCategories()));
+        View::composer('*', fn (IlluminateView $illuminateView) => $illuminateView->with('catalogCategories', $this->catalogCategories()));
     }
 
     /**

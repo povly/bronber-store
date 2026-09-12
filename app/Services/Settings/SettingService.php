@@ -59,7 +59,7 @@ class SettingService
      */
     private function resolve(string $key, string $locale): array
     {
-        $default = app(LanguageService::class)->defaultCode();
+        $default = resolve(LanguageService::class)->defaultCode();
 
         try {
             $settings = Setting::query()
