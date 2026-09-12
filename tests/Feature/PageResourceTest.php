@@ -42,6 +42,72 @@ it('edit page', function (): void {
         ->assertOk();
 });
 
+it('edit page renders for a page with translations without running out of memory', function (): void {
+    // Regression: FlexibleLayouts must not be nested inside HasMany inline fields
+    // (infinite recursion in field name generation). Translations are edited
+    // through the related resource form instead.
+    $page = Page::factory()->create(['slug' => 'with-translations']);
+    $page->translations()->create(['locale' => 'ru', 'title' => 'С переводами']);
+
+    $html = actingAs($this->user, 'moonshine')
+        ->get($this->resource->getFormPageUrl($page->getKey()))
+        ->assertOk()
+        ->getContent();
+
+    expect(strlen($html))->toBeLessThan(5_000_000);
+});
+
+it('shows a create button for translations on the page form', function (): void {
+    $page = Page::factory()->create();
+
+    actingAs($this->user, 'moonshine')
+        ->get($this->resource->getFormPageUrl($page->getKey()))
+        ->assertOk()
+        ->assertSee('Добавить');
+});
+
+it('allows creating a translation for a language the page does not have yet', function (): void {
+    $page = Page::factory()->create(['slug' => 'manual-translation']);
+    $page->translations()->create(['locale' => 'ru', 'title' => 'Русский']);
+
+    actingAs($this->user, 'moonshine')
+        ->post(route('moonshine.crud.store', ['resourceUri' => 'page-translation-resource']), [
+            'page_id' => (string) $page->getKey(),
+            'locale' => 'en',
+            'title' => 'English version',
+        ])
+        ->assertRedirect();
+
+    expect($page->refresh()->translations->pluck('locale')->all())->toEqualCanonicalizing(['ru', 'en']);
+});
+
+it('rejects a second translation for the same language of the page', function (): void {
+    $page = Page::factory()->create(['slug' => 'duplicate-locale']);
+    $page->translations()->create(['locale' => 'ru', 'title' => 'Русский']);
+
+    actingAs($this->user, 'moonshine')
+        ->post(route('moonshine.crud.store', ['resourceUri' => 'page-translation-resource']), [
+            'page_id' => (string) $page->getKey(),
+            'locale' => 'ru',
+            'title' => 'Дубликат',
+        ])
+        ->assertInvalid(['locale'], 'page-translation-resource');
+
+    expect($page->translations()->where('locale', 'ru')->count())->toBe(1);
+});
+
+it('rejects a translation for an inactive language', function (): void {
+    $page = Page::factory()->create(['slug' => 'inactive-locale']);
+
+    actingAs($this->user, 'moonshine')
+        ->post(route('moonshine.crud.store', ['resourceUri' => 'page-translation-resource']), [
+            'page_id' => (string) $page->getKey(),
+            'locale' => 'fr',
+            'title' => 'Français',
+        ])
+        ->assertInvalid(['locale'], 'page-translation-resource');
+});
+
 it('creates translations for every active language on save', function (): void {
     actingAs($this->user, 'moonshine')
         ->post(route('moonshine.crud.store', ['resourceUri' => $this->resource->getUriKey()]), [

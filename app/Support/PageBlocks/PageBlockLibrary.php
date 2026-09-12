@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Support\PageBlocks;
 
-use MoonShine\UI\Components\Layout\Column;
-use MoonShine\UI\Components\Layout\Flex;
 use MoonShine\UI\Fields\Json;
 use MoonShine\UI\Fields\Number;
 use MoonShine\UI\Fields\Text;
@@ -30,16 +28,10 @@ class PageBlockLibrary
     {
         return FlexibleLayouts::make('Контент', 'content')
             ->block('hero', 'Герой (баннер)', [
-                Flex::make([
-                    Column::make([
-                        Text::make('Заголовок', 'title'),
-                        Textarea::make('Подзаголовок', 'subtitle'),
-                    ])->columnSpan(6),
-                    Column::make([
-                        MediaManagerPicker::make('Фоновое изображение', 'image')
-                            ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
-                    ])->columnSpan(6),
-                ]),
+                Text::make('Заголовок', 'title'),
+                Textarea::make('Подзаголовок', 'subtitle'),
+                MediaManagerPicker::make('Фоновое изображение', 'image')
+                    ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
             ], limit: 1, category: 'Контент', description: 'Крупный баннер с заголовком и картинкой', icon: 'photo')
             ->block('text', 'Текст (Editor.js)', [
                 EditorJs::make('Тело блока', 'body'),
@@ -57,29 +49,17 @@ class PageBlockLibrary
                     ]),
             ], category: 'Контент', description: 'Список вопрос-ответ', icon: 'chat-bubble-left-right')
             ->block('contacts', 'Контакты', [
-                Flex::make([
-                    Column::make([
-                        Text::make('Адрес', 'address'),
-                        Text::make('Телефон', 'phone'),
-                    ])->columnSpan(6),
-                    Column::make([
-                        Text::make('E-mail', 'email'),
-                        Text::make('Ссылка на карту', 'map_url'),
-                    ])->columnSpan(6),
-                ]),
+                Text::make('Адрес', 'address'),
+                Text::make('Телефон', 'phone'),
+                Text::make('E-mail', 'email'),
+                Text::make('Ссылка на карту', 'map_url'),
             ], limit: 1, category: 'Контент', description: 'Адрес, телефон, ссылка на карту', icon: 'map-pin')
             ->block('featured-products', 'Товары (динамический)', [
-                Flex::make([
-                    Column::make([
-                        Text::make('Заголовок секции', 'title'),
-                    ])->columnSpan(6),
-                    Column::make([
-                        Number::make('Количество товаров', 'count')
-                            ->min(1)
-                            ->max(12)
-                            ->default(4),
-                    ])->columnSpan(6),
-                ]),
+                Text::make('Заголовок секции', 'title'),
+                Number::make('Количество товаров', 'count')
+                    ->min(1)
+                    ->max(12)
+                    ->default(4),
             ], category: 'Динамические', description: 'Данные берутся из каталога (сейчас mock, позже CRM-склад)', icon: 'cube');
     }
 
@@ -97,14 +77,8 @@ class PageBlockLibrary
                     ]),
             ], limit: 1, category: 'Шапка', description: 'Основное меню шапки', icon: 'bars-3')
             ->block('contacts', 'Контакты в шапке', [
-                Flex::make([
-                    Column::make([
-                        Text::make('Телефон', 'phone'),
-                    ])->columnSpan(6),
-                    Column::make([
-                        Text::make('E-mail', 'email'),
-                    ])->columnSpan(6),
-                ]),
+                Text::make('Телефон', 'phone'),
+                Text::make('E-mail', 'email'),
             ], limit: 1, category: 'Шапка', description: 'Телефон и почта в шапке', icon: 'phone');
     }
 

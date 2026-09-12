@@ -67,15 +67,20 @@ app/MoonShine/Resources/
 ### Страницы (PageResource)
 
 CRUD страниц сайта: slug (kebab-case, уникальный), сортировка, публикация и **переводы** —
-HasMany в режиме табов, по табу на каждый активный язык из `LanguageService`.
+HasMany на ресурс `PageTranslationResource` (таблица + модальная форма редактирования).
 
 - При сохранении страницы **автоматически создаются переводы** для всех активных языков
   (хук `afterSave`); новые языки, добавленные позже, добавляются при следующем сохранении.
-- В каждом переводе: заголовок, полный набор SEO-полей (meta title/description/keywords,
+- Форма перевода (модалка): заголовок, полный набор SEO-полей (meta title/description/keywords,
   robots, canonical URL, OG-изображение через media-manager) и **контент** — блоки
   `FlexibleLayouts` из `PageBlockLibrary::page()` (hero, текст Editor.js, галерея, FAQ,
   контакты, динамический «Товары»).
-- Форма разбита на табы «Страница» / «Переводы».
+- Форма страницы разбита на табы «Страница» / «Переводы».
+
+> ⚠️ Не вкладывайте `FlexibleLayouts` в inline-поля `HasMany` (`->fields([...])`) —
+> возникает бесконечная рекурсия генерации имён полей (OOM). Поле должно жить на верхнем
+> уровне формы связанного ресурса (как в `PageTranslationFormPage`) — проверено тестом
+> `edit page renders for a page with translations without running out of memory`.
 
 ### Языки (LanguageResource)
 
