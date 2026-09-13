@@ -92,23 +92,23 @@ class AboutPageSeeder extends Seeder
                 '_type' => 'about-timeline',
                 'title' => 'История компании',
                 'items' => [
-                    ['_type' => 'item', 'date' => '2017', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2017', 'title_mobile' => '2017', 'text' => $this->editorJs(
                         'Компания Bronber открыла первый магазин автозапчастей для BMW, Audi и Volkswagen.',
                         'В ассортименте — топливные насосы и компоненты топливной системы напрямую от официальных дистрибьюторов.'
                     )],
-                    ['_type' => 'item', 'date' => '2018', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2018', 'title_mobile' => '2018', 'text' => $this->editorJs(
                         'Расширили склад и запустили сервис подбора запчастей по VIN-коду.',
                         'Клиенты получили возможность заказывать редкие позиции под конкретный автомобиль без долгого ожидания.'
                     )],
-                    ['_type' => 'item', 'date' => '2019', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2019', 'title_mobile' => '2019', 'text' => $this->editorJs(
                         'Запустили онлайн-каталог на сайте: поиск по артикулу, характеристики и совместимость деталей.',
                         'Заказы стало можно оформлять круглосуточно из любого региона.'
                     )],
-                    ['_type' => 'item', 'date' => '2020', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2020', 'title_mobile' => '2020', 'text' => $this->editorJs(
                         'Начали отправлять заказы по всей России транспортными компаниями.',
                         'Добавили оплату через СБП и банковские карты; доставка в регионы занимает от 3 до 7 рабочих дней.'
                     )],
-                    ['_type' => 'item', 'date' => '2021', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2021', 'title_mobile' => '2021', 'text' => $this->editorJs(
                         'Более 10 000 клиентов купили запчасти в Bronber.',
                         'Запустили программу лояльности с бонусами за покупки и отзывы.'
                     )],
@@ -129,23 +129,23 @@ class AboutPageSeeder extends Seeder
                 '_type' => 'about-timeline',
                 'title' => 'Our Story',
                 'items' => [
-                    ['_type' => 'item', 'date' => '2017', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2017', 'title_mobile' => '2017', 'text' => $this->editorJs(
                         'Bronber opened its first auto parts store for BMW, Audi and Volkswagen.',
                         'The catalogue featured fuel pumps and fuel system components supplied directly by official distributors.'
                     )],
-                    ['_type' => 'item', 'date' => '2018', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2018', 'title_mobile' => '2018', 'text' => $this->editorJs(
                         'We expanded our warehouse and launched a VIN-based parts lookup service.',
                         'Customers could order rare parts for their exact car without a long wait.'
                     )],
-                    ['_type' => 'item', 'date' => '2019', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2019', 'title_mobile' => '2019', 'text' => $this->editorJs(
                         'We launched the online catalogue: search by article number, specifications and parts compatibility.',
                         'Orders could now be placed around the clock from any region.'
                     )],
-                    ['_type' => 'item', 'date' => '2020', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2020', 'title_mobile' => '2020', 'text' => $this->editorJs(
                         'We started shipping orders across Russia with transport companies.',
                         'SBP and bank card payments were added; delivery to the regions takes 3 to 7 business days.'
                     )],
-                    ['_type' => 'item', 'date' => '2021', 'text' => $this->editorJs(
+                    ['_type' => 'item', 'title_desktop' => '2021', 'title_mobile' => '2021', 'text' => $this->editorJs(
                         'More than 10,000 customers have bought parts from Bronber.',
                         'We launched a loyalty program with bonuses for purchases and reviews.'
                     )],

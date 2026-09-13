@@ -7,7 +7,19 @@
 @endpush
 
 @php
-    $timeline = $block['items'] ?? [];
+    // Заголовки устройств: ПК — кнопка слайдера, телефон — шапка аккордеона.
+    // Поля взаимно фолбэчатся друг в друга; date — legacy-поле, удалённое
+    // из админки, но сохранённые элементы могут его ещё нести.
+    $timeline = array_map(static function (array $item): array {
+        $desktop = (string) ($item['title_desktop'] ?? '');
+        $mobile = (string) ($item['title_mobile'] ?? '');
+        $legacyDate = (string) ($item['date'] ?? '');
+
+        $item['heading_desktop'] = $desktop !== '' ? $desktop : ($mobile !== '' ? $mobile : $legacyDate);
+        $item['heading_mobile'] = $mobile !== '' ? $mobile : ($desktop !== '' ? $desktop : $legacyDate);
+
+        return $item;
+    }, $block['items'] ?? []);
 @endphp
 
 <section class="about" x-data="about()">
@@ -30,7 +42,7 @@
                             </span>
                             <button type="button" class="about__year"
                                 @click="select({{ $i }}); $nextTick(() => scrollToReveal({{ $i }}))">
-                                {{ $item['date'] }}
+                                {{ $item['heading_desktop'] }}
                             </button>
                         </div>
                     @endforeach
@@ -57,7 +69,7 @@
                     <div class="about__acc-item" :class="{ 'is-open': accActive === {{ $i }} }">
                         <button type="button" class="about__acc-header" @click="accToggle({{ $i }})"
                             :aria-expanded="accActive === {{ $i }}">
-                            <span class="about__acc-title">{{ $item['date'] }}</span>
+                            <span class="about__acc-title">{{ $item['heading_mobile'] }}</span>
                             <span class="about__acc-chevron">
                                 <span></span>
                                 <span></span>

@@ -139,6 +139,10 @@ class PageController extends Controller
     {
         view()->share('seo', $this->seo($page, $translation));
 
+        // Page context for nested block views: the mediaImage editorjs
+        // override renders converted <x-img> markup only on the about page.
+        view()->share('currentPage', $page);
+
         $translation->content = MediaFallback::apply(
             $translation->content ?? [],
             $this->defaultContent($page, $translation),

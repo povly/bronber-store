@@ -10,14 +10,15 @@
         }
 
         @media screen and (min-width: 1200px) {
-            margin-bottom: fluid-type(1200px, 1440px, 60px, 80px);
+            margin-bottom: fluid-type(1200px, 1440px, 40px, 60px);
         }
     }
 
     &__years {
-        --slider-gap: 20px;
+        --slider-gap: 0px;
         --per-view: 5;
-        padding-bottom: 10px;
+        padding: 0;
+        margin: 0;
     }
 
     &__years-track {
@@ -69,6 +70,11 @@
         background: var(--color-gray-placeholder);
         margin-top: fluid-type(375px, 768px, 8px, 10px);
         margin-bottom: fluid-type(375px, 768px, 20px, 24px);
+
+        @media screen and (min-width: 1200px){
+            margin-top: 35px;
+            margin-bottom: 40px;
+        }
     }
 
     &__subtitle {
@@ -80,6 +86,32 @@
         line-height: 130%;
         display: grid;
         gap: 20px;
+
+        :is(h2, h3, h4, h5, h6) {
+            font-weight: 700;
+            line-height: 100%;
+            margin-bottom: fluid-type(375px, 768px, 15px, 30px);
+        }
+
+        h2 {
+            font-size: fluid-type(768px, 1200px, 25px, 40px);
+        }
+
+        h3 {
+            font-size: fluid-type(768px, 1200px, 23px, 35px);
+        }
+
+        h4 {
+            font-size: fluid-type(768px, 1200px, 21px, 30px);
+        }
+
+        h5 {
+            font-size: fluid-type(768px, 1200px, 19px, 25px);
+        }
+
+        h6 {
+            font-size: fluid-type(768px, 1200px, 17px, 20px);
+        }
 
         ul {
             list-style: disc;
@@ -166,8 +198,8 @@
 
     &__acc-title {
         font-weight: 700;
-        font-size: 25px;
-        line-height: fluid-type(375px, 1200px, 110%, 100%);
+        font-size: fluid-type(768px, 1200px, 25px, 70px);
+        line-height: fluid-type(768px, 1200px, 110%, 100%);
     }
 
     &__acc-chevron {
@@ -203,5 +235,12 @@
     &__acc-separator {
         height: 1px;
         background: var(--color-gray-placeholder);
+    }
+
+    /* editorjs mediaImage: скрывает файлы сверх первых двух — контракт
+       «первое изображение = телефон/десктоп, второе = планшетная вилка»,
+       свап выполняют правила &__image выше */
+    .about__image-wrap .about__image:nth-child(n + 3) {
+        display: none;
     }
 }

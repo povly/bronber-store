@@ -23,7 +23,9 @@ final class AboutTimelineBlock implements PageBlock
                 ->escapeOnApply(static fn (): bool => false),
             FlexibleLayouts::make('События', 'items')
                 ->block('item', 'Событие', [
-                    Text::make('Дата', 'date')
+                    Text::make('Заголовок (ПК)', 'title_desktop')
+                        ->escapeOnApply(static fn (): bool => false),
+                    Text::make('Заголовок (телефон)', 'title_mobile')
                         ->escapeOnApply(static fn (): bool => false),
                     EditorJs::make('Текст', 'text')
                         ->escapeOnApply(static fn (): bool => false),
