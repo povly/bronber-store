@@ -1,6 +1,7 @@
 <?php
 
 use App\Support\PageBlocks\BlockRenderer;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 
 it('renders each block type to its matching view', function (array $block, string $expectedClass): void {
@@ -79,4 +80,28 @@ it('renders featured products from the catalog mock', function (): void {
 
 it('renders an empty string for an empty block list', function (): void {
     expect(resolve(BlockRenderer::class)->render([], 'page'))->toBe('');
+});
+
+it('renders home-partners images stored as a JSON-encoded string', function (): void {
+    File::ensureDirectoryExists(storage_path('app/public/home/partners-test'));
+    File::put(storage_path('app/public/home/partners-test/logo.png'), 'png');
+
+    try {
+        $html = resolve(BlockRenderer::class)->render([
+            ['_type' => 'home-partners', 'title' => 'Наши партнеры', 'images' => '["home/partners-test/logo.png"]'],
+        ], 'page');
+
+        expect($html)->toContain('home-partners__title')
+            ->and($html)->toContain('/storage/home/partners-test/logo');
+    } finally {
+        File::deleteDirectory(storage_path('app/public/home/partners-test'));
+    }
+});
+
+it('skips the partners section when images string is not valid JSON', function (): void {
+    $html = resolve(BlockRenderer::class)->render([
+        ['_type' => 'home-partners', 'title' => 'Наши партнеры', 'images' => 'not-json'],
+    ], 'page');
+
+    expect($html)->not->toContain('home-partners__');
 });

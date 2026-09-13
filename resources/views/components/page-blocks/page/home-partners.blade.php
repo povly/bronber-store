@@ -5,9 +5,22 @@
 @endpush
 
 @php
-    // MediaManagerPicker stores a list of disk-relative paths;
-    // legacy Json format ({src: path}) is still accepted.
-    $images = collect($block['images'] ?? [])
+    // MediaManagerPicker stores a list of disk-relative paths; a form
+    // re-saved via MoonShine may persist them as a JSON-encoded string —
+    // decode it. Legacy Json format ({src: path}) is still accepted.
+    $rawImages = $block['images'] ?? [];
+
+    if (is_string($rawImages)) {
+        $decoded = json_decode($rawImages, true);
+
+        if (! is_array($decoded)) {
+            Log::debug('[home-partners] images is a non-JSON string, images skipped');
+        }
+
+        $rawImages = is_array($decoded) ? $decoded : [];
+    }
+
+    $images = collect($rawImages)
         ->map(static fn ($image): ?string => is_array($image) ? ($image['src'] ?? null) : (string) $image)
         ->filter()
         ->map(static function (string $path): string {
