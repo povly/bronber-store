@@ -16,7 +16,7 @@
         "laravel/tinker": "^3.0",
         "moonshine/moonshine": "^4.15",
         "povly/moonshine-flexible-layouts": "^1.0",
-        "povly/moonshine-image-editor": "dev-main",
+        "povly/moonshine-image-editor": "^1.4",
         "sckatik/moonshine-editorjs": "^2.0",
         "yurizoom/moonshine-media-manager": "^4.6"
     },
