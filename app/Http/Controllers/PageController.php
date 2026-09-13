@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Models\Page;
 use App\Models\PageTranslation;
 use App\Services\Languages\LanguageService;
+use App\Support\PageBlocks\MediaFallback;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -120,14 +121,41 @@ class PageController extends Controller
      * Block HTML is rendered by the page view itself (not here): block
      * views @push their assets onto layout stacks, which only works for
      * views rendered nested inside the page view render cycle.
+     *
+     * Empty media fields of a non-default translation inherit the
+     * default language's value at render time (no DB duplication).
      */
     private function renderPage(Page $page, PageTranslation $translation): Response
     {
         view()->share('seo', $this->seo($page, $translation));
 
+        $translation->content = MediaFallback::apply(
+            $translation->content ?? [],
+            $this->defaultContent($page, $translation),
+        );
+
         return response()->view('page', [
             'translation' => $translation,
         ]);
+    }
+
+    /**
+     * Content of the default-language translation — the media fallback
+     * source; null when rendering the default translation itself.
+     *
+     * @return list<array<string, mixed>>|null
+     */
+    private function defaultContent(Page $page, PageTranslation $translation): ?array
+    {
+        $default = resolve(LanguageService::class)->defaultCode();
+
+        if ($translation->locale === $default) {
+            return null;
+        }
+
+        $content = $page->translations->firstWhere('locale', $default)?->content;
+
+        return is_array($content) ? $content : null;
     }
 
     /**

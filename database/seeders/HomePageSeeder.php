@@ -114,23 +114,25 @@ class HomePageSeeder extends Seeder
                 ],
             ],
             ['_type' => 'home-categories', 'title' => 'Categories'],
+            // Item media is owned by the default locale: empty media fields
+            // of non-default translations inherit the default's value at
+            // render time (App\Support\PageBlocks\MediaFallback).
             [
                 '_type' => 'home-advs',
                 'items' => [
-                    ['_type' => 'item', 'title' => 'Fast delivery', 'image' => '/images/home/advs/1.svg', 'text' => 'Orders shipped within 24 hours'],
-                    ['_type' => 'item', 'title' => 'Easy payment', 'image' => '/images/home/advs/2.svg', 'text' => 'Pay by card or on delivery'],
-                    ['_type' => 'item', 'title' => 'Returns', 'image' => '/images/home/advs/3.svg', 'text' => '14 days for hassle-free returns'],
-                    ['_type' => 'item', 'title' => 'Quality guarantee', 'image' => '/images/home/advs/4.svg', 'text' => 'Only proven auto parts'],
+                    ['_type' => 'item', 'title' => 'Fast delivery', 'text' => 'Orders shipped within 24 hours'],
+                    ['_type' => 'item', 'title' => 'Easy payment', 'text' => 'Pay by card or on delivery'],
+                    ['_type' => 'item', 'title' => 'Returns', 'text' => '14 days for hassle-free returns'],
+                    ['_type' => 'item', 'title' => 'Quality guarantee', 'text' => 'Only proven auto parts'],
                 ],
             ],
             ['_type' => 'home-products', 'title' => 'Recommended products', 'count' => 4],
             ['_type' => 'home-products', 'title' => 'Fuel pumps', 'count' => 4],
             ['_type' => 'home-products', 'title' => 'Brake discs', 'count' => 4],
-            [
-                '_type' => 'home-partners',
-                'title' => 'Our partners',
-                'images' => $this->partnerLogos(),
-            ],
+            // Media is owned by the default locale: empty media fields of
+            // non-default translations inherit the default's value at
+            // render time (App\Support\PageBlocks\MediaFallback).
+            ['_type' => 'home-partners', 'title' => 'Our partners'],
             [
                 '_type' => 'home-news',
                 'title' => 'News',
