@@ -25,6 +25,10 @@
 - **Страница FAQ из БД**: фиксированный роут `/faq` → `PageController::faq` (slug `faq`, fallback на
   статический прототип), блок `faq-items` (заголовок + аккордеон вопрос/ответ);
   демо-контент — `FaqPageSeeder` (ru/en, идемпотентный, заполняет только пустые переводы)
+- **Страница «Доставка и оплата» из БД**: фиксированный роут `/delivery` → `PageController::delivery`
+  (slug `delivery`, fallback на статический прототип), блоки `delivery-methods` (заголовок + карточки:
+  иконка/заголовок/описание) и `contact-list` (заголовок + контакты: иконка/текст/ссылка tel:|mailto:|URL);
+  демо-контент — `DeliveryPageSeeder` (ru/en, идемпотентный, тексты из lang-файлов прототипа)
 - **Полный SEO-набор** пер-локали: meta title/description/keywords, robots, canonical,
   OG/Twitter, hreflang-альтернативы + x-default
 - **Редактируемые языки** (`languages`): `LanguageService` (кэш) — источник локалей для
