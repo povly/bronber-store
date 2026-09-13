@@ -18,6 +18,9 @@
 
 - **DB-страницы**: slug + публикации + переводы per-locale (таблицы `pages`, `page_translations`),
   контент — блоки flexible-layouts (JSON, `_type`), рендер `BlockRenderer` → blade `pb-*`
+- **Страница FAQ из БД**: фиксированный роут `/faq` → `PageController::faq` (slug `faq`, fallback на
+  статический прототип), блок `faq-items` (заголовок + аккордеон вопрос/ответ);
+  демо-контент — `FaqPageSeeder` (ru/en, идемпотентный, заполняет только пустые переводы)
 - **Полный SEO-набор** пер-локали: meta title/description/keywords, robots, canonical,
   OG/Twitter, hreflang-альтернативы + x-default
 - **Редактируемые языки** (`languages`): `LanguageService` (кэш) — источник локалей для
