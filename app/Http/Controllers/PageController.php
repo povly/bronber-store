@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\PageTranslation;
 use App\Services\Languages\LanguageService;
 use App\Support\PageBlocks\MediaFallback;
+use App\Support\PageBreadcrumbs;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -163,8 +164,15 @@ class PageController extends Controller
             $this->defaultContent($page, $translation),
         );
 
+        // Breadcrumbs are page-level: Главная → published ancestors → current.
+        // The site root is canonical at /, a trail would duplicate it.
+        $breadcrumbs = $page->slug === self::HOME_SLUG
+            ? null
+            : PageBreadcrumbs::forPage($page);
+
         return response()->view('page', [
             'translation' => $translation,
+            'breadcrumbs' => $breadcrumbs,
         ]);
     }
 

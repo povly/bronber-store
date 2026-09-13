@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-#[Fillable(['slug', 'is_published', 'sort_order'])]
+#[Fillable(['slug', 'parent_id', 'is_published', 'sort_order'])]
 class Page extends Model
 {
     /**
@@ -26,6 +27,24 @@ class Page extends Model
     public function translations(): HasMany
     {
         return $this->hasMany(PageTranslation::class);
+    }
+
+    /**
+     * Parent page (page hierarchy for breadcrumbs / subpage lists).
+     *
+     * @return BelongsTo<Page, $this>
+     */
+    public function parent(): BelongsTo
+    {
+        return $this->belongsTo(Page::class, 'parent_id');
+    }
+
+    /**
+     * @return HasMany<Page, $this>
+     */
+    public function children(): HasMany
+    {
+        return $this->hasMany(Page::class, 'parent_id');
     }
 
     /**

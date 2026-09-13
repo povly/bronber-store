@@ -34,6 +34,7 @@ return [
     'top_career' => 'Карьера',
     'top_faq' => 'FAQ',
     'top_contacts' => 'Контакты',
+    'breadcrumbs_home' => 'Главная',
 
     // Footer
     'footer_social' => 'Соц.сети',

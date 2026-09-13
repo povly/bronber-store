@@ -15,11 +15,6 @@
 
 <section class="faq" x-data="{ open: 0 }">
     <div class="container">
-        <x-breadcrumbs class="faq__breadcrumbs" :items="[
-            ['label' => 'Главная', 'url' => route('home')],
-            ['label' => 'FAQ'],
-        ]" />
-
         <h1 class="faq__title">{{ $title }}</h1>
 
         <div class="faq__list">

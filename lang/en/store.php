@@ -34,6 +34,7 @@ return [
     'top_career' => 'Career',
     'top_faq' => 'FAQ',
     'top_contacts' => 'Contacts',
+    'breadcrumbs_home' => 'Home',
 
     // Footer
     'footer_social' => 'Social',

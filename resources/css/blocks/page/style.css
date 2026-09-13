@@ -1,0 +1,5 @@
+.page {
+    &__breadcrumbs {
+        margin-top: fluid-type(375px, 768px, 20px, 32px);
+    }
+}

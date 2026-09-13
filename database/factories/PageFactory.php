@@ -35,4 +35,14 @@ class PageFactory extends Factory
             'is_published' => false,
         ]);
     }
+
+    /**
+     * Child of the given page.
+     */
+    public function childOf(Page $parent): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'parent_id' => $parent->getKey(),
+        ]);
+    }
 }

@@ -1,3 +1,9 @@
+@push('block-styles')
+    @once
+        @vite(['resources/css/blocks/page/style.css'])
+    @endonce
+@endpush
+
 @extends('layouts.app')
 
 @section('content')
@@ -9,6 +15,12 @@
         // flushes the stacks before the layout can @stack them.
     @endphp
     <main class="page">
+        @if (! empty($breadcrumbs))
+            <div class="container">
+                <x-breadcrumbs :items="$breadcrumbs" class="page__breadcrumbs" />
+            </div>
+        @endif
+
         {!! resolve(\App\Support\PageBlocks\BlockRenderer::class)->render($translation->content ?? [], 'page') !!}
     </main>
 @endsection
