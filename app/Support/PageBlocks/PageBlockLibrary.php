@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support\PageBlocks;
 
+use App\Support\PageBlocks\Blocks\About\AboutTimelineBlock;
 use App\Support\PageBlocks\Blocks\Contact\ContactListBlock;
 use App\Support\PageBlocks\Blocks\Contacts\ContactsMainBlock;
 use App\Support\PageBlocks\Blocks\Delivery\DeliveryMethodsBlock;
@@ -53,6 +54,7 @@ class PageBlockLibrary
             DeliveryMethodsBlock::class,
             ContactListBlock::class,
             ContactsMainBlock::class,
+            AboutTimelineBlock::class,
         ];
     }
 
