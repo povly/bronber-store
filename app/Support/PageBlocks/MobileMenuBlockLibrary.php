@@ -14,9 +14,10 @@ use YuriZoom\MoonShineMediaManager\Fields\MediaManagerPicker;
  * Flexible-layouts block definitions for the mobile menu setting
  * (settings.value, key=mobile-menu).
  *
- * Blocks mirror the static drawer markup: navigation links (two-type),
- * logo and contact items. The close button and the language switcher
- * stay in code — they are functional, not content.
+ * Blocks mirror the static drawer markup: navigation link lists (up to
+ * three, separated by dividers), logo and contact items. The close button
+ * and the language switcher stay in code — they are functional, not
+ * content.
  */
 class MobileMenuBlockLibrary
 {
@@ -36,7 +37,7 @@ class MobileMenuBlockLibrary
             ->block('links', 'Ссылки меню', [
                 Json::make('Ссылки', 'links')
                     ->fields(self::linkFields()),
-            ], limit: 1, category: 'Мобильное меню', description: 'Навигация drawer-меню (закрытие и переключатель языка остаются в коде)', icon: 'bars-3')
+            ], limit: 3, category: 'Мобильное меню', description: 'Отдельный список ссылок (до 3: списки разделяются линиями)', icon: 'bars-3')
             ->block('logo', 'Логотип', [
                 MediaManagerPicker::make('Изображение', 'image')
                     ->allowedExtensions(['svg', 'png', 'webp', 'avif', 'jpg', 'jpeg']),

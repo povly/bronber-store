@@ -59,9 +59,14 @@
         <div class="mobile-menu__content">
             <nav class="mobile-menu__nav">
                 @if(($mobileMenuSettings['links'] ?? null) !== null)
-                    @foreach ($mobileMenuSettings['links'] as $link)
-                        <a href="{{ $link['href'] }}" class="mobile-menu__link"
-                            @click="$modal.hide('mobile-menu')">{{ $link['label'] }}</a>
+                    @foreach ($mobileMenuSettings['links'] as $group)
+                        @if(! $loop->first)
+                            <div class="mobile-menu__link-divider"></div>
+                        @endif
+                        @foreach ($group as $link)
+                            <a href="{{ $link['href'] }}" class="mobile-menu__link"
+                                @click="$modal.hide('mobile-menu')">{{ $link['label'] }}</a>
+                        @endforeach
                     @endforeach
                 @else
                 <a href="{{ route('blog') }}" class="mobile-menu__link"

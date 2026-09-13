@@ -194,7 +194,7 @@ it('seeds header, footer and mobile settings with prototype content for every ac
 
     $mobileMenuRu = Setting::query()->where('key', 'mobile-menu')->where('locale', 'ru')->first();
 
-    expect(collect($mobileMenuRu->value)->pluck('_type')->all())->toEqual(['links', 'contacts'])
+    expect(collect($mobileMenuRu->value)->pluck('_type')->all())->toEqual(['links', 'links', 'links', 'contacts'])
         ->and($mobileMenuRu->value[0]['links'][0]['url'])->toBe('/blog');
 
     $mobileNavEn = Setting::query()->where('key', 'mobile-nav')->where('locale', 'en')->first();

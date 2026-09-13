@@ -230,10 +230,12 @@ class SettingsResolver
     }
 
     /**
-     * Mobile drawer menu structures for the layout partials.
+     * Mobile drawer menu structures for the layout partials. Each «links»
+     * block is a separate link list — the view renders dividers between
+     * them (three lists in the static prototype).
      *
      * @return array{
-     *     links: list<array{label: string, href: string}>|null,
+     *     links: list<list<array{label: string, href: string}>>|null,
      *     logo: array{image: string}|null,
      *     contacts: list<array{icon: ?string, text: string, href: ?string}>|null,
      * }
@@ -248,7 +250,7 @@ class SettingsResolver
             $locale,
         );
 
-        $links = null;
+        $linkGroups = [];
         $logo = null;
         $contacts = null;
 
@@ -257,7 +259,10 @@ class SettingsResolver
 
             if ($type === 'links') {
                 $resolved = self::links((array) ($block['links'] ?? []), $locale);
-                $links = $resolved === [] ? null : $resolved;
+
+                if ($resolved !== []) {
+                    $linkGroups[] = $resolved;
+                }
             }
 
             if ($type === 'logo') {
@@ -295,10 +300,10 @@ class SettingsResolver
         Log::debug('[SettingsResolver] context={context} blocks={blocks} links={links}', [
             'context' => 'mobile-menu',
             'blocks' => count($blocks),
-            'links' => count($links ?? []),
+            'links' => array_sum(array_map('count', $linkGroups)),
         ]);
 
-        return ['links' => $links, 'logo' => $logo, 'contacts' => $contacts];
+        return ['links' => $linkGroups === [] ? null : $linkGroups, 'logo' => $logo, 'contacts' => $contacts];
     }
 
     /**

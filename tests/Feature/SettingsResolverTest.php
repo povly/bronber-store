@@ -232,14 +232,18 @@ it('returns nulls when mobile settings are missing', function (): void {
         ->and(SettingsResolver::mobileNav())->toBe(['items' => null]);
 });
 
-it('resolves the mobile menu links, logo and contacts', function (): void {
+it('resolves the mobile menu link groups, logo and contacts', function (): void {
     resolverPage('about');
 
     Setting::factory()->mobileMenu()->ru()->withBlocks([
         ['_type' => 'links', 'links' => [
             ['label' => 'Каталог', 'type' => 'custom', 'url' => '/catalog'],
-            ['label' => 'О нас', 'type' => 'page', 'page' => 'about'],
         ]],
+        ['_type' => 'links', 'links' => [
+            ['label' => 'О нас', 'type' => 'page', 'page' => 'about'],
+            ['label' => 'Битая', 'type' => 'page', 'page' => 'missing'],
+        ]],
+        ['_type' => 'links', 'links' => []],
         ['_type' => 'logo', 'image' => 'brand/logo-mobile.svg'],
         ['_type' => 'contacts', 'items' => [
             ['icon' => 'icons/phone.svg', 'text' => '+7 000', 'href' => 'tel:+7000'],
@@ -249,8 +253,12 @@ it('resolves the mobile menu links, logo and contacts', function (): void {
 
     expect(SettingsResolver::mobileMenu())->toBe([
         'links' => [
-            ['label' => 'Каталог', 'href' => '/catalog'],
-            ['label' => 'О нас', 'href' => url('/about')],
+            [
+                ['label' => 'Каталог', 'href' => '/catalog'],
+            ],
+            [
+                ['label' => 'О нас', 'href' => url('/about')],
+            ],
         ],
         'logo' => ['image' => '/storage/brand/logo-mobile.svg'],
         'contacts' => [

@@ -151,10 +151,13 @@ it('renders the static mobile menu and nav when no mobile settings exist', funct
         ->toContain(__('store.mobile_cart'));
 });
 
-it('substitutes mobile menu links and contacts from settings', function (): void {
+it('substitutes mobile menu link groups with dividers from settings', function (): void {
     Setting::factory()->mobileMenu()->ru()->withBlocks([
         ['_type' => 'links', 'links' => [
             ['label' => 'Мобильная ссылка', 'type' => 'custom', 'url' => '/mobile-service'],
+        ]],
+        ['_type' => 'links', 'links' => [
+            ['label' => 'Вторая группа', 'type' => 'custom', 'url' => '/second-group'],
         ]],
         ['_type' => 'contacts', 'items' => [
             ['icon' => '/images/icons/phone.svg', 'text' => '+7 (111) 222-33-44', 'href' => 'tel:+71112223344'],
@@ -166,8 +169,9 @@ it('substitutes mobile menu links and contacts from settings', function (): void
     expect($html)
         ->toContain('Мобильная ссылка')
         ->toContain('href="/mobile-service"')
+        ->toContain('Вторая группа')
         ->toContain('tel:+71112223344')
-        ->not->toContain('mobile-menu__link-divider');
+        ->and(substr_count($html, 'mobile-menu__link-divider'))->toBe(1);
 });
 
 it('substitutes mobile nav items and keeps the functional catalog button', function (): void {

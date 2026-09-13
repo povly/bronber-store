@@ -163,9 +163,19 @@ class SettingsSeeder extends Seeder
                     ['label' => $t('Блог', 'Blog'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/blog'],
                     ['label' => $t('Бонусы', 'Bonus'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/loyalty'],
                     ['label' => $t('О нас', 'About'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/about'],
+                ],
+            ],
+            [
+                '_type' => 'links',
+                'links' => [
                     ['label' => $t('Вакансии', 'Careers'), 'type' => 'custom', 'page' => null, 'url' => '#!'],
                     ['label' => $t('Вопросы и ответы', 'FAQ'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/faq'],
                     ['label' => $t('Контакты', 'Contacts'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/contacts'],
+                ],
+            ],
+            [
+                '_type' => 'links',
+                'links' => [
                     ['label' => $t('Доставка', 'Delivery'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/delivery'],
                     ['label' => $t('Гарантия', 'Warranty'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/returns'],
                 ],
