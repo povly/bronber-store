@@ -16,6 +16,7 @@ use App\Support\PageBlocks\Blocks\Home\HomeNewsBlock;
 use App\Support\PageBlocks\Blocks\Home\HomePartnersBlock;
 use App\Support\PageBlocks\Blocks\Home\HomeProductsBlock;
 use App\Support\PageBlocks\Blocks\PageBlock;
+use App\Support\PageBlocks\Blocks\Returns\ReturnsContentBlock;
 use Povly\FlexibleLayouts\Fields\FlexibleLayouts;
 
 /**
@@ -55,6 +56,7 @@ class PageBlockLibrary
             ContactListBlock::class,
             ContactsMainBlock::class,
             AboutTimelineBlock::class,
+            ReturnsContentBlock::class,
         ];
     }
 
