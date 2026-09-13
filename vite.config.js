@@ -36,6 +36,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
+                'resources/css/moonshine.css',
                 'resources/js/lazyload.js',
                 'resources/js/app.js',
                 ...blockStyles,
