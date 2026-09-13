@@ -5,6 +5,8 @@ import {browserslistToTargets} from 'lightningcss';
 import {babel} from '@rollup/plugin-babel';
 import {globSync} from 'glob';
 import {combineMediaQueries} from './postcss/js/viteCombineMediaQuery.js';
+import {cssFunctions} from './postcss/js/viteCssFunctions.js';
+import {visualizer} from 'rollup-plugin-visualizer';
 
 const blockStyles = globSync('resources/css/blocks/**/style.css');
 const blockScripts = globSync('resources/js/blocks/**/index.js');
@@ -28,6 +30,9 @@ export default defineConfig({
         },
     },
     plugins: [
+        // Превращает fluid-type()/pxToVw() в валидный CSS на этапе загрузки
+        // файла (enforce: 'pre') + full-reload при смене любого .css в dev.
+        cssFunctions(),
         // Объединяет одинаковые @media запросы в финальном бандле AFTER
         // lightningcss минификации + сортирует по min-width ascending
         // (mobile-first cascade correctness). Даёт cleaner gzip.
@@ -45,9 +50,9 @@ export default defineConfig({
             refresh: true,
         }),
         babel({
-            // 'inline': хелперы дублируются в каждый файл вместо общего
-            // _rollupPluginBabelHelpers-чанка.
-            babelHelpers: 'inline',
+            // 'bundled': один общий чанк _rollupPluginBabelHelpers — решает
+            // ошибку 'addHelper' и не дублирует хелперы в каждом файле.
+            babelHelpers: 'bundled',
             exclude: 'node_modules/**',
             extensions: ['.js', '.jsx', '.es6', '.es', '.mjs'],
             presets: [
@@ -64,6 +69,13 @@ export default defineConfig({
                     },
                 ],
             ],
+        }),
+        // Отчёт по размеру бандла: stats.html (treemap, gzip/brotli).
+        visualizer({
+            filename: 'stats.html',
+            template: 'treemap',
+            gzipSize: true,
+            brotliSize: true,
         }),
     ],
     corePlugins: {

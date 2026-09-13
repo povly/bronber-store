@@ -32,3 +32,5 @@ claude-talk-to-figma-mcp/
 # Dev artifacts
 .playwright-mcp/
 *.png
+/modules
+stats.html
