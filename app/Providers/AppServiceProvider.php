@@ -4,10 +4,12 @@ namespace App\Providers;
 
 use App\Support\PageBlocks\SettingsResolver;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Vite;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View as IlluminateView;
+use MoonShine\Laravel\Http\Middleware\Authenticate;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,6 +30,12 @@ class AppServiceProvider extends ServiceProvider
         Vite::usePreloadTagAttributes(fn (): false => false);
 
         $this->app['view']->addLocation(resource_path('views/blocks'));
+
+        // Runs after every provider (including discovered packages) has
+        // booted, so late-registered moonshine routes are covered too.
+        $this->app->booted(function (): void {
+            $this->requireMoonshineAuth();
+        });
 
         View::share('favorites', json_decode($_COOKIE['favorites'] ?? '[]', true) ?? []);
 
@@ -65,6 +73,36 @@ class AppServiceProvider extends ServiceProvider
         });
 
         View::composer('*', fn (IlluminateView $illuminateView) => $illuminateView->with('catalogCategories', $this->catalogCategories()));
+    }
+
+    /**
+     * Attach MoonShine auth middleware to every moonshine route except the
+     * auth routes themselves.
+     *
+     * MoonShine 4.15's Route::moonshine() macro silently drops
+     * `withAuthenticate: true` when the default route group defines
+     * middleware (it always does: `middleware => 'moonshine'`), so package
+     * routes (media manager, image editor, editorjs field, …) registered
+     * with that flag stay reachable by guests. Core controller routes are
+     * protected separately inside DefaultRoutes; adding the middleware
+     * again there is harmless.
+     *
+     * Note: requires non-cached routes (no `route:cache`), which holds for
+     * this project's current deployment.
+     */
+    private function requireMoonshineAuth(): void
+    {
+        $authRoutes = ['moonshine.login', 'moonshine.authenticate', 'moonshine.logout'];
+
+        foreach (Route::getRoutes() as $route) {
+            $name = $route->getName();
+
+            if ($name === null || ! str_starts_with($name, 'moonshine.') || in_array($name, $authRoutes, true)) {
+                continue;
+            }
+
+            $route->middleware(Authenticate::class);
+        }
     }
 
     /**
