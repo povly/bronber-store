@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support\PageBlocks;
 
+use App\Support\PageBlocks\Blocks\Faq\FaqItemsBlock;
 use App\Support\PageBlocks\Blocks\Home\HomeAdvsBlock;
 use App\Support\PageBlocks\Blocks\Home\HomeCategoriesBlock;
 use App\Support\PageBlocks\Blocks\Home\HomeHeroBlock;
@@ -23,8 +24,8 @@ use Povly\FlexibleLayouts\Fields\FlexibleLayouts;
  * same way: one class per block type under Blocks/, aggregated here.
  *
  * The picker offers page-prefixed prototype blocks only («home-*» ↔
- * blocks/home/*; other pages will follow with «category-*»,
- * «contact-*», …). Legacy generic types (hero, text, gallery, faq,
+ * blocks/home/*, «faq-*» ↔ blocks/faq/*; other pages will follow with
+ * «category-*», «contact-*», …). Legacy generic types (hero, text, gallery, faq,
  * contacts, featured-products) are no longer registered here, but
  * their views stay — BlockRenderer still renders them for already
  * stored/demo content.
@@ -45,6 +46,7 @@ class PageBlockLibrary
             HomeProductsBlock::class,
             HomePartnersBlock::class,
             HomeNewsBlock::class,
+            FaqItemsBlock::class,
         ];
     }
 

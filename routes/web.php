@@ -15,7 +15,7 @@ $register = function () {
     Route::get('', [PageController::class, 'index'])->name('home');
     Route::get('/catalog', fn () => view('main'))->name('catalog');
     Route::get('/favorites', fn () => view('favorites'))->name('favorites');
-    Route::get('/faq', fn () => view('faq'))->name('faq');
+    Route::get('/faq', [PageController::class, 'faq'])->name('faq');
     Route::get('/contacts', fn () => view('contacts'))->name('contacts');
     Route::get('/blog', fn () => view('blog'))->name('blog');
     Route::get('/about', fn () => view('about'))->name('about');

@@ -21,6 +21,11 @@ class PageController extends Controller
     private const HOME_SLUG = 'index';
 
     /**
+     * Slug of the DB page that backs the FAQ page.
+     */
+    private const FAQ_SLUG = 'faq';
+
+    /**
      * Render the site root from the DB page with slug «index»
      * (fallback: the static prototype view when the page or its
      * translation is missing — same pattern as header/footer settings;
@@ -28,8 +33,30 @@ class PageController extends Controller
      */
     public function index(): Response
     {
+        return $this->renderSlugOrFallback(self::HOME_SLUG, 'home');
+    }
+
+    /**
+     * Render the FAQ page from the DB page with slug «faq»
+     * (fallback: the static prototype view — same pattern as the site
+     * root; the fixed route keeps its name «faq» for header/footer/
+     * mobile-menu links).
+     */
+    public function faq(): Response
+    {
+        return $this->renderSlugOrFallback(self::FAQ_SLUG, 'faq');
+    }
+
+    /**
+     * Render a fixed-route page backed by a DB page: a published page
+     * with a translation renders its flexible-layout blocks; anything
+     * missing (page, translation, pre-migration table) degrades to the
+     * static prototype view.
+     */
+    private function renderSlugOrFallback(string $slug, string $fallbackView): Response
+    {
         try {
-            $page = $this->findPublishedPage(self::HOME_SLUG);
+            $page = $this->findPublishedPage($slug);
         } catch (QueryException) {
             $page = null;
         }
@@ -37,14 +64,16 @@ class PageController extends Controller
         $translation = $page?->translation();
 
         if ($translation === null) {
-            Log::debug('[PageController.index] locale={locale} source=fallback', [
+            Log::debug('[PageController] slug={slug} locale={locale} source=fallback', [
+                'slug' => $slug,
                 'locale' => app()->getLocale(),
             ]);
 
-            return response()->view('home');
+            return response()->view($fallbackView);
         }
 
-        Log::debug('[PageController.index] locale={locale} source=db', [
+        Log::debug('[PageController] slug={slug} locale={locale} source=db', [
+            'slug' => $slug,
             'locale' => $translation->locale,
         ]);
 
