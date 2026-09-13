@@ -15,8 +15,8 @@ $register = function () {
     Route::get('', [PageController::class, 'index'])->name('home');
     Route::get('/catalog', fn () => view('main'))->name('catalog');
     Route::get('/favorites', fn () => view('favorites'))->name('favorites');
-    Route::get('/faq', [PageController::class, 'faq'])->name('faq');
     Route::get('/contacts', fn () => view('contacts'))->name('contacts');
+
     Route::get('/blog', fn () => view('blog'))->name('blog');
     Route::get('/about', fn () => view('about'))->name('about');
     Route::get('/loyalty', fn () => view('loyalty'))->name('loyalty');
@@ -115,7 +115,6 @@ $register = function () {
         return view('profile-order', ['user' => $user, 'order' => $order, 'items' => $items]);
     })->name('profile.order');
 
-    Route::get('/delivery', [PageController::class, 'delivery'])->name('delivery');
     Route::get('/returns', fn () => view('returns'))->name('returns');
     Route::get('/blog/{slug}', fn () => view('article'))->name('article');
 

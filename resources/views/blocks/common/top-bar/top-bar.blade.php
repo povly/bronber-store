@@ -34,7 +34,7 @@
                 </nav>
             @else
                 <nav class="top-bar__links top-bar__links--left">
-                    <a href="{{ route('delivery') }}" class="top-bar__link">{{ __('store.top_delivery') }}</a>
+                    <a href="{{ url('/delivery') }}" class="top-bar__link">{{ __('store.top_delivery') }}</a>
                     <a href="{{ route('returns') }}" class="top-bar__link">{{ __('store.top_guarantee') }}</a>
                 </nav>
             @endif
@@ -44,7 +44,7 @@
             @if(empty($topBar))
                 <nav class="top-bar__links top-bar__links--right">
                     <a href="#!" class="top-bar__link">{{ __('store.top_career') }}</a>
-                    <a href="{{ route('faq') }}" class="top-bar__link">{{ __('store.top_faq') }}</a>
+                    <a href="{{ url('/faq') }}" class="top-bar__link">{{ __('store.top_faq') }}</a>
                     <a href="{{ route('contacts') }}" class="top-bar__link">{{ __('store.top_contacts') }}</a>
                 </nav>
             @endif

@@ -22,16 +22,6 @@ class PageController extends Controller
     private const HOME_SLUG = 'index';
 
     /**
-     * Slug of the DB page that backs the FAQ page.
-     */
-    private const FAQ_SLUG = 'faq';
-
-    /**
-     * Slug of the DB page that backs the delivery page.
-     */
-    private const DELIVERY_SLUG = 'delivery';
-
-    /**
      * Render the site root from the DB page with slug «index» —
      * no static fallback: a missing page/translation is a 404, the
      * same contract as the catch-all route (the seeder ships content).
@@ -42,29 +32,11 @@ class PageController extends Controller
     }
 
     /**
-     * Render the FAQ page from the DB page with slug «faq» (the fixed
-     * route keeps its name «faq» for header/footer/mobile-menu links).
-     */
-    public function faq(): Response
-    {
-        return $this->renderFixedSlug(self::FAQ_SLUG);
-    }
-
-    /**
-     * Render the delivery page from the DB page with slug «delivery»
-     * (the fixed route keeps its name «delivery» for header/footer/
-     * mobile-menu links).
-     */
-    public function delivery(): Response
-    {
-        return $this->renderFixedSlug(self::DELIVERY_SLUG);
-    }
-
-    /**
-     * Render a fixed-route page backed by a DB page: a published page
-     * with a translation renders its flexible-layout blocks; anything
-     * missing is a 404 — the same contract as the catch-all route (the
-     * content is admin-managed, there is no static-prototype fallback).
+     * Render the only fixed page route (the site root) from its DB
+     * page: a published page with a translation renders its blocks;
+     * anything missing is a 404 — the same contract as the catch-all
+     * route that serves every other page (the content is admin-managed,
+     * there is no static-prototype fallback).
      */
     private function renderFixedSlug(string $slug): Response
     {
