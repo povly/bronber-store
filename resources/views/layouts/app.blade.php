@@ -10,7 +10,7 @@
     @stack('head-scripts')
     @yield('head')
 </head>
-<body x-data="storeHeader(@js($searchTypes))"
+<body x-data="storeHeader(@js($searchTypes), @js($catalogSearchUrl))"
       :class="{ 'overflow-hidden': $store.modal.stack.length }">
 
 @include('blocks.common.header.header')

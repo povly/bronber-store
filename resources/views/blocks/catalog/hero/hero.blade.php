@@ -19,6 +19,28 @@
     ];
     $allSortOptions = $sortOptions ?: $defaultSortOptions;
 
+    // Search state and localized URLs for the breadcrumb trail
+    $defaultLocale = resolve(\App\Services\Languages\LanguageService::class)->defaultCode();
+    $currentLocale = app()->getLocale();
+    $homeUrl = url($currentLocale === $defaultLocale ? '/' : "/{$currentLocale}/");
+    $catalogUrl = url($currentLocale === $defaultLocale ? 'catalog' : "{$currentLocale}/catalog");
+    $searchQuery = trim((string) request()->input('search', ''));
+
+    if ($searchQuery !== '') {
+        $title = __('store.search_results_title', ['query' => $searchQuery]);
+    }
+
+    $breadcrumbItems = $searchQuery !== ''
+        ? [
+            ['label' => __('store.breadcrumbs_home'), 'url' => $homeUrl],
+            ['label' => __('store.nav_catalog'), 'url' => $catalogUrl],
+            ['label' => $title, 'url' => null],
+        ]
+        : [
+            ['label' => __('store.breadcrumbs_home'), 'url' => $homeUrl],
+            ['label' => __('store.nav_catalog'), 'url' => null],
+        ];
+
     // Override sort from URL so it shows correct text immediately
     if (request()->filled('sort')) {
         $currentSort = request()->input('sort');
@@ -92,7 +114,7 @@
     <div class="container">
         <x-breadcrumbs
             class="catalog-hero__breadcrumb"
-            :items="[['label' => 'Главная', 'url' => '/'], ['label' => $title]]"
+            :items="$breadcrumbItems"
         />
 
         <h1 class="catalog-hero__title">{{ $title }}</h1>

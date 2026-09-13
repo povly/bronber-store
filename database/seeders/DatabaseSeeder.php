@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(HomePageSeeder::class);
         $this->call(FaqPageSeeder::class);
         $this->call(DeliveryPageSeeder::class);
+        $this->call(ContactsPageSeeder::class);
 
         User::factory()->create([
             'name' => 'Test User',

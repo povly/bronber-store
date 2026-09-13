@@ -10,6 +10,7 @@ return [
     'search_type_sku' => 'By SKU',
     'search_type_vin' => 'By article',
     'search_button' => 'Search',
+    'search_results_title' => 'Search: :query',
 
     // Header
     'header_logo_alt' => 'bronber — Go to homepage',
@@ -97,6 +98,7 @@ return [
     'contacts_form_message_placeholder' => 'I want to rent a car but need your advice on what to choose',
     'contacts_form_consent' => 'By clicking "Send" you agree to the data processing terms',
     'contacts_form_submit' => 'Send',
+    'contacts_form_success' => 'Thank you! Your request has been submitted — we will contact you shortly.',
 
     // Article page
     'article_date' => '09/02/2026',

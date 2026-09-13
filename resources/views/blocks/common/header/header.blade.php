@@ -80,7 +80,7 @@
                 </svg>
             </button>
 
-            <div class="header__search">
+            <form class="header__search" method="GET" @submit.prevent="submitSearch()">
                 <div class="header__search-type" :class="{ 'active': searchDropdownOpen }"
                     @click.away="closeSearchDropdown()">
                     <button type="button" class="header__search-dropdown" @click="toggleSearchDropdown()"
@@ -110,7 +110,7 @@
                 <input type="text" class="header__search-input header__search-input--desktop"
                     placeholder="{{ __('store.search_placeholder_desktop') }}" x-ref="searchInputDesktop"
                     name="search">
-                <button type="button" class="header__search-btn" aria-label="{{ __('store.search_button') }}">
+                <button type="submit" class="header__search-btn" aria-label="{{ __('store.search_button') }}">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path d="M20.9999 21L16.6599 16.66" stroke="#BFBFBF" stroke-width="2" stroke-linecap="round"
@@ -120,7 +120,7 @@
                             stroke="#BFBFBF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
-            </div>
+            </form>
 
             <div class="header__actions">
                 <a href="{{ route('favorites') }}" class="header__action header__action--favorites"

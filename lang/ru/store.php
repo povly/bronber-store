@@ -10,6 +10,7 @@ return [
     'search_type_sku' => 'По артикулу',
     'search_type_vin' => 'По VIN',
     'search_button' => 'Искать',
+    'search_results_title' => 'Поиск: :query',
 
     // Header
     'header_logo_alt' => 'bronber — На главную',
@@ -97,6 +98,7 @@ return [
     'contacts_form_message_placeholder' => 'Хочу арендовать авто, но нужен ваш совет что выбрать',
     'contacts_form_consent' => 'Нажимая кнопку «Отправить» вы соглашаетесь с условиями обработки данных',
     'contacts_form_submit' => 'Отправить',
+    'contacts_form_success' => 'Спасибо! Ваша заявка отправлена — мы свяжемся с вами в ближайшее время.',
 
     // Article page
     'article_date' => '09/02/2026',

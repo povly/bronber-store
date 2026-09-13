@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\Languages\LanguageService;
 use App\Support\PageBlocks\SettingsResolver;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
@@ -71,7 +72,11 @@ class AppServiceProvider extends ServiceProvider
                 'label' => __($type['label']),
             ])->all();
 
+            $locale = app()->getLocale();
+            $default = resolve(LanguageService::class)->defaultCode();
+
             $illuminateView->with('searchTypes', $searchTypes);
+            $illuminateView->with('catalogSearchUrl', url($locale === $default ? 'catalog' : "{$locale}/catalog"));
             $illuminateView->with('availableLocales', config('app.available_locales'));
         });
 

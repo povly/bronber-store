@@ -199,7 +199,7 @@
                         <li><a href="{{ route('blog') }}">{{ __('store.footer_com_blog') }}</a></li>
                         <li><a href="{{ route('blog') }}">{{ __('store.footer_com_news') }}</a></li>
                         <li><a href="#">{{ __('store.footer_com_career') }}</a></li>
-                        <li><a href="{{ route('contacts') }}">{{ __('store.footer_com_contacts') }}</a></li>
+                        <li><a href="{{ url('/contacts') }}">{{ __('store.footer_com_contacts') }}</a></li>
                     </ul>
                 </div>
                 @endif

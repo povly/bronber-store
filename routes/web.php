@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Content\ContactFormController;
 use App\Http\Controllers\PageController;
 use App\Services\Languages\LanguageService;
 use Illuminate\Support\Facades\Artisan;
@@ -15,7 +16,7 @@ $register = function () {
     Route::get('', [PageController::class, 'index'])->name('home');
     Route::get('/catalog', fn () => view('main'))->name('catalog');
     Route::get('/favorites', fn () => view('favorites'))->name('favorites');
-    Route::get('/contacts', fn () => view('contacts'))->name('contacts');
+    Route::post('/contacts', [ContactFormController::class, 'store'])->middleware('throttle:10,1')->name('contacts.store');
 
     Route::get('/blog', fn () => view('blog'))->name('blog');
     Route::get('/about', fn () => view('about'))->name('about');

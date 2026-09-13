@@ -115,6 +115,11 @@
         height: 100px;
     }
 
+    &__input.is-invalid,
+    &__textarea.is-invalid {
+        border-bottom-color: #E53935;
+    }
+
     &__bottom {
         display: flex;
         flex-direction: column;
@@ -135,6 +140,30 @@
         color: #696969;
         text-align: center;
         max-width: 323px;
+    }
+
+    &__alert {
+        padding: 14px 18px;
+        border-radius: 5px;
+        font-family: var(--font-manrope);
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 130%;
+
+        ul {
+            margin: 0;
+            padding-left: 18px;
+        }
+
+        &--success {
+            background: rgba(39, 174, 96, 0.08);
+            color: #27AE60;
+        }
+
+        &--error {
+            background: rgba(229, 57, 53, 0.08);
+            color: #E53935;
+        }
     }
 
     &__map {

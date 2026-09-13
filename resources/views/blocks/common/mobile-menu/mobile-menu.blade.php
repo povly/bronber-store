@@ -84,7 +84,7 @@
                     @click="$modal.hide('mobile-menu')">{{ __('store.top_career') }}</a>
                 <a href="{{ url('/faq') }}" class="mobile-menu__link"
                     @click="$modal.hide('mobile-menu')">{{ __('store.top_faq') }}</a>
-                <a href="{{ route('contacts') }}" class="mobile-menu__link"
+                <a href="{{ url('/contacts') }}" class="mobile-menu__link"
                     @click="$modal.hide('mobile-menu')">{{ __('store.top_contacts') }}</a>
                 <div class="mobile-menu__link-divider"></div>
                 <a href="{{ url('/delivery') }}" class="mobile-menu__link"
