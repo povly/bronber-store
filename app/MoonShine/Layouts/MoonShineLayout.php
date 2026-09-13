@@ -17,6 +17,7 @@ use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\FlexibleRender;
+use Illuminate\Support\Facades\Vite;
 use Povly\MoonShineImageEditor\Support\ImageEditorRenderer;
 use YuriZoom\MoonShineMediaManager\Components\MediaManagerOffCanvas;
 
@@ -32,6 +33,7 @@ final class MoonShineLayout extends AppLayout
     {
         return [
             ...parent::assets(),
+            Css::make(Vite::asset('resources/css/moonshine.css')),
             Css::make('/vendor/image-editor/image-editor.css'),
             Js::make('/vendor/image-editor/filerobot-image-editor.min.js'),
             Js::make('/vendor/image-editor/image-editor.js'),
