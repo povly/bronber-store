@@ -1,38 +1,28 @@
 @push('block-styles')
-    @vite(['resources/css/blocks/home/categories/style.css'])
+    @once
+        @vite(['resources/css/blocks/home/categories/style.css'])
+    @endonce
 @endpush
 
 @php
-    $categories = [
-        ['name' => 'Тормозная система', 'slug' => 'brake-system'],
-        ['name' => 'Чип тюнинг', 'slug' => 'chip-tuning'],
-        ['name' => 'Диски', 'slug' => 'wheels'],
-        ['name' => 'Оптика', 'slug' => 'optics'],
-        ['name' => 'Подвеска', 'slug' => 'suspension'],
-        ['name' => 'Впускная система', 'slug' => 'intake'],
-        ['name' => 'Приемные трубы и даунпайпы', 'slug' => 'downpipes'],
-        ['name' => 'Выхлопные системы', 'slug' => 'exhaust'],
-        ['name' => 'Карбоновые элементы', 'slug' => 'carbon'],
-        ['name' => 'Масла и жидкости', 'slug' => 'oils'],
-        ['name' => 'Топливная система', 'slug' => 'fuel-system'],
-        ['name' => 'Охлаждение', 'slug' => 'cooling'],
-    ];
+    $categories = \App\Support\CatalogMock::homeCategories();
+    $title = $block['title'] ?? 'Категории';
 @endphp
 
 <section class="home-categories section">
     <div class="container">
         <div class="home-categories__header section__top">
-            <h2 class="home-categories__title section__title">Категории</h2>
+            <h2 class="home-categories__title section__title">{{ $title }}</h2>
         </div>
 
         <div class="home-categories__grid">
             @foreach($categories as $category)
-                <a href="{{ route('catalog') }}?category={{ $category['slug'] }}" class="home-categories__card">
+                <a href="{{ $category['href'] }}" class="home-categories__card">
                     <div class="home-categories__card-image img--full">
                         @if($loop->first)
                             <span class="home-categories__card-tag tag">1023 товаров</span>
                         @endif
-                        <x-img path="/images/home/categories/{{ $loop->iteration }}" alt="{{ $category['name'] }}"
+                        <x-img path="{{ $category['image'] }}" alt="{{ $category['name'] }}"
                                width="39" height="47"/>
                     </div>
                     <div class="home-categories__card-body">

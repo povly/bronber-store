@@ -59,7 +59,7 @@ composer run dev
 ## Структура проекта
 
 - `routes/web.php` — все роуты (closure-based, i18n-дублирование по локали)
-- `resources/views/blocks/{page}/` — Blade-паршлы постранично (block-based паттерн)
+- `resources/views/blocks/{page}/` — Blade-блоки страниц: рендереры DB-блоков (тип `{page}-{name}` → `{page}/{name}.blade.php`) и прототипы ещё не конвертированных страниц; `blocks/legacy/` — старые demo-типы
 - `resources/{css,js}/blocks/{page}/` — стили и скрипты постранично
 - `app/MoonShine/Resources/{Resource}/` — CRUD-ресурсы админки (каждый со своим `Pages/`)
 - `lang/{ru,en}/` — переводы интерфейса

@@ -1,4 +1,14 @@
-@props(['title' => 'Рекомендованные товары'])
+@push('block-styles')
+    @once
+        @vite(['resources/css/blocks/home/products/style.css'])
+    @endonce
+@endpush
+
+@php
+    $products = \App\Support\CatalogMock::featured(max(1, (int) ($block['count'] ?? 4)));
+    $format = static fn (int $price): string => number_format($price, 0, ',', ' ').' ₽';
+    $title = $block['title'] ?? 'Рекомендованные товары';
+@endphp
 
 <section class="home-products section">
     <div class="container">
@@ -17,48 +27,23 @@
                 </div>
             </x-slot:header>
 
-            <div class="home-products__slide slider__slide">
-                <x-product-card :href="route('product')" article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
-                    image="/images/home/products/1/1.png" :rating="4" reviews-count="12" price="1100 ₽"
-                    sale="ТОП" />
-            </div>
-            <div class="home-products__slide slider__slide">
-                <x-product-card :href="route('product')" article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
-                    image="/images/home/products/1/2.png" :rating="5" reviews-count="8" price="1100 ₽"
-                    old-price="1300 ₽" sale="-15%" />
-            </div>
-            <div class="home-products__slide slider__slide">
-                <x-product-card :href="route('product')" article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
-                    image="/images/home/products/1/3.png" :rating="0" reviews-count="0" price="1100 ₽"
-                    old-price="1300 ₽" />
-            </div>
-            <div class="home-products__slide slider__slide">
-                <x-product-card :href="route('product')" article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
-                    image="/images/home/products/1/4.png" :rating="0" reviews-count="0" price="1100 ₽"
-                    sale="Распродажа" :in-stock="false" />
-            </div>
-
-            <div class="home-products__slide slider__slide">
-                <x-product-card :href="route('product')" article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
-                    image="/images/home/products/1/1.png" :rating="4" reviews-count="12" price="1100 ₽"
-                    sale="ТОП" />
-            </div>
-            <div class="home-products__slide slider__slide">
-                <x-product-card :href="route('product')" article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
-                    image="/images/home/products/1/2.png" :rating="5" reviews-count="8" price="1100 ₽"
-                    old-price="1300 ₽" sale="-15%" />
-            </div>
-            <div class="home-products__slide slider__slide">
-                <x-product-card :href="route('product')" article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
-                    image="/images/home/products/1/3.png" :rating="0" reviews-count="0" price="1100 ₽"
-                    old-price="1300 ₽" />
-            </div>
-
-            <div class="home-products__slide slider__slide">
-                <x-product-card :href="route('product')" article="DW-651-1008" title="DeatschWerks 9-651-1008 Насос топливный DW65C 265л/ч для Honda"
-                    image="/images/home/products/1/3.png" :rating="0" reviews-count="0" price="1100 ₽"
-                    old-price="1300 ₽" />
-            </div>
+            @foreach($products as $p)
+                <div class="home-products__slide slider__slide">
+                    <x-product-card
+                        href="{{ route('product') }}"
+                        :article="$p['article']"
+                        :title="$p['title']"
+                        :image="$p['image']"
+                        :rating="$p['rating']"
+                        :reviews-count="$p['reviewsCount']"
+                        :in-stock="$p['inStock']"
+                        price="{{ $format((int) $p['price']) }}"
+                        :old-price="!empty($p['oldPrice']) ? $format((int) $p['oldPrice']) : null"
+                        :sale="$p['sale'] ?? null"
+                        :index="$loop->index"
+                    />
+                </div>
+            @endforeach
         </x-slider>
     </div>
 </section>

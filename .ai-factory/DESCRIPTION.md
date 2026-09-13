@@ -17,7 +17,9 @@
 ## Реализованный модуль Content (MVC)
 
 - **DB-страницы**: slug + публикации + переводы per-locale (таблицы `pages`, `page_translations`),
-  контент — блоки flexible-layouts (JSON, `_type`), рендер `BlockRenderer` → blade `pb-*`;
+  контент — блоки flexible-layouts (JSON, `_type`), рендер `BlockRenderer` →
+  `blocks/{page}/{name}.blade.php` (тип `{page}-{name}`: `home-partners` ↔ `blocks/home/partners`;
+  legacy-demo типы → `blocks/legacy/`);
   фиксированные роуты (`/`, `/faq`, `/delivery`) — только из БД: нет опубликованной
   страницы/перевода → 404 (fallback на статический прототип убран)
 - **Иерархия страниц и хлебные крошки**: `pages.parent_id` (self-reference, админка — селект
