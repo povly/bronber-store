@@ -5,6 +5,7 @@ use App\Models\Page;
 use App\Models\PageTranslation;
 use App\Services\Languages\LanguageService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
 
 uses(RefreshDatabase::class);
 
@@ -66,7 +67,35 @@ it('renders the delivery page from db blocks', function (): void {
         ->assertSee('delivery__method')
         ->assertSee('По вопросам доставки и оплаты:')
         ->assertSee('href="tel:+79854498000"', false)
-        ->assertSee('/images/delivery/cash.svg', false);
+        ->assertSee('clip0_925_661', false);
+});
+
+it('renders icons picked in the admin from the storage disk', function (): void {
+    File::ensureDirectoryExists(storage_path('app/public/delivery-test'));
+    File::put(storage_path('app/public/delivery-test/icon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" data-test="delivery-icon"><rect width="8" height="8" fill="#000"/></svg>');
+
+    try {
+        Page::factory()
+            ->has(PageTranslation::factory()->ru()->state([
+                'content' => [
+                    [
+                        '_type' => 'delivery-methods',
+                        'title' => 'Способы оплаты',
+                        'items' => [
+                            ['_type' => 'item', 'title' => 'Карточка', 'icon' => 'delivery-test/icon.svg', 'text' => 'Иконка из media manager'],
+                        ],
+                    ],
+                ],
+            ]), 'translations')
+            ->create(['slug' => 'delivery']);
+
+        $this->get('/delivery')
+            ->assertOk()
+            ->assertSee('Карточка')
+            ->assertSee('data-test="delivery-icon"', false);
+    } finally {
+        File::deleteDirectory(storage_path('app/public/delivery-test'));
+    }
 });
 
 it('shows 404 when the delivery page is missing', function (): void {

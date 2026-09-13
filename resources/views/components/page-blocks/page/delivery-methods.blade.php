@@ -7,9 +7,23 @@
 @php
     // Prototype markup of blocks/delivery/delivery.blade.php (methods
     // part), data now comes from the flexible-layouts block. Icons are
-    // media files (MediaManagerPicker) — <img> instead of inline <svg>.
+    // resolved through <x-img> (inline SVG); MediaManagerPicker stores
+    // disk-relative paths — absolute/URL paths pass through.
     $title = $block['title'] ?? '';
-    $items = $block['items'] ?? [];
+    $items = collect($block['items'] ?? [])
+        ->filter(static fn ($item): bool => is_array($item))
+        ->map(static function (array $item): array {
+            $icon = $item['icon'] ?? null;
+
+            if (! empty($icon)) {
+                $item['icon'] = str_starts_with((string) $icon, '/') || str_starts_with((string) $icon, 'http')
+                    ? (string) $icon
+                    : '/storage/'.ltrim((string) $icon, '/');
+            }
+
+            return $item;
+        })
+        ->values();
 @endphp
 
 <section class="delivery">
@@ -23,7 +37,7 @@
                 <div class="delivery__method">
                     @if (! empty($item['icon']))
                         <span class="delivery__icon">
-                            <img src="{{ $item['icon'] }}" alt="" loading="lazy">
+                            <x-img path="{{ $item['icon'] }}" />
                         </span>
                     @endif
                     <h2 class="delivery__method-title">{!! nl2br(e($item['title'] ?? '')) !!}</h2>
