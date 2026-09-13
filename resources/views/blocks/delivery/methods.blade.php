@@ -40,8 +40,8 @@
                             <x-img path="{{ $item['icon'] }}" />
                         </span>
                     @endif
-                    <h2 class="delivery__method-title">{!! nl2br(e($item['title'] ?? '')) !!}</h2>
-                    <p class="delivery__method-text">{{ $item['text'] ?? '' }}</p>
+                    <h2 class="delivery__method-title">{!! $item['title'] ?? '' !!}</h2>
+                    <p class="delivery__method-text">{!! $item['text'] ?? '' !!}</p>
                 </div>
             @endforeach
         </div>
