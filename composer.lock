@@ -3293,19 +3293,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/povly/moonshine-image-editor.git",
-                "reference": "078465f23e907c4c1acca39dfa189d70c8248ba2"
+                "reference": "1f536906121850dca443f2d7083879918897336a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/povly/moonshine-image-editor/zipball/078465f23e907c4c1acca39dfa189d70c8248ba2",
-                "reference": "078465f23e907c4c1acca39dfa189d70c8248ba2",
+                "url": "https://api.github.com/repos/povly/moonshine-image-editor/zipball/1f536906121850dca443f2d7083879918897336a",
+                "reference": "1f536906121850dca443f2d7083879918897336a",
                 "shasum": ""
             },
             "require": {
                 "intervention/image": "^4.0",
                 "intervention/image-laravel": "^4.0",
                 "moonshine/moonshine": "^4.0",
-                "php": "^8.2",
+                "php": "^8.3",
                 "yurizoom/moonshine-media-manager": "^4.0"
             },
             "default-branch": true,
@@ -3346,7 +3346,7 @@
                 "source": "https://github.com/povly/moonshine-image-editor/tree/main",
                 "issues": "https://github.com/povly/moonshine-image-editor/issues"
             },
-            "time": "2026-09-12T23:57:36+00:00"
+            "time": "2026-09-13T00:13:51+00:00"
         },
         {
             "name": "psr/clock",
