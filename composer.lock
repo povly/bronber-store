@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "46a7d67b1c0af8058bdc0e8f00ea929c",
+    "content-hash": "25e89e62d5d2d6e25873237b142ff8ab",
     "packages": [
         {
             "name": "brick/math",
@@ -1170,26 +1170,26 @@
         },
         {
             "name": "intervention/gif",
-            "version": "4.2.4",
+            "version": "5.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/gif.git",
-                "reference": "c3598a16ebe7690cd55640c44144a9df383ea73c"
+                "reference": "bb395af960deffe64d70c976b4df9283f68e762d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/gif/zipball/c3598a16ebe7690cd55640c44144a9df383ea73c",
-                "reference": "c3598a16ebe7690cd55640c44144a9df383ea73c",
+                "url": "https://api.github.com/repos/Intervention/gif/zipball/bb395af960deffe64d70c976b4df9283f68e762d",
+                "reference": "bb395af960deffe64d70c976b4df9283f68e762d",
                 "shasum": ""
             },
             "require": {
-                "php": "^8.1"
+                "php": "^8.3"
             },
             "require-dev": {
                 "phpstan/phpstan": "^2.1",
-                "phpunit/phpunit": "^10.0 || ^11.0  || ^12.0",
+                "phpunit/phpunit": "^12.0",
                 "slevomat/coding-standard": "~8.0",
-                "squizlabs/php_codesniffer": "^3.8"
+                "squizlabs/php_codesniffer": "^4"
             },
             "type": "library",
             "autoload": {
@@ -1208,7 +1208,7 @@
                     "homepage": "https://intervention.io/"
                 }
             ],
-            "description": "Native PHP GIF Encoder/Decoder",
+            "description": "PHP GIF Encoder/Decoder",
             "homepage": "https://github.com/intervention/gif",
             "keywords": [
                 "animation",
@@ -1218,7 +1218,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/gif/issues",
-                "source": "https://github.com/Intervention/gif/tree/4.2.4"
+                "source": "https://github.com/Intervention/gif/tree/5.0.1"
             },
             "funding": [
                 {
@@ -1234,31 +1234,31 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2026-01-04T09:27:23+00:00"
+            "time": "2026-05-03T06:04:47+00:00"
         },
         {
             "name": "intervention/image",
-            "version": "3.11.8",
+            "version": "4.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image.git",
-                "reference": "cf04c8dd245697f701057c13d4bfe140d584e738"
+                "reference": "bc15ed24bb88dc58f921daf78091a019ce42fe2c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image/zipball/cf04c8dd245697f701057c13d4bfe140d584e738",
-                "reference": "cf04c8dd245697f701057c13d4bfe140d584e738",
+                "url": "https://api.github.com/repos/Intervention/image/zipball/bc15ed24bb88dc58f921daf78091a019ce42fe2c",
+                "reference": "bc15ed24bb88dc58f921daf78091a019ce42fe2c",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "intervention/gif": "^4.2",
-                "php": "^8.1"
+                "intervention/gif": "^5",
+                "php": "^8.3"
             },
             "require-dev": {
                 "mockery/mockery": "^1.6",
                 "phpstan/phpstan": "^2.1",
-                "phpunit/phpunit": "^10.0 || ^11.0 || ^12.0",
+                "phpunit/phpunit": "^12.0",
                 "slevomat/coding-standard": "~8.0",
                 "squizlabs/php_codesniffer": "^4"
             },
@@ -1294,7 +1294,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/image/issues",
-                "source": "https://github.com/Intervention/image/tree/3.11.8"
+                "source": "https://github.com/Intervention/image/tree/4.3.2"
             },
             "funding": [
                 {
@@ -1310,28 +1310,28 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2026-05-01T08:20:10+00:00"
+            "time": "2026-08-29T05:35:03+00:00"
         },
         {
             "name": "intervention/image-laravel",
-            "version": "1.5.9",
+            "version": "4.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Intervention/image-laravel.git",
-                "reference": "a760b041e5133fd81509414f4955c93ffefb4a7b"
+                "reference": "8a8bd2c7bb4a9aa2b046ff066fd1cd44b1de0da2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Intervention/image-laravel/zipball/a760b041e5133fd81509414f4955c93ffefb4a7b",
-                "reference": "a760b041e5133fd81509414f4955c93ffefb4a7b",
+                "url": "https://api.github.com/repos/Intervention/image-laravel/zipball/8a8bd2c7bb4a9aa2b046ff066fd1cd44b1de0da2",
+                "reference": "8a8bd2c7bb4a9aa2b046ff066fd1cd44b1de0da2",
                 "shasum": ""
             },
             "require": {
                 "illuminate/http": "^8|^9|^10|^11|^12|^13",
                 "illuminate/routing": "^8|^9|^10|^11|^12|^13",
                 "illuminate/support": "^8|^9|^10|^11|^12|^13",
-                "intervention/image": "^3.11",
-                "php": "^8.1"
+                "intervention/image": "^4.0",
+                "php": "^8.3"
             },
             "require-dev": {
                 "ext-fileinfo": "*",
@@ -1378,7 +1378,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Intervention/image-laravel/issues",
-                "source": "https://github.com/Intervention/image-laravel/tree/1.5.9"
+                "source": "https://github.com/Intervention/image-laravel/tree/4.1.1"
             },
             "funding": [
                 {
@@ -1394,7 +1394,7 @@
                     "type": "ko_fi"
                 }
             ],
-            "time": "2026-03-24T15:10:30+00:00"
+            "time": "2026-07-22T15:00:50+00:00"
         },
         {
             "name": "laravel/framework",
@@ -2687,16 +2687,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "3.13.2",
+            "version": "3.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/CarbonPHP/carbon.git",
-                "reference": "a1c54919f5fff9800cd03c32bd01defd5a4061cb"
+                "reference": "0023eaa2c9110e47446dd512a263c69c40cd41f2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/a1c54919f5fff9800cd03c32bd01defd5a4061cb",
-                "reference": "a1c54919f5fff9800cd03c32bd01defd5a4061cb",
+                "url": "https://api.github.com/repos/CarbonPHP/carbon/zipball/0023eaa2c9110e47446dd512a263c69c40cd41f2",
+                "reference": "0023eaa2c9110e47446dd512a263c69c40cd41f2",
                 "shasum": ""
             },
             "require": {
@@ -2788,7 +2788,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2026-08-08T11:40:35+00:00"
+            "time": "2026-09-12T20:45:19+00:00"
         },
         {
             "name": "nette/schema",
@@ -3247,16 +3247,16 @@
         },
         {
             "name": "povly/moonshine-flexible-layouts",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/povly/moonshine-flexible-layouts.git",
-                "reference": "023359d78ec2e320c8cfa8e3075288e226d166e2"
+                "reference": "c9bbd4f9cfca1f942468b2efdd3f4b1784b5f1de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/povly/moonshine-flexible-layouts/zipball/023359d78ec2e320c8cfa8e3075288e226d166e2",
-                "reference": "023359d78ec2e320c8cfa8e3075288e226d166e2",
+                "url": "https://api.github.com/repos/povly/moonshine-flexible-layouts/zipball/c9bbd4f9cfca1f942468b2efdd3f4b1784b5f1de",
+                "reference": "c9bbd4f9cfca1f942468b2efdd3f4b1784b5f1de",
                 "shasum": ""
             },
             "require": {
@@ -3283,31 +3283,32 @@
             "description": "Flexible content blocks with unlimited nesting for MoonShine",
             "support": {
                 "issues": "https://github.com/povly/moonshine-flexible-layouts/issues",
-                "source": "https://github.com/povly/moonshine-flexible-layouts/tree/1.0.2"
+                "source": "https://github.com/povly/moonshine-flexible-layouts/tree/1.0.3"
             },
-            "time": "2026-08-06T19:08:08+00:00"
+            "time": "2026-09-12T22:59:05+00:00"
         },
         {
             "name": "povly/moonshine-image-editor",
-            "version": "v1.3.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/povly/moonshine-image-editor.git",
-                "reference": "b8c3ab2c32b5289d72c4668504f56b1ef7267451"
+                "reference": "078465f23e907c4c1acca39dfa189d70c8248ba2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/povly/moonshine-image-editor/zipball/b8c3ab2c32b5289d72c4668504f56b1ef7267451",
-                "reference": "b8c3ab2c32b5289d72c4668504f56b1ef7267451",
+                "url": "https://api.github.com/repos/povly/moonshine-image-editor/zipball/078465f23e907c4c1acca39dfa189d70c8248ba2",
+                "reference": "078465f23e907c4c1acca39dfa189d70c8248ba2",
                 "shasum": ""
             },
             "require": {
-                "intervention/image": "^3.0",
-                "intervention/image-laravel": "^1.0",
+                "intervention/image": "^4.0",
+                "intervention/image-laravel": "^4.0",
                 "moonshine/moonshine": "^4.0",
                 "php": "^8.2",
                 "yurizoom/moonshine-media-manager": "^4.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -3321,7 +3322,6 @@
                     "Povly\\MoonShineImageEditor\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -3334,19 +3334,19 @@
             ],
             "description": "Image editor for MoonShine Media Manager powered by Filerobot",
             "keywords": [
-                "Webp",
                 "avif",
                 "editor",
                 "filerobot",
                 "image",
                 "moonshine",
-                "optimization"
+                "optimization",
+                "webp"
             ],
             "support": {
-                "issues": "https://github.com/povly/moonshine-image-editor/issues",
-                "source": "https://github.com/povly/moonshine-image-editor/tree/v1.3.0"
+                "source": "https://github.com/povly/moonshine-image-editor/tree/main",
+                "issues": "https://github.com/povly/moonshine-image-editor/issues"
             },
-            "time": "2026-05-18T15:22:16+00:00"
+            "time": "2026-09-12T23:57:36+00:00"
         },
         {
             "name": "psr/clock",
@@ -7079,16 +7079,16 @@
         },
         {
             "name": "yurizoom/moonshine-media-manager",
-            "version": "4.6.0",
+            "version": "4.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yurizoom/moonshine-media-manager.git",
-                "reference": "bf9656731b29a9bb07f19f59738fd125ba1b568a"
+                "reference": "6eea6ec64c03aaaac385447b169217f1e73d3c51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yurizoom/moonshine-media-manager/zipball/bf9656731b29a9bb07f19f59738fd125ba1b568a",
-                "reference": "bf9656731b29a9bb07f19f59738fd125ba1b568a",
+                "url": "https://api.github.com/repos/yurizoom/moonshine-media-manager/zipball/6eea6ec64c03aaaac385447b169217f1e73d3c51",
+                "reference": "6eea6ec64c03aaaac385447b169217f1e73d3c51",
                 "shasum": ""
             },
             "require": {
@@ -7130,9 +7130,9 @@
             ],
             "support": {
                 "issues": "https://github.com/yurizoom/moonshine-media-manager/issues",
-                "source": "https://github.com/yurizoom/moonshine-media-manager/tree/4.6.0"
+                "source": "https://github.com/yurizoom/moonshine-media-manager/tree/4.6.1"
             },
-            "time": "2026-06-29T09:35:19+00:00"
+            "time": "2026-09-12T23:05:45+00:00"
         }
     ],
     "packages-dev": [
@@ -9679,11 +9679,11 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "2.2.13",
+            "version": "2.2.14",
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9ba9ac76ee9c5cf5b56d58eb5deec6315b7a0260",
-                "reference": "9ba9ac76ee9c5cf5b56d58eb5deec6315b7a0260",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/9c672e7a8e791dfc3d30e55f683e73fc0b63a3ac",
+                "reference": "9c672e7a8e791dfc3d30e55f683e73fc0b63a3ac",
                 "shasum": ""
             },
             "require": {
@@ -9739,7 +9739,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-09-03T20:38:19+00:00"
+            "time": "2026-09-12T21:39:33+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -11519,7 +11519,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "povly/moonshine-image-editor": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

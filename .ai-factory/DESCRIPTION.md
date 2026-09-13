@@ -40,7 +40,8 @@
 
 - **Язык:** PHP 8.5
 - **Фреймворк:** Laravel 13.8
-- **Админ-панель:** MoonShine 4.15 (+ `povly/moonshine-flexible-layouts` — блоки контента страниц, `sckatik/moonshine-editorjs` — текстовый редактор, `povly/moonshine-image-editor`, `yurizoom/moonshine-media-manager`)
+- **Админ-панель:** MoonShine 4.15 (+ `povly/moonshine-flexible-layouts` — блоки контента страниц, `sckatik/moonshine-editorjs` — текстовый редактор, `povly/moonshine-image-editor` (VCS dev-main) — оптимизация/конвертация изображений, `yurizoom/moonshine-media-manager`)
+- **Обработка изображений:** Intervention Image 4.3 + `intervention/image-laravel` 4.1 (обязательна v4: `laravel/framework` 13.x `Illuminate\Image` требует `ImageManager::usingDriver()`)
 - **БД:** SQLite (default) / MySQL (сконфигурирован)
 - **Frontend JS:** Alpine.js 3.15 + vanilla-lazyload
 - **CSS:** PostCSS (mixins, nested, simple-vars, кастомные функции `fluidType`, `pxToVw`)
