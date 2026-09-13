@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a01d77335c17e613a99a21974b84e731",
+    "content-hash": "23f95b83042f7a5c053db99fcff631cc",
     "packages": [
         {
             "name": "brick/math",
-            "version": "0.18.0",
+            "version": "0.19.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brick/math.git",
-                "reference": "82944324d1c1bdb2c2618e89978d4e2ad78d69ad"
+                "reference": "a89bc96a7cf3d7b59e725afe57ccb95eb03cf6ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brick/math/zipball/82944324d1c1bdb2c2618e89978d4e2ad78d69ad",
-                "reference": "82944324d1c1bdb2c2618e89978d4e2ad78d69ad",
+                "url": "https://api.github.com/repos/brick/math/zipball/a89bc96a7cf3d7b59e725afe57ccb95eb03cf6ce",
+                "reference": "a89bc96a7cf3d7b59e725afe57ccb95eb03cf6ce",
                 "shasum": ""
             },
             "require": {
@@ -55,7 +55,7 @@
             ],
             "support": {
                 "issues": "https://github.com/brick/math/issues",
-                "source": "https://github.com/brick/math/tree/0.18.0"
+                "source": "https://github.com/brick/math/tree/0.19.1"
             },
             "funding": [
                 {
@@ -63,7 +63,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-06-14T18:21:03+00:00"
+            "time": "2026-08-08T23:03:16+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -2950,16 +2950,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v5.8.0",
+            "version": "v5.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f"
+                "reference": "9e33da9553fe7786f0962b35f4e4ecf01be89def"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
-                "reference": "044a6a392ff8ad0d61f14370a5fbbd0a0107152f",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/9e33da9553fe7786f0962b35f4e4ecf01be89def",
+                "reference": "9e33da9553fe7786f0962b35f4e4ecf01be89def",
                 "shasum": ""
             },
             "require": {
@@ -3001,9 +3001,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v5.8.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v5.9.0"
             },
-            "time": "2026-07-04T14:30:18+00:00"
+            "time": "2026-09-13T18:51:52+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -3247,21 +3247,25 @@
         },
         {
             "name": "povly/moonshine-flexible-layouts",
-            "version": "1.0.3",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/povly/moonshine-flexible-layouts.git",
-                "reference": "c9bbd4f9cfca1f942468b2efdd3f4b1784b5f1de"
+                "reference": "275d0390d7bb01712b088abc194624d1ad668c30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/povly/moonshine-flexible-layouts/zipball/c9bbd4f9cfca1f942468b2efdd3f4b1784b5f1de",
-                "reference": "c9bbd4f9cfca1f942468b2efdd3f4b1784b5f1de",
+                "url": "https://api.github.com/repos/povly/moonshine-flexible-layouts/zipball/275d0390d7bb01712b088abc194624d1ad668c30",
+                "reference": "275d0390d7bb01712b088abc194624d1ad668c30",
                 "shasum": ""
             },
             "require": {
                 "moonshine/moonshine": "^4.0",
                 "php": "^8.2"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^11.2",
+                "phpunit/phpunit": "^13.3"
             },
             "type": "library",
             "extra": {
@@ -3283,9 +3287,9 @@
             "description": "Flexible content blocks with unlimited nesting for MoonShine",
             "support": {
                 "issues": "https://github.com/povly/moonshine-flexible-layouts/issues",
-                "source": "https://github.com/povly/moonshine-flexible-layouts/tree/1.0.3"
+                "source": "https://github.com/povly/moonshine-flexible-layouts/tree/1.1.1"
             },
-            "time": "2026-09-12T22:59:05+00:00"
+            "time": "2026-09-13T21:11:51+00:00"
         },
         {
             "name": "povly/moonshine-image-editor",
@@ -3960,20 +3964,20 @@
         },
         {
             "name": "ramsey/uuid",
-            "version": "4.9.3",
+            "version": "4.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ramsey/uuid.git",
-                "reference": "1df15849d00943a67d677dc9cfd80795f038c9f8"
+                "reference": "40988c506689c11cfc76c18445f7b26819d0d259"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ramsey/uuid/zipball/1df15849d00943a67d677dc9cfd80795f038c9f8",
-                "reference": "1df15849d00943a67d677dc9cfd80795f038c9f8",
+                "url": "https://api.github.com/repos/ramsey/uuid/zipball/40988c506689c11cfc76c18445f7b26819d0d259",
+                "reference": "40988c506689c11cfc76c18445f7b26819d0d259",
                 "shasum": ""
             },
             "require": {
-                "brick/math": ">=0.8.16 <=0.18",
+                "brick/math": "^0.8.16 || ^0.9 || ^0.10 || ^0.11 || ^0.12 || ^0.13 || ^0.14 || ^0.15 || ^0.16 || ^0.17 || ^0.18 || ^0.19 || ^0.20 || ^1.0",
                 "php": "^8.0",
                 "ramsey/collection": "^1.2 || ^2.0"
             },
@@ -4006,6 +4010,7 @@
                 "paragonie/random-lib": "Provides RandomLib for use with the RandomLibAdapter",
                 "ramsey/uuid-doctrine": "Allows the use of Ramsey\\Uuid\\Uuid as Doctrine field type."
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "captainhook": {
@@ -4032,23 +4037,17 @@
             ],
             "support": {
                 "issues": "https://github.com/ramsey/uuid/issues",
-                "source": "https://github.com/ramsey/uuid/tree/4.9.3"
+                "source": "https://github.com/ramsey/uuid/tree/4.x"
             },
-            "time": "2026-06-18T03:57:49+00:00"
+            "time": "2026-09-13T14:33:28+00:00"
         },
         {
             "name": "sckatik/moonshine-editorjs",
-            "version": "2.0.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Sckatik/moonshine-editorjs.git",
-                "reference": "e20d76d75dba9878b171c8a17acb962168c53047"
-            },
+            "version": "2.x-dev",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Sckatik/moonshine-editorjs/zipball/e20d76d75dba9878b171c8a17acb962168c53047",
-                "reference": "e20d76d75dba9878b171c8a17acb962168c53047",
-                "shasum": ""
+                "type": "path",
+                "url": "modules/moonshine-editorjs",
+                "reference": "d2236bcbf4dfb30b3616582b51640975bffad46e"
             },
             "require": {
                 "codex-team/editor.js": "^2.0",
@@ -4082,7 +4081,17 @@
                     "Sckatik\\MoonshineEditorJs\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "rector": [
+                    "vendor/bin/rector process --clear-cache"
+                ],
+                "format": [
+                    "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -4095,7 +4104,7 @@
             ],
             "description": "EditorJs block editor for MoonShine",
             "keywords": [
-                "editorjs",
+                "editorJs",
                 "laravel",
                 "moonshine"
             ],
@@ -4103,7 +4112,10 @@
                 "issues": "https://github.com/Sckatik/moonshine-editorjs/issues",
                 "source": "https://github.com/Sckatik/moonshine-editorjs"
             },
-            "time": "2026-07-08T10:00:32+00:00"
+            "transport-options": {
+                "symlink": true,
+                "relative": true
+            }
         },
         {
             "name": "spatie/image",
@@ -7078,16 +7090,16 @@
         },
         {
             "name": "yurizoom/moonshine-media-manager",
-            "version": "4.7.2",
+            "version": "4.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yurizoom/moonshine-media-manager.git",
-                "reference": "d18b81e760255231dcc554439029e9067c6ee09f"
+                "reference": "933db7062c50360950612a5367ab06389a6584ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yurizoom/moonshine-media-manager/zipball/d18b81e760255231dcc554439029e9067c6ee09f",
-                "reference": "d18b81e760255231dcc554439029e9067c6ee09f",
+                "url": "https://api.github.com/repos/yurizoom/moonshine-media-manager/zipball/933db7062c50360950612a5367ab06389a6584ac",
+                "reference": "933db7062c50360950612a5367ab06389a6584ac",
                 "shasum": ""
             },
             "require": {
@@ -7133,9 +7145,9 @@
             ],
             "support": {
                 "issues": "https://github.com/yurizoom/moonshine-media-manager/issues",
-                "source": "https://github.com/yurizoom/moonshine-media-manager/tree/4.7.2"
+                "source": "https://github.com/yurizoom/moonshine-media-manager/tree/4.8.0"
             },
-            "time": "2026-09-13T03:50:59+00:00"
+            "time": "2026-09-13T17:40:26+00:00"
         }
     ],
     "packages-dev": [
@@ -10181,21 +10193,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "2.6.6",
+            "version": "2.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "ca069d6c79feaa6651b423c15d101a27a436093e"
+                "reference": "f4aa224edb9b0630fb43826d4cb6a49b62e48d4c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/ca069d6c79feaa6651b423c15d101a27a436093e",
-                "reference": "ca069d6c79feaa6651b423c15d101a27a436093e",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/f4aa224edb9b0630fb43826d4cb6a49b62e48d4c",
+                "reference": "f4aa224edb9b0630fb43826d4cb6a49b62e48d4c",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4|^8.0",
-                "phpstan/phpstan": "^2.2.10"
+                "phpstan/phpstan": "^2.2.14"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -10226,7 +10238,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/2.6.6"
+                "source": "https://github.com/rectorphp/rector/tree/2.6.7"
             },
             "funding": [
                 {
@@ -10234,7 +10246,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-09-02T09:38:46+00:00"
+            "time": "2026-09-13T20:17:44+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -11521,8 +11533,10 @@
         }
     ],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": {},
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "sckatik/moonshine-editorjs": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

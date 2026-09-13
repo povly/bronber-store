@@ -16,6 +16,7 @@ use MoonShine\Contracts\UI\FieldContract;
 use MoonShine\Laravel\Pages\Crud\FormPage;
 use MoonShine\UI\Fields\ID;
 use MoonShine\UI\Fields\Text;
+use Povly\FlexibleLayouts\Fields\FlexibleLayouts;
 
 /**
  * @extends FormPage<SettingResource>
@@ -41,11 +42,12 @@ final class SettingFormPage extends FormPage
             // serve the union of all setting blocks so picker adds work for
             // every setting key (the browser picker only offers the blocks
             // of the rendered form, so extra blocks are never clickable).
-            default => MobileNavBlockLibrary::mobileNav(
-                MobileMenuBlockLibrary::mobileMenu(
-                    FooterBlockLibrary::footer(HeaderBlockLibrary::header()),
-                ),
-            ),
+            //
+            // Union is merged first-wins: library names collide (logo exists
+            // in header/footer/mobile-menu, contacts in footer/mobile-menu)
+            // and FlexibleLayouts::block() rejects duplicates within one
+            // field. First-wins preserves the previous first-match lookup.
+            default => self::unionField(),
         };
 
         return [
@@ -67,5 +69,42 @@ final class SettingFormPage extends FormPage
     protected function rules(DataWrapperContract $item): array
     {
         return [];
+    }
+
+    /**
+     * AJAX fallback union of all setting block libraries, merged first-wins.
+     *
+     * @see self::fields() default branch for the reason this exists.
+     */
+    private static function unionField(): FlexibleLayouts
+    {
+        $union = FlexibleLayouts::make('Значение', 'value');
+
+        $libraries = [
+            HeaderBlockLibrary::header(),
+            FooterBlockLibrary::footer(),
+            MobileMenuBlockLibrary::mobileMenu(),
+            MobileNavBlockLibrary::mobileNav(),
+        ];
+
+        foreach ($libraries as $library) {
+            foreach ($library->blocks() as $block) {
+                if (! is_null($union->blocks()->findByName($block->name()))) {
+                    continue;
+                }
+
+                $union->block(
+                    $block->name(),
+                    $block->title(),
+                    $block->fields(),
+                    $block->limit(),
+                    $block->category(),
+                    $block->description(),
+                    $block->icon(),
+                );
+            }
+        }
+
+        return $union;
     }
 }

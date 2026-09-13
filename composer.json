@@ -17,7 +17,7 @@
         "moonshine/moonshine": "^4.15",
         "povly/moonshine-flexible-layouts": "^1.0",
         "povly/moonshine-image-editor": "^1.4",
-        "sckatik/moonshine-editorjs": "^2.0",
+        "sckatik/moonshine-editorjs": "2.x-dev",
         "yurizoom/moonshine-media-manager": "^4.6"
     },
     "require-dev": {
@@ -100,8 +100,15 @@
         "povly/moonshine-image-editor": {
             "type": "vcs",
             "url": "git@github.com:povly/moonshine-image-editor.git"
+        },
+        "sckatik/moonshine-editorjs": {
+            "type": "path",
+            "url": "modules/moonshine-editorjs",
+            "options": {
+                "symlink": true
+            }
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev",
     "prefer-stable": true
 }
