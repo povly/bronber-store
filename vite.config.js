@@ -4,11 +4,7 @@ import browserslist from 'browserslist';
 import {browserslistToTargets} from 'lightningcss';
 import {babel} from '@rollup/plugin-babel';
 import {globSync} from 'glob';
-import {createRequire} from 'module';
 import {combineMediaQueries} from './postcss/js/viteCombineMediaQuery.js';
-
-const require = createRequire(import.meta.url);
-const coreJsVersion = require('core-js/package.json').version;
 
 const blockStyles = globSync('resources/css/blocks/**/style.css');
 const blockScripts = globSync('resources/js/blocks/**/index.js');
@@ -48,7 +44,9 @@ export default defineConfig({
             refresh: true,
         }),
         babel({
-            babelHelpers: 'bundled', // Важно! Это решит ошибку 'addHelper'
+            // 'inline': хелперы дублируются в каждый файл вместо общего
+            // _rollupPluginBabelHelpers-чанка.
+            babelHelpers: 'inline',
             exclude: 'node_modules/**',
             extensions: ['.js', '.jsx', '.es6', '.es', '.mjs'],
             presets: [
@@ -57,16 +55,11 @@ export default defineConfig({
                     {
                         targets: babelTargets,
                         modules: false,
-                    },
-                ],
-            ],
-            plugins: [
-                [
-                    'babel-plugin-polyfill-corejs3',
-                    {
-                        method: 'usage-global',
-                        targets: babelTargets,
-                        version: coreJsVersion,
+                        // Полифиллы: один глобальный import 'core-js/stable' в
+                        // app.js. usage-global раскидывал импорты core-js по
+                        // модулям → Rollup выносил их в разделяемые чанки.
+                        useBuiltIns: 'entry',
+                        corejs: 3,
                     },
                 ],
             ],

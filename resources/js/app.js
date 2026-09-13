@@ -1,3 +1,6 @@
+// Полифиллы для всех блоков: layout грузит app.js раньше блочных скриптов.
+import 'core-js/stable';
+
 import.meta.glob(['../images/**', '../fonts/**']);
 
 import Alpine from 'alpinejs'
