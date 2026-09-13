@@ -115,7 +115,6 @@ $register = function () {
         return view('profile-order', ['user' => $user, 'order' => $order, 'items' => $items]);
     })->name('profile.order');
 
-    Route::get('/returns', fn () => view('returns'))->name('returns');
     Route::get('/blog/{slug}', fn () => view('article'))->name('article');
 
     Route::get('/cart', function () {

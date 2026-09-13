@@ -35,7 +35,7 @@
             @else
                 <nav class="top-bar__links top-bar__links--left">
                     <a href="{{ url('/delivery') }}" class="top-bar__link">{{ __('store.top_delivery') }}</a>
-                    <a href="{{ route('returns') }}" class="top-bar__link">{{ __('store.top_guarantee') }}</a>
+                    <a href="{{ url('/returns') }}" class="top-bar__link">{{ __('store.top_guarantee') }}</a>
                 </nav>
             @endif
         </div>
