@@ -7078,16 +7078,16 @@
         },
         {
             "name": "yurizoom/moonshine-media-manager",
-            "version": "4.7.1",
+            "version": "4.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/yurizoom/moonshine-media-manager.git",
-                "reference": "a2a8058be73a2ce00de031c9ef0968f4ec5d512a"
+                "reference": "d18b81e760255231dcc554439029e9067c6ee09f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yurizoom/moonshine-media-manager/zipball/a2a8058be73a2ce00de031c9ef0968f4ec5d512a",
-                "reference": "a2a8058be73a2ce00de031c9ef0968f4ec5d512a",
+                "url": "https://api.github.com/repos/yurizoom/moonshine-media-manager/zipball/d18b81e760255231dcc554439029e9067c6ee09f",
+                "reference": "d18b81e760255231dcc554439029e9067c6ee09f",
                 "shasum": ""
             },
             "require": {
@@ -7133,9 +7133,9 @@
             ],
             "support": {
                 "issues": "https://github.com/yurizoom/moonshine-media-manager/issues",
-                "source": "https://github.com/yurizoom/moonshine-media-manager/tree/4.7.1"
+                "source": "https://github.com/yurizoom/moonshine-media-manager/tree/4.7.2"
             },
-            "time": "2026-09-13T02:48:27+00:00"
+            "time": "2026-09-13T03:50:59+00:00"
         }
     ],
     "packages-dev": [
