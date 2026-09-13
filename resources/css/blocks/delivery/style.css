@@ -1,6 +1,10 @@
 .delivery {
     padding-top: 32px;
 
+    &--contacts {
+        padding-top: 0;
+    }
+
     &__title {
         margin-bottom: fluid-type(768px, 1200px, 25px, 32px);
         max-width: fluid-type(768px, 1200px, 531px, 700px);
@@ -130,7 +134,8 @@
         width: fluid-type(1200px, 1440px, 26px, 30px);
         height: fluid-type(1200px, 1440px, 26px, 30px);
 
-        svg {
+        svg,
+        img {
             width: 100%;
         }
     }

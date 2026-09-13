@@ -27,6 +27,11 @@ class PageController extends Controller
     private const FAQ_SLUG = 'faq';
 
     /**
+     * Slug of the DB page that backs the delivery page.
+     */
+    private const DELIVERY_SLUG = 'delivery';
+
+    /**
      * Render the site root from the DB page with slug «index»
      * (fallback: the static prototype view when the page or its
      * translation is missing — same pattern as header/footer settings;
@@ -46,6 +51,17 @@ class PageController extends Controller
     public function faq(): Response
     {
         return $this->renderSlugOrFallback(self::FAQ_SLUG, 'faq');
+    }
+
+    /**
+     * Render the delivery page from the DB page with slug «delivery»
+     * (fallback: the static prototype view — same pattern as the site
+     * root and FAQ; the fixed route keeps its name «delivery» for
+     * header/footer/mobile-menu links).
+     */
+    public function delivery(): Response
+    {
+        return $this->renderSlugOrFallback(self::DELIVERY_SLUG, 'delivery');
     }
 
     /**

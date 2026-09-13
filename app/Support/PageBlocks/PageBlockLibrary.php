@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Support\PageBlocks;
 
+use App\Support\PageBlocks\Blocks\Contact\ContactListBlock;
+use App\Support\PageBlocks\Blocks\Delivery\DeliveryMethodsBlock;
 use App\Support\PageBlocks\Blocks\Faq\FaqItemsBlock;
 use App\Support\PageBlocks\Blocks\Home\HomeAdvsBlock;
 use App\Support\PageBlocks\Blocks\Home\HomeCategoriesBlock;
@@ -47,6 +49,8 @@ class PageBlockLibrary
             HomePartnersBlock::class,
             HomeNewsBlock::class,
             FaqItemsBlock::class,
+            DeliveryMethodsBlock::class,
+            ContactListBlock::class,
         ];
     }
 
