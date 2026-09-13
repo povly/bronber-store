@@ -18,13 +18,18 @@ final class HomeNewsBlock implements PageBlock
     public static function register(FlexibleLayouts $layouts): void
     {
         $layouts->block('home-news', 'Новости (главная)', [
-            Text::make('Заголовок секции', 'title'),
+            Text::make('Заголовок секции', 'title')
+                ->escapeOnApply(static fn (): bool => false),
             FlexibleLayouts::make('Новости', 'items')
                 ->block('item', 'Новость', [
-                    Text::make('Тег', 'tag'),
-                    Text::make('Дата', 'date'),
-                    Text::make('Заголовок', 'title'),
-                    Textarea::make('Описание', 'desc'),
+                    Text::make('Тег', 'tag')
+                        ->escapeOnApply(static fn (): bool => false),
+                    Text::make('Дата', 'date')
+                        ->escapeOnApply(static fn (): bool => false),
+                    Text::make('Заголовок', 'title')
+                        ->escapeOnApply(static fn (): bool => false),
+                    Textarea::make('Описание', 'desc')
+                        ->escapeOnApply(static fn (): bool => false),
                     MediaManagerPicker::make('Изображение', 'image')
                         ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
                 ]),

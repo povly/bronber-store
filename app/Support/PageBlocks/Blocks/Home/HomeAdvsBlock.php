@@ -20,10 +20,12 @@ final class HomeAdvsBlock implements PageBlock
         $layouts->block('home-advs', 'Преимущества (главная)', [
             FlexibleLayouts::make('Пункты', 'items')
                 ->block('item', 'Пункт', [
-                    Text::make('Заголовок', 'title'),
+                    Text::make('Заголовок', 'title')
+                        ->escapeOnApply(static fn (): bool => false),
                     MediaManagerPicker::make('Изображение', 'image')
                         ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
-                    Textarea::make('Текст', 'text'),
+                    Textarea::make('Текст', 'text')
+                        ->escapeOnApply(static fn (): bool => false),
                 ]),
         ], category: 'Главная', description: 'Карточки преимуществ с изображением и текстом', icon: 'star');
     }

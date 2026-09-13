@@ -19,7 +19,8 @@ final class HomeCategoriesBlock implements PageBlock
     {
         $layouts->block('home-categories', 'Категории (динамический)', [
             Text::make('Заголовок секции', 'title')
-                ->default('Категории'),
+                ->default('Категории')
+                ->escapeOnApply(static fn (): bool => false),
         ], category: 'Главная', description: 'Сетка из 12 категорий каталога (сейчас mock, позже CRM-склад)', icon: 'squares-2x2');
     }
 }

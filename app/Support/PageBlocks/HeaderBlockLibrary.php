@@ -40,7 +40,8 @@ class HeaderBlockLibrary
             ], limit: 1, category: 'Шапка', description: 'Логотип шапки (SVG выводится инлайном; пусто — статический логотип)', icon: 'photo')
             ->block('top-bar', 'Верхняя панель', [
                 Text::make('Телефон', 'phone')
-                    ->hint('Например: +7 (985) 449-80-00'),
+                    ->hint('Например: +7 (985) 449-80-00')
+                    ->escapeOnApply(static fn (): bool => false),
                 Json::make('Ссылки верхней панели', 'links')
                     ->fields(self::linkFields()),
             ], limit: 1, category: 'Шапка', description: 'Телефон и сервисные ссылки над основной шапкой', icon: 'phone')

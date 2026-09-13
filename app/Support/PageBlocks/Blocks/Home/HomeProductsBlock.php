@@ -19,7 +19,8 @@ final class HomeProductsBlock implements PageBlock
     public static function register(FlexibleLayouts $layouts): void
     {
         $layouts->block('home-products', 'Товары слайдером (динамический)', [
-            Text::make('Заголовок секции', 'title'),
+            Text::make('Заголовок секции', 'title')
+                ->escapeOnApply(static fn (): bool => false),
             Number::make('Количество товаров', 'count')
                 ->min(1)
                 ->max(12)

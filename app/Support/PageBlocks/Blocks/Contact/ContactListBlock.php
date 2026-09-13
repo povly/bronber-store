@@ -20,12 +20,15 @@ final class ContactListBlock implements PageBlock
     public static function register(FlexibleLayouts $layouts): void
     {
         $layouts->block('contact-list', 'Контакты — список', [
-            Text::make('Заголовок', 'title'),
+            Text::make('Заголовок', 'title')
+                ->escapeOnApply(static fn (): bool => false),
             FlexibleLayouts::make('Контакты', 'items')
                 ->block('item', 'Контакт', [
-                    Text::make('Текст', 'text'),
+                    Text::make('Текст', 'text')
+                        ->escapeOnApply(static fn (): bool => false),
                     Text::make('Ссылка', 'href')
-                        ->hint('Готовый протокол: tel:, mailto: или https://; пусто — без ссылки'),
+                        ->hint('Готовый протокол: tel:, mailto: или https://; пусто — без ссылки')
+                        ->escapeOnApply(static fn (): bool => false),
                     MediaManagerPicker::make('Иконка', 'icon')
                         ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
                 ]),

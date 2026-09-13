@@ -48,9 +48,11 @@ class MobileMenuBlockLibrary
                         MediaManagerPicker::make('Иконка', 'icon')
                             ->allowedExtensions(['svg', 'png', 'webp', 'avif', 'jpg', 'jpeg']),
                         Text::make('Номер / текст', 'text')
-                            ->required(),
+                            ->required()
+                            ->escapeOnApply(static fn (): bool => false),
                         Text::make('Ссылка (необязательно)', 'href')
-                            ->hint('Например: tel:+7…, mailto:… или https://…'),
+                            ->hint('Например: tel:+7…, mailto:… или https://…')
+                            ->escapeOnApply(static fn (): bool => false),
                     ]),
             ], limit: 1, category: 'Мобильное меню', description: 'Контакты внизу меню: иконка + номер + ссылка', icon: 'phone');
     }

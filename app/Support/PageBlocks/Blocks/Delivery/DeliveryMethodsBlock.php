@@ -19,13 +19,16 @@ final class DeliveryMethodsBlock implements PageBlock
     public static function register(FlexibleLayouts $layouts): void
     {
         $layouts->block('delivery-methods', 'Доставка — способы оплаты и доставки', [
-            Text::make('Заголовок', 'title'),
+            Text::make('Заголовок', 'title')
+                ->escapeOnApply(static fn (): bool => false),
             FlexibleLayouts::make('Карточки', 'items')
                 ->block('item', 'Карточка', [
-                    Text::make('Заголовок', 'title'),
+                    Text::make('Заголовок', 'title')
+                        ->escapeOnApply(static fn (): bool => false),
                     MediaManagerPicker::make('Иконка', 'icon')
                         ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
-                    Textarea::make('Описание', 'text'),
+                    Textarea::make('Описание', 'text')
+                        ->escapeOnApply(static fn (): bool => false),
                 ]),
         ], limit: 1, category: 'Доставка', description: 'Заголовок + карточки: иконка, заголовок, описание (прототип /delivery)', icon: 'credit-card');
     }

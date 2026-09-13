@@ -22,7 +22,8 @@ trait BuildsLinkFields
     {
         return [
             Text::make('Название', 'label')
-                ->required(),
+                ->required()
+                ->escapeOnApply(static fn (): bool => false),
 
             Select::make('Тип ссылки', 'type')
                 ->options([
@@ -37,7 +38,8 @@ trait BuildsLinkFields
                 ->hint('Для типа «Страница сайта»; в списке только опубликованные страницы'),
 
             Text::make('URL', 'url')
-                ->hint('Для типа «Кастомная ссылка»; относительные пути пишите с учётом локали'),
+                ->hint('Для типа «Кастомная ссылка»; относительные пути пишите с учётом локали')
+                ->escapeOnApply(static fn (): bool => false),
         ];
     }
 }

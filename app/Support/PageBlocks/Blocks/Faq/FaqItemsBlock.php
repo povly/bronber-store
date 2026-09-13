@@ -18,11 +18,14 @@ final class FaqItemsBlock implements PageBlock
     public static function register(FlexibleLayouts $layouts): void
     {
         $layouts->block('faq-items', 'FAQ — вопросы и ответы', [
-            Text::make('Заголовок', 'title'),
+            Text::make('Заголовок', 'title')
+                ->escapeOnApply(static fn (): bool => false),
             FlexibleLayouts::make('Вопросы', 'items')
                 ->block('item', 'Вопрос', [
-                    Text::make('Вопрос', 'question'),
-                    Textarea::make('Ответ', 'answer'),
+                    Text::make('Вопрос', 'question')
+                        ->escapeOnApply(static fn (): bool => false),
+                    Textarea::make('Ответ', 'answer')
+                        ->escapeOnApply(static fn (): bool => false),
                 ]),
         ], limit: 1, category: 'FAQ', description: 'Аккордеон вопрос-ответ с заголовком (прототип /faq)', icon: 'question-mark-circle');
     }

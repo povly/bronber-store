@@ -17,7 +17,8 @@ final class HomePartnersBlock implements PageBlock
     public static function register(FlexibleLayouts $layouts): void
     {
         $layouts->block('home-partners', 'Партнёры (главная)', [
-            Text::make('Заголовок секции', 'title'),
+            Text::make('Заголовок секции', 'title')
+                ->escapeOnApply(static fn (): bool => false),
             MediaManagerPicker::make('Логотипы', 'images')
                 ->multiple()
                 ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),

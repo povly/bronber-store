@@ -42,11 +42,17 @@ final class PageTranslationFormPage extends FormPage
                 ->hint('Перевод для выбранного языка; у страницы может быть только один перевод на язык')
                 ->readonly(static fn (Select $select): bool => $select->getData()?->getOriginal()?->exists ?? false),
 
-            Text::make('Заголовок', 'title')->required(),
-            Text::make('Meta title', 'meta_title'),
-            Textarea::make('Meta description', 'meta_description'),
-            Textarea::make('Meta keywords', 'meta_keywords'),
-            Text::make('Canonical URL', 'canonical_url'),
+            Text::make('Заголовок', 'title')
+                ->required()
+                ->escapeOnApply(static fn (): bool => false),
+            Text::make('Meta title', 'meta_title')
+                ->escapeOnApply(static fn (): bool => false),
+            Textarea::make('Meta description', 'meta_description')
+                ->escapeOnApply(static fn (): bool => false),
+            Textarea::make('Meta keywords', 'meta_keywords')
+                ->escapeOnApply(static fn (): bool => false),
+            Text::make('Canonical URL', 'canonical_url')
+                ->escapeOnApply(static fn (): bool => false),
             MediaManagerPicker::make('OG-изображение', 'og_image')
                 ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp']),
 
