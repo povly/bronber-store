@@ -39,6 +39,12 @@ final class PageIndexPage extends IndexPage
             ),
 
             Text::make(
+                'Родитель',
+                'parent_id',
+                formatted: static fn (Page $page): string => $page->parent?->translation()?->title ?? '—',
+            ),
+
+            Text::make(
                 'Статус',
                 'is_published',
                 formatted: static fn (Page $page): string => $page->is_published ? 'Опубликована' : 'Черновик',

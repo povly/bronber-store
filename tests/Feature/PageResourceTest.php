@@ -2,6 +2,7 @@
 
 use App\Models\Language;
 use App\Models\Page;
+use App\Models\PageTranslation;
 use App\MoonShine\Resources\Page\PageResource;
 use App\Services\Languages\LanguageService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -26,6 +27,20 @@ it('index page', function (): void {
     actingAs($this->user, 'moonshine')
         ->get($this->resource->getIndexPageUrl())
         ->assertOk();
+});
+
+it('index shows the parent page title column', function (): void {
+    $parent = Page::factory()->create(['slug' => 'delivery']);
+    PageTranslation::factory()->ru()->for($parent, 'page')->create(['title' => 'Доставка']);
+
+    $child = Page::factory()->childOf($parent)->create(['slug' => 'delivery-moscow']);
+    PageTranslation::factory()->ru()->for($child, 'page')->create(['title' => 'Доставка по Москве']);
+
+    actingAs($this->user, 'moonshine')
+        ->get($this->resource->getIndexPageUrl())
+        ->assertOk()
+        ->assertSee('Родитель')
+        ->assertSee('Доставка');
 });
 
 it('create page', function (): void {

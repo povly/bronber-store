@@ -30,7 +30,7 @@ class PageResource extends ModelResource
 
     protected string $column = 'slug';
 
-    protected array $with = ['translations'];
+    protected array $with = ['translations', 'parent.translations'];
 
     protected bool $simplePaginate = true;
 
