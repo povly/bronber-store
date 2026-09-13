@@ -37,6 +37,8 @@ final class SettingIndexPage extends IndexPage
                 formatted: static fn (Setting $setting): string => match ($setting->key) {
                     'header' => 'Шапка',
                     'footer' => 'Подвал',
+                    'mobile-menu' => 'Мобильное меню',
+                    'mobile-nav' => 'Мобильная панель',
                     default => $setting->key,
                 },
             )->badge(Color::PURPLE),
@@ -58,6 +60,8 @@ final class SettingIndexPage extends IndexPage
             Select::make('Ключ', 'key')->options([
                 'header' => 'Шапка',
                 'footer' => 'Подвал',
+                'mobile-menu' => 'Мобильное меню',
+                'mobile-nav' => 'Мобильная панель',
             ]),
         ];
     }

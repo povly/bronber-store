@@ -23,6 +23,9 @@
 
         <div class="mobile-menu__header">
             <div class="mobile-menu__logo">
+                @if(($mobileMenuSettings['logo']['image'] ?? null) !== null)
+                    <x-img path="{{ $mobileMenuSettings['logo']['image'] }}" :lazy="false" width="134" height="21" />
+                @else
                 <svg width="134" height="21" viewBox="0 0 134 21" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_1010_8714)">
                 <path d="M3.26012 0.0670216C3.27793 0.0149314 3.30878 -0.0117188 3.35507 -0.0117188H15.9931C16.8749 -0.0117188 17.5705 0.321417 18.0796 0.987688C18.5437 1.65396 18.6577 2.45106 18.4227 3.38021C18.4167 3.40928 18.4108 3.43593 18.4049 3.45895C18.0785 4.60372 17.4601 5.57406 16.5509 6.36874C17.0435 7.16947 17.1515 8.14223 16.8773 9.287C16.8714 9.31002 16.8631 9.33667 16.8512 9.36575C16.5937 10.2949 16.0619 11.092 15.2548 11.7583C14.3967 12.4185 13.5291 12.748 12.6532 12.748H0.00685487C-0.0394339 12.748 -0.0596104 12.7213 -0.0536759 12.6692L3.26012 0.0682333V0.0670216ZM4.41971 7.83938L4.4031 7.9266L4.25711 8.48748L3.9046 9.80185H13.1089C13.2229 9.80185 13.3345 9.75824 13.4436 9.67102C13.5469 9.58985 13.6157 9.48688 13.6502 9.36453L14.0454 7.83938H4.4209H4.41971ZM5.19238 4.89567H14.8169L15.2204 3.38021C15.2489 3.25786 15.2347 3.15246 15.1777 3.06524C15.1089 2.97802 15.0175 2.93441 14.9035 2.93441H5.70868L5.19357 4.89688L5.19238 4.89567Z" fill="black"/>
@@ -49,11 +52,18 @@
                 </clipPath>
                 </defs>
                 </svg>
+                @endif
             </div>
         </div>
 
         <div class="mobile-menu__content">
             <nav class="mobile-menu__nav">
+                @if(($mobileMenuSettings['links'] ?? null) !== null)
+                    @foreach ($mobileMenuSettings['links'] as $link)
+                        <a href="{{ $link['href'] }}" class="mobile-menu__link"
+                            @click="$modal.hide('mobile-menu')">{{ $link['label'] }}</a>
+                    @endforeach
+                @else
                 <a href="{{ route('blog') }}" class="mobile-menu__link"
                     @click="$modal.hide('mobile-menu')">{{ __('store.nav_new') }}</a>
                 <a href="#" class="mobile-menu__link"
@@ -76,10 +86,22 @@
                     @click="$modal.hide('mobile-menu')">{{ __('store.top_delivery') }}</a>
                 <a href="{{route('returns')}}" class="mobile-menu__link"
                     @click="$modal.hide('mobile-menu')">{{ __('store.top_guarantee') }}</a>
+                @endif
             </nav>
         </div>
 
         <div class="mobile-menu__footer">
+            @if(($mobileMenuSettings['contacts'] ?? null) !== null)
+                @foreach ($mobileMenuSettings['contacts'] as $contact)
+                    @php $contactTag = ! empty($contact['href']) ? 'a' : 'span'; @endphp
+                    <{{ $contactTag }} @if(!empty($contact['href'])) href="{{ $contact['href'] }}" @endif class="mobile-menu__phone">
+                        @if(!empty($contact['icon']))
+                            <x-img path="{{ $contact['icon'] }}" :lazy="false" width="19" height="19" />
+                        @endif
+                        <span>{{ $contact['text'] }}</span>
+                    </{{ $contactTag }}>
+                @endforeach
+            @else
             <a href="tel:+79854498000" class="mobile-menu__phone">
                 <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_1010_8711)">
@@ -93,6 +115,7 @@
                 </svg>
                 <span>+7 (985) 449-8000</span>
             </a>
+            @endif
 
             <div class="mobile-menu__lang">
                 @php $locales = app(\App\Services\Languages\LanguageService::class)->codes(); @endphp

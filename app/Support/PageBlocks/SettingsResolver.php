@@ -9,8 +9,8 @@ use App\Services\Settings\SettingService;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Turns header/footer settings JSON (flexible-layouts blocks) into flat
- * view-ready structures with resolved link hrefs.
+ * Turns header/footer/mobile settings JSON (flexible-layouts blocks)
+ * into flat view-ready structures with resolved link hrefs.
  *
  * A missing block yields null for its key — the static markup then renders
  * its hardcoded fallback (nothing breaks when settings are empty).
@@ -227,6 +227,137 @@ class SettingsResolver
             'payment' => $payment,
             'bottom' => $bottom,
         ];
+    }
+
+    /**
+     * Mobile drawer menu structures for the layout partials.
+     *
+     * @return array{
+     *     links: list<array{label: string, href: string}>|null,
+     *     logo: array{image: string}|null,
+     *     contacts: list<array{icon: ?string, text: string, href: ?string}>|null,
+     * }
+     */
+    public static function mobileMenu(?string $locale = null): array
+    {
+        $locale ??= app()->getLocale();
+
+        $blocks = self::withMediaFallback(
+            resolve(SettingService::class)->get('mobile-menu', $locale),
+            'mobile-menu',
+            $locale,
+        );
+
+        $links = null;
+        $logo = null;
+        $contacts = null;
+
+        foreach ($blocks as $block) {
+            $type = $block['_type'] ?? null;
+
+            if ($type === 'links') {
+                $resolved = self::links((array) ($block['links'] ?? []), $locale);
+                $links = $resolved === [] ? null : $resolved;
+            }
+
+            if ($type === 'logo') {
+                $image = self::media($block, 'image');
+                $logo = $image !== null ? ['image' => $image] : null;
+            }
+
+            if ($type === 'contacts') {
+                $items = [];
+
+                foreach ((array) ($block['items'] ?? []) as $item) {
+                    if (! is_array($item)) {
+                        continue;
+                    }
+
+                    $text = self::string($item, 'text');
+
+                    if ($text === null) {
+                        continue;
+                    }
+
+                    $items[] = [
+                        'icon' => self::media($item, 'icon'),
+                        'text' => $text,
+                        'href' => self::string($item, 'href'),
+                    ];
+                }
+
+                if ($items !== []) {
+                    $contacts = $items;
+                }
+            }
+        }
+
+        Log::debug('[SettingsResolver] context={context} blocks={blocks} links={links}', [
+            'context' => 'mobile-menu',
+            'blocks' => count($blocks),
+            'links' => count($links ?? []),
+        ]);
+
+        return ['links' => $links, 'logo' => $logo, 'contacts' => $contacts];
+    }
+
+    /**
+     * Mobile bottom nav structures for the layout partials. Each item is
+     * an icon + a resolved two-type link; the functional catalog button
+     * is inserted by the view, not by settings.
+     *
+     * @return array{
+     *     items: list<array{icon: ?string, label: string, href: string}>|null,
+     * }
+     */
+    public static function mobileNav(?string $locale = null): array
+    {
+        $locale ??= app()->getLocale();
+
+        $blocks = self::withMediaFallback(
+            resolve(SettingService::class)->get('mobile-nav', $locale),
+            'mobile-nav',
+            $locale,
+        );
+
+        $items = null;
+
+        foreach ($blocks as $block) {
+            if (($block['_type'] ?? null) !== 'items') {
+                continue;
+            }
+
+            $resolved = [];
+
+            foreach ((array) ($block['items'] ?? []) as $item) {
+                if (! is_array($item)) {
+                    continue;
+                }
+
+                $label = self::string($item, 'label');
+                $href = LinkResolver::href($item, $locale);
+
+                if ($label !== null && $href !== null) {
+                    $resolved[] = [
+                        'icon' => self::media($item, 'icon'),
+                        'label' => $label,
+                        'href' => $href,
+                    ];
+                }
+            }
+
+            if ($resolved !== []) {
+                $items = $resolved;
+            }
+        }
+
+        Log::debug('[SettingsResolver] context={context} blocks={blocks} links={links}', [
+            'context' => 'mobile-nav',
+            'blocks' => count($blocks),
+            'links' => count($items ?? []),
+        ]);
+
+        return ['items' => $items];
     }
 
     /**

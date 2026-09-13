@@ -47,6 +47,26 @@ class SettingFactory extends Factory
     }
 
     /**
+     * Mobile drawer menu setting.
+     */
+    public function mobileMenu(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'key' => 'mobile-menu',
+        ]);
+    }
+
+    /**
+     * Mobile bottom nav setting.
+     */
+    public function mobileNav(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'key' => 'mobile-nav',
+        ]);
+    }
+
+    /**
      * Russian locale.
      */
     public function ru(): static

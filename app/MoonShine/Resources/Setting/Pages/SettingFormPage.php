@@ -8,6 +8,8 @@ use App\Models\Setting;
 use App\MoonShine\Resources\Setting\SettingResource;
 use App\Support\PageBlocks\FooterBlockLibrary;
 use App\Support\PageBlocks\HeaderBlockLibrary;
+use App\Support\PageBlocks\MobileMenuBlockLibrary;
+use App\Support\PageBlocks\MobileNavBlockLibrary;
 use MoonShine\Contracts\Core\TypeCasts\DataWrapperContract;
 use MoonShine\Contracts\UI\ComponentContract;
 use MoonShine\Contracts\UI\FieldContract;
@@ -32,12 +34,18 @@ final class SettingFormPage extends FormPage
         $value = match ($setting?->key) {
             'footer' => FooterBlockLibrary::footer(),
             'header' => HeaderBlockLibrary::header(),
+            'mobile-menu' => MobileMenuBlockLibrary::mobileMenu(),
+            'mobile-nav' => MobileNavBlockLibrary::mobileNav(),
             // The flexible-layouts AJAX store route carries no resourceItem,
             // so the setting is unresolvable there and getItem() is null —
             // serve the union of all setting blocks so picker adds work for
             // every setting key (the browser picker only offers the blocks
             // of the rendered form, so extra blocks are never clickable).
-            default => FooterBlockLibrary::footer(HeaderBlockLibrary::header()),
+            default => MobileNavBlockLibrary::mobileNav(
+                MobileMenuBlockLibrary::mobileMenu(
+                    FooterBlockLibrary::footer(HeaderBlockLibrary::header()),
+                ),
+            ),
         };
 
         return [

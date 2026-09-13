@@ -141,3 +141,55 @@ it('renders media from settings: logos, payment, social and contact icons', func
         File::deleteDirectory(storage_path('app/public/settings-test'));
     }
 });
+
+it('renders the static mobile menu and nav when no mobile settings exist', function (): void {
+    $html = $this->get('/')->getContent();
+
+    expect($html)
+        ->toContain('mobile-menu__link-divider')
+        ->toContain(__('store.mobile_home'))
+        ->toContain(__('store.mobile_cart'));
+});
+
+it('substitutes mobile menu links and contacts from settings', function (): void {
+    Setting::factory()->mobileMenu()->ru()->withBlocks([
+        ['_type' => 'links', 'links' => [
+            ['label' => 'Мобильная ссылка', 'type' => 'custom', 'url' => '/mobile-service'],
+        ]],
+        ['_type' => 'contacts', 'items' => [
+            ['icon' => '/images/icons/phone.svg', 'text' => '+7 (111) 222-33-44', 'href' => 'tel:+71112223344'],
+        ]],
+    ])->create();
+
+    $html = $this->get('/')->getContent();
+
+    expect($html)
+        ->toContain('Мобильная ссылка')
+        ->toContain('href="/mobile-service"')
+        ->toContain('tel:+71112223344')
+        ->not->toContain('mobile-menu__link-divider');
+});
+
+it('substitutes mobile nav items and keeps the functional catalog button', function (): void {
+    File::ensureDirectoryExists(storage_path('app/public/settings-test'));
+    File::put(storage_path('app/public/settings-test/nav-icon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" data-test="mobile-nav-icon"><rect width="8" height="8" fill="#fff"/></svg>');
+
+    try {
+        Setting::factory()->mobileNav()->ru()->withBlocks([
+            ['_type' => 'items', 'items' => [
+                ['icon' => 'settings-test/nav-icon.svg', 'label' => 'Избранное', 'type' => 'custom', 'url' => '/favorites'],
+                ['icon' => null, 'label' => 'Профиль', 'type' => 'custom', 'url' => '/profile'],
+            ]],
+        ])->create();
+
+        $html = $this->get('/')->getContent();
+
+        expect($html)
+            ->toContain('Избранное')
+            ->toContain('data-test="mobile-nav-icon"')
+            ->toContain('catalogMenu.openMobile()')
+            ->not->toContain(__('store.mobile_home'));
+    } finally {
+        File::deleteDirectory(storage_path('app/public/settings-test'));
+    }
+});

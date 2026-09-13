@@ -39,28 +39,31 @@ class AppServiceProvider extends ServiceProvider
 
         View::share('favorites', json_decode($_COOKIE['favorites'] ?? '[]', true) ?? []);
 
-        View::composer(['blocks.common.header.header', 'blocks.common.footer.footer'], static function (IlluminateView $illuminateView): void {
-            $isHeader = str_contains($illuminateView->getName(), 'header');
+        View::composer(
+            ['blocks.common.header.header', 'blocks.common.footer.footer', 'blocks.common.mobile-menu.mobile-menu', 'blocks.common.mobile-nav.mobile-nav'],
+            static function (IlluminateView $illuminateView): void {
+                $name = $illuminateView->getName();
 
-            $settings = $isHeader
-                ? SettingsResolver::header()
-                : SettingsResolver::footer();
+                [$variable, $settings] = match (true) {
+                    str_contains($name, 'header') => ['headerSettings', SettingsResolver::header()],
+                    str_contains($name, 'footer') => ['footerSettings', SettingsResolver::footer()],
+                    str_contains($name, 'mobile-menu') => ['mobileMenuSettings', SettingsResolver::mobileMenu()],
+                    default => ['mobileNavSettings', SettingsResolver::mobileNav()],
+                };
 
-            $hasSettings = in_array(true, array_map(
-                static fn ($value): bool => ! empty($value),
-                $settings,
-            ), true);
+                $hasSettings = in_array(true, array_map(
+                    static fn ($value): bool => ! empty($value),
+                    $settings,
+                ), true);
 
-            $illuminateView->with(
-                $isHeader ? 'headerSettings' : 'footerSettings',
-                $settings,
-            );
+                $illuminateView->with($variable, $settings);
 
-            Log::debug('[Layout] settings header/footer resolved, source={source}', [
-                'context' => $isHeader ? 'header' : 'footer',
-                'source' => $hasSettings ? 'settings' : 'fallback',
-            ]);
-        });
+                Log::debug('[Layout] settings resolved, context={context} source={source}', [
+                    'context' => str_replace('Settings', '', $variable),
+                    'source' => $hasSettings ? 'settings' : 'fallback',
+                ]);
+            },
+        );
 
         View::composer(['blocks.common.header.header', 'layouts.app'], function (IlluminateView $illuminateView): void {
             $searchTypes = collect(config('search.types'))->map(fn (array $type): array => [

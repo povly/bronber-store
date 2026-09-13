@@ -25,10 +25,12 @@
   OG/Twitter, hreflang-альтернативы + x-default
 - **Редактируемые языки** (`languages`): `LanguageService` (кэш) — источник локалей для
   middleware, роутов, автосоздания переводов и fallback (дефолтный язык, не хардкод ru)
-- **Шапка/подвал из настроек** (`settings` key × locale): блоки редактируются в MoonShine
-  (`HeaderBlockLibrary`/`FooterBlockLibrary`), ссылки двух типов — страница сайта (автолокализация
-  `/en/...`) или кастомный URL (`LinkResolver`); `SettingsResolver` подставляет данные в статическую
-  вёрстку шапки/подвала, пусто → статика прототипа
+- **Шапка/подвал/мобильные меню из настроек** (`settings` key × locale): блоки редактируются в MoonShine
+  (`HeaderBlockLibrary`/`FooterBlockLibrary`/`MobileMenuBlockLibrary`/`MobileNavBlockLibrary`), ссылки двух
+  типов — страница сайта (автолокализация `/en/...`) или кастомный URL (`LinkResolver`), изображения —
+  через MediaManagerPicker; `SettingsResolver` подставляет данные в статическую вёрстку шапки/подвала и
+  мобильных меню (drawer `mobile-menu` + нижняя панель `mobile-nav`; функциональные элементы — кнопка
+  «Каталог», переключатель языка — остаются в коде), пусто → статика прототипа
 - Catch-all `/{slug}` / `/{locale}/{slug}` в конце `routes/web.php` (фиксированные роуты не перекрыты)
 
 ## Запланированные возможности

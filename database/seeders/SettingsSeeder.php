@@ -11,10 +11,12 @@ use Illuminate\Database\Seeder;
 class SettingsSeeder extends Seeder
 {
     /**
-     * Seed header/footer settings for every active language, pre-filled with
-     * the same content as the static prototype markup (custom links to the
+     * Seed header/footer/mobile settings for every active language, pre-filled
+     * with the same content as the static prototype markup (custom links to the
      * fixed prototype routes). Safe to re-run: upsert on (key, locale),
-     * existing non-empty values are never overwritten.
+     * existing non-empty values are never overwritten. The mobile-nav key is
+     * seeded as null — its item icons are uploaded via the media manager, so
+     * the static prototype keeps rendering until the admin fills the row.
      */
     public function run(): void
     {
@@ -28,7 +30,7 @@ class SettingsSeeder extends Seeder
         foreach ($languages as $language) {
             $content = $this->content($language);
 
-            foreach (['header', 'footer'] as $key) {
+            foreach (['header', 'footer', 'mobile-menu', 'mobile-nav'] as $key) {
                 $signature = $key.'.'.$language;
 
                 if (! in_array($signature, $existing, true)) {
@@ -41,7 +43,12 @@ class SettingsSeeder extends Seeder
                     continue;
                 }
 
-                // Fill only empty values — admin edits are never overwritten.
+                // Fill only empty values — admin edits (and intentionally
+                // empty keys like mobile-nav) are never overwritten.
+                if ($content[$key] === null) {
+                    continue;
+                }
+
                 Setting::query()
                     ->where('key', $key)
                     ->where('locale', $language)
@@ -54,7 +61,7 @@ class SettingsSeeder extends Seeder
     /**
      * Default block content mirroring the static prototype for a locale.
      *
-     * @return array{header: list<array<string, mixed>>, footer: list<array<string, mixed>>}
+     * @return array{header: list<array<string, mixed>>, footer: list<array<string, mixed>>, mobile-menu: list<array<string, mixed>>, mobile-nav: null}
      */
     private function content(string $locale): array
     {
@@ -147,6 +154,30 @@ class SettingsSeeder extends Seeder
             ],
         ];
 
-        return ['header' => $header, 'footer' => $footer];
+        $mobileMenu = [
+            [
+                '_type' => 'links',
+                'links' => [
+                    ['label' => $t('Новинки', 'New'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/blog'],
+                    ['label' => $t('Акции', 'Promo'), 'type' => 'custom', 'page' => null, 'url' => '#'],
+                    ['label' => $t('Блог', 'Blog'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/blog'],
+                    ['label' => $t('Бонусы', 'Bonus'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/loyalty'],
+                    ['label' => $t('О нас', 'About'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/about'],
+                    ['label' => $t('Вакансии', 'Careers'), 'type' => 'custom', 'page' => null, 'url' => '#!'],
+                    ['label' => $t('Вопросы и ответы', 'FAQ'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/faq'],
+                    ['label' => $t('Контакты', 'Contacts'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/contacts'],
+                    ['label' => $t('Доставка', 'Delivery'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/delivery'],
+                    ['label' => $t('Гарантия', 'Warranty'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/returns'],
+                ],
+            ],
+            [
+                '_type' => 'contacts',
+                'items' => [
+                    ['icon' => '/images/icons/phone.svg', 'text' => '+7 (985) 449-8000', 'href' => 'tel:+79854498000'],
+                ],
+            ],
+        ];
+
+        return ['header' => $header, 'footer' => $footer, 'mobile-menu' => $mobileMenu, 'mobile-nav' => null];
     }
 }

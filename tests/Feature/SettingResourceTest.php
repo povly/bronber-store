@@ -162,14 +162,19 @@ it('keeps key and locale unchanged on save', function (): void {
         ->and($item->refresh()->locale)->toBe('en');
 });
 
-it('seeds header and footer with prototype content for every active language', function (): void {
+it('seeds header, footer and mobile settings with prototype content for every active language', function (): void {
     $this->seed(SettingsSeeder::class);
 
     $rows = Setting::query()->get()
         ->map(fn (Setting $setting): string => $setting->key.'.'.$setting->locale)
         ->all();
 
-    expect($rows)->toEqualCanonicalizing(['header.ru', 'header.en', 'footer.ru', 'footer.en']);
+    expect($rows)->toEqualCanonicalizing([
+        'header.ru', 'header.en',
+        'footer.ru', 'footer.en',
+        'mobile-menu.ru', 'mobile-menu.en',
+        'mobile-nav.ru', 'mobile-nav.en',
+    ]);
 
     $headerRu = Setting::query()->where('key', 'header')->where('locale', 'ru')->first();
 
@@ -186,13 +191,22 @@ it('seeds header and footer with prototype content for every active language', f
 
     expect(collect($footerEn->value)->pluck('_type')->all())->toEqual(['contacts', 'socials', 'links-column', 'links-column', 'links-column', 'bottom'])
         ->and($footerEn->value[2]['links'][0]['url'])->toBe('/en/catalog');
+
+    $mobileMenuRu = Setting::query()->where('key', 'mobile-menu')->where('locale', 'ru')->first();
+
+    expect(collect($mobileMenuRu->value)->pluck('_type')->all())->toEqual(['links', 'contacts'])
+        ->and($mobileMenuRu->value[0]['links'][0]['url'])->toBe('/blog');
+
+    $mobileNavEn = Setting::query()->where('key', 'mobile-nav')->where('locale', 'en')->first();
+
+    expect($mobileNavEn->value)->toBeNull();
 });
 
 it('seeder is re-runnable and does not duplicate rows', function (): void {
     $this->seed(SettingsSeeder::class);
     $this->seed(SettingsSeeder::class);
 
-    expect(Setting::query()->count())->toBe(4);
+    expect(Setting::query()->count())->toBe(8);
 });
 
 it('seeder does not overwrite admin-edited values', function (): void {

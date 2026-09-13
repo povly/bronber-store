@@ -226,3 +226,54 @@ it('inherits empty header/footer media from the default locale settings', functi
         ->and($footer['contactItems'][0]['text'])->toBe('EN phone')
         ->and($footer['contactItems'][0]['icon'])->toBe('/storage/icons/phone.svg');
 });
+
+it('returns nulls when mobile settings are missing', function (): void {
+    expect(SettingsResolver::mobileMenu())->toBe(['links' => null, 'logo' => null, 'contacts' => null])
+        ->and(SettingsResolver::mobileNav())->toBe(['items' => null]);
+});
+
+it('resolves the mobile menu links, logo and contacts', function (): void {
+    resolverPage('about');
+
+    Setting::factory()->mobileMenu()->ru()->withBlocks([
+        ['_type' => 'links', 'links' => [
+            ['label' => 'Каталог', 'type' => 'custom', 'url' => '/catalog'],
+            ['label' => 'О нас', 'type' => 'page', 'page' => 'about'],
+        ]],
+        ['_type' => 'logo', 'image' => 'brand/logo-mobile.svg'],
+        ['_type' => 'contacts', 'items' => [
+            ['icon' => 'icons/phone.svg', 'text' => '+7 000', 'href' => 'tel:+7000'],
+            ['icon' => null, 'text' => ''],
+        ]],
+    ])->create();
+
+    expect(SettingsResolver::mobileMenu())->toBe([
+        'links' => [
+            ['label' => 'Каталог', 'href' => '/catalog'],
+            ['label' => 'О нас', 'href' => url('/about')],
+        ],
+        'logo' => ['image' => '/storage/brand/logo-mobile.svg'],
+        'contacts' => [
+            ['icon' => '/storage/icons/phone.svg', 'text' => '+7 000', 'href' => 'tel:+7000'],
+        ],
+    ]);
+});
+
+it('resolves the mobile nav items with two-type links and icons', function (): void {
+    resolverPage('contacts');
+
+    Setting::factory()->mobileNav()->ru()->withBlocks([
+        ['_type' => 'items', 'items' => [
+            ['icon' => 'icons/home.svg', 'label' => 'Главная', 'type' => 'custom', 'url' => '/'],
+            ['icon' => null, 'label' => 'Контакты', 'type' => 'page', 'page' => 'contacts'],
+            ['icon' => null, 'label' => 'Битая', 'type' => 'page', 'page' => 'missing'],
+        ]],
+    ])->create();
+
+    expect(SettingsResolver::mobileNav())->toBe([
+        'items' => [
+            ['icon' => '/storage/icons/home.svg', 'label' => 'Главная', 'href' => '/'],
+            ['icon' => null, 'label' => 'Контакты', 'href' => url('/contacts')],
+        ],
+    ]);
+});
