@@ -34,6 +34,11 @@
   (slug `delivery`), блоки `delivery-methods` (заголовок + карточки:
   иконка/заголовок/описание) и `contact-list` (заголовок + контакты: иконка/текст/ссылка tel:|mailto:|URL);
   демо-контент — `DeliveryPageSeeder` (ru/en, идемпотентный, тексты из lang-файлов прототипа)
+- **Страница «Возврат и обмен» из БД** (slug `returns`, catch-all): контент — один блок `returns-content`
+  (заголовок h1 + весь текст страницы единым EditorJS-документом: абзацы/подзаголовки/списки; поле
+  `Sckatik\MoonshineEditorJs\Fields\EditorJs`, рендер `RenderEditorJs` во вью блока — разметка
+  переиспользует CSS прототипа); демо-контент — `ReturnsPageSeeder` (ru/en, идемпотентный, тексты из
+  lang-файлов прототипа); фиксированный роут и прототипные вью удалены
 - **Полный SEO-набор** пер-локали: meta title/description/keywords, robots, canonical,
   OG/Twitter, hreflang-альтернативы + x-default
 - **Редактируемые языки** (`languages`): `LanguageService` (кэш) — источник локалей для
