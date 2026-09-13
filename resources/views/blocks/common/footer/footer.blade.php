@@ -182,7 +182,7 @@
                     <ul class="footer__column-list" :class="{ 'is-open': open }">
                         <li><a href="{{ url('/delivery') }}">{{ __('store.footer_buy_delivery') }}</a></li>
                         <li><a href="{{ url('/returns') }}">{{ __('store.footer_buy_guarantee') }}</a></li>
-                        <li><a href="{{ route('loyalty') }}">{{ __('store.footer_buy_loyalty') }}</a></li>
+                        <li><a href="{{ url('/loyalty') }}">{{ __('store.footer_buy_loyalty') }}</a></li>
                         <li><a href="{{ url('/faq') }}">{{ __('store.top_faq') }}</a></li>
                     </ul>
                 </div>

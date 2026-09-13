@@ -19,7 +19,6 @@ $register = function () {
     Route::post('/contacts', [ContactFormController::class, 'store'])->middleware('throttle:10,1')->name('contacts.store');
 
     Route::get('/blog', fn () => view('blog'))->name('blog');
-    Route::get('/loyalty', fn () => view('loyalty'))->name('loyalty');
 
     Route::get('/profile', function () {
         $user = [

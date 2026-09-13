@@ -75,7 +75,7 @@
                     @click="$modal.hide('mobile-menu')">{{ __('store.nav_promo') }}</a>
                 <a href="{{ route('blog') }}" class="mobile-menu__link"
                     @click="$modal.hide('mobile-menu')">{{ __('store.nav_blog') }}</a>
-                <a href="{{ route('loyalty') }}" class="mobile-menu__link"
+                <a href="{{ url('/loyalty') }}" class="mobile-menu__link"
                     @click="$modal.hide('mobile-menu')">{{ __('store.nav_bonus') }}</a>
                 <a href="{{ url('/about') }}" class="mobile-menu__link"
                     @click="$modal.hide('mobile-menu')">{{ __('store.nav_about') }}</a>

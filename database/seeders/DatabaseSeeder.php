@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ContactsPageSeeder::class);
         $this->call(AboutPageSeeder::class);
         $this->call(ReturnsPageSeeder::class);
+        $this->call(LoyaltyPageSeeder::class);
 
         User::factory()->create([
             'name' => 'Test User',
