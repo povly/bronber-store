@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Support\PageBlocks;
 
+use App\Services\Languages\LanguageService;
 use App\Services\Settings\SettingService;
 use Illuminate\Support\Facades\Log;
 
@@ -17,23 +18,44 @@ use Illuminate\Support\Facades\Log;
 class SettingsResolver
 {
     /**
+     * Pure-media setting blocks inherited wholesale for non-default
+     * locales when the locale lacks them entirely.
+     *
+     * @var list<string>
+     */
+    private const MEDIA_BLOCK_TYPES = ['logo', 'payment'];
+
+    /**
      * Header structures for the layout partials.
      *
      * @return array{
      *     topBar: array{phone: ?string, links: list<array{label: string, href: string}>}|null,
      *     nav: array{links: list<array{label: string, href: string}>}|null,
+     *     logo: array{image: string}|null,
      * }
      */
     public static function header(?string $locale = null): array
     {
-        $blocks = resolve(SettingService::class)->get('header', $locale);
+        $locale ??= app()->getLocale();
+
+        $blocks = self::withMediaFallback(
+            resolve(SettingService::class)->get('header', $locale),
+            'header',
+            $locale,
+        );
 
         $topBar = null;
         $nav = null;
+        $logo = null;
         $linksCount = 0;
 
         foreach ($blocks as $block) {
             $type = $block['_type'] ?? null;
+
+            if ($type === 'logo') {
+                $image = self::media($block, 'image');
+                $logo = $image !== null ? ['image' => $image] : null;
+            }
 
             if ($type === 'top-bar') {
                 $links = self::links((array) ($block['links'] ?? []), $locale);
@@ -57,38 +79,79 @@ class SettingsResolver
             'links' => $linksCount,
         ]);
 
-        return ['topBar' => $topBar, 'nav' => $nav];
+        return ['topBar' => $topBar, 'nav' => $nav, 'logo' => $logo];
     }
 
     /**
      * Footer structures for the layout partials.
      *
      * @return array{
+     *     logo: array{image: string}|null,
      *     contacts: array{phone: ?string, email: ?string}|null,
-     *     socials: list<array{platform: string, url: string}>|null,
+     *     contactItems: list<array{icon: ?string, text: string, href: ?string}>|null,
+     *     socials: list<array{platform: string, url: string, icon: ?string}>|null,
      *     columns: list<array{title: ?string, links: list<array{label: string, href: string}>}>,
-     *     bottom: array{privacy_label: ?string, privacy_url: ?string, terms_label: ?string,
-     *         terms_url: ?string, copyright: ?string, developer_label: ?string, developer_url: ?string}|null,
+     *     payment: array{image: string}|null,
+     *     bottom: array{links: list<array{label: string, href: string}>, copyright: ?string,
+     *         developer_label: ?string, developer_url: ?string}|null,
      * }
      */
     public static function footer(?string $locale = null): array
     {
-        $blocks = resolve(SettingService::class)->get('footer', $locale);
+        $locale ??= app()->getLocale();
 
+        $blocks = self::withMediaFallback(
+            resolve(SettingService::class)->get('footer', $locale),
+            'footer',
+            $locale,
+        );
+
+        $logo = null;
         $contacts = null;
+        $contactItems = null;
         $socials = null;
         $columns = [];
+        $payment = null;
         $bottom = null;
         $linksCount = 0;
 
         foreach ($blocks as $block) {
             $type = $block['_type'] ?? null;
 
+            if ($type === 'logo') {
+                $image = self::media($block, 'image');
+                $logo = $image !== null ? ['image' => $image] : null;
+            }
+
             if ($type === 'contacts') {
                 $contacts = [
                     'phone' => self::string($block, 'phone'),
                     'email' => self::string($block, 'email'),
                 ];
+
+                $items = [];
+
+                foreach ((array) ($block['items'] ?? []) as $item) {
+                    if (! is_array($item)) {
+                        continue;
+                    }
+
+                    $text = self::string($item, 'text');
+
+                    if ($text === null) {
+                        continue;
+                    }
+
+                    $items[] = [
+                        'icon' => self::media($item, 'icon'),
+                        'text' => $text,
+                        'href' => self::string($item, 'href'),
+                    ];
+                }
+
+                if ($items !== []) {
+                    $contactItems = $items;
+                }
             }
 
             if ($type === 'socials') {
@@ -99,7 +162,11 @@ class SettingsResolver
                     $url = self::string($social, 'url');
 
                     if ($platform !== null && $url !== null) {
-                        $socials[] = ['platform' => $platform, 'url' => $url];
+                        $socials[] = [
+                            'platform' => $platform,
+                            'url' => $url,
+                            'icon' => self::media($social, 'icon'),
+                        ];
                     }
                 }
             }
@@ -113,12 +180,31 @@ class SettingsResolver
                 $linksCount += count($links);
             }
 
+            if ($type === 'payment') {
+                $image = self::media($block, 'image');
+                $payment = $image !== null ? ['image' => $image] : null;
+            }
+
             if ($type === 'bottom') {
+                $bottomLinks = self::links((array) ($block['links'] ?? []), $locale);
+
+                // Legacy privacy/terms fields → links (data saved before
+                // the bottom row switched to the Json links list).
+                if ($bottomLinks === []) {
+                    foreach (['privacy', 'terms'] as $legal) {
+                        $label = self::string($block, $legal.'_label');
+
+                        if ($label !== null) {
+                            $bottomLinks[] = [
+                                'label' => $label,
+                                'href' => self::string($block, $legal.'_url') ?? '#',
+                            ];
+                        }
+                    }
+                }
+
                 $bottom = [
-                    'privacy_label' => self::string($block, 'privacy_label'),
-                    'privacy_url' => self::string($block, 'privacy_url'),
-                    'terms_label' => self::string($block, 'terms_label'),
-                    'terms_url' => self::string($block, 'terms_url'),
+                    'links' => $bottomLinks,
                     'copyright' => self::string($block, 'copyright'),
                     'developer_label' => self::string($block, 'developer_label'),
                     'developer_url' => self::string($block, 'developer_url'),
@@ -133,11 +219,38 @@ class SettingsResolver
         ]);
 
         return [
+            'logo' => $logo,
             'contacts' => $contacts,
+            'contactItems' => $contactItems,
             'socials' => $socials,
             'columns' => $columns,
+            'payment' => $payment,
             'bottom' => $bottom,
         ];
+    }
+
+    /**
+     * Fill empty media fields of a non-default locale's setting from the
+     * default locale's setting; pure-media blocks (logo, payment) are
+     * inherited wholesale when the locale lacks them. Media is owned by
+     * the primary language — text content stays per-locale.
+     *
+     * @param  list<array<string, mixed>>  $blocks
+     * @return list<array<string, mixed>>
+     */
+    private static function withMediaFallback(array $blocks, string $key, string $locale): array
+    {
+        $default = resolve(LanguageService::class)->defaultCode();
+
+        if ($locale === $default) {
+            return $blocks;
+        }
+
+        return MediaFallback::apply(
+            $blocks,
+            resolve(SettingService::class)->get($key, $default),
+            self::MEDIA_BLOCK_TYPES,
+        );
     }
 
     /**
@@ -176,5 +289,24 @@ class SettingsResolver
         $value = trim((string) ($data[$key] ?? ''));
 
         return $value === '' ? null : $value;
+    }
+
+    /**
+     * Normalized media path: disk-relative picker paths get the
+     * /storage/ prefix; absolute paths and URLs pass through; empty → null.
+     *
+     * @param  array<string, mixed>  $data
+     */
+    private static function media(array $data, string $key): ?string
+    {
+        $path = trim((string) ($data[$key] ?? ''));
+
+        if ($path === '') {
+            return null;
+        }
+
+        return str_starts_with($path, '/') || str_starts_with($path, 'http')
+            ? $path
+            : '/storage/'.ltrim($path, '/');
     }
 }

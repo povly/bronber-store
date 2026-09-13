@@ -31,7 +31,13 @@ final class SettingFormPage extends FormPage
 
         $value = match ($setting?->key) {
             'footer' => FooterBlockLibrary::footer(),
-            default => HeaderBlockLibrary::header(),
+            'header' => HeaderBlockLibrary::header(),
+            // The flexible-layouts AJAX store route carries no resourceItem,
+            // so the setting is unresolvable there and getItem() is null —
+            // serve the union of all setting blocks so picker adds work for
+            // every setting key (the browser picker only offers the blocks
+            // of the rendered form, so extra blocks are never clickable).
+            default => FooterBlockLibrary::footer(HeaderBlockLibrary::header()),
         };
 
         return [

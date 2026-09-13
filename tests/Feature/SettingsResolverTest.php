@@ -28,11 +28,14 @@ function resolverPage(string $slug): void
 }
 
 it('returns nulls when no settings exist', function (): void {
-    expect(SettingsResolver::header())->toBe(['topBar' => null, 'nav' => null])
+    expect(SettingsResolver::header())->toBe(['topBar' => null, 'nav' => null, 'logo' => null])
         ->and(SettingsResolver::footer())->toBe([
+            'logo' => null,
             'contacts' => null,
+            'contactItems' => null,
             'socials' => null,
             'columns' => [],
+            'payment' => null,
             'bottom' => null,
         ]);
 });
@@ -103,7 +106,7 @@ it('resolves the footer structures', function (): void {
 
     expect($footer['contacts'])->toBe(['phone' => '+7 000', 'email' => 'shop@bronber.ru'])
         ->and($footer['socials'])->toBe([
-            ['platform' => 'Instagram', 'url' => 'https://instagram.com/bronber'],
+            ['platform' => 'Instagram', 'url' => 'https://instagram.com/bronber', 'icon' => null],
         ])
         ->and($footer['columns'])->toBe([
             ['title' => 'Покупателям', 'links' => [
@@ -111,8 +114,24 @@ it('resolves the footer structures', function (): void {
             ]],
         ])
         ->and($footer['bottom']['copyright'])->toBe('© 2026 Bronber')
-        ->and($footer['bottom']['privacy_label'])->toBe('Политика')
+        ->and($footer['bottom']['links'])->toBe([['label' => 'Политика', 'href' => '#']])
         ->and($footer['bottom']['developer_label'])->toBeNull();
+});
+
+it('resolves the bottom row legal links from the json list', function (): void {
+    resolverPage('privacy');
+
+    Setting::factory()->footer()->ru()->withBlocks([
+        ['_type' => 'bottom', 'links' => [
+            ['label' => 'Политика', 'type' => 'page', 'page' => 'privacy'],
+            ['label' => 'Terms', 'type' => 'custom', 'url' => 'https://example.com/terms'],
+        ], 'copyright' => '© 2026'],
+    ])->create();
+
+    expect(SettingsResolver::footer()['bottom']['links'])->toBe([
+        ['label' => 'Политика', 'href' => url('/privacy')],
+        ['label' => 'Terms', 'href' => 'https://example.com/terms'],
+    ]);
 });
 
 it('keeps missing blocks as null while others resolve', function (): void {
@@ -123,7 +142,87 @@ it('keeps missing blocks as null while others resolve', function (): void {
     $footer = SettingsResolver::footer();
 
     expect($footer['contacts'])->toBe(['phone' => '+7 000', 'email' => null])
+        ->and($footer['logo'])->toBeNull()
+        ->and($footer['contactItems'])->toBeNull()
         ->and($footer['socials'])->toBeNull()
         ->and($footer['columns'])->toBe([])
+        ->and($footer['payment'])->toBeNull()
         ->and($footer['bottom'])->toBeNull();
+});
+
+it('resolves logo, payment, contact items and social icons with normalized media paths', function (): void {
+    Setting::factory()->header()->ru()->withBlocks([
+        ['_type' => 'logo', 'image' => 'brand/logo-header.svg'],
+    ])->create();
+
+    Setting::factory()->footer()->ru()->withBlocks([
+        ['_type' => 'logo', 'image' => '/images/brand/logo-footer.svg'],
+        ['_type' => 'contacts', 'items' => [
+            ['icon' => 'icons/phone.svg', 'text' => '+7 000', 'href' => 'tel:+7000'],
+            ['icon' => null, 'text' => 'Без иконки'],
+            ['icon' => 'icons/mail.svg', 'text' => '', 'href' => 'mailto:x@y.z'],
+        ]],
+        ['_type' => 'socials', 'links' => [
+            ['platform' => 'Telegram', 'url' => 'https://t.me/bronber', 'icon' => 'icons/tg.svg'],
+        ]],
+        ['_type' => 'payment', 'image' => 'brand/payment.png'],
+    ])->create();
+
+    $header = SettingsResolver::header();
+    $footer = SettingsResolver::footer();
+
+    expect($header['logo'])->toBe(['image' => '/storage/brand/logo-header.svg'])
+        ->and($footer['logo'])->toBe(['image' => '/images/brand/logo-footer.svg'])
+        ->and($footer['payment'])->toBe(['image' => '/storage/brand/payment.png'])
+        ->and($footer['contactItems'])->toBe([
+            ['icon' => '/storage/icons/phone.svg', 'text' => '+7 000', 'href' => 'tel:+7000'],
+            ['icon' => null, 'text' => 'Без иконки', 'href' => null],
+        ])
+        ->and($footer['socials'])->toBe([
+            ['platform' => 'Telegram', 'url' => 'https://t.me/bronber', 'icon' => '/storage/icons/tg.svg'],
+        ])
+        ->and($footer['contacts'])->toBe(['phone' => null, 'email' => null]);
+});
+
+it('inherits empty header/footer media from the default locale settings', function (): void {
+    Setting::factory()->header()->ru()->withBlocks([
+        ['_type' => 'logo', 'image' => 'brand/logo.svg'],
+    ])->create();
+
+    Setting::factory()->header()->en()->withBlocks([
+        ['_type' => 'top-bar', 'phone' => '+7 EN'],
+    ])->create();
+
+    Setting::factory()->footer()->ru()->withBlocks([
+        ['_type' => 'logo', 'image' => 'brand/logo.svg'],
+        ['_type' => 'payment', 'image' => 'brand/pay.png'],
+        ['_type' => 'socials', 'links' => [
+            ['platform' => 'Telegram', 'url' => 'https://t.me/x', 'icon' => 'icons/tg.svg'],
+        ]],
+        ['_type' => 'contacts', 'items' => [
+            ['icon' => 'icons/phone.svg', 'text' => 'RU телефон'],
+        ]],
+    ])->create();
+
+    Setting::factory()->footer()->en()->withBlocks([
+        ['_type' => 'socials', 'links' => [
+            ['platform' => 'Telegram', 'url' => 'https://t.me/x', 'icon' => null],
+        ]],
+        ['_type' => 'contacts', 'items' => [
+            ['icon' => null, 'text' => 'EN phone'],
+        ]],
+    ])->create();
+
+    app()->setLocale('en');
+
+    $header = SettingsResolver::header();
+    $footer = SettingsResolver::footer();
+
+    expect($header['logo'])->toBe(['image' => '/storage/brand/logo.svg'])
+        ->and($header['topBar']['phone'])->toBe('+7 EN')
+        ->and($footer['logo'])->toBe(['image' => '/storage/brand/logo.svg'])
+        ->and($footer['payment'])->toBe(['image' => '/storage/brand/pay.png'])
+        ->and($footer['socials'][0]['icon'])->toBe('/storage/icons/tg.svg')
+        ->and($footer['contactItems'][0]['text'])->toBe('EN phone')
+        ->and($footer['contactItems'][0]['icon'])->toBe('/storage/icons/phone.svg');
 });

@@ -4,6 +4,9 @@
 
     <div class="header__top">
         <a href="/" class="header__logo" aria-label="{{ __('store.header_logo_alt') }}">
+            @if(($headerSettings['logo']['image'] ?? null) !== null)
+                <x-img path="{{ $headerSettings['logo']['image'] }}" :lazy="false" width="207" height="32" />
+            @else
             <svg width="207" height="32" viewBox="0 0 207 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_755_344)">
                     <path
@@ -61,6 +64,7 @@
                     </clipPath>
                 </defs>
             </svg>
+            @endif
         </a>
 
         <div class="header__top-right container">

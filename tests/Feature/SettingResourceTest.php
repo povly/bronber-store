@@ -37,6 +37,82 @@ it('edit page', function (): void {
         ->assertOk();
 });
 
+it('renders media blocks (logo, payment) in the footer settings form', function (): void {
+    $item = Setting::factory()->footer()->ru()->withBlocks([
+        ['_type' => 'payment', 'image' => 'footer/payment.svg'],
+        ['_type' => 'logo', 'image' => 'footer/logo.svg'],
+    ])->create();
+
+    actingAs($this->user, 'moonshine')
+        ->get($this->resource->getFormPageUrl($item->getKey()))
+        ->assertOk();
+});
+
+it('adds the payment block via the flexible-layouts ajax endpoint', function (): void {
+    $item = Setting::factory()->footer()->ru()->create();
+
+    $html = actingAs($this->user, 'moonshine')
+        ->get($this->resource->getFormPageUrl($item->getKey()))
+        ->assertOk()
+        ->getContent();
+
+    preg_match('/flexibleLayouts\(\s*`([^`]+)`/s', $html, $m);
+    $addRoute = $m[1] ?? null;
+
+    expect($addRoute)->not->toBeNull();
+
+    $response = actingAs($this->user, 'moonshine')
+        ->post($addRoute, [
+            'field' => 'value',
+            'path' => 'value',
+            'name' => 'payment',
+            'counts' => [],
+        ])
+        ->assertOk();
+
+    expect($response->json('blockHtml'))->not->toBeNull();
+});
+
+it('saves the payment block through the settings form', function (): void {
+    $item = Setting::factory()->footer()->ru()->create();
+
+    actingAs($this->user, 'moonshine')
+        ->patch(route('moonshine.crud.update', [
+            'resourceUri' => $this->resource->getUriKey(),
+            'resourceItem' => $item->getKey(),
+        ]), [
+            'key' => 'footer',
+            'locale' => 'ru',
+            'value' => [
+                ['_type' => 'payment', 'image' => 'footer/payment.svg'],
+                ['_type' => 'logo', 'image' => 'footer/logo.svg'],
+            ],
+        ])
+        ->assertRedirect();
+
+    expect($item->refresh()->value)->toBe([
+        ['_type' => 'payment', 'image' => 'footer/payment.svg'],
+        ['_type' => 'logo', 'image' => 'footer/logo.svg'],
+    ]);
+});
+
+it('loads the link type visibility script on the settings form', function (): void {
+    $item = Setting::factory()->header()->ru()->withBlocks([
+        ['_type' => 'top-bar', 'links' => [
+            ['label' => 'Доставка', 'type' => 'custom', 'url' => '/delivery'],
+        ]],
+    ])->create();
+
+    $html = actingAs($this->user, 'moonshine')
+        ->get($this->resource->getFormPageUrl($item->getKey()))
+        ->assertOk()
+        ->getContent();
+
+    expect($html)
+        ->toContain('/vendor/bronber/link-type-visibility.js')
+        ->toContain('[type]');
+});
+
 it('saves flexible-layouts blocks through the form', function (): void {
     $item = Setting::factory()->header()->ru()->create();
 

@@ -7,6 +7,7 @@ use App\Models\Setting;
 use App\Services\Languages\LanguageService;
 use App\Support\PageBlocks\PageOptions;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\File;
 
 uses(RefreshDatabase::class);
 
@@ -106,4 +107,37 @@ it('falls back to static markup when settings exist but are empty', function ():
     expect($html)
         ->toContain(__('store.nav_new'))
         ->toContain('top-bar__links--right');
+});
+
+it('renders media from settings: logos, payment, social and contact icons', function (): void {
+    File::ensureDirectoryExists(storage_path('app/public/settings-test'));
+    File::put(storage_path('app/public/settings-test/logo.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" data-test="settings-logo"><rect width="8" height="8" fill="#000"/></svg>');
+    File::put(storage_path('app/public/settings-test/icon.svg'), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 8" data-test="settings-icon"><rect width="8" height="8" fill="#fff"/></svg>');
+
+    try {
+        Setting::factory()->header()->ru()->withBlocks([
+            ['_type' => 'logo', 'image' => 'settings-test/logo.svg'],
+        ])->create();
+
+        Setting::factory()->footer()->ru()->withBlocks([
+            ['_type' => 'logo', 'image' => 'settings-test/logo.svg'],
+            ['_type' => 'payment', 'image' => 'settings-test/logo.svg'],
+            ['_type' => 'contacts', 'items' => [
+                ['icon' => 'settings-test/icon.svg', 'text' => '+7 (000) 000-00-00', 'href' => 'tel:+70000000000'],
+            ]],
+            ['_type' => 'socials', 'links' => [
+                ['platform' => 'Telegram', 'url' => 'https://t.me/bronber', 'icon' => 'settings-test/icon.svg'],
+            ]],
+        ])->create();
+
+        $html = $this->get('/')->getContent();
+
+        expect($html)
+            ->toContain('data-test="settings-logo"')
+            ->toContain('data-test="settings-icon"')
+            ->toContain('tel:+70000000000')
+            ->toContain('https://t.me/bronber');
+    } finally {
+        File::deleteDirectory(storage_path('app/public/settings-test'));
+    }
 });

@@ -90,8 +90,10 @@ class SettingsSeeder extends Seeder
         $footer = [
             [
                 '_type' => 'contacts',
-                'phone' => '+7 (985) 449-8000',
-                'email' => 'info@bronber.ru',
+                'items' => [
+                    ['icon' => '/images/icons/phone.svg', 'text' => '+7 (985) 449-8000', 'href' => 'tel:+79854498000'],
+                    ['icon' => '/images/icons/mail.svg', 'text' => 'info@bronber.ru', 'href' => 'mailto:info@bronber.ru'],
+                ],
             ],
             [
                 '_type' => 'socials',
@@ -135,10 +137,10 @@ class SettingsSeeder extends Seeder
             ],
             [
                 '_type' => 'bottom',
-                'privacy_label' => $t('Политика конфиденциальности', 'Privacy Policy'),
-                'privacy_url' => '#',
-                'terms_label' => $t('Пользовательское соглашение', 'Terms of Use'),
-                'terms_url' => '#',
+                'links' => [
+                    ['label' => $t('Политика конфиденциальности', 'Privacy Policy'), 'type' => 'custom', 'page' => null, 'url' => '#'],
+                    ['label' => $t('Пользовательское соглашение', 'Terms of Use'), 'type' => 'custom', 'page' => null, 'url' => '#'],
+                ],
                 'copyright' => $t('© 2026 Bronber Store. Все права защищены', '© 2026 Bronber Store. All rights reserved'),
                 'developer_label' => $t('Разработка — Bronber', 'Developed by Bronber'),
                 'developer_url' => '#!',

@@ -8,6 +8,7 @@ use App\MoonShine\Resources\Language\LanguageResource;
 use App\MoonShine\Resources\Page\PageResource;
 use App\MoonShine\Resources\PageTranslation\PageTranslationResource;
 use App\MoonShine\Resources\Setting\SettingResource;
+use Illuminate\Support\Facades\Vite;
 use MoonShine\AssetManager\Css;
 use MoonShine\AssetManager\Js;
 use MoonShine\ColorManager\ColorManager;
@@ -17,7 +18,6 @@ use MoonShine\Contracts\ColorManager\PaletteContract;
 use MoonShine\Laravel\Layouts\AppLayout;
 use MoonShine\MenuManager\MenuItem;
 use MoonShine\UI\Components\FlexibleRender;
-use Illuminate\Support\Facades\Vite;
 use Povly\MoonShineImageEditor\Support\ImageEditorRenderer;
 use YuriZoom\MoonShineMediaManager\Components\MediaManagerOffCanvas;
 
@@ -37,6 +37,9 @@ final class MoonShineLayout extends AppLayout
             Css::make('/vendor/image-editor/image-editor.css'),
             Js::make('/vendor/image-editor/filerobot-image-editor.min.js'),
             Js::make('/vendor/image-editor/image-editor.js'),
+            // Conditional visibility of the [page]/[url] link fields inside
+            // flexible-layout blocks — native showWhen does not reach them.
+            Js::make('/vendor/bronber/link-type-visibility.js'),
         ];
     }
 
