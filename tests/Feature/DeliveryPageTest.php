@@ -69,14 +69,11 @@ it('renders the delivery page from db blocks', function (): void {
         ->assertSee('/images/delivery/cash.svg', false);
 });
 
-it('falls back to the static prototype when the delivery page is missing', function (): void {
-    $this->get('/delivery')
-        ->assertOk()
-        ->assertSee('Оплата по СБП — QR Code')
-        ->assertSee('По вопросам доставки и оплаты:');
+it('shows 404 when the delivery page is missing', function (): void {
+    $this->get('/delivery')->assertNotFound();
 });
 
-it('falls back to the static prototype when the delivery page is a draft', function (): void {
+it('shows 404 when the delivery page is a draft', function (): void {
     Page::factory()->draft()
         ->has(PageTranslation::factory()->ru()->state([
             'content' => [
@@ -90,10 +87,7 @@ it('falls back to the static prototype when the delivery page is a draft', funct
         ]), 'translations')
         ->create(['slug' => 'delivery']);
 
-    $this->get('/delivery')
-        ->assertOk()
-        ->assertSee('Оплата по СБП — QR Code')
-        ->assertDontSee('Черновой способ оплаты');
+    $this->get('/delivery')->assertNotFound();
 });
 
 it('renders the en translation on the locale-prefixed route', function (): void {

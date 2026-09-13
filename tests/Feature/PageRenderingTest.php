@@ -103,8 +103,21 @@ it('renders the full SEO tag set from the current translation', function (): voi
         ->toContain('<link rel="alternate" hreflang="x-default" href="'.url('/o-kompanii').'">');
 });
 
-it('keeps the default title on prototype pages', function (): void {
-    $html = $this->get('/')->getContent();
+it('shows 404 on the home route when the index page is missing', function (): void {
+    $this->get('/')->assertNotFound();
+    $this->get('/en')->assertNotFound();
+});
 
-    expect($html)->toContain('<title>Bronber Store</title>');
+it('renders the home page from the db', function (): void {
+    Page::factory()
+        ->has(PageTranslation::factory()->ru()->state([
+            'title' => 'Главная',
+            'meta_title' => 'Bronber — автозапчасти',
+            'content' => [],
+        ]), 'translations')
+        ->create(['slug' => 'index']);
+
+    $this->get('/')
+        ->assertOk()
+        ->assertSee('header__nav');
 });

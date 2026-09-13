@@ -9,7 +9,6 @@ use App\Models\PageTranslation;
 use App\Services\Languages\LanguageService;
 use App\Support\PageBlocks\MediaFallback;
 use App\Support\PageBreadcrumbs;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
@@ -32,61 +31,53 @@ class PageController extends Controller
     private const DELIVERY_SLUG = 'delivery';
 
     /**
-     * Render the site root from the DB page with slug «index»
-     * (fallback: the static prototype view when the page or its
-     * translation is missing — same pattern as header/footer settings;
-     * a missing table (pre-migration) also degrades to the prototype).
+     * Render the site root from the DB page with slug «index» —
+     * no static fallback: a missing page/translation is a 404, the
+     * same contract as the catch-all route (the seeder ships content).
      */
     public function index(): Response
     {
-        return $this->renderSlugOrFallback(self::HOME_SLUG, 'home');
+        return $this->renderFixedSlug(self::HOME_SLUG);
     }
 
     /**
-     * Render the FAQ page from the DB page with slug «faq»
-     * (fallback: the static prototype view — same pattern as the site
-     * root; the fixed route keeps its name «faq» for header/footer/
-     * mobile-menu links).
+     * Render the FAQ page from the DB page with slug «faq» (the fixed
+     * route keeps its name «faq» for header/footer/mobile-menu links).
      */
     public function faq(): Response
     {
-        return $this->renderSlugOrFallback(self::FAQ_SLUG, 'faq');
+        return $this->renderFixedSlug(self::FAQ_SLUG);
     }
 
     /**
      * Render the delivery page from the DB page with slug «delivery»
-     * (fallback: the static prototype view — same pattern as the site
-     * root and FAQ; the fixed route keeps its name «delivery» for
-     * header/footer/mobile-menu links).
+     * (the fixed route keeps its name «delivery» for header/footer/
+     * mobile-menu links).
      */
     public function delivery(): Response
     {
-        return $this->renderSlugOrFallback(self::DELIVERY_SLUG, 'delivery');
+        return $this->renderFixedSlug(self::DELIVERY_SLUG);
     }
 
     /**
      * Render a fixed-route page backed by a DB page: a published page
      * with a translation renders its flexible-layout blocks; anything
-     * missing (page, translation, pre-migration table) degrades to the
-     * static prototype view.
+     * missing is a 404 — the same contract as the catch-all route (the
+     * content is admin-managed, there is no static-prototype fallback).
      */
-    private function renderSlugOrFallback(string $slug, string $fallbackView): Response
+    private function renderFixedSlug(string $slug): Response
     {
-        try {
-            $page = $this->findPublishedPage($slug);
-        } catch (QueryException) {
-            $page = null;
-        }
+        $page = $this->findPublishedPage($slug);
 
         $translation = $page?->translation();
 
-        if ($translation === null) {
-            Log::debug('[PageController] slug={slug} locale={locale} source=fallback', [
+        if ($page === null || $translation === null) {
+            Log::debug('[PageController] slug={slug} locale={locale} found=false', [
                 'slug' => $slug,
                 'locale' => app()->getLocale(),
             ]);
 
-            return response()->view($fallbackView);
+            abort(404);
         }
 
         Log::debug('[PageController] slug={slug} locale={locale} source=db', [

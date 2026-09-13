@@ -18,6 +18,12 @@ beforeEach(function (): void {
     Language::factory()->default()->create(['code' => 'ru', 'sort_order' => 0]);
     Language::factory()->create(['code' => 'en', 'sort_order' => 1]);
 
+    // The home route renders strictly from the DB (no prototype
+    // fallback) — the header/footer assertions need a rendered page.
+    Page::factory()
+        ->has(PageTranslation::factory()->ru()->state(['content' => []]), 'translations')
+        ->create(['slug' => 'index']);
+
     app()->setLocale('ru');
 });
 

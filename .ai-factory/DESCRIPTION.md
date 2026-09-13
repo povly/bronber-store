@@ -17,16 +17,18 @@
 ## Реализованный модуль Content (MVC)
 
 - **DB-страницы**: slug + публикации + переводы per-locale (таблицы `pages`, `page_translations`),
-  контент — блоки flexible-layouts (JSON, `_type`), рендер `BlockRenderer` → blade `pb-*`
+  контент — блоки flexible-layouts (JSON, `_type`), рендер `BlockRenderer` → blade `pb-*`;
+  фиксированные роуты (`/`, `/faq`, `/delivery`) — только из БД: нет опубликованной
+  страницы/перевода → 404 (fallback на статический прототип убран)
 - **Иерархия страниц и хлебные крошки**: `pages.parent_id` (self-reference, админка — селект
   «Родительская страница» с защитой от циклов); автоматические крошки на уровне вью страницы —
   `PageBreadcrumbs` строит «Главная → опубликованные предки → текущая» через `LinkResolver`
   (автолокализация `/en/...`), JSON-LD BreadcrumbList; на главной крошки скрыты
-- **Страница FAQ из БД**: фиксированный роут `/faq` → `PageController::faq` (slug `faq`, fallback на
-  статический прототип), блок `faq-items` (заголовок + аккордеон вопрос/ответ);
+- **Страница FAQ из БД**: фиксированный роут `/faq` → `PageController::faq` (slug `faq`), блок
+  `faq-items` (заголовок + аккордеон вопрос/ответ);
   демо-контент — `FaqPageSeeder` (ru/en, идемпотентный, заполняет только пустые переводы)
 - **Страница «Доставка и оплата» из БД**: фиксированный роут `/delivery` → `PageController::delivery`
-  (slug `delivery`, fallback на статический прототип), блоки `delivery-methods` (заголовок + карточки:
+  (slug `delivery`), блоки `delivery-methods` (заголовок + карточки:
   иконка/заголовок/описание) и `contact-list` (заголовок + контакты: иконка/текст/ссылка tel:|mailto:|URL);
   демо-контент — `DeliveryPageSeeder` (ru/en, идемпотентный, тексты из lang-файлов прототипа)
 - **Полный SEO-набор** пер-локали: meta title/description/keywords, robots, canonical,

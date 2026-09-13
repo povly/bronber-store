@@ -55,14 +55,11 @@ it('renders the faq page from db blocks', function (): void {
         ->assertSee('Второй тестовый ответ.');
 });
 
-it('falls back to the static prototype when the faq page is missing', function (): void {
-    $this->get('/faq')
-        ->assertOk()
-        ->assertSee('Как оформить заказ?')
-        ->assertSee('faq()');
+it('shows 404 when the faq page is missing', function (): void {
+    $this->get('/faq')->assertNotFound();
 });
 
-it('falls back to the static prototype when the faq page is a draft', function (): void {
+it('shows 404 when the faq page is a draft', function (): void {
     Page::factory()->draft()
         ->has(PageTranslation::factory()->ru()->state([
             'content' => [[
@@ -74,10 +71,7 @@ it('falls back to the static prototype when the faq page is a draft', function (
         ]), 'translations')
         ->create(['slug' => 'faq']);
 
-    $this->get('/faq')
-        ->assertOk()
-        ->assertSee('Как оформить заказ?')
-        ->assertDontSee('Черновой вопрос?');
+    $this->get('/faq')->assertNotFound();
 });
 
 it('renders the en translation on the locale-prefixed route', function (): void {
