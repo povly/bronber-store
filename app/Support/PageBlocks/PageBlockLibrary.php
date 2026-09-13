@@ -67,4 +67,23 @@ class PageBlockLibrary
 
         return $layouts;
     }
+
+    /**
+     * Media slots per page block type for the locale media fallback
+     * ({@see MediaFallback}): a string slot is a block-level media key,
+     * '<list>' => [keys] declares item-level media keys. Keep in sync
+     * with the MediaManagerPicker fields of the block classes.
+     *
+     * @return array<string, array<string|int, mixed>>
+     */
+    public static function mediaSchemas(): array
+    {
+        return [
+            'home-advs' => ['items' => ['image']],
+            'home-news' => ['items' => ['image']],
+            'home-partners' => ['images'],
+            'delivery-methods' => ['items' => ['icon']],
+            'contact-list' => ['items' => ['icon']],
+        ];
+    }
 }

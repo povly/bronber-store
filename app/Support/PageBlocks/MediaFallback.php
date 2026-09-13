@@ -11,44 +11,38 @@ use Illuminate\Support\Facades\Log;
  * (page translations, header/footer settings) from the default locale's
  * content («primary language» fallback).
  *
- * A locale may exist while its media fields are empty — images are
- * managed per language in MoonShine. Instead of duplicating files between
- * translations, empty media fields inherit the default locale's value at
- * render time. Pure-media blocks (logo, payment) are inherited wholesale
- * when the locale lacks the block at all.
+ * Media fields are DECLARED per block type by the caller — a schema map
+ * (type => list of slots): a string slot is a block-level media key,
+ * '<list>' => [keys] declares item-level media keys inside that list.
+ * A block type without a schema is left untouched — nothing is scanned
+ * or filled globally.
  *
  * Blocks are matched by {_type} + occurrence order; items inside a
- * block (e.g. home-advs, contacts items, socials links) are matched by
- * index.
+ * block (e.g. contacts items, socials links) are matched by index.
+ * Pure-media blocks (logo, payment) are inherited wholesale when the
+ * locale lacks the block at all.
  */
 final class MediaFallback
 {
     /**
-     * Single-value media keys: a plain path string is a valid value.
+     * Block-level media keys that hold a list value (a JSON-encoded
+     * string or an array) instead of a single path.
+     *
+     * @var list<string>
      */
-    private const SINGLE_MEDIA_KEYS = ['image', 'icon'];
-
-    /**
-     * List media keys: a JSON-encoded string or an array; a non-JSON
-     * string is treated as empty — the templates skip such values.
-     */
-    private const LIST_MEDIA_KEYS = ['images'];
-
-    /**
-     * List fields whose items may carry media keys.
-     */
-    private const LIST_KEYS = ['items', 'links'];
+    private const LIST_VALUED_KEYS = ['images'];
 
     /**
      * Apply the fallback to a locale's content.
      *
      * @param  list<array<string, mixed>>  $content
      * @param  list<array<string, mixed>>|null  $fallbackContent
+     * @param  array<string, array<string|int, mixed>>  $schemas  media slots per block type
      * @param  list<string>  $inheritMissingTypes  pure-media block types inherited
      *                                             wholesale when the locale lacks them
      * @return list<array<string, mixed>>
      */
-    public static function apply(array $content, ?array $fallbackContent, array $inheritMissingTypes = []): array
+    public static function apply(array $content, ?array $fallbackContent, array $schemas = [], array $inheritMissingTypes = []): array
     {
         if ($fallbackContent === null) {
             return $content;
@@ -70,18 +64,24 @@ final class MediaFallback
             }
 
             $type = (string) $block['_type'];
+            $schema = $schemas[$type] ?? null;
+
+            if ($schema === null) {
+                continue;
+            }
+
             $occurrence = $seen[$type] ?? 0;
             $seen[$type] = $occurrence + 1;
 
             $fallback = $fallbackByType[$type][$occurrence] ?? null;
 
             if (is_array($fallback)) {
-                $content[$index] = self::fillBlock($block, $fallback, $type);
+                $content[$index] = self::fillBlock($block, $fallback, $type, $schema);
             }
         }
 
         if ($inheritMissingTypes !== []) {
-            $content = self::inheritMissingBlocks($content, $fallbackContent, $inheritMissingTypes);
+            $content = self::inheritMissingBlocks($content, $fallbackContent, $inheritMissingTypes, $schemas);
         }
 
         return $content;
@@ -95,9 +95,10 @@ final class MediaFallback
      * @param  list<array<string, mixed>>  $content
      * @param  list<array<string, mixed>>  $fallbackContent
      * @param  list<string>  $types
+     * @param  array<string, array<string|int, mixed>>  $schemas
      * @return list<array<string, mixed>>
      */
-    private static function inheritMissingBlocks(array $content, array $fallbackContent, array $types): array
+    private static function inheritMissingBlocks(array $content, array $fallbackContent, array $types, array $schemas): array
     {
         $present = [];
 
@@ -114,7 +115,7 @@ final class MediaFallback
 
             $type = (string) $block['_type'];
 
-            if (in_array($type, $present, true) || ! self::blockHasMedia($block)) {
+            if (in_array($type, $present, true) || ! self::blockHasMedia($block, $schemas[$type] ?? [])) {
                 continue;
             }
 
@@ -128,30 +129,27 @@ final class MediaFallback
     }
 
     /**
-     * Whether the block carries at least one non-empty media value
-     * (block-level or inside list items/links).
+     * Whether the block carries at least one non-empty declared media
+     * value (block-level or inside declared lists).
      *
      * @param  array<string, mixed>  $block
+     * @param  array<string|int, mixed>  $schema
      */
-    private static function blockHasMedia(array $block): bool
+    private static function blockHasMedia(array $block, array $schema): bool
     {
-        foreach (self::mediaKeys() as $key) {
-            if (! self::isEmptyMedia($block[$key] ?? null, self::isListKey($key))) {
-                return true;
-            }
-        }
-
-        foreach (self::LIST_KEYS as $listKey) {
-            foreach ((array) ($block[$listKey] ?? []) as $item) {
-                if (! is_array($item)) {
-                    continue;
-                }
-
-                foreach (self::mediaKeys() as $key) {
-                    if (! self::isEmptyMedia($item[$key] ?? null, self::isListKey($key))) {
+        foreach ($schema as $key => $slot) {
+            if (is_string($key)) {
+                foreach ((array) ($block[$key] ?? []) as $item) {
+                    if (is_array($item) && self::itemHasMedia($item, (array) $slot)) {
                         return true;
                     }
                 }
+
+                continue;
+            }
+
+            if (! self::isEmptyMedia($block[(string) $slot] ?? null, self::isListKey((string) $slot))) {
+                return true;
             }
         }
 
@@ -159,42 +157,42 @@ final class MediaFallback
     }
 
     /**
-     * Copy non-empty media values from the fallback block into the
-     * empty media slots of the current block.
+     * @param  array<string, mixed>  $item
+     * @param  list<string>  $itemKeys
+     */
+    private static function itemHasMedia(array $item, array $itemKeys): bool
+    {
+        foreach ($itemKeys as $itemKey) {
+            if (! self::isEmptyMedia($item[$itemKey] ?? null, false)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Copy non-empty declared media values from the fallback block into
+     * the empty media slots of the current block.
      *
      * @param  array<string, mixed>  $block
      * @param  array<string, mixed>  $fallback
+     * @param  array<string|int, mixed>  $schema
      * @return array<string, mixed>
      */
-    private static function fillBlock(array $block, array $fallback, string $type): array
+    private static function fillBlock(array $block, array $fallback, string $type, array $schema): array
     {
-        foreach (self::mediaKeys() as $key) {
-            $block = self::fillSlot($block, $fallback, "{$type}.{$key}", $key);
-        }
+        foreach ($schema as $key => $slot) {
+            if (is_string($key)) {
+                $block = self::fillList($block, $fallback, $type, $key, (array) $slot);
 
-        foreach (self::LIST_KEYS as $listKey) {
-            $block = self::fillList($block, $fallback, $type, $listKey);
+                continue;
+            }
+
+            $block = self::fillSlot($block, $fallback, "{$type}.{$slot}", (string) $slot);
         }
 
         return $block;
-    }
-
-    /**
-     * All media keys participating in the fallback.
-     *
-     * @return list<string>
-     */
-    private static function mediaKeys(): array
-    {
-        return [...self::SINGLE_MEDIA_KEYS, ...self::LIST_MEDIA_KEYS];
-    }
-
-    /**
-     * Whether the media key holds a list value (affects emptiness rules).
-     */
-    private static function isListKey(string $key): bool
-    {
-        return in_array($key, self::LIST_MEDIA_KEYS, true);
     }
 
     /**
@@ -226,13 +224,14 @@ final class MediaFallback
     }
 
     /**
-     * Fill empty media slots of list items, matched by index.
+     * Fill empty media slots of a declared list's items, matched by index.
      *
      * @param  array<string, mixed>  $block
      * @param  array<string, mixed>  $fallback
+     * @param  list<string>  $itemKeys
      * @return array<string, mixed>
      */
-    private static function fillList(array $block, array $fallback, string $type, string $listKey): array
+    private static function fillList(array $block, array $fallback, string $type, string $listKey, array $itemKeys): array
     {
         $items = $block[$listKey] ?? null;
 
@@ -249,14 +248,10 @@ final class MediaFallback
                 continue;
             }
 
-            // Chain fills across media keys: every fillSlot call must
-            // receive the result of the previous one — the original
-            // $item is a foreach snapshot and would clobber earlier
-            // fills on the next key pass.
             $filled = $item;
 
-            foreach (self::mediaKeys() as $key) {
-                $filled = self::fillSlot($filled, $fallbackItem, "{$type}.{$listKey}.{$index}.{$key}", $key);
+            foreach ($itemKeys as $itemKey) {
+                $filled = self::fillSlot($filled, $fallbackItem, "{$type}.{$listKey}.{$index}.{$itemKey}", $itemKey);
             }
 
             $items[$index] = $filled;
@@ -265,6 +260,14 @@ final class MediaFallback
         $block[$listKey] = $items;
 
         return $block;
+    }
+
+    /**
+     * Whether the media key holds a list value (affects emptiness rules).
+     */
+    private static function isListKey(string $key): bool
+    {
+        return in_array($key, self::LIST_VALUED_KEYS, true);
     }
 
     /**

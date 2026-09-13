@@ -26,6 +26,23 @@ class SettingsResolver
     private const MEDIA_BLOCK_TYPES = ['logo', 'payment'];
 
     /**
+     * Declared media slots per settings block type for the locale media
+     * fallback (MediaFallback schema): a string slot is a block-level
+     * media key, '<list>' => [keys] declares item-level media keys.
+     * Keep in sync with the MediaManagerPicker fields of the settings
+     * block libraries.
+     *
+     * @var array<string, array<string|int, mixed>>
+     */
+    private const MEDIA_SCHEMAS = [
+        'logo' => ['image'],
+        'payment' => ['image'],
+        'contacts' => ['items' => ['icon']],
+        'socials' => ['links' => ['icon']],
+        'items' => ['items' => ['icon']],
+    ];
+
+    /**
      * Header structures for the layout partials.
      *
      * @return array{
@@ -385,6 +402,7 @@ class SettingsResolver
         return MediaFallback::apply(
             $blocks,
             resolve(SettingService::class)->get($key, $default),
+            self::MEDIA_SCHEMAS,
             self::MEDIA_BLOCK_TYPES,
         );
     }

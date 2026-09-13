@@ -8,6 +8,7 @@ use App\Models\Page;
 use App\Models\PageTranslation;
 use App\Services\Languages\LanguageService;
 use App\Support\PageBlocks\MediaFallback;
+use App\Support\PageBlocks\PageBlockLibrary;
 use App\Support\PageBreadcrumbs;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
@@ -169,6 +170,7 @@ class PageController extends Controller
         $translation->content = MediaFallback::apply(
             $translation->content ?? [],
             $this->defaultContent($page, $translation),
+            PageBlockLibrary::mediaSchemas(),
         );
 
         // Breadcrumbs are page-level: Главная → published ancestors → current.

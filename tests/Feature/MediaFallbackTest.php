@@ -17,6 +17,19 @@ beforeEach(function (): void {
     Language::factory()->create(['code' => 'en', 'sort_order' => 1]);
 });
 
+function fallbackSchemas(): array
+{
+    return [
+        'home-partners' => ['images'],
+        'home-advs' => ['items' => ['image']],
+        'home-news' => ['items' => ['image']],
+        'socials' => ['links' => ['icon']],
+        'contacts' => ['items' => ['icon']],
+        'logo' => ['image'],
+        'payment' => ['image'],
+    ];
+}
+
 it('fills empty media fields from the default locale content', function (): void {
     $content = [
         ['_type' => 'home-partners', 'title' => 'Our partners'],
@@ -34,7 +47,7 @@ it('fills empty media fields from the default locale content', function (): void
         ]],
     ];
 
-    $result = MediaFallback::apply($content, $fallback);
+    $result = MediaFallback::apply($content, $fallback, fallbackSchemas());
 
     expect($result[0]['images'])->toBe('["home/partners/brembo.png"]')
         ->and($result[1]['items'][0]['image'])->toBe('home/advs/fast.svg')
@@ -46,6 +59,7 @@ it('keeps non-empty media of the current locale', function (): void {
     $result = MediaFallback::apply(
         [['_type' => 'home-partners', 'images' => ['en/logo.png']]],
         [['_type' => 'home-partners', 'images' => '["ru/logo.png"]']],
+        fallbackSchemas(),
     );
 
     expect($result[0]['images'])->toBe(['en/logo.png']);
@@ -62,6 +76,7 @@ it('matches blocks by type and occurrence order', function (): void {
             ['_type' => 'home-partners', 'images' => '["ru/first.png"]'],
             ['_type' => 'home-partners', 'images' => '["ru/second.png"]'],
         ],
+        fallbackSchemas(),
     );
 
     expect($result[0]['images'])->toBe('["ru/first.png"]')
@@ -71,7 +86,7 @@ it('matches blocks by type and occurrence order', function (): void {
 it('returns content unchanged for the default translation', function (): void {
     $content = [['_type' => 'home-partners']];
 
-    expect(MediaFallback::apply($content, null))->toBe($content);
+    expect(MediaFallback::apply($content, null, fallbackSchemas()))->toBe($content);
 });
 
 it('treats various empty shapes as empty media', function (): void {
@@ -84,7 +99,7 @@ it('treats various empty shapes as empty media', function (): void {
             $block['images'] = $empty;
         }
 
-        $result = MediaFallback::apply([$block], $fallback);
+        $result = MediaFallback::apply([$block], $fallback, fallbackSchemas());
 
         expect($result[0]['images'])->toBe('["ru/logo.png"]');
     }
@@ -94,6 +109,7 @@ it('ignores malformed blocks and missing fallback counterparts', function (): vo
     $result = MediaFallback::apply(
         ['not-an-array', ['_type' => 'home-news'], ['no-type' => true]],
         [['_type' => 'home-news', 'items' => [['image' => 'ru/news.svg']]]],
+        fallbackSchemas(),
     );
 
     expect($result)->toBe(['not-an-array', ['_type' => 'home-news'], ['no-type' => true]]);
@@ -140,6 +156,7 @@ it('fills empty link icons by index', function (): void {
             ['platform' => 'TG', 'url' => '#', 'icon' => 'ru/tg.svg'],
             ['platform' => 'IG', 'url' => '#', 'icon' => 'ru/ig.svg'],
         ]]],
+        fallbackSchemas(),
     );
 
     expect($result[0]['links'][0]['icon'])->toBe('ru/tg.svg')
@@ -154,9 +171,20 @@ it('inherits missing pure-media blocks and skips empty default ones', function (
             ['_type' => 'payment', 'image' => null],
             ['_type' => 'bottom', 'copyright' => '© RU'],
         ],
+        fallbackSchemas(),
         ['logo', 'payment'],
     );
 
     expect($result)->toHaveCount(2)
         ->and($result[1])->toBe(['_type' => 'logo', 'image' => 'brand/logo.svg']);
+});
+
+it('leaves media of undeclared block types untouched', function (): void {
+    $result = MediaFallback::apply(
+        [['_type' => 'some-custom', 'image' => '']],
+        [['_type' => 'some-custom', 'image' => 'ru/logo.png']],
+        ['home-partners' => ['images']],
+    );
+
+    expect($result[0]['image'])->toBe('');
 });
