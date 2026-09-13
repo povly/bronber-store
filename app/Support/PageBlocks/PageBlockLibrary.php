@@ -15,6 +15,10 @@ use App\Support\PageBlocks\Blocks\Home\HomeHeroBlock;
 use App\Support\PageBlocks\Blocks\Home\HomeNewsBlock;
 use App\Support\PageBlocks\Blocks\Home\HomePartnersBlock;
 use App\Support\PageBlocks\Blocks\Home\HomeProductsBlock;
+use App\Support\PageBlocks\Blocks\Loyalty\LoyaltyBenefitsBlock;
+use App\Support\PageBlocks\Blocks\Loyalty\LoyaltyBottomBlock;
+use App\Support\PageBlocks\Blocks\Loyalty\LoyaltyHeroBlock;
+use App\Support\PageBlocks\Blocks\Loyalty\LoyaltyHowWorksBlock;
 use App\Support\PageBlocks\Blocks\PageBlock;
 use App\Support\PageBlocks\Blocks\Returns\ReturnsContentBlock;
 use Povly\FlexibleLayouts\Fields\FlexibleLayouts;
@@ -57,6 +61,10 @@ class PageBlockLibrary
             ContactsMainBlock::class,
             AboutTimelineBlock::class,
             ReturnsContentBlock::class,
+            LoyaltyHeroBlock::class,
+            LoyaltyBenefitsBlock::class,
+            LoyaltyHowWorksBlock::class,
+            LoyaltyBottomBlock::class,
         ];
     }
 
@@ -90,6 +98,10 @@ class PageBlockLibrary
             'home-partners' => ['images'],
             'delivery-methods' => ['items' => ['icon']],
             'contact-list' => ['items' => ['icon']],
+            'loyalty-hero' => ['image_pc', 'image_mb'],
+            'loyalty-benefits' => ['items' => ['icon']],
+            'loyalty-how-works' => ['items' => ['icon']],
+            'loyalty-bottom' => ['gift_icon'],
         ];
     }
 }
