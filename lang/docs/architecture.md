@@ -95,7 +95,7 @@ Alpine-компоненты и дизайн не затрагиваются. Л�
 | **Catalog** | Витрина товаров, категории, бренды, поиск/фильтры | Product, Category, Brand *(ждёт CRM-склад)* |
 | **Orders** | Корзина, оформление заказа, оплата, статусы | Order, OrderItem |
 | **Reviews** | Отзывы на товары, рейтинги, модерация | Review |
-| **Content** | Блог, статьи, статичные страницы (FAQ, контакты, о нас) | Article, **Page, PageTranslation, Setting, Language** ✅ |
+| **Content** | Блог, статьи, статичные страницы (FAQ, контакты, о нас) | **Article, ArticleTranslation, Page, PageTranslation, Setting, Language** ✅ |
 
 ## Целевая структура каталогов
 

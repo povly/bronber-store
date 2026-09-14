@@ -13,9 +13,11 @@
 
 - `MoonShineUserResource` / `MoonShineUserRoleResource` — администраторы и роли
 - `PageResource` — **страницы сайта** с переводами, блоками и SEO
+- `ArticleResource` — **статьи блога** с переводами, блоками и SEO (`/blog`, `/blog/{slug}`)
 - `LanguageResource` — **активные языки** (редактируются в админке)
 - `SettingResource` — **шапка/подвал** с переводами (блоки)
 - `PageTranslationResource` — технический ресурс для HasMany переводов (в меню скрыт)
+- `ArticleTranslationResource` — технический ресурс для HasMany переводов статей (в меню скрыт)
 
 > Доменные ресурсы каталога (`ProductResource`, `OrderResource`, ...) появятся вместе
 > с CRM-складом на поддомене.
@@ -85,6 +87,22 @@ HasMany на ресурс `PageTranslationResource` (таблица + модал
 > возникает бесконечная рекурсия генерации имён полей (OOM). Поле должно жить на верхнем
 > уровне формы связанного ресурса (как в `PageTranslationFormPage`) — проверено тестом
 > `edit page renders for a page with translations without running out of memory`.
+
+### Статьи (ArticleResource)
+
+CRUD статей блога (витрина: `/blog` — листинг, `/blog/{slug}` — статья). Форма — табы
+«Статья» / «Переводы», зеркально `PageResource`:
+
+- Таб «Статья»: slug (kebab-case, уникальный), дата публикации (`published_at`, сортировка
+  блога — по убыванию даты), флаг «Опубликована», обложки `cover_pc`/`cover_mb`
+  (media-manager; пустая мобильная наследует десктопную).
+- Таб «Переводы»: HasMany на `ArticleTranslationResource`; форма перевода — заголовок,
+  тег, краткое описание (карточка в листинге), полный набор SEO-полей и контент — блоки
+  `ArticleBlockLibrary::article()`: `article-content` (EditorJS-текст), `article-gallery`
+  (слайдер изображений), `article-cta` (кнопка со ссылкой страница/кастом),
+  `article-related` (динамические «Другие новости» — список статей тянет `BlogService`).
+- При сохранении статьи **автоматически создаются переводы** для всех активных языков
+  (`afterSave`, как у страниц).
 
 ### Языки (LanguageResource)
 
