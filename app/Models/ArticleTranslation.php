@@ -1,0 +1,49 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Models;
+
+use Database\Factories\ArticleTranslationFactory;
+use Illuminate\Database\Eloquent\Attributes\Fillable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+#[Fillable(['article_id', 'locale', 'title', 'tag', 'excerpt', 'meta_title', 'meta_description', 'meta_keywords', 'meta_robots', 'canonical_url', 'og_image', 'content'])]
+class ArticleTranslation extends Model
+{
+    /**
+     * @use HasFactory<ArticleTranslationFactory>
+     */
+    use HasFactory;
+
+    /**
+     * @return BelongsTo<Article, $this>
+     */
+    public function article(): BelongsTo
+    {
+        return $this->belongsTo(Article::class);
+    }
+
+    /**
+     * Effective robots directive (defaults to "index, follow").
+     */
+    public function metaRobots(): string
+    {
+        return $this->meta_robots ?: 'index, follow';
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    #[\Override]
+    protected function casts(): array
+    {
+        return [
+            'content' => 'array',
+        ];
+    }
+}
