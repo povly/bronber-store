@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\MoonShine\Resources\Article\ArticleResource;
+use App\MoonShine\Resources\ArticleTranslation\ArticleTranslationResource;
 use App\MoonShine\Resources\Language\LanguageResource;
 use App\MoonShine\Resources\MoonShineUser\MoonShineUserResource;
 use App\MoonShine\Resources\MoonShineUserRole\MoonShineUserRoleResource;
@@ -26,8 +28,10 @@ class MoonShineServiceProvider extends ServiceProvider
                 MoonShineUserResource::class,
                 MoonShineUserRoleResource::class,
                 PageResource::class,
+                ArticleResource::class,
                 LanguageResource::class,
                 PageTranslationResource::class,
+                ArticleTranslationResource::class,
                 SettingResource::class,
             ])
             ->pages([

@@ -121,7 +121,7 @@ Created: 2026-09-14
 
 ### Phase 4: Админка MoonShine
 
-- [ ] **Task 7: `ArticleResource` + ресурсы переводов + регистрация** (depends on 3)
+- [x] **Task 7: `ArticleResource` + ресурсы переводов + регистрация** (depends on 3)
   - `app/MoonShine/Resources/Article/ArticleResource.php` — копия `PageResource`: `#[Icon('newspaper')]` (**предварительно проверить**: `ls vendor/moonshine/moonshine/src/UI/resources/views/icons/ | grep newspaper`, иначе 500 всей админки — .ai/rules/moon-shine.md; запасной вариант `document-text`), `#[Group('content')]`, `#[Order(15)]`, `$column = 'slug'`, `search(): ['slug']`, `activeActions()->except(Action::VIEW)`, `afterSave` — создать недостающие переводы на каждый язык (`title = $article->slug`) + `Log::info('[ArticleResource] article_id={id} saved by moonshine_user_id={uid}')`.
   - `app/MoonShine/Resources/Article/Pages/ArticleFormPage.php` — Tabs по образцу `PageFormPage`: таб «Статья» (slug с regex-валидацией как у страниц, `published_at` — `MoonShine\UI\Fields\Date`, Switcher «Опубликована», `cover_pc`/`cover_mb` — `MediaManagerPicker` allowedExtensions jpg/jpeg/png/webp); таб «Переводы» (`HasMany` → `ArticleTranslationResource`, `creatable()`).
   - `app/MoonShine/Resources/Article/Pages/ArticleIndexPage.php` — по образцу `PageIndexPage` (колонка slug, статус публикации, published_at).

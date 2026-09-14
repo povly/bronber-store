@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\MoonShine\Layouts;
 
+use App\MoonShine\Resources\Article\ArticleResource;
 use App\MoonShine\Resources\Language\LanguageResource;
 use App\MoonShine\Resources\Page\PageResource;
 use App\MoonShine\Resources\PageTranslation\PageTranslationResource;
@@ -49,6 +50,7 @@ final class MoonShineLayout extends AppLayout
         return [
             ...parent::menu(),
             MenuItem::make(PageResource::class, 'Страницы'),
+            MenuItem::make(ArticleResource::class, 'Статьи'),
             MenuItem::make(LanguageResource::class, 'Языки'),
             MenuItem::make(PageTranslationResource::class, 'Переводы страниц'),
             MenuItem::make(SettingResource::class, 'Настройки'),
