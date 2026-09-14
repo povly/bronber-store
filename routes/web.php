@@ -19,6 +19,10 @@ $register = function () {
 
     Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
+    // AJAX cards for «Показать больше» — must stay above /blog/{slug} so
+    // «cards» is never treated as an article slug.
+    Route::get('/blog/cards', [BlogController::class, 'cards'])->name('blog.cards');
+
     Route::get('/profile', function () {
         $user = [
             'name' => 'Игорь Валерьевич',

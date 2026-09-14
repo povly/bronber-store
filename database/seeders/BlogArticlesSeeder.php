@@ -93,8 +93,10 @@ class BlogArticlesSeeder extends Seeder
     }
 
     /**
-     * Article blocks: EditorJS text, image gallery, CTA button and (for the
-     * featured article) the dynamic «Другие новости» section.
+     * Article blocks: EditorJS text, CTA button, image gallery and (for
+     * the featured article) the dynamic «Другие новости» section. The
+     * CTA lives between the text and the gallery — the prototype placed
+     * the button at the end of the article text, before the images.
      *
      * @param  array<string, mixed>  $article
      * @return list<array<string, mixed>>
@@ -107,18 +109,18 @@ class BlogArticlesSeeder extends Seeder
                 'text' => $this->editorJs($article, $locale),
             ],
             [
-                '_type' => 'article-gallery',
-                'items' => array_map(
-                    static fn (string $image): array => ['image' => $image],
-                    $article['gallery'],
-                ),
-            ],
-            [
                 '_type' => 'article-cta',
                 'label' => $locale === 'ru' ? 'Перейти к направлению' : 'Go to division',
                 'type' => 'page',
                 'page' => 'about',
                 'url' => null,
+            ],
+            [
+                '_type' => 'article-gallery',
+                'items' => array_map(
+                    static fn (string $image): array => ['image' => $image],
+                    $article['gallery'],
+                ),
             ],
         ];
 

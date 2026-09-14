@@ -5,30 +5,38 @@ declare(strict_types=1);
 namespace App\Services\Content;
 
 use App\Models\Article;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Blog storefront use-cases: published articles listing (no server-side
- * pagination yet — the Alpine show-more handles the client batch) and
- * related-articles selection for the article page.
+ * Blog storefront use-cases: the listing is paginated server-side (the
+ * first page renders in the blog view, «Показать больше» fetches the next
+ * pages over AJAX) plus related-articles selection for the article page.
  */
 class BlogService
 {
     /**
-     * All published articles, newest first, with eager-loaded translations.
+     * One page of published articles, newest first, with eager-loaded
+     * translations.
      *
-     * @return Collection<int, Article>
+     * @param  positive-int  $page
+     * @param  positive-int  $perPage  how many cards one page carries
+     * @return LengthAwarePaginator<Article>
      */
-    public function published(): Collection
+    public function page(int $page = 1, int $perPage = 3): LengthAwarePaginator
     {
         $articles = Article::query()
             ->published()
             ->with('translations')
             ->orderByDesc('published_at')
-            ->get();
+            ->paginate($perPage, ['*'], 'page', $page);
 
-        Log::debug('[BlogService.published] count={count}', ['count' => $articles->count()]);
+        Log::debug('[BlogService.page] page={page} per_page={per_page} total={total}', [
+            'page' => $articles->currentPage(),
+            'per_page' => $perPage,
+            'total' => $articles->total(),
+        ]);
 
         return $articles;
     }

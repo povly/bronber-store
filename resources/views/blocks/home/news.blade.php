@@ -65,7 +65,7 @@
                                 @endif
                                 <div class="article__reveal">
                                 <span class="article__more btn btn--white">
-                                    Детальнее
+                                    {{ __('store.read_more') }}
                                 </span>
                                 </div>
                             </div>

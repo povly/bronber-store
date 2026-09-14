@@ -59,7 +59,7 @@
                         <h3 class="article__title">{{ $translation?->title }}</h3>
                         <p class="article__desc">{{ $translation?->excerpt }}</p>
                         <div class="article__reveal">
-                            <span class="article__more btn btn--white">Детальнее</span>
+                            <span class="article__more btn btn--white">{{ __('store.read_more') }}</span>
                         </div>
                     </div>
                 </a>

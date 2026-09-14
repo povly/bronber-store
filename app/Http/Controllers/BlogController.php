@@ -10,6 +10,7 @@ use App\Services\Content\BlogService;
 use App\Services\Languages\LanguageService;
 use App\Support\PageBlocks\ArticleBlockLibrary;
 use App\Support\PageBlocks\MediaFallback;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
 
@@ -23,21 +24,46 @@ use Illuminate\Support\Facades\Log;
 class BlogController extends Controller
 {
     /**
-     * Blog listing: all published articles, newest first. The Alpine
-     * show-more batches the cards client-side (6 → +3).
+     * Blog listing: the first page (3 cards) renders server-side; the
+     * «Показать больше» button fetches the next pages over AJAX
+     * ({@see self::cards()}).
      */
     public function index(): Response
     {
-        $articles = resolve(BlogService::class)->published();
+        $articles = resolve(BlogService::class)->page();
 
-        Log::debug('[BlogController.index] locale={locale} articles={count}', [
+        Log::debug('[BlogController.index] locale={locale} page={page} total={total}', [
             'locale' => app()->getLocale(),
-            'count' => $articles->count(),
+            'page' => $articles->currentPage(),
+            'total' => $articles->total(),
         ]);
 
         view()->share('seo', $this->listingSeo());
 
         return response()->view('blog', ['articles' => $articles]);
+    }
+
+    /**
+     * AJAX fragment for the listing «Показать больше»: the next page of
+     * article cards as a {html, has_more} JSON payload. Whitelist-only
+     * response — no ORM models are serialized.
+     */
+    public function cards(): JsonResponse
+    {
+        $page = max(1, (int) request()->query('page', '1'));
+        $articles = resolve(BlogService::class)->page($page);
+
+        Log::debug('[BlogController.cards] locale={locale} page={page} count={count} has_more={has_more}', [
+            'locale' => app()->getLocale(),
+            'page' => $page,
+            'count' => $articles->count(),
+            'has_more' => $articles->hasMorePages(),
+        ]);
+
+        return response()->json([
+            'html' => view('blocks.blog.cards', ['articles' => $articles->getCollection()])->render(),
+            'has_more' => $articles->hasMorePages(),
+        ]);
     }
 
     /**

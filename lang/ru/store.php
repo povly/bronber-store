@@ -104,6 +104,8 @@ return [
     'blog_title' => 'Новости',
     'blog_meta_title' => 'Новости — Bronber',
     'blog_meta_description' => 'Новости и статьи Bronber: запуск новых направлений, события и партнерства',
+    'blog_show_more' => 'Показать больше',
+    'read_more' => 'Детальнее',
 
     // 404 page
     'error_404_title' => 'Страница не найдена',

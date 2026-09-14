@@ -90,6 +90,41 @@ it('renders the blog listing from db articles', function (): void {
         ->assertSee('Профессиональный автосервис как часть экосистемы');
 });
 
+it('renders only the first page and serves the rest over the cards endpoint', function (): void {
+    foreach (['2025-12-25', '2025-12-18', '2025-12-10', '2025-12-01'] as $index => $date) {
+        Article::factory()
+            ->has(ArticleTranslation::factory()->ru()->state([
+                'title' => 'Статья номер '.$index,
+            ]), 'translations')
+            ->create(['slug' => 'article-'.$index, 'published_at' => $date]);
+    }
+
+    $this->get('/blog')
+        ->assertOk()
+        ->assertSee('Статья номер 0')
+        ->assertSee('Статья номер 1')
+        ->assertSee('Статья номер 2')
+        ->assertDontSee('Статья номер 3');
+
+    $response = $this->getJson('/blog/cards?page=2')->assertOk();
+
+    expect($response->json('html'))->toContain('Статья номер 3')
+        ->and($response->json('has_more'))->toBeFalse();
+});
+
+it('reports more pages from the cards endpoint while batches remain', function (): void {
+    Article::factory()
+        ->count(7)
+        ->sequence(fn ($sequence) => ['slug' => 'batch-article-'.$sequence->index, 'published_at' => '2025-12-'.str_pad((string) (25 - $sequence->index), 2, '0', STR_PAD_LEFT)])
+        ->has(ArticleTranslation::factory()->ru(), 'translations')
+        ->create();
+
+    $response = $this->getJson('/blog/cards?page=2')->assertOk();
+
+    expect($response->json('has_more'))->toBeTrue()
+        ->and(substr_count((string) $response->json('html'), 'blog__item'))->toBe(3);
+});
+
 it('renders en cards on the locale-prefixed listing', function (): void {
     blogArticle();
 

@@ -1,3 +1,10 @@
+.article-page {
+    &__breadcrumbs {
+        margin-top: fluid-type(375px, 768px, 20px, 32px);
+        margin-bottom: 0;
+    }
+}
+
 .article-page-block {
     padding-top: fluid-type(375px, 768px, 25px, 32px);
 
@@ -137,11 +144,24 @@
         }
     }
 
+    /* Same vertical rhythm as &__images below (keep the values in sync). */
+    &__content--cta {
+        padding-top: fluid-type(768px, 1200px, 40px, 50px);
+
+        @media screen and (min-width: 768px) {
+            padding-top: fluid-type(1200px, 1440px, 50px, 60px);
+        }
+
+        .article-page-block__btn {
+            margin-top: 0;
+        }
+    }
+
     &__images {
         display: none;
         padding-top: fluid-type(768px, 1200px, 40px, 50px);
 
-        @media screen and (min-width: 768px){
+        @media screen and (min-width: 768px) {
             display: block;
             padding-top: fluid-type(1200px, 1440px, 50px, 60px);
 
@@ -186,7 +206,7 @@
             margin-bottom: fluid-type(375px, 768px, 20px, 30px);
         }
     }
-    
+
     &__related-slider {
         --slider-gap: fluid-type(768px, 1200px, 14px, 18px);
     }
@@ -202,7 +222,6 @@
     }
 
     @media (min-width: 1200px) {
-
         &__related-slider {
             --per-view: 3;
         }

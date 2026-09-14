@@ -32,7 +32,7 @@
         @if (! empty($breadcrumbs))
             <div class="container">
                 {{-- Flat utility class compiled from blocks/page/style.css (.page__breadcrumbs) --}}
-                <x-breadcrumbs :items="$breadcrumbs" class="page__breadcrumbs" />
+                <x-breadcrumbs :items="$breadcrumbs" class="page__breadcrumbs article-page__breadcrumbs" />
             </div>
         @endif
 

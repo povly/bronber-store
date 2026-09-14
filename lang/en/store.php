@@ -104,6 +104,8 @@ return [
     'blog_title' => 'News',
     'blog_meta_title' => 'News — Bronber',
     'blog_meta_description' => 'Bronber news and articles: new divisions, events and partnerships',
+    'blog_show_more' => 'Show more',
+    'read_more' => 'Read more',
 
     // 404 page
     'error_404_title' => 'Page not found',

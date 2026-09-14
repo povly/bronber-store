@@ -6,7 +6,7 @@
 @endphp
 
 @if ($href !== null)
-    <div class="article-page-block__content">
+    <div class="article-page-block__content article-page-block__content--cta">
         <a href="{{ $href }}" class="article-page-block__btn btn btn--primary">{{ $label }}</a>
     </div>
 @endif
