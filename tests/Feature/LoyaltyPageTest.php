@@ -19,13 +19,19 @@ beforeEach(function (): void {
  * Loyalty blocks in the shape stored by the admin flexible layouts
  * (same shape as LoyaltyPageSeeder): hero with a custom-url button,
  * benefits with one titled «main» item, how-works steps and the
- * bottom example/gift/faq columns.
+ * bottom example/gift/faq columns. Benefits/how-works texts are
+ * EditorJS documents — the block views render them via RenderEditorJs.
  *
  * @return list<array<string, mixed>>
  */
 function loyaltyContent(string $locale): array
 {
     $ru = $locale === 'ru';
+
+    $editorjs = static fn (string $html): string => (string) json_encode(
+        ['time' => 0, 'blocks' => [['type' => 'paragraph', 'data' => ['text' => $html]]], 'version' => '1.0.0'],
+        JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+    );
 
     return [
         [
@@ -44,15 +50,15 @@ function loyaltyContent(string $locale): array
         [
             '_type' => 'loyalty-benefits',
             'items' => [
-                ['_type' => 'item', 'icon' => '/images/loyalty/icons/benefits-coin.svg', 'title' => '1 бонус = 1 ₽', 'text' => 'Оплатите до 30% заказа'],
-                ['_type' => 'item', 'icon' => '/images/loyalty/icons/benefits-cart.svg', 'title' => null, 'text' => 'Бонусы с каждой покупки'],
+                ['_type' => 'item', 'icon' => '/images/loyalty/icons/benefits-coin.svg', 'title' => '1 бонус = 1 ₽', 'text' => $editorjs('Оплатите до 30% заказа')],
+                ['_type' => 'item', 'icon' => '/images/loyalty/icons/benefits-cart.svg', 'title' => null, 'text' => $editorjs('Бонусы с каждой покупки')],
             ],
         ],
         [
             '_type' => 'loyalty-how-works',
             'title' => $ru ? 'Как это работает?' : 'How does it work?',
             'items' => [
-                ['_type' => 'item', 'icon' => '/images/loyalty/icons/how-cart.svg', 'title' => 'Шаг 1', 'text' => 'Описание шага'],
+                ['_type' => 'item', 'icon' => '/images/loyalty/icons/how-cart.svg', 'title' => 'Шаг 1', 'text' => $editorjs('Описание шага')],
             ],
         ],
         [

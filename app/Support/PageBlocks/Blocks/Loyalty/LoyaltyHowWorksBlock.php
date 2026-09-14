@@ -12,8 +12,9 @@ use YuriZoom\MoonShineMediaManager\Fields\MediaManagerPicker;
 
 /**
  * «loyalty-how-works» — «Как это работает?»: заголовок секции +
- * карточки-шаги (иконка, заголовок, описание).
- * Прототип: blocks/loyalty/how-works/how-works.blade.php.
+ * карточки-шаги (иконка, заголовок, описание-EditorJS).
+ * Прототип: blocks/loyalty/how-works/how-works.blade.php;
+ * разметку текста рендерит RenderEditorJs во вью блока.
  */
 final class LoyaltyHowWorksBlock implements PageBlock
 {
@@ -28,8 +29,8 @@ final class LoyaltyHowWorksBlock implements PageBlock
                         ->allowedExtensions(['jpg', 'jpeg', 'png', 'webp', 'svg']),
                     Text::make('Заголовок', 'title')
                         ->escapeOnApply(static fn (): bool => false),
-                    EditorJs::make('Описание', 'text'),
+                    EditorJs::make('Описание (EditorJS)', 'text'),
                 ]),
-        ], limit: 1, category: 'Лояльность', description: 'Заголовок + шаги: иконка, заголовок, описание (прототип /loyalty)', icon: 'queue-list');
+        ], limit: 1, category: 'Лояльность', description: 'Заголовок + шаги: иконка, заголовок, описание-EditorJS (прототип /loyalty)', icon: 'queue-list');
     }
 }

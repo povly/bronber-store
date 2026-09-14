@@ -11,10 +11,11 @@ use Sckatik\MoonshineEditorJs\Fields\EditorJs;
 use YuriZoom\MoonShineMediaManager\Fields\MediaManagerPicker;
 
 /**
- * «loyalty-benefits» — полоса преимуществ: список «иконка + текст»;
- * пункт с заполненным заголовком становится «главным» (большая
- * иконка, класс модификатора --main у прототипа).
- * Прототип: blocks/loyalty/benefits/benefits.blade.php.
+ * «loyalty-benefits» — полоса преимуществ: список «иконка + текст-
+ * EditorJS»; пункт с заполненным заголовком становится «главным»
+ * (большая иконка, класс модификатора --main у прототипа).
+ * Прототип: blocks/loyalty/benefits/benefits.blade.php;
+ * разметку текста рендерит RenderEditorJs во вью блока.
  */
 final class LoyaltyBenefitsBlock implements PageBlock
 {
@@ -28,8 +29,8 @@ final class LoyaltyBenefitsBlock implements PageBlock
                     Text::make('Заголовок', 'title')
                         ->hint('Заполнен — пункт становится «главным»: большая иконка и заголовок')
                         ->escapeOnApply(static fn (): bool => false),
-                    EditorJs::make('Текст', 'text'),
+                    EditorJs::make('Текст (EditorJS)', 'text'),
                 ]),
-        ], limit: 1, category: 'Лояльность', description: 'Список преимуществ: иконка, опциональный заголовок, текст (прототип /loyalty)', icon: 'star');
+        ], limit: 1, category: 'Лояльность', description: 'Список преимуществ: иконка, опциональный заголовок, текст-EditorJS (прототип /loyalty)', icon: 'star');
     }
 }

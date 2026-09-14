@@ -14,8 +14,9 @@ use Illuminate\Support\Facades\Log;
  * /loyalty renders from MoonShine-editable flexible-layout blocks.
  * Content mirrors the static prototype (blocks/loyalty/*); wording is
  * pulled from lang/{ru,en}/loyalty.php at seed time so the prototype
- * stays the single source of the texts (benefit texts keep the
- * prototype's <strong>/&nbsp; markup). Icons live in
+ * stays the single source of the texts. Benefits/how-works texts are
+ * stored as EditorJS documents (single paragraph block) — the block
+ * views render them via RenderEditorJs. Icons live in
  * public/images/loyalty/icons/, exported from the prototype inline SVG.
  * Idempotent: firstOrCreate by slug / (page_id, locale); an existing
  * translation with EMPTY content is filled with the demo data —
@@ -83,22 +84,30 @@ class LoyaltyPageSeeder extends Seeder
     {
         $icons = '/images/loyalty/icons/';
 
+        // Benefits/how-works texts are EditorJS documents (RenderEditorJs
+        // in the block views) — a single paragraph block carries the
+        // prototype wording incl. <strong>/&nbsp; markup.
+        $editorjs = static fn (string $html): string => (string) json_encode(
+            ['time' => 0, 'blocks' => [['type' => 'paragraph', 'data' => ['text' => $html]]], 'version' => '1.0.0'],
+            JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES,
+        );
+
         $benefits = $locale === 'ru' ? [
-            ['icon' => $icons.'benefits-coin.svg', 'title' => $this->text('benefit_1_title', $locale), 'text' => 'Бонусами можно оплатить до 30% от&nbsp;суммы заказа'],
-            ['icon' => $icons.'benefits-cart.svg', 'title' => null, 'text' => '<strong>Бонусы</strong> начисляются с&nbsp;каждой покупки'],
-            ['icon' => $icons.'benefits-calendar.svg', 'title' => null, 'text' => 'Бонусы <strong>не сгорают</strong> и&nbsp;действуют всегда'],
-            ['icon' => $icons.'benefits-star.svg', 'title' => null, 'text' => '<strong>Эксклюзивные</strong> акции и&nbsp;предложения'],
+            ['icon' => $icons.'benefits-coin.svg', 'title' => $this->text('benefit_1_title', $locale), 'text' => $editorjs('Бонусами можно оплатить до 30% от&nbsp;суммы заказа')],
+            ['icon' => $icons.'benefits-cart.svg', 'title' => null, 'text' => $editorjs('<strong>Бонусы</strong> начисляются с&nbsp;каждой покупки')],
+            ['icon' => $icons.'benefits-calendar.svg', 'title' => null, 'text' => $editorjs('Бонусы <strong>не сгорают</strong> и&nbsp;действуют всегда')],
+            ['icon' => $icons.'benefits-star.svg', 'title' => null, 'text' => $editorjs('<strong>Эксклюзивные</strong> акции и&nbsp;предложения')],
         ] : [
-            ['icon' => $icons.'benefits-coin.svg', 'title' => $this->text('benefit_1_title', $locale), 'text' => 'Pay up to 30% of your order with bonuses'],
-            ['icon' => $icons.'benefits-cart.svg', 'title' => null, 'text' => '<strong>Bonuses</strong> awarded on every purchase'],
-            ['icon' => $icons.'benefits-calendar.svg', 'title' => null, 'text' => 'Bonuses <strong>never expire</strong>'],
-            ['icon' => $icons.'benefits-star.svg', 'title' => null, 'text' => '<strong>Exclusive</strong> promotions and offers'],
+            ['icon' => $icons.'benefits-coin.svg', 'title' => $this->text('benefit_1_title', $locale), 'text' => $editorjs('Pay up to 30% of your order with bonuses')],
+            ['icon' => $icons.'benefits-cart.svg', 'title' => null, 'text' => $editorjs('<strong>Bonuses</strong> awarded on every purchase')],
+            ['icon' => $icons.'benefits-calendar.svg', 'title' => null, 'text' => $editorjs('Bonuses <strong>never expire</strong>')],
+            ['icon' => $icons.'benefits-star.svg', 'title' => null, 'text' => $editorjs('<strong>Exclusive</strong> promotions and offers')],
         ];
 
         $steps = [
-            ['icon' => $icons.'how-cart.svg', 'title' => $this->text('step_1_title', $locale), 'text' => $this->text('step_1_text', $locale)],
-            ['icon' => $icons.'how-coin.svg', 'title' => $this->text('step_2_title', $locale), 'text' => $this->text('step_2_text', $locale)],
-            ['icon' => $icons.'how-card.svg', 'title' => $this->text('step_3_title', $locale), 'text' => $this->text('step_3_text', $locale)],
+            ['icon' => $icons.'how-cart.svg', 'title' => $this->text('step_1_title', $locale), 'text' => $editorjs($this->text('step_1_text', $locale))],
+            ['icon' => $icons.'how-coin.svg', 'title' => $this->text('step_2_title', $locale), 'text' => $editorjs($this->text('step_2_text', $locale))],
+            ['icon' => $icons.'how-card.svg', 'title' => $this->text('step_3_title', $locale), 'text' => $editorjs($this->text('step_3_text', $locale))],
         ];
 
         $faqs = [
