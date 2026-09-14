@@ -74,7 +74,7 @@ Created: 2026-09-14
 
 ### Phase 2: Блоки статьи
 
-- [ ] **Task 3: Классы блоков `article-*` + `ArticleBlockLibrary`** (depends on 2)
+- [x] **Task 3: Классы блоков `article-*` + `ArticleBlockLibrary`** (depends on 2)
   Каталог `app/Support/PageBlocks/Blocks/Article/`, каждый класс `implements PageBlock` (по образцу `FaqItemsBlock`/`HomeNewsBlock`; все Text/Textarea — `->escapeOnApply(static fn (): bool => false)`):
   - `ArticleContentBlock` → тип `article-content`: поле `Sckatik\MoonshineEditorJs\Fields\EditorJs` («Текст статьи», `text`). Без limit (можно чередовать с галереей). Категория «Статья».
   - `ArticleGalleryBlock` → `article-gallery`: `FlexibleLayouts::make('Изображения', 'items')->block('item', ...)` с `MediaManagerPicker` (`image`, allowedExtensions jpg/jpeg/png/webp/svg).
@@ -84,7 +84,7 @@ Created: 2026-09-14
   Файлы: `app/Support/PageBlocks/Blocks/Article/{ArticleContentBlock,ArticleGalleryBlock,ArticleCtaBlock,ArticleRelatedBlock}.php`, `app/Support/PageBlocks/ArticleBlockLibrary.php`
   Логирование: не требуется (декларации полей). Проверка: `php -l`.
 
-- [ ] **Task 4: Вьюхи статьи** (depends on 3)
+- [x] **Task 4: Вьюхи статьи** (depends on 3)
   - **Переписать** `resources/views/article.blade.php` по образцу `page.blade.php`: крошки (`x-breadcrumbs`), hero (`cover_mb`/`cover_pc` через `<x-img>` из полей статьи, как в прототипе: два `<x-img>` с классами `article-page-block__image`), дата (`published_at->format('d/m/Y')`), `<h1>` из перевода, затем `{!! resolve(\App\Support\PageBlocks\BlockRenderer::class)->render($translation->content ?? [], 'article') !!}`. Рендер блоков именно во вью (не в контроллере) — @push('block-styles') выживают только так (см. комментарий в `page.blade.php`).
   - **Создать** `resources/views/blocks/article/content.blade.php` — EditorJS-рендер по образцу вью блока `returns-content` (`RenderEditorJs`), разметка/классы прототипа (`article-page-block__content`).
   - **Создать** `resources/views/blocks/article/gallery.blade.php` — `<x-slider>` perView 1/2 (скопировать конфиг из прототипа), элементы `items` c `<x-img :path="$item['image']">`.
