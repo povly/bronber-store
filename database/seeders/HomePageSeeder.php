@@ -71,10 +71,10 @@ class HomePageSeeder extends Seeder
             [
                 '_type' => 'home-advs',
                 'items' => [
-                    ['_type' => 'item', 'title' => 'Быстрая доставка', 'image' => '/images/home/advs/1.svg', 'text' => "Отправка заказов в\u{00A0}течение 24 часов"],
-                    ['_type' => 'item', 'title' => 'Удобная оплата', 'image' => '/images/home/advs/2.svg', 'text' => 'Оплата картой или при получении'],
-                    ['_type' => 'item', 'title' => 'Возврат товара', 'image' => '/images/home/advs/3.svg', 'text' => '14 дней на возврат без проблем'],
-                    ['_type' => 'item', 'title' => 'Гарантия качества', 'image' => '/images/home/advs/4.svg', 'text' => 'Только проверенные автозапчасти'],
+                    ['_type' => 'item', 'title' => 'Быстрая доставка', 'image' => 'home/advs/delivery-fast-svgrepo-com-1.svg', 'text' => "Отправка заказов в\u{00A0}течение 24 часов"],
+                    ['_type' => 'item', 'title' => 'Удобная оплата', 'image' => 'home/advs/Frame.svg', 'text' => 'Оплата картой или при получении'],
+                    ['_type' => 'item', 'title' => 'Возврат товара', 'image' => 'home/advs/Group-210.svg', 'text' => '14 дней на возврат без проблем'],
+                    ['_type' => 'item', 'title' => 'Гарантия качества', 'image' => 'home/advs/Frame-1.svg', 'text' => 'Только проверенные автозапчасти'],
                 ],
             ],
             ['_type' => 'home-products', 'title' => 'Рекомендованные товары', 'count' => 4],
@@ -120,10 +120,10 @@ class HomePageSeeder extends Seeder
             [
                 '_type' => 'home-advs',
                 'items' => [
-                    ['_type' => 'item', 'title' => 'Fast delivery', 'text' => 'Orders shipped within 24 hours'],
-                    ['_type' => 'item', 'title' => 'Easy payment', 'text' => 'Pay by card or on delivery'],
-                    ['_type' => 'item', 'title' => 'Returns', 'text' => '14 days for hassle-free returns'],
-                    ['_type' => 'item', 'title' => 'Quality guarantee', 'text' => 'Only proven auto parts'],
+                    ['_type' => 'item', 'title' => 'Fast delivery', 'image' => '', 'text' => 'Orders shipped within 24 hours'],
+                    ['_type' => 'item', 'title' => 'Easy payment', 'image' => '', 'text' => 'Pay by card or on delivery'],
+                    ['_type' => 'item', 'title' => 'Returns', 'image' => '', 'text' => '14 days for hassle-free returns'],
+                    ['_type' => 'item', 'title' => 'Quality guarantee', 'image' => '', 'text' => 'Only proven auto parts'],
                 ],
             ],
             ['_type' => 'home-products', 'title' => 'Recommended products', 'count' => 4],
@@ -132,40 +132,38 @@ class HomePageSeeder extends Seeder
             // Media is owned by the default locale: empty media fields of
             // non-default translations inherit the default's value at
             // render time (App\Support\PageBlocks\MediaFallback).
-            ['_type' => 'home-partners', 'title' => 'Our partners'],
+            ['_type' => 'home-partners', 'title' => 'Our partners', 'images' => '[]'],
             [
                 '_type' => 'home-news',
                 'title' => 'News',
                 'items' => [
-                    ['_type' => 'item', 'tag' => '#launch', 'date' => '25/12/25', 'title' => 'BRONBER Auto Service: launching a new direction', 'desc' => 'We are opening a new auto service direction. Modern equipment, qualified specialists and a wide range of services for your car.', 'image' => '/images/blog/1.jpg'],
-                    ['_type' => 'item', 'tag' => '#event', 'date' => '18/12/25', 'title' => 'Opening a new auto parts store', 'desc' => 'Happy to announce the opening of a new store. More than 50,000 parts in stock and on order with fast delivery.', 'image' => '/images/blog/2.jpg'],
-                    ['_type' => 'item', 'tag' => '#partnership', 'date' => '10/12/25', 'title' => 'New partnership with leading manufacturers', 'desc' => 'We have signed agreements with the world\'s largest auto parts manufacturers. Now even more genuine parts in our range.', 'image' => '/images/blog/3.jpg'],
+                    ['_type' => 'item', 'tag' => '#launch', 'date' => '25/12/25', 'title' => 'BRONBER Auto Service: launching a new direction', 'desc' => 'We are opening a new auto service direction. Modern equipment, qualified specialists and a wide range of services for your car.', 'image' => ''],
+                    ['_type' => 'item', 'tag' => '#event', 'date' => '18/12/25', 'title' => 'Opening a new auto parts store', 'desc' => 'Happy to announce the opening of a new store. More than 50,000 parts in stock and on order with fast delivery.', 'image' => ''],
+                    ['_type' => 'item', 'tag' => '#partnership', 'date' => '10/12/25', 'title' => 'New partnership with leading manufacturers', 'desc' => 'We have signed agreements with the world\'s largest auto parts manufacturers. Now even more genuine parts in our range.', 'image' => ''],
                 ],
             ],
         ];
     }
 
     /**
-     * Partner logo slides (brembo/bosch/akrapovic repeated 5x, as in the prototype).
-     *
-     * @return list<string>
+     * Partner logos as stored in the database: a JSON-encoded list of
+     * media-manager uploads (4 rounds × brembo/bosch/akrapovic).
      */
-    private function partnerLogos(): array
+    private function partnerLogos(): string
     {
-        $logos = [
-            '/images/home/partners/brembo.png',
-            '/images/home/partners/bosch.png',
-            '/images/home/partners/akrapovic.png',
-        ];
-
-        $images = [];
-
-        for ($round = 0; $round < 5; $round++) {
-            foreach ($logos as $logo) {
-                $images[] = $logo;
-            }
-        }
-
-        return $images;
+        return (string) json_encode([
+            'home/partners/brembo.png',
+            'home/partners/bosch.png',
+            'home/partners/akrapovic.png',
+            'home/partners/brembo-1.png',
+            'home/partners/bosch-1.png',
+            'home/partners/akrapovic-1.png',
+            'home/partners/brembo-2.png',
+            'home/partners/bosch-2.png',
+            'home/partners/akrapovic-2.png',
+            'home/partners/brembo-3.png',
+            'home/partners/bosch-3.png',
+            'home/partners/akrapovic-3.png',
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
     }
 }

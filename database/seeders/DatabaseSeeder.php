@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
 
         $this->call(LanguageSeeder::class);
+        $this->call(SettingsSeeder::class);
         $this->call(HomePageSeeder::class);
         $this->call(FaqPageSeeder::class);
         $this->call(DeliveryPageSeeder::class);
@@ -28,9 +29,11 @@ class DatabaseSeeder extends Seeder
         $this->call(ReturnsPageSeeder::class);
         $this->call(LoyaltyPageSeeder::class);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        if (! app()->environment('production') && User::query()->doesntExist()) {
+            User::factory()->create([
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+            ]);
+        }
     }
 }

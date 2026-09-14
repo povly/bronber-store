@@ -79,11 +79,22 @@ class DeliveryPageSeeder extends Seeder
      */
     private function content(string $locale): array
     {
+        // Media-manager icons as stored in the database: real uploads for
+        // the default locale, empty strings on non-default translations
+        // (rendered via the locale media fallback).
+        $methodIcons = $locale === 'ru'
+            ? ['delivery/cash.svg', 'delivery/card.svg', 'delivery/sbp.svg', 'delivery/Frame-5.svg']
+            : ['', '', '', ''];
+
+        $contactIcons = $locale === 'ru'
+            ? ['delivery/phone.svg', 'delivery/email.svg']
+            : ['', ''];
+
         $methods = [
-            ['title' => $this->text('method_cash_title', $locale), 'icon' => '/images/delivery/cash.svg', 'text' => $this->text('method_cash_text', $locale)],
-            ['title' => $this->text('method_card_title', $locale), 'icon' => '/images/delivery/card.svg', 'text' => $this->text('method_card_text', $locale)],
-            ['title' => $this->text('method_sbp_title', $locale), 'icon' => '/images/delivery/sbp.svg', 'text' => $this->text('method_sbp_text', $locale)],
-            ['title' => $this->text('method_currency_title', $locale), 'icon' => '/images/delivery/currency.svg', 'text' => $this->text('method_currency_text', $locale)],
+            ['title' => $this->text('method_cash_title', $locale), 'icon' => $methodIcons[0], 'text' => $this->text('method_cash_text', $locale)],
+            ['title' => $this->text('method_card_title', $locale), 'icon' => $methodIcons[1], 'text' => $this->text('method_card_text', $locale)],
+            ['title' => $this->text('method_sbp_title', $locale), 'icon' => $methodIcons[2], 'text' => $this->text('method_sbp_text', $locale)],
+            ['title' => $this->text('method_currency_title', $locale), 'icon' => $methodIcons[3], 'text' => $this->text('method_currency_text', $locale)],
         ];
 
         $phone = $this->text('contact_phone', $locale);
@@ -102,8 +113,8 @@ class DeliveryPageSeeder extends Seeder
                 '_type' => 'contact-list',
                 'title' => $this->text('contact_title', $locale),
                 'items' => [
-                    ['_type' => 'item', 'text' => $phone, 'href' => 'tel:'.preg_replace('/[^+\d]/', '', $phone), 'icon' => '/images/delivery/phone.svg'],
-                    ['_type' => 'item', 'text' => $email, 'href' => 'mailto:'.$email, 'icon' => '/images/delivery/email.svg'],
+                    ['_type' => 'item', 'text' => $phone, 'href' => 'tel:'.preg_replace('/[^+\d]/', '', $phone), 'icon' => $contactIcons[0]],
+                    ['_type' => 'item', 'text' => $email, 'href' => 'mailto:'.$email, 'icon' => $contactIcons[1]],
                 ],
             ],
         ];
