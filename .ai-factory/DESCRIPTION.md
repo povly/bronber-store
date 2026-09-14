@@ -50,6 +50,16 @@
   прототипа — benefits/how-works тексты как EditorJS-документы, иконки выгружены в
   `public/images/loyalty/icons/`); фиксированный роут и прототипные вью удалены, ссылки шапки/подвала/
   мобильного меню — `url('/loyalty')`
+- **Блог из БД (статьи)**: фиксированные роуты `/blog` → `BlogController::index` (листинг всех опубликованных статей,
+  Alpine show-more 6 → +3) и `/blog/{slug}` → `BlogController::show` (404 для черновиков/чужих slug); сущности
+  `articles` (slug, is_published, published_at, обложки cover_pc/cover_mb) + `article_translations` (locale, title,
+  tag, excerpt, SEO-поля, content-блоки); контент — блоки `article-*` в `ArticleBlockLibrary` (`article-content` —
+  EditorJS-документ, `article-gallery` — слайдер изображений, `article-cta` — кнопка с двухтиповой ссылкой,
+  `article-related` — динамические «Другие новости» через `BlogService`, передаются в блок через view()->share),
+  рендер `BlockRenderer` → `blocks/article/{name}`; MediaFallback для медиа галерей (article-gallery);
+  SEO + hreflang `/blog/{slug}` ↔ `/en/blog/{slug}`, для листинга — lang-ключи `blog_*`; CRUD-админка
+  `ArticleResource` (newspaper, group content, afterSave создаёт недостающие переводы); демо-контент —
+  `BlogArticlesSeeder` (6 статей ru/en, идемпотентный, fill-when-empty); прототипные вью/lang-ключи article_* удалены
 - **Страница ошибки 404 из настроек** (settings, ключ `error-404`, ru-fallback в `SettingService`;
   рендерится через `errors/404.blade.php` с HTTP 404, а не PageController): блок `error-404` —
   заголовок, описание (HTML) и кнопки (Json-список: текст + двухтиповая ссылка `BuildsLinkFields` +

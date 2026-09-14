@@ -132,11 +132,11 @@ Created: 2026-09-14
 
 ### Phase 5: Контент, тесты, очистка
 
-- [ ] **Task 8: `BlogArticlesSeeder`** (depends on 7)
+- [x] **Task 8: `BlogArticlesSeeder`** (depends on 7)
   `database/seeders/BlogArticlesSeeder.php` — по образцу `FaqPageSeeder` (.ai/rules/seeders.md): `firstOrCreate` 6 статей (3 уникальные × 2 для show-more, даты по убыванию, обложки `/images/blog/{1,2,3}.jpg`, hero `/images/blog/hero.jpg` + `hero-mb.jpg`); переводы ru/en: `firstOrCreate` по (article_id, locale), fill-when-empty для пустого content, авторский контент не перезаписывать; тексты — из текущих `lang/{ru,en}/store.php` `article_*`; контент-блоки: `article-content` (EditorJS-документ: lead + подзаголовки + абзацы из прототипа `blocks/article/article.blade.php`), `article-gallery` (2–4 изображения), `article-cta` (кнопка «Перейти к направлению»), в одной статье — `article-related`. `Log::info('[BlogArticlesSeeder] seeded, locales={locales}')` per-locale (`:created`/`:exists`/`:filled`). Зарегистрировать в `DatabaseSeeder` (посмотреть, как зарегистрированы FaqPageSeeder и др.).
   Файлы: `database/seeders/BlogArticlesSeeder.php`, `database/seeders/DatabaseSeeder.php`
 
-- [ ] **Task 9: Фич-тесты `BlogTest`** (depends on 5, 8)
+- [x] **Task 9: Фич-тесты `BlogTest`** (depends on 5, 8)
   `tests/Feature/BlogTest.php` (Pest, `php artisan make:test --pest --no-interaction BlogTest`), beforeEach по .ai/rules/tests.md: `resolve(LanguageService::class)->clearCache()` + фабрики языков ru(default)/en. Хелпер `blogArticle()` по образцу `faqPage()`: Article + переводы ru/en c блоками (`article-content`, `article-gallery`, `article-cta`, `article-related`):
   - `/blog` рендерит листинг из БД (карточка: title, tag, дата, excerpt);
   - `/en/blog` — en-перевод карточек;
@@ -147,7 +147,7 @@ Created: 2026-09-14
   Файлы: `tests/Feature/BlogTest.php`
   Прогон: `php artisan test --compact tests/Feature/BlogTest.php`.
 
-- [ ] **Task 10: Очистка прототипа + финализация** (depends on 9)
+- [x] **Task 10: Очистка прототипа + финализация** (depends on 9)
   - Удалить неиспользуемые ключи `article_*` из `lang/ru/store.php` и `lang/en/store.php` (тексты теперь в сидере; перед удалением grep по репозиторию на каждый ключ).
   - Смоук: `php artisan db:seed --class=BlogArticlesSeeder`, `curl http://bronber_store.test/blog`, `curl http://bronber_store.test/blog/{slug-seeded}`, `curl http://bronber_store.test/en/blog`.
   - `php vendor/bin/pint --dirty --format agent` (правило .ai/rules/general.md — бинарники без exec-бита, запускать через `php`).

@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AboutPageSeeder::class);
         $this->call(ReturnsPageSeeder::class);
         $this->call(LoyaltyPageSeeder::class);
+        $this->call(BlogArticlesSeeder::class);
 
         if (! app()->environment('production') && User::query()->doesntExist()) {
             User::factory()->create([

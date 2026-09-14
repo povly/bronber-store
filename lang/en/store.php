@@ -105,17 +105,6 @@ return [
     'blog_meta_title' => 'News — Bronber',
     'blog_meta_description' => 'Bronber news and articles: new divisions, events and partnerships',
 
-    // Article page
-    'article_date' => '09/02/2026',
-    'article_title' => 'Launch of Bronber Auto Service',
-    'article_subtitle' => 'A new stage in the Bronber ecosystem',
-    'article_lead' => 'Bronber announces the launch of a new division — Bronber Auto Service. This is a logical step in the development of our brand ecosystem, combining auto parts retail and professional auto service into a single service system.',
-    'article_heading' => 'Professional approach',
-    'article_body_1' => 'Bronber Auto Service is a professional auto service center built to the highest standards of quality, service and expertise. Modern equipment, qualified specialists and a wide range of services for your vehicle.',
-    'article_body_2' => 'The opening of this new division allows us to offer clients a full cycle of services — from selecting and selling parts to professional installation and diagnostics. All work is performed using original parts and certified materials.',
-    'article_cta' => 'Go to division',
-    'article_related_title' => 'Other news',
-
     // 404 page
     'error_404_title' => 'Page not found',
     'error_404_desc' => 'Unfortunately, the page you requested does not exist or has been moved.<br>Please check the address or go to the home page.',

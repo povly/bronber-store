@@ -70,6 +70,11 @@ class BlogController extends Controller
 
         view()->share('seo', $this->seo($article, $translation));
 
+        // Article context for nested block views: the «Другие новости»
+        // block (article-related) reads the shared list — BlockRenderer
+        // renders block views with only $block in scope.
+        view()->share('related', resolve(BlogService::class)->related($article));
+
         $translation->content = MediaFallback::apply(
             $translation->content ?? [],
             $this->defaultContent($article, $translation),
@@ -79,7 +84,6 @@ class BlogController extends Controller
         return response()->view('article', [
             'article' => $article,
             'translation' => $translation,
-            'related' => resolve(BlogService::class)->related($article),
             'breadcrumbs' => $this->breadcrumbs($translation),
         ]);
     }
