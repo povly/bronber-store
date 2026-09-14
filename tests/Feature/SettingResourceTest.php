@@ -174,6 +174,7 @@ it('seeds header, footer and mobile settings with prototype content for every ac
         'footer.ru', 'footer.en',
         'mobile-menu.ru', 'mobile-menu.en',
         'mobile-nav.ru', 'mobile-nav.en',
+        'error-404.ru', 'error-404.en',
     ]);
 
     $headerRu = Setting::query()->where('key', 'header')->where('locale', 'ru')->first();
@@ -206,7 +207,7 @@ it('seeder is re-runnable and does not duplicate rows', function (): void {
     $this->seed(SettingsSeeder::class);
     $this->seed(SettingsSeeder::class);
 
-    expect(Setting::query()->count())->toBe(8);
+    expect(Setting::query()->count())->toBe(10);
 });
 
 it('seeder does not overwrite admin-edited values', function (): void {

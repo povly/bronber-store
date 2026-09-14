@@ -30,7 +30,7 @@ class SettingsSeeder extends Seeder
         foreach ($languages as $language) {
             $content = $this->content($language);
 
-            foreach (['header', 'footer', 'mobile-menu', 'mobile-nav'] as $key) {
+            foreach (['header', 'footer', 'mobile-menu', 'mobile-nav', 'error-404'] as $key) {
                 $signature = $key.'.'.$language;
 
                 if (! in_array($signature, $existing, true)) {
@@ -61,7 +61,7 @@ class SettingsSeeder extends Seeder
     /**
      * Default block content mirroring the static prototype for a locale.
      *
-     * @return array{header: list<array<string, mixed>>, footer: list<array<string, mixed>>, mobile-menu: list<array<string, mixed>>, mobile-nav: null}
+     * @return array{header: list<array<string, mixed>>, footer: list<array<string, mixed>>, mobile-menu: list<array<string, mixed>>, mobile-nav: null, error-404: list<array<string, mixed>>}
      */
     private function content(string $locale): array
     {
@@ -188,6 +188,21 @@ class SettingsSeeder extends Seeder
             ],
         ];
 
-        return ['header' => $header, 'footer' => $footer, 'mobile-menu' => $mobileMenu, 'mobile-nav' => null];
+        $error404 = [
+            [
+                '_type' => 'error-404',
+                'title' => $t('Страница не найдена', 'Page not found'),
+                'text' => $t(
+                    'К сожалению, запрашиваемой страницы не существует или была перемещена.<br>Проверьте адрес или перейдите на главную страницу.',
+                    'Unfortunately, the page you requested does not exist or has been moved.<br>Please check the address or go to the home page.',
+                ),
+                'buttons' => [
+                    ['label' => $t('На главную', 'Go home'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/', 'variant' => 'primary'],
+                    ['label' => $t('Перейти в каталог', 'Go to catalog'), 'type' => 'custom', 'page' => null, 'url' => $prefix.'/catalog', 'variant' => 'white-border'],
+                ],
+            ],
+        ];
+
+        return ['header' => $header, 'footer' => $footer, 'mobile-menu' => $mobileMenu, 'mobile-nav' => null, 'error-404' => $error404];
     }
 }

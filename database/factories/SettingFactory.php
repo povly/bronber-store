@@ -67,6 +67,16 @@ class SettingFactory extends Factory
     }
 
     /**
+     * Error 404 page setting.
+     */
+    public function error404(): static
+    {
+        return $this->state(fn (array $attributes): array => [
+            'key' => 'error-404',
+        ]);
+    }
+
+    /**
      * Russian locale.
      */
     public function ru(): static

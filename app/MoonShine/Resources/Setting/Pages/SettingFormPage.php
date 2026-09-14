@@ -6,6 +6,7 @@ namespace App\MoonShine\Resources\Setting\Pages;
 
 use App\Models\Setting;
 use App\MoonShine\Resources\Setting\SettingResource;
+use App\Support\PageBlocks\Error404BlockLibrary;
 use App\Support\PageBlocks\FooterBlockLibrary;
 use App\Support\PageBlocks\HeaderBlockLibrary;
 use App\Support\PageBlocks\MobileMenuBlockLibrary;
@@ -37,6 +38,7 @@ final class SettingFormPage extends FormPage
             'header' => HeaderBlockLibrary::header(),
             'mobile-menu' => MobileMenuBlockLibrary::mobileMenu(),
             'mobile-nav' => MobileNavBlockLibrary::mobileNav(),
+            'error-404' => Error404BlockLibrary::error404(),
             // The flexible-layouts AJAX store route carries no resourceItem,
             // so the setting is unresolvable there and getItem() is null —
             // serve the union of all setting blocks so picker adds work for
@@ -85,6 +87,7 @@ final class SettingFormPage extends FormPage
             FooterBlockLibrary::footer(),
             MobileMenuBlockLibrary::mobileMenu(),
             MobileNavBlockLibrary::mobileNav(),
+            Error404BlockLibrary::error404(),
         ];
 
         foreach ($libraries as $library) {

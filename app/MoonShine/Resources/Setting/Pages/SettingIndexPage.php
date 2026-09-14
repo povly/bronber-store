@@ -39,6 +39,7 @@ final class SettingIndexPage extends IndexPage
                     'footer' => 'Подвал',
                     'mobile-menu' => 'Мобильное меню',
                     'mobile-nav' => 'Мобильная панель',
+                    'error-404' => 'Ошибка 404',
                     default => $setting->key,
                 },
             )->badge(Color::PURPLE),
@@ -62,6 +63,7 @@ final class SettingIndexPage extends IndexPage
                 'footer' => 'Подвал',
                 'mobile-menu' => 'Мобильное меню',
                 'mobile-nav' => 'Мобильная панель',
+                'error-404' => 'Ошибка 404',
             ]),
         ];
     }
