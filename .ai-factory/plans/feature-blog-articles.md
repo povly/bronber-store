@@ -97,7 +97,7 @@ Created: 2026-09-14
 
 ### Phase 3: Публичная часть
 
-- [ ] **Task 5: `BlogService` + `BlogController` + роуты** (depends on 2)
+- [x] **Task 5: `BlogService` + `BlogController` + роуты** (depends on 2)
   `app/Services/Content/BlogService.php` (каталог Content — по ARCHITECTURE.md):
   - `published()`: `Article::query()->published()->with('translations')->orderByDesc('published_at')->get()` + `Log::debug('[BlogService.published] count={count}')`.
   - `related(Article $exclude, int $limit = 3)`: опубликованные кроме текущей, top по дате + `Log::debug`.
@@ -114,7 +114,7 @@ Created: 2026-09-14
   Файлы: `app/Services/Content/BlogService.php`, `app/Http/Controllers/BlogController.php`, `routes/web.php`
   Логирование: DEBUG-логи в index/show/related по формату `[BlogController.show] slug={slug} locale={locale} found={bool}` (образец — PageController).
 
-- [ ] **Task 6: Листинг `/blog` из БД** (depends on 5)
+- [x] **Task 6: Листинг `/blog` из БД** (depends on 5)
   Переписать `resources/views/blocks/blog/blog.blade.php`: убрать `@php $news = [...] @endphp`; цикл по `$articles` — карточка `.article` (разметка как сейчас): `<x-img :path="$article->cover_pc"` (альт — title перевода), tag/date (`published_at->format('d/m/y')`)/title/desc (excerpt) из `$article->translation()`; href — локализованная ссылка на статью (правило views.md). Alpine `blog()` show-more и `@push` vite-энтри не трогать. Заголовок `<h1>` — `__('store.blog_title')`.
   Файлы: `resources/views/blocks/blog/blog.blade.php` (rewrite), `lang/ru/store.php` + `lang/en/store.php` (+`blog_title`, `blog_meta_title`, `blog_meta_description`)
   Логирование: не требуется (вью).

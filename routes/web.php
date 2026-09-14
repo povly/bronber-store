@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\PageController;
 use App\Services\Languages\LanguageService;
 use Illuminate\Support\Facades\Artisan;
@@ -16,7 +17,7 @@ $register = function () {
     Route::get('/catalog', fn () => view('main'))->name('catalog');
     Route::get('/favorites', fn () => view('favorites'))->name('favorites');
 
-    Route::get('/blog', fn () => view('blog'))->name('blog');
+    Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 
     Route::get('/profile', function () {
         $user = [
@@ -112,7 +113,7 @@ $register = function () {
         return view('profile-order', ['user' => $user, 'order' => $order, 'items' => $items]);
     })->name('profile.order');
 
-    Route::get('/blog/{slug}', fn () => view('article'))->name('article');
+    Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('article');
 
     Route::get('/cart', function () {
         $items = [

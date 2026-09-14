@@ -100,6 +100,11 @@ return [
     'contacts_form_submit' => 'Отправить',
     'contacts_form_success' => 'Спасибо! Ваша заявка отправлена — мы свяжемся с вами в ближайшее время.',
 
+    // Blog listing
+    'blog_title' => 'Новости',
+    'blog_meta_title' => 'Новости — Bronber',
+    'blog_meta_description' => 'Новости и статьи Bronber: запуск новых направлений, события и партнерства',
+
     // Article page
     'article_date' => '09/02/2026',
     'article_title' => 'Запуск нового направления Bronber Auto Service',

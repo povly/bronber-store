@@ -100,6 +100,11 @@ return [
     'contacts_form_submit' => 'Send',
     'contacts_form_success' => 'Thank you! Your request has been submitted — we will contact you shortly.',
 
+    // Blog listing
+    'blog_title' => 'News',
+    'blog_meta_title' => 'News — Bronber',
+    'blog_meta_description' => 'Bronber news and articles: new divisions, events and partnerships',
+
     // Article page
     'article_date' => '09/02/2026',
     'article_title' => 'Launch of Bronber Auto Service',
